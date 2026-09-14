@@ -18,6 +18,6 @@
         "laravel-vite-plugin": "^3.2",
         "pusher-js": "^8.6.0",
         "terser": "^5.51.2",
-        "vite": "^8.2"
+        "vite": "^8.3"
     }
 }
