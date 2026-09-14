@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use OGame\Models\Planet\Coordinate;
 use OGame\Services\SettingsService;
 
@@ -21,6 +22,12 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // No test may reach a real outbound service. An unmocked request throws here instead of
+        // spending money or returning something the assertion never expected, and a test that
+        // wants a response fakes it. This is what keeps the module's provider path honest: it stays
+        // enabled exactly as production runs it, and the boundary is what is faked.
+        Http::preventStrayRequests();
 
         if ($this->app->environment('testing') && DB::getDriverName() === 'mysql') {
             DB::unprepared('SET SESSION innodb_lock_wait_timeout = 1');
