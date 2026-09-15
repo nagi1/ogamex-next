@@ -68,6 +68,9 @@ class ExpeditionMission extends GameMission
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::peaceful;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Neutral;
 
+    /** Expedition is gated on Astrophysics level 1 ("You have to research Astrophysics first."). */
+    protected static array $requiredResearch = ['astrophysics' => 1];
+
     /**
      * Get configurable outcome weights based on community research.
      * Each outcome has a weight (representing relative probability).

@@ -70,6 +70,16 @@ abstract class GameMission
     protected static array $requiredShipMachineNames = [];
 
     /**
+     * @var array<string, int> The research a player must have before this mission can run, as
+     *                         machine name => minimum level. It answers "which research does this
+     *                         mission wait on?" without the caller naming a technology, so a
+     *                         mod-added mission declares its own technology and every reader — this
+     *                         host's checks and any module planner — stays name-free. Missions with
+     *                         no research gate leave this empty.
+     */
+    protected static array $requiredResearch = [];
+
+    /**
      * @param FleetMissionService $fleetMissionService
      * @param MessageService $messageService
      * @param PlanetServiceFactory $planetServiceFactory
@@ -129,6 +139,18 @@ abstract class GameMission
     public static function getRequiredShipMachineNames(): array
     {
         return static::$requiredShipMachineNames;
+    }
+
+    /**
+     * The research this mission waits on, as machine name => minimum level. Missions with no research
+     * gate leave this empty. The caller reads a technology's name from here rather than carrying it,
+     * so a mod-added mission's technology is reachable with no host or module edit (gate 1).
+     *
+     * @return array<string, int>
+     */
+    public static function getRequiredResearch(): array
+    {
+        return static::$requiredResearch;
     }
 
     /**
