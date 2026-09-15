@@ -26,6 +26,7 @@ class ColonisationMission extends GameMission
     protected static bool $hasReturnMission = false;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::peaceful;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Neutral;
+    protected static array $requiredShipMachineNames = ['colony_ship'];
 
     /**
      * @inheritdoc

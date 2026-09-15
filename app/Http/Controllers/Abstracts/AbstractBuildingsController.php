@@ -241,7 +241,7 @@ abstract class AbstractBuildingsController extends OGameController
         }
 
         // If the technology is a shipyard or nanite, it shouldn't be able to upgrade while ships are built.
-        if (($request->input('technologyId') === '21' || $request->input('technologyId') === '15') && $player->isBuildingShipsOrDefense()) {
+        if ($player->isObjectUpgradeBlocked((int) $request->input('technologyId'))) {
             return response()->json([
                 'success' => false,
                 'errors' => [['message' => __('The Shipyard is still busy.')]],

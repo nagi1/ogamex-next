@@ -831,6 +831,20 @@ class PlayerService
     }
 
     /**
+     * Whether upgrading the given object is blocked right now because ships or
+     * defence are in production. The two unit-producing stations — the shipyard
+     * and the nanite factory — cannot be upgraded while a unit is queued or
+     * building, the same answer the building controller gives.
+     *
+     * @param int $object_id
+     * @return bool
+     */
+    public function isObjectUpgradeBlocked(int $object_id): bool
+    {
+        return ($object_id === 21 || $object_id === 15) && $this->isBuildingShipsOrDefense();
+    }
+
+    /**
      * Get is the player researching the tech or not
      *
      * @param string $machine_name

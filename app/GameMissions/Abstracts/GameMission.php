@@ -63,6 +63,13 @@ abstract class GameMission
     protected static FleetMissionStatus $friendlyStatus;
 
     /**
+     * @var array<int, string> The ship machine names this mission refuses to run without. Missions
+     *                          with no fixed required ship (attack, transport, deployment, ...)
+     *                          leave this empty.
+     */
+    protected static array $requiredShipMachineNames = [];
+
+    /**
      * @param FleetMissionService $fleetMissionService
      * @param MessageService $messageService
      * @param PlanetServiceFactory $planetServiceFactory
@@ -111,6 +118,17 @@ abstract class GameMission
     public static function getFriendlyStatus(): FleetMissionStatus
     {
         return static::$friendlyStatus;
+    }
+
+    /**
+     * The ship machine names this mission refuses to run without. Missions with
+     * no fixed required ship (attack, transport, deployment, ...) leave this empty.
+     *
+     * @return array<int, string>
+     */
+    public static function getRequiredShipMachineNames(): array
+    {
+        return static::$requiredShipMachineNames;
     }
 
     /**

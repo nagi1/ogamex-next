@@ -335,7 +335,7 @@ class RustBattleEngine extends BattleEngine
         // Roll the dice for Hamill Manoeuvre
         $settings = app(SettingsService::class);
         $probability = $settings->hamillManoeuvreChance();
-        $dice = random_int(1, $probability);
+        $dice = $this->random(1, $probability);
 
         if ($dice === 1) {
             // Hamill Manoeuvre triggered! Destroy one Deathstar

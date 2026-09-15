@@ -47,6 +47,18 @@ abstract class BattleEngine
     protected bool $retreatAfterDefenderRetreat = false;
 
     /**
+     * @var int|null Seed for reproducible simulation. When set, every combat
+     * draw is drawn from a seeded generator; when null, behaviour is unchanged.
+     */
+    protected ?int $seed = null;
+
+    /**
+     * @var bool Whether this run is a pure, read-only question: no planet
+     * writes, no events. A pure run must not change the world it is asked about.
+     */
+    protected bool $pure = false;
+
+    /**
      * BattleEngine constructor.
      *
      * @param array<AttackerFleet> $attackers All attacking fleets.
@@ -105,10 +117,26 @@ abstract class BattleEngine
     /**
      * Simulate a battle between two players.
      *
+     * @param int|null $seed An explicit seed for reproducible simulation. Every
+     * combat draw is taken from a seeded generator, so the same inputs and seed
+     * return the same result. Null keeps the current random behaviour.
+     * @param bool $pure A read-only question when true: the defender's planet is
+     * never written and no BattleResolved event is fired, so a "what if" changes
+     * nothing in the world. The default remains the live battle path.
+     *
      * @return BattleResult Information about the battle result.
      */
-    public function simulateBattle(): BattleResult
+    public function simulateBattle(int|null $seed = null, bool $pure = false): BattleResult
     {
+        $this->seed = $seed;
+        $this->pure = $pure;
+
+        // Seeding the global Mersenne Twister makes every mt_rand/rand/array_rand
+        // draw in the round path reproducible under this seed.
+        if ($seed !== null) {
+            mt_srand($seed);
+        }
+
         $result = new BattleResult();
 
         // Initialize the battle result object with the attacker and defender information.
@@ -249,7 +277,10 @@ abstract class BattleEngine
 
         // Calculate repaired defenses (only defense units, not ships).
         // According to game rules, approximately 70% of destroyed defenses are repaired after battle.
-        $defenseRepairService = new DefenseRepairService($this->settings->defenseRepairRate());
+        // The repair service re-seeds the global generator, so it receives a
+        // distinct sub-stream rather than replaying the round draws.
+        $repairSeed = $this->seed === null ? null : $this->seed ^ 0x9E3779B9;
+        $defenseRepairService = new DefenseRepairService($this->settings->defenseRepairRate(), $repairSeed);
         $result->repairedDefenses = $defenseRepairService->calculateRepairedDefenses($result->defenderUnitsLost);
 
         // Determine winner of battle.
@@ -297,7 +328,10 @@ abstract class BattleEngine
             $this->attackers,
         );
 
-        event(new BattleResolved($attackerPlayerIds, $defenderPlayer->getId(), $this->defenderPlanet->getPlanetId()));
+        // A pure question fires no event: the world must not react to a "what if".
+        if (!$this->pure) {
+            event(new BattleResolved($attackerPlayerIds, $defenderPlayer->getId(), $this->defenderPlanet->getPlanetId()));
+        }
 
         return $result;
     }
@@ -329,7 +363,8 @@ abstract class BattleEngine
         }
 
         // Deduct flee deuterium before loot calculation so cargo theft uses updated stocks.
-        if ($decision->deuteriumCost > 0) {
+        // A pure question skips the write: the defender's planet is left exactly as it was.
+        if ($decision->deuteriumCost > 0 && !$this->pure) {
             $this->defenderPlanet->deductResources(new Resources(0, 0, $decision->deuteriumCost, 0));
         }
 
@@ -837,7 +872,17 @@ abstract class BattleEngine
      */
     protected function rollMoonCreation($moonChance): bool
     {
-        $dice = random_int(1, 100);
+        $dice = $this->random(1, 100);
         return $dice <= $moonChance;
+    }
+
+    /**
+     * One combat draw, seeded when a seed is set and cryptographically random
+     * otherwise. This is the single point every draw in the round path should
+     * go through so a seeded simulation is fully reproducible.
+     */
+    protected function random(int $min, int $max): int
+    {
+        return $this->seed !== null ? mt_rand($min, $max) : random_int($min, $max);
     }
 }

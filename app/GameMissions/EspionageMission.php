@@ -36,6 +36,7 @@ class EspionageMission extends GameMission
     protected static bool $blockedByServerAttackBlock = true;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::war;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Hostile;
+    protected static array $requiredShipMachineNames = ['espionage_probe'];
 
     /**
      * @inheritdoc
