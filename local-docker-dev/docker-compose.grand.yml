@@ -1,0 +1,88 @@
+# Grand test stack — reuses the existing image and codebase, pointed at its own
+# database, redis prefixes and Horizon lanes. Nothing here is shared with the dev
+# stack except the bind-mounted code and the host-level cognition sidecars.
+#
+#   docker compose -f local-docker-dev/docker-compose.grand.yml --profile queue up -d
+#
+name: ogamex-grand
+
+x-grand-env: &grand-env
+  APP_ENV: local
+  APP_DEBUG: "true"
+  DB_HOST: host.docker.internal
+  DB_PORT: "3306"
+  DB_DATABASE: ogamex-grand
+  DB_USERNAME: root
+  DB_PASSWORD: ""
+  REDIS_HOST: host.docker.internal
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: "null"
+  REDIS_CLIENT: phpredis
+  QUEUE_CONNECTION: redis
+  REDIS_QUEUE_RETRY_AFTER: "660"
+  CACHE_DRIVER: redis
+  CACHE_PREFIX: ogamex_grand
+  HORIZON_PREFIX: "ogamex_grand_horizon:"
+  BROADCAST_CONNECTION: log
+  SESSION_DRIVER: database
+  # Horizon controls the workers; the module's Horizon plan reads these ceilings.
+  AI_HORIZON_WORK_PROCESSES: "10"
+  AI_HORIZON_WORK_BALANCE: simple
+  AI_HORIZON_WORK_TIMEOUT: "300"
+  AI_HORIZON_LANGUAGE_PROCESSES: "1"
+  AI_POPULATION_SESSION_INTERVAL_SECONDS: "5"
+  # Max capabilities: native engines always run, all three drivers alongside.
+  AI_COGNITION_MODE: hybrid
+  AI_COGNITION_DRIVER: fatima
+  AI_EXPERIENCE_DRIVER: cbrkit
+  AI_MEMORY_DRIVER: agentos
+  AI_LANGUAGE_ENABLED: "false"
+  AI_CONVERSATION_ENABLED: "true"
+
+services:
+  ogamex-app:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *grand-env
+      CONTAINER_ROLE: app
+    ports:
+      - "9001:9000" # distinct PHP-FPM port; no reverb, no web server
+    networks: [grand-network]
+
+  ogamex-scheduler:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *grand-env
+      CONTAINER_ROLE: scheduler
+    depends_on:
+      - ogamex-app
+    networks: [grand-network]
+
+  ogamex-queue-worker:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *grand-env
+      CONTAINER_ROLE: queue
+    profiles: ["queue"]
+    depends_on:
+      - ogamex-app
+    networks: [grand-network]
+
+networks:
+  grand-network:
+    driver: bridge

@@ -16,7 +16,7 @@ class PlayerGameStateService
     {
     }
 
-    public function advance(int $playerId, int|null $currentPlanetId = null): PlayerService
+    public function advance(int $playerId, int|null $currentPlanetId = null, bool $markActivity = true): PlayerService
     {
         $player = $this->playerServiceFactory->make($playerId, true);
 
@@ -24,8 +24,15 @@ class PlayerGameStateService
             $player->setCurrentPlanetId($currentPlanetId);
         }
 
-        $player->update();
-        $player->planets->current()->update();
+        if ($markActivity) {
+            $player->update();
+        }
+        if (!$markActivity) {
+            $player->updateResearchQueue(false);
+        }
+        if ($player->planets->all() !== []) {
+            $player->planets->current()->update();
+        }
         $player->updateFleetMissions();
 
         return $player;
