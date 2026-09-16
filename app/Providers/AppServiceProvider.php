@@ -17,6 +17,7 @@ use OGame\Models\FleetMission;
 use OGame\Models\User;
 use OGame\Observers\FleetMissionObserver;
 use OGame\Observers\UserObserver;
+use OGame\Services\HostilityGuard;
 use OGame\Services\SettingsService;
 
 class AppServiceProvider extends ServiceProvider
@@ -108,5 +109,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(ExceptionHandler::class, Handler::class);
+
+        $this->app->singleton(HostilityGuard::class, static fn (): HostilityGuard => new HostilityGuard());
     }
 }

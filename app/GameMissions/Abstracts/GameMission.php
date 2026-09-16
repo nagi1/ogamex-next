@@ -23,6 +23,7 @@ use OGame\Models\Planet\Coordinate;
 use OGame\Models\Resources;
 use OGame\Services\FleetMissionService;
 use OGame\Services\FleetUnionService;
+use OGame\Services\HostilityGuard;
 use OGame\Services\MessageService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
@@ -179,6 +180,10 @@ abstract class GameMission
             return new MissionPossibleStatus(false, __('The attack block is active. In that time only friendly fleets can be started.'));
         }
 
+        if (static::$blockedByServerAttackBlock && app(HostilityGuard::class)->forbids($player->getId(), $this->defenderPlayerId($targetCoordinate, $targetType))) {
+            return new MissionPossibleStatus(false, __('Hostile actions are disabled in this universe.'));
+        }
+
         // If mission from and to coordinates and types are the same, the mission is not possible.
         if ($planet->getPlanetCoordinates()->equals($targetCoordinate) && $planet->getPlanetType() === $targetType) {
             return new MissionPossibleStatus(false);
@@ -186,6 +191,17 @@ abstract class GameMission
 
         // Default: mission is possible. Child classes should call parent first and then add their own checks.
         return new MissionPossibleStatus(true);
+    }
+
+    /**
+     * Resolve the target planet's owner from its coordinates and type, or null when the
+     * target does not exist. The guard then decides from the two player ids alone.
+     */
+    private function defenderPlayerId(Coordinate $targetCoordinate, PlanetType $targetType): ?int
+    {
+        $targetPlanet = $this->planetServiceFactory->makeForCoordinate($targetCoordinate, true, $targetType);
+
+        return $targetPlanet?->getPlayer()?->getId();
     }
 
     /**

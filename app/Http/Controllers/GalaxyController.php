@@ -18,6 +18,7 @@ use OGame\Models\Planet\Coordinate;
 use OGame\Services\BuddyService;
 use OGame\Services\CharacterClassService;
 use OGame\Services\DebrisFieldService;
+use OGame\Services\HostilityGuard;
 use OGame\Services\PhalanxService;
 use OGame\Services\PlanetMoveService;
 use OGame\Services\PlanetService;
@@ -1033,6 +1034,13 @@ class GalaxyController extends OGameController
             return response()->json([
                 'success' => false,
                 'error' => __('You cannot attack your own planet'),
+            ], 403);
+        }
+
+        if (app(HostilityGuard::class)->forbids($player->getId(), $targetPlanet->getPlayer()?->getId())) {
+            return response()->json([
+                'success' => false,
+                'error' => __('Hostile actions are disabled in this universe.'),
             ], 403);
         }
 
