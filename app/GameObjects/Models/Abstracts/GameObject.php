@@ -116,6 +116,15 @@ abstract class GameObject
     }
 
     /**
+     * Whether this object carries the given calculation, so a caller can find the object
+     * behind a value (e.g. the technology that raises the fleet-slot ceiling) without naming it.
+     */
+    public function hasCalculation(CalculationType $calculationName): bool
+    {
+        return isset($this->calculations[$calculationName->value]);
+    }
+
+    /**
      * Check if the object has any requirements.
      *
      * @return bool

@@ -9,6 +9,7 @@ use OGame\GameObjects\DefenseObjects;
 use OGame\GameObjects\MilitaryShipObjects;
 use OGame\GameObjects\Models\Abstracts\GameObject;
 use OGame\GameObjects\Models\BuildingObject;
+use OGame\GameObjects\Models\Calculations\CalculationType;
 use OGame\GameObjects\Models\DefenseObject;
 use OGame\GameObjects\Models\Enums\GameObjectType;
 use OGame\GameObjects\Models\Fields\GameObjectRequirement;
@@ -270,6 +271,22 @@ class ObjectService
         }
 
         throw new RuntimeException('Game object not found with machine name: ' . $machine_name);
+    }
+
+    /**
+     * The object that carries a given calculation (e.g. the technology behind the fleet-slot
+     * ceiling), or null when no object provides it. This is the reverse of `performCalculation`
+     * and lets a module reach the object behind a value without naming it (host obligation R11).
+     */
+    public static function getObjectByCalculationType(CalculationType $calculationName): ?GameObject
+    {
+        foreach (self::getObjects() as $object) {
+            if ($object->hasCalculation($calculationName)) {
+                return $object;
+            }
+        }
+
+        return null;
     }
 
     /**
