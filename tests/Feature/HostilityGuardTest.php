@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use OGame\Contracts\HostilityPolicy;
+use OGame\Enums\UniverseMode;
 use OGame\Services\HostilityGuard;
 use OGame\Services\SettingsService;
 use RuntimeException;
@@ -21,21 +22,21 @@ class HostilityGuardTest extends TestCase
 
     public function testOrdinaryUniverseNeverForbids(): void
     {
-        app(SettingsService::class)->set('universe_mode', 'ordinary');
+        app(SettingsService::class)->setUniverseMode(UniverseMode::Ordinary);
 
         $this->assertFalse((new HostilityGuard())->forbids(1, 2));
     }
 
     public function testCooperativeUniverseWithNoPolicyFailsClosed(): void
     {
-        app(SettingsService::class)->set('universe_mode', 'cooperative');
+        app(SettingsService::class)->setUniverseMode(UniverseMode::Cooperative);
 
         $this->assertTrue((new HostilityGuard())->forbids(1, 2));
     }
 
     public function testCooperativeUniverseConsultsItsRegisteredPolicy(): void
     {
-        app(SettingsService::class)->set('universe_mode', 'cooperative');
+        app(SettingsService::class)->setUniverseMode(UniverseMode::Cooperative);
 
         $guard = new HostilityGuard();
         $guard->register(new class () implements HostilityPolicy {
@@ -51,7 +52,7 @@ class HostilityGuardTest extends TestCase
 
     public function testThrowingPolicyFailsClosed(): void
     {
-        app(SettingsService::class)->set('universe_mode', 'cooperative');
+        app(SettingsService::class)->setUniverseMode(UniverseMode::Cooperative);
 
         $guard = new HostilityGuard();
         $guard->register(new class () implements HostilityPolicy {
@@ -66,7 +67,7 @@ class HostilityGuardTest extends TestCase
 
     public function testUnresolvableDefenderIsNotAssessed(): void
     {
-        app(SettingsService::class)->set('universe_mode', 'cooperative');
+        app(SettingsService::class)->setUniverseMode(UniverseMode::Cooperative);
 
         $this->assertFalse((new HostilityGuard())->forbids(1, null));
     }

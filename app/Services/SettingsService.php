@@ -3,6 +3,7 @@
 namespace OGame\Services;
 
 use Illuminate\Support\Facades\Date;
+use OGame\Enums\UniverseMode;
 use OGame\Factories\GameMissionFactory;
 use OGame\GameConstants\UniverseConstants;
 use OGame\Models\Setting;
@@ -486,6 +487,24 @@ class SettingsService
         $until = $this->attackBlockUntil();
 
         return $until > Date::now()->timestamp;
+    }
+
+    /**
+     * Returns the declared hostility mode of the universe, defaulting to ordinary so a
+     * universe that never recorded a mode behaves exactly as it always has.
+     */
+    public function universeMode(): UniverseMode
+    {
+        return UniverseMode::tryFrom($this->get('universe_mode', UniverseMode::Ordinary->value))
+            ?? UniverseMode::Ordinary;
+    }
+
+    /**
+     * Sets the declared hostility mode; the raw key lives here so callers never spell it.
+     */
+    public function setUniverseMode(UniverseMode $mode): void
+    {
+        $this->set('universe_mode', $mode->value);
     }
 
     /**

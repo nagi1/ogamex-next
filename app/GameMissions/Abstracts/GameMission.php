@@ -197,7 +197,7 @@ abstract class GameMission
      * Resolve the target planet's owner from its coordinates and type, or null when the
      * target does not exist. The guard then decides from the two player ids alone.
      */
-    private function defenderPlayerId(Coordinate $targetCoordinate, PlanetType $targetType): ?int
+    private function defenderPlayerId(Coordinate $targetCoordinate, PlanetType $targetType): int|null
     {
         $targetPlanet = $this->planetServiceFactory->makeForCoordinate($targetCoordinate, true, $targetType);
 

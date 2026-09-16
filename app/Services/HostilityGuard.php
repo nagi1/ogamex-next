@@ -3,6 +3,7 @@
 namespace OGame\Services;
 
 use OGame\Contracts\HostilityPolicy;
+use OGame\Enums\UniverseMode;
 use Throwable;
 
 /**
@@ -24,7 +25,7 @@ class HostilityGuard
         $this->policies[] = $policy;
     }
 
-    public function forbids(int $attackerPlayerId, ?int $defenderPlayerId): bool
+    public function forbids(int $attackerPlayerId, int|null $defenderPlayerId): bool
     {
         // An unresolvable defender has no owner to be hostile toward; the action's own
         // target checks reject it, so the guard stays out of the way.
@@ -32,7 +33,7 @@ class HostilityGuard
             return false;
         }
 
-        if ((string) app(SettingsService::class)->get('universe_mode', 'ordinary') !== 'cooperative') {
+        if (app(SettingsService::class)->universeMode() !== UniverseMode::Cooperative) {
             return false;
         }
 
