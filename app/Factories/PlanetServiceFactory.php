@@ -253,8 +253,8 @@ class PlanetServiceFactory
             /** @var PlanetService */
             $planetService = resolve(PlanetService::class, [
                 'player' => null,
-                'planet' => null,
-                'planet_id' => $planet->id,
+                'planet' => $planet,
+                'planet_id' => null,
             ]);
 
             if ($type === PlanetType::Planet) {

@@ -6,6 +6,10 @@ x-host-services: &host-services
   DB_DATABASE: ${LOCAL_DB_DATABASE:-ogamex-test}
   DB_USERNAME: ${LOCAL_DB_USERNAME:-root}
   DB_PASSWORD: ${LOCAL_DB_PASSWORD:-}
+  # The database lives on the Docker host gateway, the slow link .env.example
+  # names for client-side statement emulation: native prepares cost three round
+  # trips per query there (31 ms measured against 1 ms emulated).
+  DB_EMULATE_PREPARES: ${LOCAL_DB_EMULATE_PREPARES:-true}
   REDIS_HOST: ${LOCAL_REDIS_HOST:-host.docker.internal}
   REDIS_PORT: ${LOCAL_REDIS_PORT:-6379}
   REDIS_PASSWORD: ${LOCAL_REDIS_PASSWORD:-null}

@@ -18,9 +18,15 @@ use RuntimeException;
 class GameMissionFactory
 {
     /**
-     * @return array<GameMission>
+     * The id-to-class map, without instantiation. A GameMission constructor pulls
+     * FleetMissionService and MessageService, and both require a PlayerService, so
+     * resolving a mission builds a player for metadata that is already static
+     * (getTypeId, getRequiredResearch, getRequiredShipMachineNames). Readers that
+     * only need that static metadata iterate this map and call the class directly.
+     *
+     * @return array<int, class-string<GameMission>>
      */
-    public static function getAllMissions(): array
+    public static function getMissionClasses(): array
     {
         /*
         {
@@ -37,18 +43,29 @@ class GameMissionFactory
         }
         */
         return [
-            1 => resolve(AttackMission::class),
-            2 => resolve(AttackMission::class),
-            3 => resolve(TransportMission::class),
-            4 => resolve(DeploymentMission::class),
-            5 => resolve(AcsDefendMission::class),
-            6 => resolve(EspionageMission::class),
-            7 => resolve(ColonisationMission::class),
-            8 => resolve(RecycleMission::class),
-            9 => resolve(MoonDestructionMission::class),
-            10 => resolve(MissileMission::class),
-            15 => resolve(ExpeditionMission::class),
+            1 => AttackMission::class,
+            2 => AttackMission::class,
+            3 => TransportMission::class,
+            4 => DeploymentMission::class,
+            5 => AcsDefendMission::class,
+            6 => EspionageMission::class,
+            7 => ColonisationMission::class,
+            8 => RecycleMission::class,
+            9 => MoonDestructionMission::class,
+            10 => MissileMission::class,
+            15 => ExpeditionMission::class,
         ];
+    }
+
+    /**
+     * @return array<GameMission>
+     */
+    public static function getAllMissions(): array
+    {
+        return array_map(
+            static fn (string $class): GameMission => resolve($class),
+            self::getMissionClasses(),
+        );
     }
 
     /**
@@ -59,18 +76,12 @@ class GameMissionFactory
      */
     public static function getMissionById(int $missionId, array $dependencies): GameMission
     {
-        return match ($missionId) {
-            1, 2 => resolve(AttackMission::class, $dependencies),
-            3 => resolve(TransportMission::class, $dependencies),
-            4 => resolve(DeploymentMission::class, $dependencies),
-            5 => resolve(AcsDefendMission::class, $dependencies),
-            6 => resolve(EspionageMission::class, $dependencies),
-            7 => resolve(ColonisationMission::class, $dependencies),
-            8 => resolve(RecycleMission::class, $dependencies),
-            9 => resolve(MoonDestructionMission::class, $dependencies),
-            10 => resolve(MissileMission::class, $dependencies),
-            15 => resolve(ExpeditionMission::class, $dependencies),
-            default => throw new RuntimeException('Mission not found: ' . $missionId),
-        };
+        $class = self::getMissionClasses()[$missionId] ?? null;
+
+        if ($class === null) {
+            throw new RuntimeException('Mission not found: ' . $missionId);
+        }
+
+        return resolve($class, $dependencies);
     }
 }

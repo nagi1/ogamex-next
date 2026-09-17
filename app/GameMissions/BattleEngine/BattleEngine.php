@@ -47,6 +47,14 @@ abstract class BattleEngine
     protected bool $retreatAfterDefenderRetreat = false;
 
     /**
+     * @var bool|null Memoised moon existence for the defender planet. The planet is
+     * fixed for the engine's life, so the moon cannot appear between two runs of the
+     * same engine — and a Monte-Carlo raid estimate runs it 50+ times, where each
+     * uncached lookup was a query against the planets table.
+     */
+    protected bool|null $moonExisted = null;
+
+    /**
      * @var int|null Seed for reproducible simulation. When set, every combat
      * draw is drawn from a seeded generator; when null, behaviour is unchanged.
      */
@@ -312,7 +320,7 @@ abstract class BattleEngine
 
         // Determine if a moon already exists for defender's planet.
         // If defender is a moon, moonExisted should be true (the moon itself exists).
-        $result->moonExisted = $this->defenderPlanet->isMoon() || $this->defenderPlanet->hasMoon();
+        $result->moonExisted = $this->moonExisted ??= $this->defenderPlanet->isMoon() || $this->defenderPlanet->hasMoon();
 
         // Calculate moon percentage if a moon does not exist yet.
         if ($result->moonExisted) {

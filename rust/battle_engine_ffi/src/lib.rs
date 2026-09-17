@@ -40,7 +40,8 @@
 use serde::{Deserialize, Serialize};
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
-use rand::Rng;
+use rand::rngs::StdRng;
+use rand::{Rng, RngCore, SeedableRng};
 use std::collections::HashMap;
 #[cfg(feature = "memory-metrics")]
 use memory_stats::memory_stats;
@@ -50,6 +51,12 @@ use memory_stats::memory_stats;
 pub struct BattleInput {
     attacker_fleets: Vec<FleetInput>,
     defender_fleets: Vec<FleetInput>,
+    /// Optional caller seed. When present every draw in the round combat comes
+    /// from a seeded generator, so the same input and seed return the same
+    /// result and a read-only battle question can be replayed. Absent keeps the
+    /// thread RNG the live path has always used.
+    #[serde(default)]
+    seed: Option<u64>,
 }
 
 /// Input structure for a single fleet (attacker or defender).
@@ -240,7 +247,7 @@ fn process_battle_rounds(input: BattleInput) -> BattleOutput {
     update_peak_memory(&mut peak_memory);
 
     // Fight up to 6 rounds
-    for _ in 0..6 {
+    for round_number in 0..6 {
         if attacker_units.is_empty() || defender_units.is_empty() {
             break;
         }
@@ -248,8 +255,8 @@ fn process_battle_rounds(input: BattleInput) -> BattleOutput {
         let mut round = BattleRound::new();
 
         // Process combat
-        process_combat(&attacker_units, &mut defender_units, &attacker_infos, &defender_infos, &mut round, true);
-        process_combat(&defender_units, &mut attacker_units, &defender_infos, &attacker_infos, &mut round, false);
+        process_combat(&attacker_units, &mut defender_units, &attacker_infos, &defender_infos, &mut round, true, phase_seed(input.seed, round_number, true));
+        process_combat(&defender_units, &mut attacker_units, &defender_infos, &attacker_infos, &mut round, false, phase_seed(input.seed, round_number, false));
 
         // Remove destroyed units, record per-round losses and regenerate shields.
         cleanup_units(&mut attacker_units, &attacker_infos, &mut attacker_alive, &mut round.attacker_losses_in_round);
@@ -365,6 +372,15 @@ fn expand_units(infos: &[CombatUnitInfo]) -> Vec<CombatUnit> {
 /// - `defender_infos`: Static values of the defending units (max shield, max hull, etc.).
 /// - `round`: Stores round statistics, such as hits and absorbed damage.
 /// - `is_attacker`: Whether the current phase is attacker-to-defender or vice versa.
+/// Derive the seed for one side of one round.
+///
+/// Each side of each round draws from its own stream, so a single caller seed
+/// still gives every phase independent luck instead of replaying one sequence
+/// six times over.
+fn phase_seed(seed: Option<u64>, round_number: u64, is_attacker: bool) -> Option<u64> {
+    seed.map(|value| value.wrapping_add(round_number.wrapping_mul(2) + u64::from(!is_attacker)))
+}
+
 fn process_combat(
     attackers: &[CombatUnit],
     defenders: &mut Vec<CombatUnit>,
@@ -372,8 +388,12 @@ fn process_combat(
     defender_infos: &[CombatUnitInfo],
     round: &mut BattleRound,
     is_attacker: bool,
+    seed: Option<u64>,
 ) {
-    let mut rng = rand::thread_rng();
+    let mut rng: Box<dyn RngCore> = match seed {
+        Some(value) => Box::new(StdRng::seed_from_u64(value)),
+        None => Box::new(rand::thread_rng()),
+    };
 
     for attacker in attackers.iter() {
         // Get the static values of the attacking unit.
@@ -621,6 +641,7 @@ mod tests {
             &[defender_info],
             &mut round,
             true,
+            None,
         );
 
         (round, defenders)

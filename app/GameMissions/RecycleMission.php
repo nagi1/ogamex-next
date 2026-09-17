@@ -28,6 +28,20 @@ class RecycleMission extends GameMission
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::war;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Neutral;
 
+    /** Both harvest hulls this mission consumes: slot 16 debris is pathfinders, the rest recyclers. */
+    protected static array $requiredShipMachineNames = ['recycler', 'pathfinder'];
+
+    /**
+     * The harvest hull for a debris field at the given slot: slot 16 is expedition
+     * debris (pathfinder), every other slot is battlefield debris (recycler).
+     * Exposed so module code reads the requirement from the mission instead of
+     * naming a ship itself (gate 1).
+     */
+    public static function getHarvesterMachineNameForPosition(int $position): string
+    {
+        return $position === 16 ? 'pathfinder' : 'recycler';
+    }
+
     /**
      * @inheritdoc
      */
@@ -43,21 +57,10 @@ class RecycleMission extends GameMission
             return new MissionPossibleStatus(false);
         }
 
-        // Check if this is an expedition debris field (position 16)
-        $isExpeditionDebris = $targetCoordinate->position === 16;
-
-        // For expedition debris (position 16): require Pathfinders
-        // For regular debris (positions 1-15): require Recyclers
-        if ($isExpeditionDebris) {
-            // Expedition debris can only be harvested by Pathfinders
-            if ($units->getAmountByMachineName('pathfinder') === 0) {
-                return new MissionPossibleStatus(false);
-            }
-        } else {
-            // Regular debris requires at least one recycler
-            if ($units->getAmountByMachineName('recycler') === 0) {
-                return new MissionPossibleStatus(false);
-            }
+        // The harvest hull this mission consumes for the target slot: slot 16 is
+        // expedition debris (pathfinder), every other slot (recycler).
+        if ($units->getAmountByMachineName(self::getHarvesterMachineNameForPosition($targetCoordinate->position)) === 0) {
+            return new MissionPossibleStatus(false);
         }
 
         // Check if debris field exists (including "ghost" fields with 0 resources).
@@ -105,19 +108,10 @@ class RecycleMission extends GameMission
         $debrisField = app(DebrisFieldService::class);
         $debrisField->loadOrCreateForCoordinates($targetCoordinate);
 
-        // Check if this is expedition debris (position 16) - harvested by Pathfinders
-        // or regular debris (positions 1-15) - harvested by Recyclers
-        $isExpeditionDebris = $targetCoordinate->position === 16;
-
-        if ($isExpeditionDebris) {
-            // Get pathfinder unit count and capacity
-            $harvesterShip = ObjectService::getShipObjectByMachineName('pathfinder');
-            $harvesterCount = $this->fleetMissionService->getFleetUnits($mission)->getAmountByMachineName($harvesterShip->machine_name);
-        } else {
-            // Get recycler unit count and capacity
-            $harvesterShip = ObjectService::getShipObjectByMachineName('recycler');
-            $harvesterCount = $this->fleetMissionService->getFleetUnits($mission)->getAmountByMachineName($harvesterShip->machine_name);
-        }
+        // One harvest hull per slot: pathfinders for expedition debris (slot 16),
+        // recyclers for battlefield debris (slots 1-15).
+        $harvesterShip = ObjectService::getShipObjectByMachineName(self::getHarvesterMachineNameForPosition($targetCoordinate->position));
+        $harvesterCount = $this->fleetMissionService->getFleetUnits($mission)->getAmountByMachineName($harvesterShip->machine_name);
 
         // Calculate total cargo capacity.
         $total_cargo_capacity = $harvesterShip->properties->capacity->calculate($originPlayer)->totalValue * $harvesterCount;

@@ -278,7 +278,7 @@ class ObjectService
      * ceiling), or null when no object provides it. This is the reverse of `performCalculation`
      * and lets a module reach the object behind a value without naming it (host obligation R11).
      */
-    public static function getObjectByCalculationType(CalculationType $calculationName): ?GameObject
+    public static function getObjectByCalculationType(CalculationType $calculationName): GameObject|null
     {
         foreach (self::getObjects() as $object) {
             if ($object->hasCalculation($calculationName)) {

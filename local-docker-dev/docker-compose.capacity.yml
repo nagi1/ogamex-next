@@ -1,23 +1,23 @@
-# Grand test stack — reuses the existing image and codebase, pointed at its own
-# database, redis prefixes and Horizon lanes. Nothing here is shared with the dev
-# stack except the bind-mounted code and the host-level cognition sidecars.
+# Capacity comparison stack — one fresh, isolated universe per run, pointed at its own
+# database and redis prefixes. Nothing here is shared with the dev stack or the holy
+# `ogamex-grand` universe except the bind-mounted code and the host cognition sidecars.
 #
-#   docker compose -f local-docker-dev/docker-compose.grand.yml --profile queue up -d
+#   CAP_DB=ogamex-cap-2 CAP_PORT=9102 CAP_PLAYERS=2 \
+#     docker compose -f local-docker-dev/docker-compose.capacity.yml --profile queue up -d
 #
-name: ogamex-grand
+# The run is driven by local-docker-dev/capacity-run.sh, which creates the database,
+# migrates, seeds, sets the speed rows and collects the report — this file only owns the
+# container wiring.
+name: ogamex-capacity
 
-x-grand-env: &grand-env
+x-capacity-env: &capacity-env
   APP_ENV: local
   APP_DEBUG: "true"
   DB_HOST: host.docker.internal
   DB_PORT: "3306"
-  DB_DATABASE: ogamex-grand
+  DB_DATABASE: "${CAP_DB:-ogamex-cap-2}"
   DB_USERNAME: root
   DB_PASSWORD: ""
-  # The database is reached over the Docker host gateway, the slow link
-  # .env.example names for client-side statement emulation. Measured here:
-  # 45 ms per query native (three round trips) against 1 ms emulated.
-  DB_EMULATE_PREPARES: "true"
   REDIS_HOST: host.docker.internal
   REDIS_PORT: "6379"
   REDIS_PASSWORD: "null"
@@ -25,23 +25,19 @@ x-grand-env: &grand-env
   QUEUE_CONNECTION: redis
   REDIS_QUEUE_RETRY_AFTER: "660"
   CACHE_STORE: redis
-  CACHE_PREFIX: ogamex_grand
-  HORIZON_PREFIX: "ogamex_grand_horizon:"
+  CACHE_PREFIX: "${CAP_PREFIX:-ogamex_cap2}"
+  HORIZON_PREFIX: "${CAP_HORIZON:-ogamex_cap2_horizon:}"
   BROADCAST_CONNECTION: log
   SESSION_DRIVER: database
-  # Horizon controls the workers; the module's Horizon plan reads these ceilings.
-  AI_HORIZON_WORK_PROCESSES: "10"
+  AI_HORIZON_WORK_PROCESSES: "${CAP_WORKERS:-8}"
   AI_HORIZON_WORK_BALANCE: simple
   AI_HORIZON_WORK_TIMEOUT: "300"
   AI_HORIZON_LANGUAGE_PROCESSES: "1"
-  AI_POPULATION_SESSION_INTERVAL_SECONDS: "5"
-  # Every external driver is the authority here, with native kept only as the per-call
-  # fallback an absent or failed sidecar degrades to.
-  AI_COGNITION_MODE: external
+  AI_POPULATION_SESSION_INTERVAL_SECONDS: "${CAP_SESSION_INTERVAL:-5}"
+  AI_COGNITION_MODE: "${CAP_MODE:-hybrid}"
   AI_COGNITION_DRIVER: fatima
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
-  # No generative lane: each provider gateway binds to its Null implementation while off.
   AI_LANGUAGE_ENABLED: "false"
   AI_CONVERSATION_ENABLED: "true"
 
@@ -54,11 +50,11 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      <<: *grand-env
+      <<: *capacity-env
       CONTAINER_ROLE: app
     ports:
-      - "9001:9000" # distinct PHP-FPM port; no reverb, no web server
-    networks: [grand-network]
+      - "${CAP_PORT:-9102}:9000"
+    networks: [capacity-network]
 
   ogamex-scheduler:
     image: ogamex-local-docker-dev:latest
@@ -68,11 +64,11 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      <<: *grand-env
+      <<: *capacity-env
       CONTAINER_ROLE: scheduler
     depends_on:
       - ogamex-app
-    networks: [grand-network]
+    networks: [capacity-network]
 
   ogamex-queue-worker:
     image: ogamex-local-docker-dev:latest
@@ -82,13 +78,13 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      <<: *grand-env
+      <<: *capacity-env
       CONTAINER_ROLE: queue
     profiles: ["queue"]
     depends_on:
       - ogamex-app
-    networks: [grand-network]
+    networks: [capacity-network]
 
 networks:
-  grand-network:
+  capacity-network:
     driver: bridge

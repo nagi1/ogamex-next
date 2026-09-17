@@ -169,6 +169,10 @@ class RustBattleEngine extends BattleEngine
         return [
             'attacker_fleets' => $attackerFleets,
             'defender_fleets' => $defenderFleets,
+            // The round combat runs in Rust, so the base class's seed has to
+            // travel with the input for a read-only question to be replayable.
+            // Null keeps the thread RNG the live path has always used.
+            'seed' => $this->seed,
         ];
     }
 
