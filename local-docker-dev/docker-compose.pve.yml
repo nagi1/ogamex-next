@@ -45,12 +45,12 @@ x-pve-env: &pve-env
   AI_COGNITION_DRIVER: fatima
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
-  # Mirrors the grand stack: cheap models only, off-peak, bounded by the module's
-  # own daily limits. Consultation runs in `observe` (records, never applies).
-  AI_LANGUAGE_ENABLED: "true"
+  # Generative lanes OFF for the deepseek peak (mirrors grand, 18 Sep 2026): language gate
+  # false + consultation `off` binds both gateways to Null, so no provider call is made.
+  AI_LANGUAGE_ENABLED: "false"
   AI_LANGUAGE_MODEL: deepseek-flash
-  AI_CONVERSATION_ENABLED: "true"
-  AI_CAMPAIGN_CONSULTATION_MODE: observe
+  AI_CONVERSATION_ENABLED: "false"
+  AI_CAMPAIGN_CONSULTATION_MODE: off
   AI_CAMPAIGN_CONSULTATION_MODEL: deepseek-flash
 
 services:

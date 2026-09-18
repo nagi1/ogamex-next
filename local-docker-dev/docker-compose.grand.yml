@@ -41,14 +41,14 @@ x-grand-env: &grand-env
   AI_COGNITION_DRIVER: fatima
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
-  # Generative lanes ON for the Package 6/7 run (owner direction 17 Sep 2026): cheap models
-  # only (deepseek-flash / gpt-5.6-luna), off-peak, bounded by the module's own daily limits.
-  # Consultation runs in `observe` mode (records, never applies). Lanes are switched back off
-  # when the run ends.
-  AI_LANGUAGE_ENABLED: "true"
+  # Generative lanes OFF for the deepseek peak (owner direction 18 Sep 2026): with the
+  # language gate false and consultation `off`, the provider gateways bind to their Null
+  # implementations and no deepseek call is made. `off` is also the lane's own fail-closed
+  # default. Flip back to true/true/observe when the peak ends.
+  AI_LANGUAGE_ENABLED: "false"
   AI_LANGUAGE_MODEL: deepseek-flash
-  AI_CONVERSATION_ENABLED: "true"
-  AI_CAMPAIGN_CONSULTATION_MODE: observe
+  AI_CONVERSATION_ENABLED: "false"
+  AI_CAMPAIGN_CONSULTATION_MODE: off
   AI_CAMPAIGN_CONSULTATION_MODEL: deepseek-flash
 
 services:
