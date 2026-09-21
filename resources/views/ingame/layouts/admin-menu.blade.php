@@ -7,6 +7,7 @@
             height: 32px;
             left: 0;
             padding: 0;
+            position: relative;
             text-align: center;
             top: 0;
             width: 100%;

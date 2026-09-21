@@ -9,16 +9,15 @@ name: ogamex-grand
 x-grand-env: &grand-env
   APP_ENV: local
   APP_DEBUG: "true"
-  DB_HOST: host.docker.internal
+  DB_HOST: mysql
   DB_PORT: "3306"
   DB_DATABASE: ogamex-grand
   DB_USERNAME: root
   DB_PASSWORD: ""
-  # The database is reached over the Docker host gateway, the slow link
-  # .env.example names for client-side statement emulation. Measured here:
-  # 45 ms per query native (three round trips) against 1 ms emulated.
+  # The database is reached directly over Docker DNS. Statement emulation stays
+  # enabled to preserve the existing local application's behavior.
   DB_EMULATE_PREPARES: "true"
-  REDIS_HOST: host.docker.internal
+  REDIS_HOST: redis
   REDIS_PORT: "6379"
   REDIS_PASSWORD: "null"
   REDIS_CLIENT: phpredis
@@ -41,14 +40,17 @@ x-grand-env: &grand-env
   AI_COGNITION_DRIVER: fatima
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
-  # Generative lanes OFF for the deepseek peak (owner direction 18 Sep 2026): with the
-  # language gate false and consultation `off`, the provider gateways bind to their Null
-  # implementations and no deepseek call is made. `off` is also the lane's own fail-closed
-  # default. Flip back to true/true/observe when the peak ends.
-  AI_LANGUAGE_ENABLED: "false"
+  # Generative lanes ON for the deepseek off-peak (owner direction 18 Sep 2026, 13:05 UTC; the
+  # consultation lane raised observe -> advice for the off-peak window, 20 Sep 2026): the peak
+  # windows are 01:00-04:00 and 06:00-10:00 UTC Mon-Fri, so this window is billed at 1x.
+  # Consultation now APPLIES a validated, profile-bounded ranking nudge instead of only recording
+  # it. AI_ROUTING_ENABLED stays off, so the explicit model pins below remain authoritative.
+  # Flip back to false/false/observe when the peak returns.
+  AI_LANGUAGE_ENABLED: "true"
   AI_LANGUAGE_MODEL: deepseek-flash
-  AI_CONVERSATION_ENABLED: "false"
-  AI_CAMPAIGN_CONSULTATION_MODE: off
+  AI_LANGUAGE_AI_TO_AI: "true"
+  AI_CONVERSATION_ENABLED: "true"
+  AI_CAMPAIGN_CONSULTATION_MODE: advice
   AI_CAMPAIGN_CONSULTATION_MODEL: deepseek-flash
 
 services:
@@ -65,7 +67,7 @@ services:
       CONTAINER_ROLE: app
     ports:
       - "9001:9000" # distinct PHP-FPM port; no reverb, no web server
-    networks: [grand-network]
+    networks: [grand-network, shared-services]
 
   ogamex-scheduler:
     image: ogamex-local-docker-dev:latest
@@ -80,7 +82,7 @@ services:
       CONTAINER_ROLE: scheduler
     depends_on:
       - ogamex-app
-    networks: [grand-network]
+    networks: [grand-network, shared-services]
 
   ogamex-queue-worker:
     image: ogamex-local-docker-dev:latest
@@ -96,8 +98,11 @@ services:
     profiles: ["queue"]
     depends_on:
       - ogamex-app
-    networks: [grand-network]
+    networks: [grand-network, shared-services]
 
 networks:
   grand-network:
     driver: bridge
+  shared-services:
+    external: true
+    name: ogamex-shared-services
