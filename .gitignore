@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/modules/ai/build
 /storage/*.key
 /storage/grand-backups
 /vendor
