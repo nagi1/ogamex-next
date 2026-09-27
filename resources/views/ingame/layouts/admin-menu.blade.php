@@ -93,8 +93,6 @@
                 @endif
                 <li><a class="{{(Request::is('admin/rules') ? 'active' : '') }}" href="{{ route('admin.rules.index') }}">Rules & Legal</a></li>
                 <li><a class="{{(Request::is('admin/server-administration*') ? 'active' : '') }}" href="{{ route('admin.server-administration.index') }}">Server Administration</a></li>
-                {{-- Module extension point: additional admin nav links --}}
-                @moduleSlot('admin.nav')
             </ul>
         @endif
     </div>

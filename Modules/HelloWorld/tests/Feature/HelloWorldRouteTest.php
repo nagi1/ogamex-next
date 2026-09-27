@@ -71,11 +71,11 @@ class HelloWorldRouteTest extends IsolatedAccountTestCase
         $response->assertSee('Hello from the OGameX HelloWorld module!');
     }
 
-    public function test_module_adds_a_link_to_the_admin_navigation(): void
+    public function test_module_adds_its_admin_controls_to_the_modules_page(): void
     {
         $this->artisan('ogamex:admin:assign-role', ['username' => $this->currentUsername]);
 
-        $response = $this->get('/admin/server-settings');
+        $response = $this->get('/admin/modules');
 
         $response->assertOk();
         $response->assertSee('HelloWorld example');

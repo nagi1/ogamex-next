@@ -42,7 +42,10 @@ x-pve-env: &pve-env
   AI_POPULATION_SESSION_INTERVAL_SECONDS: "5"
   # Every external driver is the authority, native kept only as the per-call fallback.
   AI_COGNITION_MODE: external
-  AI_COGNITION_DRIVER: fatima
+  # PsychSim is the selected cognition driver on pve (owner direction 23 Sep 2026): its
+  # theory-of-mind reads the trust/admission decisions (buddy, alliance join/leader) and
+  # feeds the reply and campaign prompts. Affect falls back to the native engine.
+  AI_COGNITION_DRIVER: psychsim
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
   # Generative lanes ON for the deepseek off-peak (mirrors grand, 18 Sep 2026, 13:05 UTC; the

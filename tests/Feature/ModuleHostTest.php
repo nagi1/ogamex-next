@@ -74,7 +74,7 @@ class ModuleHostTest extends TestCase
         $this->refreshApplication();
 
         $this->assertTrue(Route::has('helloworld.index'));
-        $this->assertStringContainsString('/admin/hello-world', ModuleSlotService::render('admin.nav'));
+        $this->assertStringContainsString('/admin/hello-world', ModuleSlotService::render('admin.modules'));
     }
 
     public function test_disabling_a_module_removes_its_routes(): void

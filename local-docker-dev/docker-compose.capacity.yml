@@ -13,12 +13,12 @@ name: ogamex-capacity
 x-capacity-env: &capacity-env
   APP_ENV: local
   APP_DEBUG: "true"
-  DB_HOST: host.docker.internal
+  DB_HOST: mysql
   DB_PORT: "3306"
   DB_DATABASE: "${CAP_DB:-ogamex-cap-2}"
   DB_USERNAME: root
   DB_PASSWORD: ""
-  REDIS_HOST: host.docker.internal
+  REDIS_HOST: redis
   REDIS_PORT: "6379"
   REDIS_PASSWORD: "null"
   REDIS_CLIENT: phpredis
@@ -54,7 +54,7 @@ services:
       CONTAINER_ROLE: app
     ports:
       - "${CAP_PORT:-9102}:9000"
-    networks: [capacity-network]
+    networks: [capacity-network, shared-services]
 
   ogamex-scheduler:
     image: ogamex-local-docker-dev:latest
@@ -68,7 +68,7 @@ services:
       CONTAINER_ROLE: scheduler
     depends_on:
       - ogamex-app
-    networks: [capacity-network]
+    networks: [capacity-network, shared-services]
 
   ogamex-queue-worker:
     image: ogamex-local-docker-dev:latest
@@ -83,8 +83,11 @@ services:
     profiles: ["queue"]
     depends_on:
       - ogamex-app
-    networks: [capacity-network]
+    networks: [capacity-network, shared-services]
 
 networks:
   capacity-network:
     driver: bridge
+  shared-services:
+    external: true
+    name: ogamex-shared-services

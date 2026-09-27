@@ -61,6 +61,7 @@ return [
     'modules' => [
         'title'              => 'Modules',
         'installed'          => 'Installed Modules',
+        'admin_controls'     => 'Module admin controls',
         'enabled'            => 'enabled',
         'disabled'           => 'disabled',
         'search_placeholder' => 'Search modules...',

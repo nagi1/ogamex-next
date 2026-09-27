@@ -22,6 +22,13 @@
             <div class="content">
                 <div class="buddylistContent" style="margin-bottom: 60px;">
 
+                    @if (\OGame\Services\ModuleSlotService::hasSlot('admin.modules'))
+                        <p class="box_highlight textCenter no_buddies">{{ __('t_ingame.modules.admin_controls') }}</p>
+                        <div style="text-align: center; margin: 0 auto 10px auto;">
+                            @moduleSlot('admin.modules')
+                        </div>
+                    @endif
+
                     <div style="width: 606px; margin: 0 auto;">
                     <span class="fleft" style="padding: 8px 0 0 5px; color: #aaa;">
                         <span style="color: #8f8;">{{ $enabledCount }}</span> {{ __('t_ingame.modules.enabled') }}

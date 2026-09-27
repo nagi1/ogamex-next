@@ -4,7 +4,7 @@ This module is a small reference module for contributors. It demonstrates the su
 
 - a `ModuleServiceProvider` that calls `parent::boot()`;
 - module configuration read through the `helloworld` config namespace;
-- an additive `admin.nav` view slot;
+- an additive `admin.modules` view slot (rendered on the Modules admin page);
 - an authenticated, in-game admin route and module view.
 
 ## Try it locally
@@ -15,7 +15,7 @@ php artisan module:enable HelloWorld
 php artisan module:list
 ```
 
-Sign in as an administrator and open `/admin/hello-world`. The module also adds a link to the existing admin navigation bar.
+Sign in as an administrator and open `/admin/hello-world`. The module also adds a link to the Modules admin page.
 
 Disable it when finished:
 

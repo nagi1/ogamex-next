@@ -17,7 +17,7 @@ use InvalidArgumentException;
  * may inject JavaScript or replace arbitrary core markup.
  *
  * Available slot names:
- *   admin.nav — after the existing nav items in the admin sidebar
+ *   admin.modules — a module's admin controls, rendered on the Modules admin page
  */
 class ModuleSlotService
 {
@@ -26,7 +26,7 @@ class ModuleSlotService
      * explicit boundaries; this keeps core views and module upgrades safe.
      */
     public const SLOTS = [
-        'admin.nav',
+        'admin.modules',
     ];
 
     /** @var array<string, array<callable>> */
@@ -35,7 +35,7 @@ class ModuleSlotService
     /**
      * Register a renderer callable for a named slot.
      *
-     * @param string   $slot     The slot name, e.g. 'admin.nav'
+     * @param string   $slot     The slot name, e.g. 'admin.modules'
      * @param callable $renderer Receives array $data, returns HTML string
      */
     public static function register(string $slot, callable $renderer): void

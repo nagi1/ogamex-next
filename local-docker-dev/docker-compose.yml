@@ -1,16 +1,15 @@
 name: ogamex-local-docker-dev
 
 x-host-services: &host-services
-  DB_HOST: ${LOCAL_DB_HOST:-host.docker.internal}
+  DB_HOST: ${LOCAL_DB_HOST:-mysql}
   DB_PORT: ${LOCAL_DB_PORT:-3306}
   DB_DATABASE: ${LOCAL_DB_DATABASE:-ogamex-test}
   DB_USERNAME: ${LOCAL_DB_USERNAME:-root}
   DB_PASSWORD: ${LOCAL_DB_PASSWORD:-}
-  # The database lives on the Docker host gateway, the slow link .env.example
-  # names for client-side statement emulation: native prepares cost three round
-  # trips per query there (31 ms measured against 1 ms emulated).
+  # Keep statement emulation configurable for compatibility with the existing
+  # local workflow; the database itself is now reached directly over Docker DNS.
   DB_EMULATE_PREPARES: ${LOCAL_DB_EMULATE_PREPARES:-true}
-  REDIS_HOST: ${LOCAL_REDIS_HOST:-host.docker.internal}
+  REDIS_HOST: ${LOCAL_REDIS_HOST:-redis}
   REDIS_PORT: ${LOCAL_REDIS_PORT:-6379}
   REDIS_PASSWORD: ${LOCAL_REDIS_PASSWORD:-null}
 
@@ -23,6 +22,7 @@ x-service: &service
     - "host.docker.internal:host-gateway"
   networks:
     - app-network
+    - shared-services
 
 services:
   ogamex-app:
@@ -85,3 +85,6 @@ services:
 networks:
   app-network:
     driver: bridge
+  shared-services:
+    external: true
+    name: ogamex-shared-services
