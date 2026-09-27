@@ -12,6 +12,10 @@ and the traps.
 Nothing here rewrites the game. The code is still the original legacy code; what
 changed is how it is stored and reviewed.
 
+If you are working in the asset tree rather than reading this end to end,
+`resources/css/README.md` and `resources/js/README.md` are the short versions, and
+`npm run assets:check` tells you whether the splits are still intact.
+
 ## The map
 
 | Bundle | Source of truth | Split | Order lives in | Check |
@@ -26,6 +30,85 @@ The CSS entries pull the split in through one generated line each:
 - `resources/css/ingame.css` line 10 — `@import "ingame/chunks/index.css";`, in the
   slot the monolithic sheet used to occupy.
 - `resources/css/outgame.css` line 8 — `@import "outgame/chunks/index.css";`, same.
+
+## How the in-game bundle is assembled
+
+`resources/css/ingame.css` is the Vite input, and the chunked sheet is only one
+slot in an ordered list of ten imports. Vite inlines all of them into a single
+`assets/ingame-*.css`, in this order:
+
+| # | File | What it is |
+| --- | --- | --- |
+| 1 | `ingame/jquery.ui.css` | vendor |
+| 2 | `ingame/select2.css` | vendor |
+| 3 | `ingame/modules/fleets.css` | ours, hand-written |
+| 4 | `ingame/modules/objects.css` | ours, hand-written |
+| 5 | `ingame/22b955f43c237ad23d644e8e52272a.css` | legacy, small |
+| 6 | `ingame/chunks/index.css` | **the split legacy sheet (10 chunks)** |
+| 7 | `ingame/02base.css` | legacy, small |
+| 8 | `ingame/modules/sprites.css` | ours, hand-written |
+| 9 | `ingame/modules/highscore.css` | ours, hand-written |
+| 10 | `ingame/modules/messages.css` | ours, hand-written |
+
+Position decides who wins when two files touch the same selector. Measured against
+the legacy sheet:
+
+| File | Position | Selectors also in the sheet | Shared (selector, property) pairs | …where the value differs |
+| --- | --- | --- | --- | --- |
+| `jquery.ui.css` | before | 330 | 584 | 36 — the sheet wins |
+| `modules/fleets.css` | before | 515 | 1151 | 5 — the sheet wins |
+| `22b955f43…css` | before | 3 | 7 | 0 |
+| `select2.css` | before | 0 | 0 | 0 |
+| `modules/objects.css` | before | 0 | 0 | 0 |
+| `02base.css` | after | 360 | 691 | 31 — `02base` wins |
+| `modules/sprites.css` | after | 182 | 235 | 35 — `sprites` wins |
+| `modules/highscore.css` | after | 1 | 0 | 0 |
+| `modules/messages.css` | after | 2 | 2 | 0 |
+
+So the hand-written `modules/*.css` files are already replacing the legacy sheet in
+about 66 places, and that works precisely because `sprites`, `highscore` and
+`messages` are imported **after** it. `fleets.css` and `objects.css` come **before**
+it, which has a consequence for the migration: a rule copied into them still loses
+to the sheet's copy, so they only take effect once the sheet's version is deleted in
+the same change. Copy into a file that loads after the sheet if you want the two to
+coexist for a while.
+
+`select2.css` and `modules/objects.css` share no selectors with the sheet — they are
+new UI, not replacements.
+
+Modules are a separate story: `Modules/*` are packages with their own front-end
+builds landing in `public/modules/<module>/build/` (git-ignored), and they add
+nothing to these two entries, so chunking never interacts with them.
+
+The split does duplicate the sheet's bytes on disk — the in-game sheet plus its
+chunks is about 2.4 MB in the repository. Only the chunks are ever served; the
+sheet exists so there is one ordered source to edit, diff and regenerate from.
+
+## Unused CSS in `resources/css`
+
+Nothing below is referenced by either entry or by any view. It was moved into
+`deprecated/` folders so the live tree says what it means — the files themselves are
+kept for reference:
+
+| File | Size | Why it is unused |
+| --- | --- | --- |
+| `ingame/deprecated/990d5d349ed6e981658ff4e2e3444c.css` | 1.1 MB | never imported — an older export of the legacy sheet |
+| `ingame/deprecated/base1.css` | 281 KB | rejected style rewrite; import was commented out |
+| `ingame/deprecated/base2.css` | 265 KB | same |
+| `ingame/deprecated/app.css` | 120 KB | unused experiment that used to sit in `ingame/modules/` |
+| `ingame/deprecated/{ltie10,ie8}/…` | 2.6 KB | IE-only sheets kept for reference |
+| `outgame/deprecated/8203e976…`, `outgame/deprecated/9253d1db…` | 4.8 KB | IE-only sheets |
+
+That is roughly 1.8 MB of the 3.2 MB under `resources/css`. Each `deprecated/`
+folder has a README recording the comments that used to sit in the entries, so
+nothing was lost when the entries were reduced to their import lists.
+
+One broken reference predates all of this:
+`resources/views/ingame/alliance/info.blade.php` lines 9 and 180 link
+`asset('css/ingame.css')` and `asset('js/ingame.js')`, but `public/` has no `css/`
+or `js/` directory and nginx defines no alias for them (the built assets live in
+`public/build/`). That page renders from its inline `<style>` and never receives the
+bundle.
 
 ## The one rule: order is load-bearing
 
@@ -175,12 +258,18 @@ clearer as the `outgameScripts` array, which is the only place that has to know 
 
 ## Commands
 
+```bash
+npm run assets:check     # every split at once: JS, in-game CSS, out-game CSS
+```
+
 | Command | What it does |
 | --- | --- |
-| `npm run ingame:css:group` / `:validate` | refresh / check the in-game CSS split |
-| `npm run outgame:css:group` / `:validate` | refresh / check the out-game CSS split |
-| `npm run ingame:group` / `:validate` | explore / check the in-game JS split |
-| `npm run asset:group` / `asset:validate` | generic JS grouper and validator (tmp output) |
+| `npm run assets:check` | runs the three validators below; the one command to run before committing asset work |
+| `npm run ingame:validate` | check the in-game JS split |
+| `npm run ingame:css:validate` / `ingame:css:group` | check / refresh the in-game CSS split |
+| `npm run outgame:css:validate` / `outgame:css:group` | check / refresh the out-game CSS split |
+| `npm run ingame:group` | refresh the in-game JS split |
+| `npm run asset:group` / `asset:validate` | generic JS grouper and validator (tmp output, for a new file) |
 | `npm run asset:group-css` / `asset:validate-css` | generic CSS grouper and validator (tmp output) |
 | `npm run asset:beautify-css` | whitespace-only CSS re-indent, refuses non-equivalent output |
 | `npm run asset:beautify-js` | terser re-print guarded by parse-tree equality |
