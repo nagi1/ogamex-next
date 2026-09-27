@@ -1,0 +1,402 @@
+
+
+#subscribe {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    display: inline;
+    float: left;
+    margin: 48px 1px 8px 8px;
+    width: 220px;
+    position: relative;
+}
+
+#subscribeForm {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    background: none repeat scroll 0 0 #22303f;
+    border: 2px solid #2d343c;
+    width: 218px;
+    height: 400px;
+}
+
+#subscribeForm h2 {
+    font-size: 14px;
+    padding: 0 0 0 10px;
+    text-transform: uppercase;
+    text-shadow: 1px 2px #000;
+    border-bottom: 1px dotted #000;
+}
+
+#subscribeForm .input-wrap {
+    height: 45px;
+}
+
+#subscribeForm .first {
+    height: 53px;
+}
+
+#subscribeForm .first label a {
+    font-size: 11px;
+}
+
+#subscribeForm label {
+    margin: 2px auto;
+    width: 188px;
+}
+
+#subscribeForm label span {
+    font-size: 11px;
+}
+
+#subscribeForm #submitWrap {
+    background: url(/img/outgame/70a9155abc284da765831d7e22f9a9.jpg) repeat-x;
+    position: relative;
+}
+
+#subscribeForm #submitWrap label {
+    background: 0;
+    color: #848484;
+    font-size: 11px;
+    height: auto;
+    padding: 0;
+    margin: 0 auto;
+    width: 220px;
+}
+
+#stayLoggedIn,
+#agb,
+#ageCheck {
+    background: #fff;
+    border: 0;
+    display: inline;
+    float: left;
+    height: 15px;
+    margin: 0 5px 7px 10px;
+    width: 15px;
+    padding: 0;
+}
+
+* html #agb {
+    margin: 5px 5px 15px 10px;
+}
+
+#stayLoggedIn {
+    background: 0;
+    margin: 0 5px 0 0;
+}
+
+.expand {
+    min-height: 170px;
+    height: auto !important;
+}
+
+#regSubmit {
+    background: url("/img/outgame/f88cc2bd8efa2b7d232e50d56a1180.png") no-repeat scroll 0 -30px transparent;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    height: 54px;
+    line-height: 54px;
+    margin: 0 auto;
+    padding: 0 30px 0 15px;
+    text-align: center;
+    text-shadow: -1px -1px #000;
+    width: 155px;
+}
+
+#regSubmit:hover {
+    background-position: 0 -84px;
+    text-shadow: -1px -1px #5f5f5f;
+}
+
+input#regSubmit {
+    width: 205px;
+}
+
+#contentWrap {
+    float: left;
+    width: 487px;
+}
+
+#menu {
+    background: url(/img/outgame/480120d537b7f69afcfda1356dd39e.gif) no-repeat scroll 15px -33px;
+}
+
+#tabs {
+    border-bottom: 1px solid #131820;
+    height: 33px;
+    margin: 0 0 0 17px;
+    width: 330px;
+    float: left;
+}
+
+#tab4,
+#tab5,
+#tabs li {
+    float: left;
+    height: 33px;
+    width: 110px;
+}
+
+#tab4,
+#tab5,
+#tabs li a {
+    color: #5b6a76;
+    display: block;
+    font-size: 14px;
+    line-height: 33px;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000;
+}
+
+#tab4:hover,
+#tab5:hover,
+#tabs li.ui-state-active a,
+#tabs li a:hover {
+    color: #91b0c4;
+}
+
+#tabs li.active-tab a {
+    color: #91b0c4;
+}
+
+.tabContent {
+    background: url(/img/outgame/daeabdae9844ec3d61c235e5ee1a64.gif) repeat-y scroll 3px 0;
+    padding: 15px;
+    width: 450px;
+}
+
+#distinctions div.tabContent {
+    height: 403px;
+}
+
+#fancybox-inner .tabContent {
+    width: 430px;
+}
+
+.tabContent .inner-box {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    background: #1e2b39 url(/img/outgame/aef3bd3bdfb1d2be6d99ff39e7a394.png) repeat-x;
+    border-top: 1px solid #2e363e;
+    border-left: 1px solid #1d2228;
+    border-right: 1px solid #1d2228;
+    border-bottom: 1px solid #000;
+    padding: 0 11px 0;
+}
+
+#contentFooter {
+    background: url(/img/outgame/de8b29a965ae085e8f3cdfcc63fb8e.gif) no-repeat;
+    height: 33px;
+    width: 487px;
+}
+
+#flashTrailer {
+    background: url(/img/outgame/2c3d8b94dc095ab950a202f7089995.jpg) no-repeat;
+    border: 1px solid #2e363e;
+    margin: 10px 0 0;
+    height: 270px;
+    width: 425px;
+}
+
+#trailer img {
+    border: 1px solid #314154;
+    margin: 10px 0;
+    width: 422px;
+}
+
+.tabContent .inner-box ul {
+    margin-top: 15px;
+}
+
+.tabContent .inner-box li {
+    color: #848484;
+    margin: 0 0 15px 10px;
+    padding: 0 0 0 15px;
+}
+
+#wallpapers,
+#screens {
+    margin: 0 auto;
+    width: 415px;
+}
+
+#wallpapers div {
+    float: left;
+    width: 138px;
+}
+
+#wallpapers a,
+#screens a {
+    background: url(/img/outgame/1f6bbeedc1e94af33af8b2ccacc753.png) no-repeat left bottom;
+    float: left;
+    height: 71px;
+    padding: 9px;
+    width: 120px;
+}
+
+#wallpapers a {
+    float: none;
+    display: block;
+}
+
+#wallpapers p {
+    background: url(/img/outgame/16475277cf8b5e19494deb9f5e0420.gif) no-repeat 4px bottom;
+    min-height: 66px;
+    margin: 0 0 15px;
+    text-align: center;
+    width: 136px;
+}
+
+#wallpapers p a {
+    font-size: 11px;
+    font-weight: normal;
+    background: 0;
+    display: inline;
+    padding: 0;
+}
+
+#start .last,
+#start_rtl2 .last {
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-radius-bottomleft: 3px;
+    -webkit-border-radius-bottomright: 3px;
+    padding: 0 11px 15px;
+}
+
+#start {
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -110px;
+}
+
+#start.partner-gazeta {
+    min-height: 85%;
+}
+
+#push {
+    height: 130px;
+}
+
+#footer {
+    background: #000 url(/img/outgame/72a97f02af4493519c741f49f7180b.jpg) no-repeat 50% 0;
+    color: #425463;
+    font-size: 11px;
+    height: 110px;
+}
+
+#footer p {
+    color: #425463;
+    font-size: 11px;
+}
+
+#gfLogo {
+    background: url(/img/outgame/a0451be6b0bbf01d57849f6f2d67b8.jpg) no-repeat;
+    float: left;
+    height: 32px;
+    margin: 29px 7px;
+    width: 151px;
+}
+
+.linksAndCopyright {
+    text-align: center;
+    display: inline-block;
+}
+
+.logos {
+    float: left;
+    display: inline-block;
+}
+
+#copyright {
+    margin: 5px 0;
+}
+
+#footerLinks {
+    line-height: 26px;
+    float: right;
+}
+
+#footerLinks a {
+    padding: 0 4px;
+}
+
+#footerLinks span a {
+    background: url(/img/icons/select-arrows.png) no-repeat right 2px;
+    padding-right: 20px;
+}
+
+#footerLinks span a.focus {
+    background-position: right -9px;
+}
+
+#language {
+    bottom: 32px;
+    display: none;
+    left: 0;
+    position: absolute;
+}
+
+#langBg {
+    background: url(/img/outgame/642a66e51800dacc532ede220e722f.gif) repeat-y;
+    width: 368px;
+}
+
+#langHead {
+    background: url(/img/outgame/52fe68c3e535c2f09732e93b55efe6.gif) no-repeat;
+    min-height: 97px;
+    width: 368px;
+}
+
+#langFooter {
+    background: url(/img/outgame/68ad998b538e24d63ca7d66959d5c9.gif) no-repeat scroll left bottom;
+    height: 7px;
+    font-size: 1px;
+    width: 368px;
+}
+
+#trigger {
+    background: url(/img/outgame/8846ca071a8f64e60bc60f7f7808ef.gif) no-repeat 0 -32px;
+    float: left;
+    height: 32px;
+    position: relative;
+    width: 165px;
+}
+
+#footerLinks #selected,
+#footerLinks #displayLang {
+    display: block;
+    cursor: pointer;
+    height: 32px;
+    overflow: hidden;
+    padding: 0 37px 0 16px;
+    width: 112px;
+}
+
+#footerLinks #selected {
+    background: url(/img/outgame/8846ca071a8f64e60bc60f7f7808ef.gif) no-repeat 0 0;
+    color: #619fc8;
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+#langHead h3 {
+    color: #4579a4;
+    font-size: 11px;
+    font-weight: normal;
+    height: 25px;
+    line-height: 20px;
+    padding: 0 0 0 5px;
+}
+
+#langHead a {
+    float: left;
+    font-size: 10px;
+    width: 112px;
+}

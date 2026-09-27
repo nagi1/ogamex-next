@@ -8,6 +8,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { execSync } from "node:child_process";
+import postcss from "postcss";
 import { assetType, options, projectPath } from "./lib/asset-workflow.js";
 
 const args = options({
@@ -18,6 +19,7 @@ const ORIGINAL = projectPath(args.input, "input");
 const CHUNKS_DIR = projectPath(args.chunks, "chunks");
 const TYPE = assetType(ORIGINAL, args.type);
 const MANIFEST = path.join(CHUNKS_DIR, "manifest.json");
+const IMPORT_LIST = path.join(CHUNKS_DIR, "index.css");
 const REASSEMBLED = projectPath("tmp/asset-validation/reassembled." + (TYPE === "css" ? "css" : "js"), "validation output");
 
 const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
@@ -105,14 +107,58 @@ try {
   console.log("Minification comparison failed:", err.message?.slice(0, 200));
 }
 
+} else if (TYPE === "css") {
+// ---- Parse check ----
+// A chunk that starts or ends mid-node would still concatenate to the original
+// bytes but parse differently once Vite inlines it, so every chunk must survive a
+// standalone parse and stringify unchanged.
+try {
+  for (const chunk of manifest.chunks) {
+    const chunkPath = path.join(CHUNKS_DIR, chunk.path);
+    const text = fs.readFileSync(chunkPath, "utf8");
+    const parsed = postcss.parse(text, { from: chunkPath });
+
+    if (parsed.toString() !== text) {
+      console.log("CSS parse:   FAILED — " + chunk.path + " does not round-trip");
+      process.exitCode = 1;
+      break;
+    }
+  }
+
+  if (!process.exitCode) {
+    console.log("CSS parse:   OK (" + manifest.chunks.length + " chunks round-trip)");
+  }
+} catch (err) {
+  console.log("CSS parse:   FAILED");
+  console.log(err.message?.slice(0, 500));
+  process.exitCode = 1;
+}
+
+}
+
+// ---- Import list check ----
+// index.css is generated next to the manifest and is what the build actually
+// imports, so a stale list would silently reorder the cascade even though every
+// chunk is individually fine.
+if (fs.existsSync(IMPORT_LIST)) {
+  const imported = (fs.readFileSync(IMPORT_LIST, "utf8").match(/@import\s+"([^"]+)";/g) ?? [])
+    .map((statement) => statement.replace(/^@import\s+"|";$/g, ""));
+  const expected = manifest.chunks.map((chunk) => chunk.path);
+
+  if (imported.join("\n") === expected.join("\n")) {
+    console.log(`Import list: OK (${imported.length} imports)`);
+  } else {
+    console.log("Import list: OUT OF SYNC with the manifest — regenerate the chunks.");
+    process.exitCode = 1;
+  }
 }
 
 // ---- Chunk size stats ----
 console.log("\n=== Chunk Size Stats ===");
 const sizes = manifest.chunks.map((c) => ({
   name: c.path,
-  lines: c.lineCount,
-  category: c.category,
+  lines: c.lineCount ?? (c.endLine ?? 0) - (c.startLine ?? 0) + 1,
+  category: c.category ?? c.feature ?? c.area,
 }));
 
 // Top 10 largest

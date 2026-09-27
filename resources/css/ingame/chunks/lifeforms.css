@@ -1,0 +1,5449 @@
+
+
+#combatsim simulation-warning {
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 60px;
+    background: linear-gradient(to bottom, #2b3e51 0%,#1f2630 100%);
+    margin: 5px;
+    border: rgb(220 38 38) 2px solid;
+    gap: 5px;
+}
+
+#combatsim simulation-warning .warnsymbol {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: transparent url(/img/icons/992972c34e4757cd146f4358360c02.gif) 0 0 no-repeat;
+    margin: 3px 0 3px 6px;
+}
+
+#combatsim simulation-warning .disclaimer {
+    flex-grow: 1;
+    max-width: 850px;
+    padding: 3px 0;
+}
+
+#combatsim div,
+#combatsim span,
+#combatsim applet,
+#combatsim object,
+#combatsim iframe,
+#combatsim h1,
+#combatsim h2,
+#combatsim h3,
+#combatsim h4,
+#combatsim h5,
+#combatsim h6,
+#combatsim p,
+#combatsim blockquote,
+#combatsim pre,
+#combatsim a,
+#combatsim abbr,
+#combatsim acronym,
+#combatsim address,
+#combatsim big,
+#combatsim cite,
+#combatsim code,
+#combatsim del,
+#combatsim dfn,
+#combatsim em,
+#combatsim img,
+#combatsim ins,
+#combatsim kbd,
+#combatsim q,
+#combatsim s,
+#combatsim samp,
+#combatsim small,
+#combatsim strike,
+#combatsim strong,
+#combatsim sub,
+#combatsim sup,
+#combatsim tt,
+#combatsim var,
+#combatsim b,
+#combatsim u,
+#combatsim i,
+#combatsim center,
+#combatsim dl,
+#combatsim dt,
+#combatsim dd,
+#combatsim ol,
+#combatsim fieldset,
+#combatsim form,
+#combatsim label,
+#combatsim legend,
+#combatsim table,
+#combatsim caption,
+#combatsim tbody,
+#combatsim tfoot,
+#combatsim thead,
+#combatsim tr,
+#combatsim th,
+#combatsim td,
+#combatsim article,
+#combatsim aside,
+#combatsim canvas,
+#combatsim details,
+#combatsim embed,
+#combatsim figure,
+#combatsim figcaption,
+#combatsim footer,
+#combatsim header,
+#combatsim hgroup,
+#combatsim menu,
+#combatsim nav,
+#combatsim output,
+#combatsim ruby,
+#combatsim section,
+#combatsim summary,
+#combatsim time,
+#combatsim mark,
+#combatsim audio,
+#combatsim video {
+    z-index: auto !important;
+}
+
+simulation-overview group-title {
+    margin: 0 0 5px -7px !important;
+}
+
+simulation-overview combatsim-section[overview][minimized] {
+    width: 526px !important;
+}
+
+simulation-details {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+combatsim-section group-title {
+    margin: 8px 0 5px -12px;
+}
+
+combatsim-section lifeform-data group-title {
+    margin: 8px 0 5px -12px !important;
+}
+
+fleet-section-clear gradient-button {
+    width: 48%;
+    height: 45px;
+}
+
+fleet-section-clear,
+coordinates-section {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    z-index: 2;
+}
+
+coordinates-section .labeled-textfield {
+    width: 75px !important;
+}
+
+coordinates-section .topAdjustment {
+    margin-top: 6px;
+}
+
+coordinates-section coordinates-label {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+coordinates-section coordinates-fields {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2px;
+}
+
+#combatsim basic-data .labeled-textfield {
+    width: 125px;
+}
+
+#combatsim fleet-content .labeled-textfield {
+    width: 125px;
+    z-index: 2 !important;
+}
+
+#combatsim fleet-content characterclass-bonus .labeled-textfield {
+    width: 75px !important;
+    z-index: 2 !important;
+}
+
+#serversettingsoverlay {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 370px;
+    background: linear-gradient(to bottom, #1f2630 0%,#111921 100%);
+    min-height: 50px;
+    max-width: 370px;
+}
+
+#serversettingsoverlay .technology-fullrow:hover {
+    background-color: #2b3341;
+}
+
+#serversettingsoverlay thick-headline {
+    color: white;
+}
+
+#serversettingsoverlay {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 370px;
+    background: linear-gradient(to bottom, #1f2630 0%,#111921 100%);
+    min-height: 50px;
+    max-width: 370px;
+}
+
+#serversettingsoverlay .technology-fullrow span {
+    flex-grow: 1;
+    max-width: 295px;
+}
+
+#serversettingsoverlay .technology-fullrow:hover {
+    background-color: #2b3341;
+}
+
+#serversettingsoverlay thick-headline {
+    color: white;
+}
+
+#serversettingsoverlay .technology-fullrow,
+fleet-content[serversettings] .technology-fullrow {
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    height: 30px;
+    z-index: 2 !important;
+}
+
+fleet-content[serversettings] span {
+    color: #848484;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+fleet-content[serversettings] {
+    gap: 2px;
+}
+
+fleet-content[serversettings] .technology-fullrow:hover {
+    background-color: #2b3341;
+}
+
+fleet-content[serversettings] span {
+    flex-grow: 1;
+    max-width: 295px;
+}
+
+#serversettingsoverlay .technology-fullrow,
+fleet-content[serversettings] .technology-fullrow {
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    height: 30px;
+    z-index: 2 !important;
+}
+
+fleet-content[serversettings] span {
+    color: #848484;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+fleet-content[serversettings] {
+    gap: 2px;
+}
+
+fleet-content[serversettings] .technology-fullrow:hover {
+    background-color: #2b3341;
+}
+
+fleet-content[serversettings] span {
+    flex-grow: 1;
+    max-width: 295px;
+}
+
+#combatsim technology-icon,
+#combatsim resource-icon {
+    margin-top: 6px;
+}
+
+#combatsim fleet-content .load_data {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+}
+
+basic-data {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 350px;
+    margin: 0 auto 7px;
+    padding: 0 5px 5px;
+    min-height: 50px;
+}
+
+misc-section,
+defense-section,
+research-section,
+ship-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 50px;
+}
+
+#combatsim .lifeform-bonus-icon {
+    display: block;
+    width: 27px;
+    height: 27px;
+    background: transparent url(/img/icons/ce44d444b7d14a3ea6fa51fa6c1148.png) 0 0 no-repeat;
+    background-position: -405px 0;
+    filter: brightness(150%);
+    scale: 0.7;
+}
+
+#combatsim .double-row {
+    display: flex;
+    height: 42px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+lifeform-data {
+    display: none;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 350px;
+    margin: 0 auto 7px;
+    padding: 0 5px 5px;
+    min-height: 50px;
+}
+
+combatsim-section[show-lifeform="1"] lifeform-data {
+    display: flex;
+}
+
+basic-data .technology-fullrow {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+lifeform-data .technology-fullrow {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 36px;
+}
+
+combatsim-section[base-defender] lifeform-data {
+    align-items: flex-end;
+}
+
+combatsim-section[base-defender] lifeform-data defensebonus-section {
+    width: 190px;
+    gap: 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+combatsim-section[base-defender] lifeform-data miscbonus-section {
+    width: 150px;
+    gap: 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+combatsim-section[base-defender] lifeform-data miscbonus-section .labeled-textfield {
+    width: 106px !important;
+}
+
+combatsim-section[base-defender] + combatsim-section[show-lifeform="1"] {
+    width: 740px;
+}
+
+combatsim-section[base-defender] lifeform-data .technology-fullrow {
+    justify-content: space-evenly;
+}
+
+lifeform-data .unlabeled-textfield {
+    width: 46px !important;
+}
+
+lifeform-data .icon-header {
+    display: flex;
+    width: 46px;
+    height: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+lifeform-data .spacer {
+    display: block;
+    width: 30px;
+    height: 16px;
+}
+
+#combatsim fleet-content .load_data .labeled-textfield {
+    flex-grow: 1;
+}
+
+#combatsim fleet-content .load_data gradient-button {
+    margin-top: 6px;
+}
+
+#combatsim .class-selection-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 2px;
+    z-index: unset;
+}
+
+#combatsim .class-selection {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    height: 40px;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: #2b3341;
+    z-index: unset;
+}
+
+#combatsim .class-selection:hover {
+    background-color: #323b4b;
+}
+
+#combatsim .technology-row {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    height: 36px;
+    gap: 5px;
+}
+
+#combatsim misc-section .technology-row {
+    justify-content: flex-start !important;
+    z-index: 3 !important;
+    margin: 3px -3px -3px 3px;
+}
+
+#combatsim misc-section .technology-fullrow {
+    justify-content: flex-start !important;
+    z-index: 3 !important;
+    margin: 0 -3px 0 3px;
+    gap: 3px;
+}
+
+#combatsim misc-section .textBeefy {
+    color: rgba(200,200,200,0.87);
+}
+
+#combatsim .resource-row {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    height: 40px;
+    gap: 5px;
+}
+
+/* **** Dropdown for planet Selection ***** */
+
+#combatsim .source {
+    background: url("/img/icons/959a4123aecfd2de881188648e6f71.gif") no-repeat 0 0;
+    display: inline-block;
+    height: 30px;
+    width: 37px;
+    border-radius: 5px;
+}
+
+#combatsim .planetSelection .planet:hover,
+#combatsim .planetSelection .planet.selected {
+    background-position: 0 -30px;
+}
+
+#combatsim .source.moon {
+    background-position: -37px 0;
+}
+
+#combatsim .planetSelection .moon:hover,
+#combatsim .planetSelection .moon.selected {
+    background-position: -37px -30px;
+}
+
+#combatsim .selectWrapper {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+}
+
+#combatsim .selectWrapper .planetSelection {
+    background-color: #0e1115;
+    height: 30px;
+    border: solid 1px;
+    border-color: rgba(var(--pure-material-onsurface-rgb, 200, 200, 200), 0.6);
+    border-radius: 5px;
+    margin-top: 1px;
+}
+
+#combatsim .selectWrapper .selectBoxWrapper {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 31px;
+    padding-left: 20px;
+    position: relative;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+#combatsim .currentPlanet,
+#combatsim .toggleLink {
+    background: url(/img/icons/5a5779f124c72299cf7db15602deb2.png) repeat-x;
+    color: #848484;
+    display: inline-flex;
+    height: 31px;
+    text-align: left;
+    text-decoration: none;
+    width: calc(100% - 35px);
+    vertical-align: top;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+#combatsim .currentPlanet::before,
+#combatsim .toggleLink::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 31px;
+    background: url(/img/icons/ee095df9554e7cfe903d8f3782d260.png) bottom left no-repeat;
+    content: "";
+}
+
+#combatsim .currentPlanet::after,
+#combatsim .toggleLink::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 31px;
+    background: url(/img/icons/609f6d19899d1b422ac70d587f9dd3.png) bottom left no-repeat;
+    content: "";
+}
+
+#combatsim .option_source {
+    position: relative;
+    height: 15px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 15px;
+    flex-grow: 1;
+}
+
+#combatsim .currentPlanet {
+    margin: 0 0 0 240px;
+}
+
+#combatsim .togglePanel {
+    background: #181f26;
+    border: 2px solid #000;
+    color: #848484;
+    margin: 0 38px 0 0;
+    padding: 4px;
+    text-align: left;
+    text-decoration: none;
+    width: 190px;
+    position: absolute;
+    z-index: 10 !important;
+    border-top: none;
+    top: 31px;
+    left: 13px;
+}
+
+#combatsim .togglePanel li {
+    cursor: pointer;
+    list-style: none;
+    padding: 0 0 0 3px;
+}
+
+#combatsim .togglePanel li:hover {
+    background-color: #2c3448;
+}
+
+#combatsim .js_toggleLink {
+    cursor: pointer;
+}
+
+/* **** End Dropdown for planet Selection ***** */
+
+simulation-overview fleet-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #000;
+    margin: 0 auto 7px;
+    padding: 5px;
+    background: linear-gradient(to bottom, #2b3e51 0%,#1f2630 100%);
+    min-height: 38px;
+    gap: 5px;
+}
+
+combatsim-intro {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+combatsim-report {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+combatsim-list {
+    flex-grow: 1;
+    z-index: 2 !important;
+}
+
+combatsim-list .entryCount {
+    margin-bottom: 6px;
+}
+
+combatsim-list single-simulation {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    min-height: 24px;
+    font-family: Verdana, Arial, SunSans-Regular, sans-serif;
+    font-size: 12px;
+    color: #b2b2b3;
+}
+
+combatsim-shortinfo .shortName span,
+combatsim-list single-simulation span.simName {
+    display: inline-block;
+    max-width: calc(100% - 20px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+combatsim-shortinfo .shortName span {
+    width: 100%;
+    text-align: right;
+}
+
+combatsim-list single-simulation div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex: 1 1 0;
+    width: 0;
+    max-width: 111px;
+}
+
+combatsim-list single-simulation div.attackerCount,
+combatsim-list single-simulation div.defenderCount {
+    width: 30px;
+    max-width: 30px;
+}
+
+combatsim-list single-simulation div.creation {
+    width: 80px;
+    max-width: 80px;
+}
+
+combatsim-list single-simulation div.shipCount {
+    width: 70px;
+    max-width: 70px;
+}
+
+combatsim-list single-simulation div.state {
+    width: 170px;
+    max-width: 170px;
+}
+
+combatsim-list single-simulation:hover {
+    background-color: #2b3341 !important;
+}
+
+combatsim-list single-simulation:not(:hover) > sim-actions-empty {
+    width: 111px;
+    max-width: 111px;
+    flex: 1 1 0;
+}
+
+combatsim-list single-simulation:hover > sim-actions {
+    display: flex;
+    gap: 3px;
+    justify-content: flex-end;
+    width: 111px;
+    max-width: 111px;
+    flex: 1 1 0;
+}
+
+combatsim-list single-simulation sim-actions {
+    display: none;
+    flex: 1 1 0;
+    width: 0;
+}
+
+combatsim-list single-simulation .planning {
+    color: aqua;
+}
+
+combatsim-list single-simulation .pending {
+    color: yellow;
+}
+
+combatsim-list single-simulation .done {
+    color: greenyellow;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+combatsim-list owned-sims single-simulation:nth-child(even),
+combatsim-list joined-sims single-simulation:nth-child(even) {
+    background-color: #1f2a49;
+}
+
+combatsim-list owned-sims,
+combatsim-list joined-sims {
+    min-height: 18px;
+    display: block;
+}
+
+combatsim-shortinfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-direction: column;
+    width: 200px;
+    min-height: 78px;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: #0c0e10;
+}
+
+combatsim-name {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-grow: 1;
+    margin-top: 3px;
+}
+
+combatsim-shortinfo div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+combatsim-shortinfo div .shortinfodesc {
+    flex-grow: 1;
+    font-size: 11px;
+    color: #6F9FC8;
+    font-weight: 600;
+}
+
+combatsim-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-direction: column;
+    z-index: 3 !important;
+}
+
+combatsim-actions .savebutton .emoji {
+    margin: 0;
+    transform: scale(0.8);
+}
+
+#combatsim .newbutton,
+#combatsim .savebutton,
+#combatsim .deletebutton,
+#combatsim .simulatebutton {
+    height: 22px;
+    width: 120px;
+    font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit;
+}
+
+gradient-button.newbutton .custom_btn span,
+gradient-button.savebutton .custom_btn span,
+gradient-button.deletebutton .custom_btn span,
+gradient-button.simulatebutton .custom_btn span,
+gradient-button.moredetails .custom_btn span,
+gradient-button.moreDetailsShortInfo .custom_btn span {
+    font-size: 12px !important;
+}
+
+gradient-button.moreDetailsShortInfo {
+    z-index: 3 !important;
+}
+
+gradient-button.moredetails .custom_btn span,
+gradient-button.moreDetailsShortInfo .custom_btn span {
+    max-width: 180px;
+}
+
+.lifeform-technology-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-top: 6px;
+    background-image: url(/img/icons/2d828476bacc6b1e6bbfaf2a9fb041.jpg) !important;
+    width: 28px;
+    height: 28px;
+    background-size: 504px 829px;
+    background-position-y: 0;
+    background-position-x: 0;
+    border-radius: 5px;
+}
+
+.lifeform-technology-row {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    height: 40px;
+    gap: 5px;
+}
+
+combatsim-section > fleet-content:only-child ~ participants-headline {
+    display: none;
+}
+
+participants-headline {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 4px);
+    background: url(/img/icons/0721fd07d84834abab94b85b6e7303.gif) repeat;
+    position: relative;
+    min-height: 35px;
+    flex-wrap: wrap;
+}
+
+participants-headline:after {
+    background: url(/img/icons/1fea4e43d9fd16c47565067e83f0fb.png) repeat-y 0 0;
+    content: "";
+    height: 100%;
+    width: 8px;
+    display: block;
+    position: absolute;
+    right: -8px;
+}
+
+participants-headline thick-headline-background {
+    background: url(/img/icons/0721fd07d84834abab94b85b6e7303.gif) repeat-x;
+    height: 35px;
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100% - 4px) !important;
+    position: relative;
+    --current-width: 350;
+}
+
+participants-headline thick-headline-background::after {
+    background: url(/img/icons/1fea4e43d9fd16c47565067e83f0fb.png) no-repeat 0 0 !important;
+    content: "";
+    height: 35px;
+    width: 25px;
+    display: block;
+    position: absolute;
+    right: -25px;
+}
+
+participant-header {
+    /* background: url(/img/icons/0a5ba5507cb9bfae1b615cd72fc051.png) repeat-x 0 0; */
+    background: url(/img/icons/cd5b0a0180da57f84aee065e1f552a.png) repeat-x 0 0;
+    height: 35px;
+    width: calc(100% / 10);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    /* z-index: 2 !important; */
+}
+
+participant-header::before {
+    background: url(/img/icons/ecbdb336ee6ce8112e2875e389bbf9.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    width: 3px;
+}
+
+participant-header::after {
+    /*  */
+    background: url(/img/icons/fe65a1e792675d684fa5d6291423fc.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    position: absolute;
+    width: 8px;
+    right: -8px;
+    cursor: default;
+}
+
+participant-header.active {
+    background: url(/img/icons/0a5ba5507cb9bfae1b615cd72fc051.png) repeat-x 0 0;
+}
+
+participant-header.active::after {
+    background: url(/img/icons/fe65a1e792675d684fa5d6291423fc.png) no-repeat 0 0;
+}
+
+participant-header p {
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+thick-headline-background::after {
+    background: url(/img/icons/a43a0c46b4446617d53d9fd8249402.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    width: 25px;
+    display: block;
+    position: absolute;
+    right: -25px;
+}
+
+thick-headline-background .minimizeBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 14px;
+    border: 1px solid #ada7a7;
+    cursor: pointer;
+}
+
+.addParticipantBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, rgba(232,225,225,1) 0%, rgba(6,148,11,1) 65%, rgba(2,24,2,1) 100%);
+    font-weight: bolder;
+    font-size: 14px;
+    border: 1px solid #ada7a7;
+    cursor: pointer;
+}
+
+.addParticipantBtn:hover {
+    filter: brightness(130%);
+}
+
+.removeParticipantBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, rgba(232,225,225,1) 0%, rgba(148,6,6,1) 65%, rgba(2,24,2,1) 100%);
+    font-weight: bolder;
+    font-size: 14px;
+    border: 1px solid #ada7a7;
+    cursor: pointer;
+}
+
+.removeParticipantBtn.disabled {
+    border: 1px solid #999999 !important;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.removeParticipantBtn:hover {
+    filter: brightness(130%);
+}
+
+.refreshSimInfoBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/img/icons/5f666fdcd134db000a804b66fac589.png) !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-weight: bolder;
+    font-size: 14px;
+    border: 1px solid #ada7a7;
+    cursor: pointer;
+}
+
+.refreshSimInfoBtn:hover {
+    filter: brightness(130%);
+}
+
+/* combatsim-list single-simulation { */
+
+/* display: flex; */
+
+/* justify-content: flex-start; */
+
+/* align-items: center; */
+
+/* gap: 3px; */
+
+/* min-height: 24px; */
+
+/* font-family: Verdana, Arial, SunSans-Regular, sans-serif; */
+
+/* font-size: 12px; */
+
+/* color: #b2b2b3; */
+
+/* } */
+
+/* combatsim-list single-simulation div { */
+
+/* display: flex; */
+
+/* align-items: center; */
+
+/* gap: 3px; */
+
+/* flex: 1 1 0; */
+
+/* width: 0; */
+
+/* } */
+
+fleet-content[siminfo] group-title {
+    margin: 8px 0 5px -7px !important;
+}
+
+fleet-content[siminfo] share-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+fleet-content[siminfo] shared-to {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+fleet-content[siminfo] share-adction {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+fleet-content[siminfo] search-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    min-height: 24px;
+    font-family: Verdana, Arial, SunSans-Regular, sans-serif;
+    font-size: 12px;
+    color: #b2b2b3;
+    flex-direction: row;
+}
+
+fleet-content[siminfo] search-row:hover {
+    background-color: #2b3341 !important;
+}
+
+fleet-content[siminfo] search-row div {
+    width: 0;
+    flex-grow: 1;
+}
+
+fleet-content[siminfo] search-row:not(:hover) > search-actions-empty {
+    width: 25px;
+}
+
+fleet-content[siminfo] search-row:hover > search-actions {
+    display: flex;
+    gap: 3px;
+    justify-content: flex-end;
+    width: 25px;
+}
+
+fleet-content[siminfo] search-row search-actions {
+    display: none;
+    width: 25px;
+}
+
+fleet-content[siminfo] shared-participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+fleet-content[siminfo] sim-log {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 4px;
+}
+
+fleet-content[siminfo] .simLogEntry {
+    font-size: 11px;
+    font-style: italic;
+}
+
+fleet-content[siminfo] .simLogTime {
+    font-family: monospace;
+    font-style: normal;
+}
+
+fleet-content[siminfo] .simLogName {
+    color: #6F9FC8;
+    font-weight: 600;
+}
+
+fleet-content[siminfo] combatsim-shortinfo {
+    margin-top: 7px;
+}
+
+fleet-content[siminfo] .noentries {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+fleet-content[siminfo] shared-to .emoji {
+    min-width: 20px !important;
+}
+
+fleet-content[siminfo] shared-to .emoji.deactivated {
+    cursor: pointer;
+}
+
+characterclass-bonus {
+    width: 100%;
+    padding: 0 5px 5px;
+}
+
+characterclass-bonus characterclass-icon {
+    margin-top: 6px;
+}
+
+characterclass-bonus .technology-fullrow {
+    justify-content: space-between;
+}
+
+.combatSimResultOverlay {
+    overflow-y: auto;
+}
+
+#combatSimResultContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#combatSimResultContainer > .resultHeader {
+    width: 100%;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#combatSimReport {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.resultHeader > .ribbon {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    --s: 1.3em;
+    /* the ribbon size */
+    --d: .3em;
+    /* the depth */
+    --c: .8em;
+    /* the cutout part */
+    padding: 0 calc(var(--s) + .5em) var(--d);
+    line-height: 1.8;
+    background: conic-gradient(at left  var(--s) bottom var(--d),
+            #0000 25%,#0008 0 37.5%,#0004 0) 0   /50% 100% no-repeat,
+            conic-gradient(at right var(--s) bottom var(--d),
+            #0004 62.5%,#0008 0 75%,#0000 0) 100%/50% 100% no-repeat;
+    clip-path: polygon(0 var(--d), var(--s) var(--d),var(--s) 0,calc(100% - var(--s)) 0,calc(100% - var(--s)) var(--d),100% var(--d),calc(100% - var(--c)) calc(50% + var(--d)/2),100% 100%,calc(100% - var(--s) - var(--d)) 100%,calc(100% - var(--s) - var(--d)) calc(100% - var(--d)),calc(var(--s) + var(--d)) calc(100% - var(--d)),calc(var(--s) + var(--d)) 100%,0 100%,var(--c) calc(50% + var(--d)/2));
+    width: fit-content;
+}
+
+.resultHeader > .ribbon.winAttacker {
+    background-color: #127210;
+}
+
+.resultHeader > .ribbon.winDefender {
+    background-color: #CC333F;
+}
+
+.resultHeader > .ribbon.draw {
+    background-color: #085885;
+}
+
+/* COMBAT SIM ROUNDS START */
+
+#combatSimRoundsContainer {
+    display: flex;
+    width: 675px;
+    flex-direction: column;
+}
+
+#combatSimRoundsContainer .combat_round_list {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 10px;
+}
+
+#combatSimRoundsContainer .combat_round_list .selectRoundBtn > span {
+    font-size: 10px;
+    padding: 2px;
+}
+
+#combatSimRoundsContainer .repairedDefensesContainer > li {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#combatSimRoundsContainer .repairedDefensesContainer > li > span.detail_list_txt {
+    flex-grow: 1;
+}
+
+#combatSimRoundsContainer .roundStatistic {
+    width: 95%;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgba(66,66,66,0.3);
+}
+
+#combatSimRounds {
+    display: flex;
+    flex-direction: row;
+}
+
+#combatSimRounds .attackerCharacterClass,
+#combatSimRounds .defenderCharacterClass,
+#combatSimRounds .attackerAllianceClass,
+#combatSimRounds .defenderAllianceClass {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+#combatSimRounds .military_ships > li.odd,
+#combatSimRounds .civil_ships > li.odd,
+#combatSimRounds .defence_techs > li.odd {
+    background-color: #0D1014;
+}
+
+#combatSimRounds .military_ships > li.even,
+#combatSimRounds .civil_ships > li.even,
+#combatSimRounds .defence_techs > li.even {
+    background-color: #182028;
+}
+
+/* COMBAT SIM ROUNDS END */
+
+/* COMBAT SIM LOOT RESULTS START */
+
+#combatSimLootResults {
+    display: flex;
+    flex-direction: column;
+    width: 425px;
+    min-width: 500px;
+}
+
+#combatSimLootResults .tooltip {
+    color: #848484;
+}
+
+#combatSimLootResults #resourceOutcome {
+    border: 2px solid #3a75a7;
+    height: 100%;
+}
+
+#resourceOutcome .lootDistribution,
+#resourceOutcome .debrissum,
+#resourceOutcome .debrissumAfterCombat,
+#resourceOutcome .lossprofit {
+    margin-left: 6px;
+}
+
+#resourceOutcome .lootPercentage {
+    margin-left: 7px;
+    font-weight: bold;
+}
+
+#resourceOutcome .debrisInfo {
+    display: flex;
+}
+
+#resourceOutcome .debrisInfo .moonChanceInfo {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(66,66,66,0.3);
+}
+
+#resourceOutcome .debrisInfo .moonChanceBg {
+    justify-content: center;
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+#resourceOutcome .debrisInfo .moonChance {
+    background: url(/img/icons/c9643df71b262232a4d66e591f7543.gif) no-repeat center;
+    height: 30px;
+    width: 37px;
+    opacity: 0.4;
+}
+
+#resourceOutcome .debrisInfo .moonChancePercentage {
+    font-weight: bold;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#resourceOutcome .debrisInfo .moonContainer {
+    position: relative;
+    height: 30px;
+    width: 37px;
+    display: flex;
+    justify-content: center;
+}
+
+#resourceOutcome .debrissumAfterCombat,
+#resourceOutcome .debrissum {
+    width: 400px;
+    border: 2px solid #000000;
+}
+
+#resourceOutcome .lootDistribution {
+    width: 97%;
+    border: 2px solid #000000;
+}
+
+#resourceOutcome .lootDistribution div,
+#resourceOutcome .debrissumAfterCombat div,
+#resourceOutcome .debrissum div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3px;
+    min-height: 24px;
+}
+
+#resourceOutcome .lootDistribution > div:nth-child(even),
+#resourceOutcome .debrissumAfterCombat > div:nth-child(even),
+#resourceOutcome .debrissum > div:nth-child(even) {
+    background-color: #0D1014;
+}
+
+#resourceOutcome .lootDistribution > div:nth-child(odd),
+#resourceOutcome .debrissumAfterCombat > div:nth-child(odd),
+#resourceOutcome .debrissum > div:nth-child(odd) {
+    background-color: #182028;
+}
+
+#resourceOutcome .debrissumAfterCombat div.debDesc,
+#resourceOutcome .debrissum div.debDesc {
+    justify-content: flex-start;
+    min-width: 150px;
+}
+
+#resourceOutcome .debrissumAfterCombat div.debHeader div,
+#resourceOutcome .debrissum div.debHeader div {
+    justify-content: center;
+}
+
+#resourceOutcome .debrissumAfterCombat div div,
+#resourceOutcome .debrissum div div {
+    flex: 1 1 0;
+    width: 0;
+    padding-right: 3px;
+}
+
+#resourceOutcome .lootDistribution div.lootDesc {
+    justify-content: flex-start;
+    min-width: 150px;
+}
+
+#resourceOutcome .lootDistribution div.lootHeader div {
+    justify-content: center;
+}
+
+#resourceOutcome .lootDistribution div div {
+    flex: 1 1 0;
+    width: 0;
+    padding-right: 3px;
+}
+
+#resourceOutcome .profitAttackers .desc,
+#resourceOutcome .profitDefenders .desc {
+    display: flex;
+    justify-content: center;
+    background-color: #182028;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+#resourceOutcome .profitAttackers .lossprofit,
+#resourceOutcome .profitDefenders .lossprofit {
+    display: flex;
+    width: 400px;
+    gap: 3px;
+    border: 2px solid #000000;
+    background: #000;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .losses,
+#resourceOutcome .profitAttackers .lossprofit .profit,
+#resourceOutcome .profitDefenders .lossprofit .losses,
+#resourceOutcome .profitDefenders .lossprofit .profit {
+    width: 50%;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details div,
+#resourceOutcome .profitDefenders .lossprofit .details div {
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details > div:nth-child(odd),
+#resourceOutcome .profitDefenders .lossprofit .details > div:nth-child(odd) {
+    background-color: #0D1014;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details > div:nth-child(even),
+#resourceOutcome .profitDefenders .lossprofit .details > div:nth-child(even) {
+    background-color: #182028;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details div div,
+#resourceOutcome .profitDefenders .lossprofit .details div div {
+    justify-content: end;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details div div.totalDesc,
+#resourceOutcome .profitDefenders .lossprofit .details div div.totalDesc {
+    justify-content: start !important;
+}
+
+#resourceOutcome .profitAttackers .lossprofit .details div > resource-icon,
+#resourceOutcome .profitAttackers .lossprofit .details div > div,
+#resourceOutcome .profitDefenders .lossprofit .details div > resource-icon,
+#resourceOutcome .profitDefenders .lossprofit .details div > div {
+    flex: 1 1 0;
+    width: 0;
+    padding-right: 3px;
+}
+
+/* COMBAT SIM LOOT RESULTS END */
+
+#commandercomponent {
+    position: absolute;
+    top: 32px;
+    right: 0;
+    float: right;
+}
+
+#officers {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    display: inline-block;
+}
+
+/* ****************** Small Officer and Resource Images ************************** */
+
+.smallOfficer,
+.officer20,
+.officer32 {
+    display: inline-block;
+    float: left;
+}
+
+.smallOfficer {
+    background: transparent url("/img/icons/e34a98c3f2c9e66a2d3cdfee94c513.jpg") 0px 0px no-repeat;
+    height: 26px;
+    width: 26px;
+}
+
+.smallOfficer.admiral {
+    background-position: -25px 0;
+}
+
+.smallOfficer.engineer {
+    background-position: -50px 0;
+}
+
+.smallOfficer.geologe {
+    background-position: -75px 0;
+}
+
+.officer20 {
+    background: transparent url("/img/icons/8568533160349e1bcd9b8ba6f00be2.jpg") 0px 0px no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.officer20.admiral {
+    background-position: -20px 0;
+}
+
+.officer32 {
+    background: transparent url("/img/icons/f593aa158c734df9e6223f00721981.jpg") 0px 0px no-repeat;
+    height: 32px;
+    width: 32px;
+}
+
+.officer32.admiral {
+    background-position: -32px 0;
+}
+
+.officer32.engineer {
+    background-position: -64px 0;
+}
+
+.officer32.geologe {
+    background-position: -96px 0;
+}
+
+#officers a.commander {
+    background-position: -45px 0;
+}
+
+#officers a.admiral {
+    background-position: 0 0;
+}
+
+#officers a.engineer {
+    background-position: -90px 0;
+}
+
+#officers a.geologist {
+    background-position: -135px 0;
+}
+
+#officers a.technocrat {
+    background-position: -180px 0;
+}
+
+#officers a.commander.on {
+    background-position: -45px -45px;
+}
+
+#officers a.admiral.on {
+    background-position: 0 -45px;
+}
+
+#officers a.engineer.on {
+    background-position: -90px -45px;
+}
+
+#officers a.geologist.on {
+    background-position: -135px -45px;
+}
+
+#officers a.technocrat.on {
+    background-position: -180px -45px;
+}
+
+#officers img {
+    box-shadow: 0px 0px 5px black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: #000000;
+}
+
+#officers a {
+    background-image: url("/img/icons/5cc4cca6a362b93d874107caabf3b4.png");
+}
+
+body.halloween .officer32,
+#officers a.halloween {
+    background: url("/img/icons/1dd6f8cce2b0fadc6870494a75f83d.jpg") no-repeat;
+}
+
+#officers,
+#officers.all,
+#officers.one {
+    height: 32px;
+    padding: 3px;
+    display: block;
+    position: relative;
+}
+
+.lang-gr #links .leftmenu li .officers {
+    font-size: 10px;
+}
+
+/* Offiziere */
+
+#officers {
+    text-align: left;
+}
+
+#officers a:link,
+#officers a:visited,
+.no-touch #officers a:hover,
+#officers a:active {
+    text-decoration: none;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+}
+
+#officers.one,
+#officers.all {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+#officers.one {
+    border-color: #80868F;
+}
+
+#officers.all {
+    border-color: #E7AE46;
+}
+
+#officers.shortTime {
+    border-color: #D43635;
+}
+
+/* ***************** Character Class Selection *********************************** */
+
+#commandercomponent #characterclass {
+    position: relative;
+    width: 36px;
+    display: block;
+    transition: all 0.2s ease-in;
+    border-radius: 5px;
+    border: 1px solid #767b84;
+    height: 36px;
+    padding: 1px;
+}
+
+#commandercomponent #characterclass:hover {
+    transform: scale(1.2);
+    z-index: 2;
+}
+
+#commandercomponent #characterclass .sprite.medium {
+    width: 32px;
+    height: 32px;
+}
+
+#commandercomponent #characterclass a:link,
+#commandercomponent #characterclass a:visited,
+.no-touch #commandercomponent #characterclass a:hover,
+#commandercomponent #characterclass a:active {
+    text-decoration: none;
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #111111;
+    border-radius: 2px;
+    background-color: #111f;
+    padding-left: 1px;
+    padding-top: 1px;
+    box-sizing: border-box;
+}
+
+/* ***************** Lifeform link *********************************** */
+
+#commandercomponent #lifeform {
+    position: relative;
+    width: 36px;
+    display: block;
+    transition: all 0.2s ease-in;
+    border-radius: 5px;
+    border: 1px solid #767b84;
+    height: 36px;
+    padding: 1px;
+}
+
+#commandercomponent #lifeform:hover {
+    transform: scale(1.2);
+    z-index: 2;
+}
+
+#commandercomponent #lifeform a>div {
+    width: 32px;
+    height: 32px;
+}
+
+#commandercomponent #lifeform .resourceIcon.population {
+    background-position-x: -344px;
+}
+
+#commandercomponent #lifeform .lifeform-item-icon {
+    background-position-y: -280px;
+}
+
+#commandercomponent #lifeform .lifeform-item-icon.lifeform1 {
+    background-position-x: -4px;
+}
+
+#commandercomponent #lifeform .lifeform-item-icon.lifeform2 {
+    background-position-x: -40px;
+}
+
+#commandercomponent #lifeform .lifeform-item-icon.lifeform3 {
+    background-position-x: -75px;
+}
+
+#commandercomponent #lifeform .lifeform-item-icon.lifeform4 {
+    background-position-x: -110px;
+}
+
+#commandercomponent #lifeform a:link,
+#commandercomponent #lifeform a:visited,
+.no-touch #commandercomponent #lifeform a:hover,
+#commandercomponent #lifeform a:active {
+    text-decoration: none;
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #111111;
+    border-radius: 2px;
+    background-color: #111f;
+    padding-left: 1px;
+    padding-top: 1px;
+    box-sizing: border-box;
+}
+
+/* **
+    Category UI elements */
+
+/* start toggle-switch */
+
+toggle-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    margin: -1px 3px 3px 3px;
+    position: relative;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+    /* if different size is needed adjust this */
+    width: 60px;
+    height: 19px;
+}
+
+toggle-switch::after {
+    content: "OFF";
+    color: #000;
+    position: absolute;
+    z-index: 0 !important;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+    text-transform: uppercase;
+    /* if different size is needed adjust this */
+    font: 11px/22px Arial, sans-serif;
+    right: 5px;
+}
+
+toggle-switch::before {
+    content: "ON";
+    color: #27ae60;
+    position: absolute;
+    z-index: 0 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* if different size is needed adjust this */
+    left: 5px;
+    font: 11px/22px Arial, sans-serif;
+}
+
+toggle-switch > label {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1 !important;
+    background: rgb(252,255,244);
+    background: linear-gradient(180deg, rgba(252,255,244,1) 0%, rgba(223,229,215,1) 40%, rgba(179,190,173,1) 100%);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+    /* if different size is needed adjust this */
+    width: 27px;
+    height: 13px;
+    top: 4px;
+    left: 3px;
+}
+
+toggle-switch > input[type=checkbox] {
+    visibility: hidden;
+}
+
+toggle-switch > input[type=checkbox]:checked + label {
+    /* if different size is needed adjust this */
+    left: 30px;
+}
+
+/* end toggle-switch */
+
+/* start square-checkbox */
+
+square-checkbox {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: rgba(252,255,244,1);
+    background: linear-gradient(180deg, rgba(252,255,244,1) 0%, rgba(223,229,215,1) 40%, rgba(179,190,173,1) 100%);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    /* if different size is needed adjust this */
+    width: 20px;
+    height: 20px;
+}
+
+square-checkbox > label {
+    position: absolute;
+    cursor: pointer;
+    background: rgb(34,34,34);
+    background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(69,72,77,1) 100%);
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    /* if different size is needed adjust this */
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+
+square-checkbox > label::after {
+    content: '';
+    position: absolute;
+    background: rgb(46,173,65);
+    background: linear-gradient(180deg, rgba(46,173,65,1) 0%, rgba(20,91,50,1) 100%);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    opacity: 0;
+    /* if different size is needed adjust this */
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+}
+
+square-checkbox > label:hover::after {
+    opacity: 0.3;
+}
+
+square-checkbox > input[type=checkbox] {
+    visibility: hidden;
+}
+
+square-checkbox > input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+/* end square-checkbox */
+
+/* start round-radiobox */
+
+round-radiobox {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #fcfff4;
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    border-radius: 50px;
+    /* if different size is needed adjust this */
+    width: 20px;
+    height: 20px;
+}
+
+round-radiobox > label {
+    position: absolute;
+    cursor: pointer;
+    background: rgb(34,34,34);
+    background: linear-gradient(top, #222 0%, #45484d 100%);
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    /* if different size is needed adjust this */
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+
+round-radiobox > label::after {
+    content: '';
+    position: absolute;
+    background: rgb(46,173,65);
+    background: linear-gradient(180deg, rgba(46,173,65,1) 0%, rgba(20,91,50,1) 100%);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    opacity: 0;
+    border-radius: 50px;
+    /* if different size is needed adjust this */
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+}
+
+round-radiobox > label:hover::after {
+    opacity: 0.3;
+}
+
+round-radiobox > input[type=radio] {
+    visibility: hidden;
+}
+
+round-radiobox > input[type=radio]:checked + label:after {
+    opacity: 1;
+}
+
+/* end round-radiobox */
+
+/* **
+    Category icons */
+
+.menu-toggler:checked ~ ul > .menu-item {
+    opacity: 1;
+}
+
+/* start characterclass-icon */
+
+characterclass-icon {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+characterclass-icon[explorer][sq20] {
+    background-image: url(/img/icons/0361a8c680334eb802f0f35676a66c.png);
+}
+
+characterclass-icon[explorer][sq28] {
+    background-image: url(/img/icons/1433cc4b84f60df3034379f69f238a.png);
+    background-size: cover;
+}
+
+characterclass-icon[explorer][sq40] {
+    background-image: url(/img/icons/1433cc4b84f60df3034379f69f238a.png);
+}
+
+characterclass-icon[explorer][sq100] {
+    background-image: url(/img/icons/6b04d094b1eaec68f470760db4c6ca.png);
+}
+
+characterclass-icon[explorer][sq200] {
+    background-image: url(/img/icons/a7226db4268e3c22d65a3fbd936975.png);
+}
+
+characterclass-icon[miner][sq20] {
+    background-image: url(/img/icons/d8fef22d14bb70419405c4dceb5d3d.png);
+}
+
+characterclass-icon[miner][sq28] {
+    background-image: url(/img/icons/f5b7a5620b23b5290ee5954f07d160.png);
+    background-size: cover;
+}
+
+characterclass-icon[miner][sq40] {
+    background-image: url(/img/icons/f5b7a5620b23b5290ee5954f07d160.png);
+}
+
+characterclass-icon[miner][sq100] {
+    background-image: url(/img/icons/d31422123848b21d1fe5f877cbf23a.png);
+}
+
+characterclass-icon[miner][sq200] {
+    background-image: url(/img/icons/ebadb2179a145168f234a9287786c1.png);
+}
+
+characterclass-icon[neutral][sq20] {
+    background-image: url(/img/icons/b093c16b9d703f67b4959d0e1110c5.png);
+}
+
+characterclass-icon[neutral][sq40] {
+    background-image: url(/img/icons/ca50f93455a3c6894f0c5ae03e665f.png);
+}
+
+characterclass-icon[neutral][sq100] {
+    background-image: url(/img/icons/058a0dd0c45a1d05e8c52657c6c54f.png);
+}
+
+characterclass-icon[neutral][sq200] {
+    background-image: url(/img/icons/7924c98af4dc3dc0def79275ebcd7f.png);
+}
+
+characterclass-icon[warrior][sq20] {
+    background-image: url(/img/icons/a1f541e196f249a658175a40e9945a.png);
+}
+
+characterclass-icon[warrior][sq28] {
+    background-image: url(/img/icons/c9a66d4b358353d42d503ca99388b6.png);
+    background-size: cover;
+}
+
+characterclass-icon[warrior][sq40] {
+    background-image: url(/img/icons/c9a66d4b358353d42d503ca99388b6.png);
+}
+
+characterclass-icon[warrior][sq100] {
+    background-image: url(/img/icons/5484c3b846afe9be9c0a75abbf45d7.png);
+}
+
+characterclass-icon[warrior][sq200] {
+    background-image: url(/img/icons/4820e3768f76849d1faa718d57b09e.png);
+}
+
+/* end characterclass-icon */
+
+/* start allianceclass-icon */
+
+allianceclass-icon {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+allianceclass-icon[explorer][sq20] {
+    background-image: url(/img/icons/bb0ff2146d93887ff9bf2a14a25a45.png);
+}
+
+allianceclass-icon[explorer][sq40] {
+    background-image: url(/img/icons/eaa936531415467b959dfcd67bfcf9.png);
+}
+
+allianceclass-icon[explorer][sq100] {
+    background-image: url(/img/icons/fd0da2a874d163d64bcbe0189819ce.png);
+}
+
+allianceclass-icon[explorer][sq200] {
+    background-image: url(/img/icons/58ca35abbdfaf080563fe67fc08a6d.png);
+}
+
+allianceclass-icon[trader][sq20] {
+    background-image: url(/img/icons/02614bfe12340c2d8f89ce58ad83c7.png);
+}
+
+allianceclass-icon[trader][sq40] {
+    background-image: url(/img/icons/32c89f02522a44b46ca3dc359fe1e2.png);
+}
+
+allianceclass-icon[trader][sq100] {
+    background-image: url(/img/icons/4c2481811140db89100f0bc2e7118a.png);
+}
+
+allianceclass-icon[trader][sq200] {
+    background-image: url(/img/icons/dc5d139f79fa745594db047e57b26e.png);
+}
+
+allianceclass-icon[neutral][sq20] {
+    background-image: url(/img/icons/91f4cdf171328d7cef3443860cd063.png);
+}
+
+allianceclass-icon[neutral][sq40] {
+    background-image: url(/img/icons/17c83524ca049ab09fc5dee53e2004.png);
+}
+
+allianceclass-icon[neutral][sq100] {
+    background-image: url(/img/icons/be2d91117e545679cb3aaa73e22af2.png);
+}
+
+allianceclass-icon[neutral][sq200] {
+    background-image: url(/img/icons/7924c98af4dc3dc0def79275ebcd7f.png);
+}
+
+allianceclass-icon[warrior][sq20] {
+    background-image: url(/img/icons/f2435fcc1304b0d181323254d3d3ec.png);
+}
+
+allianceclass-icon[warrior][sq40] {
+    background-image: url(/img/icons/10ca470f74ddd86449c6b4c85f331c.png);
+}
+
+allianceclass-icon[warrior][sq100] {
+    background-image: url(/img/icons/ee056f72d77c0bb3d511e51f1a693c.png);
+}
+
+allianceclass-icon[warrior][sq200] {
+    background-image: url(/img/icons/c6136ea39904df0239a3d5eaa24bb8.png);
+}
+
+/* end allianceclass-icon */
+
+/* start thick-headline for fleet-content */
+
+thick-headline {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+}
+
+thick-headline-header {
+    background: url(/img/icons/0a5ba5507cb9bfae1b615cd72fc051.png) repeat-x 0 0;
+    height: 35px;
+    min-width: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2 !important;
+}
+
+thick-headline-header::before {
+    background: url(/img/icons/ecbdb336ee6ce8112e2875e389bbf9.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    width: 3px;
+}
+
+thick-headline-header::after {
+    background: url(/img/icons/56f8d5a932238db6b779e17bf9a9f8.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    position: absolute;
+    width: 26px;
+    right: -26px;
+}
+
+thick-headline-header p {
+    font-size: 18px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+thick-headline-background {
+    background: url(/img/icons/0721fd07d84834abab94b85b6e7303.gif) repeat-x;
+    height: 35px;
+    /* flex-grow: 1; */
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100% - 25px);
+    position: relative;
+    --current-width: 350;
+    align-items: center;
+    gap: 4px;
+}
+
+thick-headline-background::after {
+    background: url(/img/icons/a43a0c46b4446617d53d9fd8249402.png) no-repeat 0 0;
+    content: "";
+    height: 35px;
+    width: 25px;
+    display: block;
+    position: absolute;
+    right: -25px;
+}
+
+/* end thick-headline for fleet-content */
+
+/* start fleet-content for displaying fleetinformation in combatsim */
+
+fleet-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 100%;
+    border: 2px solid #000;
+    margin: 0 auto 7px;
+    padding: 0 5px 5px;
+    background: linear-gradient(to bottom, #1f2630 0%,#111921 100%);
+    min-height: 50px;
+}
+
+fleet-content::before {
+    position: absolute;
+    left: -9px;
+    top: -2px;
+    width: calc(100% + 18px);
+    height: 28px;
+    background: url(/img/icons/f333e15eb738b8ec692340f507e1ae.png) bottom left no-repeat, url(/img/icons/66551209db14e23b3001901b996cc6.png) bottom right no-repeat;
+    content: "";
+}
+
+fleet-content::after {
+    position: absolute;
+    left: -9px;
+    bottom: -5px;
+    width: calc(100% + 18px);
+    height: 50px;
+    background: url(/img/icons/0330abcdca0d125d35a0ebace4b584.png) bottom left no-repeat, url(/img/icons/8003a40825bc96919c5fec01b018b8.png) bottom right no-repeat;
+    content: "";
+}
+
+/* end fleet-content for displaying fleetinformation in combatsim */
+
+/* start combatsim-section fir displaying a section in combatsim */
+
+combatsim-section {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+}
+
+combatsim-section[show-lifeform="1"] {
+    width: 720px;
+}
+
+simulation-overview {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+simulation-overview combatsim-section {
+    width: 990px !important;
+}
+
+/* end combatsim-section fir displaying a section in combatsim */
+
+/* start gradient-button */
+
+gradient-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+gradient-button .custom_btn {
+    width: 100%;
+    height: 100%;
+    border: 1px outset #696666 !important;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #bbb;
+    font-size: 17px;
+    background: linear-gradient(160deg, rgba(54,77,99,1) 0%, rgba(40,57,72,1) 33%, rgba(20,30,38,1) 66%, rgba(18,26,33,1) 100%);
+    box-shadow: 0px 2px 3px 1px #0000008c;
+    outline: none;
+    transition: 300ms;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 0;
+    padding-inline: 0;
+    box-sizing: border-box;
+}
+
+gradient-button .custom_btn.send {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+gradient-button button:not(:disabled):hover {
+    background: linear-gradient(160deg, rgba(67,107,145,1) 0%, rgba(52,76,97,1) 33%, rgba(40,58,71,1) 66%, rgba(20,26,32,1) 100%);
+    box-shadow: 0px 0px 0px 0px transparent;
+}
+
+gradient-button button:disabled,
+gradient-button button[disabled] {
+    border: 1px solid #999999 !important;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* end gradient-button */
+
+/* start group title */
+
+group-title {
+    display: flex;
+    justify-content: center;
+    background: url(/img/icons/f5f81e8302aaad56c958c033677fb8.png) -143px -162px no-repeat;
+    height: 25px;
+    width: 231px;
+    font-size: 11px;
+    line-height: 25px;
+    margin: 8px 0 5px -7px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+group-title > group-title-label {
+    display: block;
+    color: #9c0;
+    text-decoration: none;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+group-title-right {
+    display: flex;
+    justify-content: center;
+    background: url(/img/icons/f5f81e8302aaad56c958c033677fb8.png) -143px -162px no-repeat;
+    height: 25px;
+    width: 231px;
+    font-size: 11px;
+    line-height: 25px;
+    margin: 8px 0 5px -7px;
+}
+
+group-title-right > group-title-label {
+    display: block;
+    color: #9c0;
+    text-decoration: none;
+}
+
+.fullrow-title {
+    display: flex;
+    justify-content: end;
+    flex-grow: 1;
+    height: 40px;
+}
+
+.fullrow-title group-title-right {
+    margin: 8px -14px 5px 0;
+}
+
+/* end group title */
+
+/* *****************************************
+ ******** TECHNOLOGY SPRITE IMAGES ********
+ ***************************************** */
+
+/* There is no need at all to change anything in this complete section */
+
+technology-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    --var-width: 30;
+    --var-height: 30;
+    border-radius: 5px;
+}
+
+technology-icon[regular] {
+    background-image: url(/img/icons/7a9861be0c38bf7de05a57c56d73cf.jpg) !important;
+    background-size: calc(4000px * var(--var-width) * 0.005) calc(6000px * var(--var-height) * 0.005);
+}
+
+technology-icon[lifeform] {
+    background-image: url(/img/icons/2d828476bacc6b1e6bbfaf2a9fb041.jpg) !important;
+    background-size: calc(3600px * var(--var-width) * 0.005) calc(5920px * var(--var-height) * 0.005);
+}
+
+server-settings-icon[bordered],
+resource-icon[bordered],
+technology-icon[bordered] {
+    border: 1px outset #ccc !important;
+}
+
+/* ~~~~~ BUILDINGS ~~~~~ */
+
+technology-icon[metalmine] {
+    background-position: 0 0;
+}
+
+technology-icon[crystalmine] {
+    background-position: 5.25% 0;
+}
+
+technology-icon[deuteriumsynthesizer] {
+    background-position: 10.52% 0;
+}
+
+technology-icon[solarplant] {
+    background-position: 15.78% 0;
+}
+
+technology-icon[fusionplant] {
+    background-position: 21.05% 0;
+}
+
+technology-icon[roboticsfactory] {
+    background-position: 0 17.24%;
+}
+
+technology-icon[nanitefactory] {
+    background-position: 26.31% 17.24%;
+}
+
+technology-icon[shipyard] {
+    background-position: 5.25% 17.24%;
+}
+
+technology-icon[metalstorage] {
+    background-position: 31.57% 0;
+}
+
+technology-icon[crystalstorage] {
+    background-position: 36.84% 0;
+}
+
+technology-icon[deuteriumstorage] {
+    background-position: 42.1% 0;
+}
+
+technology-icon[researchlaboratory] {
+    background-position: 10.52% 17.24%;
+}
+
+technology-icon[terraformer] {
+    background-position: 31.57% 17.24%;
+}
+
+technology-icon[alliancedepot] {
+    background-position: 15.78% 17.24%;
+}
+
+technology-icon[moonbase] {
+    background-position: 36.85% 17.24%;
+}
+
+technology-icon[sensorphalanx] {
+    background-position: 42.1% 17.24%;
+}
+
+technology-icon[jumpgate] {
+    background-position: 47.36% 17.24%;
+}
+
+technology-icon[missilesilo] {
+    background-position: 21.05% 17.24%;
+}
+
+technology-icon[repairdock] {
+    background-position: 52.62% 17.24%;
+}
+
+/* ~~~~~ RESEARCHES ~~~~~ */
+
+/* ~~ BASICS ~~ */
+
+technology-icon[energytechnology] {
+    background-position: 0 68.96%;
+}
+
+technology-icon[lasertechnology] {
+    background-position: 5.25% 68.96%;
+}
+
+technology-icon[iontechnology] {
+    background-position: 10.52% 68.96%;
+}
+
+technology-icon[hyperspacetechnology] {
+    background-position: 15.78% 68.96%;
+}
+
+technology-icon[plasmatechnology] {
+    background-position: 21.05% 68.96%;
+}
+
+/* ~~ DRIVES ~~ */
+
+technology-icon[combustiondrivetechnology] {
+    background-position: 26.31% 68.96%;
+}
+
+technology-icon[impulsedrivetechnology] {
+    background-position: 31.57% 68.96%;
+}
+
+technology-icon[hyperspacedrivetechnology] {
+    background-position: 36.84% 68.96%;
+}
+
+/* ~~ ADVANCED~~ */
+
+technology-icon[espionagetechnology] {
+    background-position: 42.1% 68.96%;
+}
+
+technology-icon[computertechnology] {
+    background-position: 47.36% 68.96%;
+}
+
+technology-icon[astrophysicstechnology] {
+    background-position: 52.62% 68.96%;
+}
+
+technology-icon[researchnetworktechnology] {
+    background-position: 57.88% 68.96%;
+}
+
+technology-icon[gravitontechnology] {
+    background-position: 63.15% 68.96%;
+}
+
+/* ~~ COMBAT ~~ */
+
+technology-icon[weaponstechnology] {
+    background-position: 73.68% 68.96%;
+}
+
+technology-icon[shieldingtechnology] {
+    background-position: 78.94% 68.96%;
+}
+
+technology-icon[armortechnology] {
+    background-position: 68.42% 68.96%;
+}
+
+/* ~~~~~ SHIPS ~~~~~ */
+
+/* ~~ CIVIL ~~ */
+
+technology-icon[transportersmall] {
+    background-position: 42.1% 51.72%;
+}
+
+technology-icon[transporterlarge] {
+    background-position: 47.36% 51.72%;
+}
+
+technology-icon[colonyship] {
+    background-position: 52.62% 51.72%;
+}
+
+technology-icon[recycler] {
+    background-position: 57.89% 51.72%;
+}
+
+technology-icon[espionageprobe] {
+    background-position: 63.15% 51.72%;
+}
+
+technology-icon[solarsatellite] {
+    background-position: 26.31% 0;
+}
+
+/* ~~ MILITARY ~~ */
+
+technology-icon[fighterlight] {
+    background-position: 0 51.72%;
+}
+
+technology-icon[fighterheavy] {
+    background-position: 5.25% 51.72%;
+}
+
+technology-icon[cruiser] {
+    background-position: 10.53% 51.72%;
+}
+
+technology-icon[battleship] {
+    background-position: 15.78% 51.72%;
+}
+
+technology-icon[interceptor] {
+    background-position: 21.05% 51.72%;
+}
+
+technology-icon[bomber] {
+    background-position: 26.31% 51.72%;
+}
+
+technology-icon[destroyer] {
+    background-position: 31.57% 51.72%;
+}
+
+technology-icon[deathstar] {
+    background-position: 36.84% 51.72%;
+}
+
+technology-icon[resbuggy] {
+    background-position: 84.20% 51.72%;
+}
+
+technology-icon[explorer] {
+    background-position: 78.94% 51.72%;
+}
+
+technology-icon[reaper] {
+    background-position: 73.68% 51.72%;
+}
+
+/* ~~~~~ DEFENSES ~~~~~ */
+
+technology-icon[rocketlauncher] {
+    background-position: 0 34.48%;
+}
+
+technology-icon[lasercannonlight] {
+    background-position: 5.25% 34.48%;
+}
+
+technology-icon[lasercannonheavy] {
+    background-position: 10.52% 34.48%;
+}
+
+technology-icon[gausscannon] {
+    background-position: 15.78% 34.48%;
+}
+
+technology-icon[ioncannon] {
+    background-position: 21.05% 34.48%;
+}
+
+technology-icon[plasmacannon] {
+    background-position: 26.31% 34.48%;
+}
+
+technology-icon[shielddomesmall] {
+    background-position: 31.57% 34.48%;
+}
+
+technology-icon[shielddomelarge] {
+    background-position: 36.84% 34.48%;
+}
+
+/* ~~~~~ MISSILES ~~~~~ */
+
+technology-icon[missileinterceptor] {
+    background-position: 42.1% 34.48%;
+}
+
+technology-icon[missileinterplanetary] {
+    background-position: 47.36% 34.48%;
+}
+
+/* *** LIFEFORM TECHNOLOGY IMAGES *** */
+
+/* ~~~~~ BUILDINGS ~~~~~ */
+
+technology-icon[lifeformtech11101],
+technology-icon[lifeformtech11102],
+technology-icon[lifeformtech11103],
+technology-icon[lifeformtech11104],
+technology-icon[lifeformtech11105],
+technology-icon[lifeformtech11106],
+technology-icon[lifeformtech11107],
+technology-icon[lifeformtech11108],
+technology-icon[lifeformtech11109],
+technology-icon[lifeformtech11110],
+technology-icon[lifeformtech11111],
+technology-icon[lifeformtech11112] {
+    background-position-y: 0;
+}
+
+technology-icon[lifeformtech12101],
+technology-icon[lifeformtech12102],
+technology-icon[lifeformtech12103],
+technology-icon[lifeformtech12104],
+technology-icon[lifeformtech12105],
+technology-icon[lifeformtech12106],
+technology-icon[lifeformtech12107],
+technology-icon[lifeformtech12108],
+technology-icon[lifeformtech12109],
+technology-icon[lifeformtech12110],
+technology-icon[lifeformtech12111],
+technology-icon[lifeformtech12112] {
+    background-position-y: 25.87%;
+}
+
+technology-icon[lifeformtech13101],
+technology-icon[lifeformtech13102],
+technology-icon[lifeformtech13103],
+technology-icon[lifeformtech13104],
+technology-icon[lifeformtech13105],
+technology-icon[lifeformtech13106],
+technology-icon[lifeformtech13107],
+technology-icon[lifeformtech13108],
+technology-icon[lifeformtech13109],
+technology-icon[lifeformtech13110],
+technology-icon[lifeformtech13111],
+technology-icon[lifeformtech13112] {
+    background-position-y: 51.74%;
+}
+
+technology-icon[lifeformtech14101],
+technology-icon[lifeformtech14102],
+technology-icon[lifeformtech14103],
+technology-icon[lifeformtech14104],
+technology-icon[lifeformtech14105],
+technology-icon[lifeformtech14106],
+technology-icon[lifeformtech14107],
+technology-icon[lifeformtech14108],
+technology-icon[lifeformtech14109],
+technology-icon[lifeformtech14110],
+technology-icon[lifeformtech14111],
+technology-icon[lifeformtech14112] {
+    background-position-y: 77.62%;
+}
+
+technology-icon[lifeformtech11101],
+technology-icon[lifeformtech12101],
+technology-icon[lifeformtech13101],
+technology-icon[lifeformtech14101] {
+    background-position-x: 0;
+}
+
+technology-icon[lifeformtech11102],
+technology-icon[lifeformtech12102],
+technology-icon[lifeformtech13102],
+technology-icon[lifeformtech14102] {
+    background-position-x: 5.88%;
+}
+
+technology-icon[lifeformtech11103],
+technology-icon[lifeformtech12103],
+technology-icon[lifeformtech13103],
+technology-icon[lifeformtech14103] {
+    background-position-x: 11.76%;
+}
+
+technology-icon[lifeformtech11104],
+technology-icon[lifeformtech12104],
+technology-icon[lifeformtech13104],
+technology-icon[lifeformtech14104] {
+    background-position-x: 17.65%;
+}
+
+technology-icon[lifeformtech11105],
+technology-icon[lifeformtech12105],
+technology-icon[lifeformtech13105],
+technology-icon[lifeformtech14105] {
+    background-position-x: 23.53%;
+}
+
+technology-icon[lifeformtech11106],
+technology-icon[lifeformtech12106],
+technology-icon[lifeformtech13106],
+technology-icon[lifeformtech14106] {
+    background-position-x: 29.42%;
+}
+
+technology-icon[lifeformtech11107],
+technology-icon[lifeformtech12107],
+technology-icon[lifeformtech13107],
+technology-icon[lifeformtech14107] {
+    background-position-x: 35.29%;
+}
+
+technology-icon[lifeformtech11108],
+technology-icon[lifeformtech12108],
+technology-icon[lifeformtech13108],
+technology-icon[lifeformtech14108] {
+    background-position-x: 41.17%;
+}
+
+technology-icon[lifeformtech11109],
+technology-icon[lifeformtech12109],
+technology-icon[lifeformtech13109],
+technology-icon[lifeformtech14109] {
+    background-position-x: 47.06%;
+}
+
+technology-icon[lifeformtech11110],
+technology-icon[lifeformtech12110],
+technology-icon[lifeformtech13110],
+technology-icon[lifeformtech14110] {
+    background-position-x: 52.94%;
+}
+
+technology-icon[lifeformtech11111],
+technology-icon[lifeformtech12111],
+technology-icon[lifeformtech13111],
+technology-icon[lifeformtech14111] {
+    background-position-x: 58.82%;
+}
+
+technology-icon[lifeformtech11112],
+technology-icon[lifeformtech12112],
+technology-icon[lifeformtech13112],
+technology-icon[lifeformtech14112] {
+    background-position-x: 64.70%;
+}
+
+/* ~~~~~ Researches ~~~~~ */
+
+technology-icon[lifeformtech11201],
+technology-icon[lifeformtech11202],
+technology-icon[lifeformtech11203],
+technology-icon[lifeformtech11204],
+technology-icon[lifeformtech11205],
+technology-icon[lifeformtech11206],
+technology-icon[lifeformtech11207],
+technology-icon[lifeformtech11208],
+technology-icon[lifeformtech11209],
+technology-icon[lifeformtech11210],
+technology-icon[lifeformtech11211],
+technology-icon[lifeformtech11212],
+technology-icon[lifeformtech11213],
+technology-icon[lifeformtech11214],
+technology-icon[lifeformtech11215],
+technology-icon[lifeformtech11216],
+technology-icon[lifeformtech11217],
+technology-icon[lifeformtech11218] {
+    background-position-y: 12.93%;
+}
+
+technology-icon[lifeformtech12201],
+technology-icon[lifeformtech12202],
+technology-icon[lifeformtech12203],
+technology-icon[lifeformtech12204],
+technology-icon[lifeformtech12205],
+technology-icon[lifeformtech12206],
+technology-icon[lifeformtech12207],
+technology-icon[lifeformtech12208],
+technology-icon[lifeformtech12209],
+technology-icon[lifeformtech12210],
+technology-icon[lifeformtech12211],
+technology-icon[lifeformtech12212],
+technology-icon[lifeformtech12213],
+technology-icon[lifeformtech12214],
+technology-icon[lifeformtech12215],
+technology-icon[lifeformtech12216],
+technology-icon[lifeformtech12217],
+technology-icon[lifeformtech12218] {
+    background-position-y: 38.81%;
+}
+
+technology-icon[lifeformtech13201],
+technology-icon[lifeformtech13202],
+technology-icon[lifeformtech13203],
+technology-icon[lifeformtech13204],
+technology-icon[lifeformtech13205],
+technology-icon[lifeformtech13206],
+technology-icon[lifeformtech13207],
+technology-icon[lifeformtech13208],
+technology-icon[lifeformtech13209],
+technology-icon[lifeformtech13210],
+technology-icon[lifeformtech13211],
+technology-icon[lifeformtech13212],
+technology-icon[lifeformtech13213],
+technology-icon[lifeformtech13214],
+technology-icon[lifeformtech13215],
+technology-icon[lifeformtech13216],
+technology-icon[lifeformtech13217],
+technology-icon[lifeformtech13218] {
+    background-position-y: 64.69%;
+}
+
+technology-icon[lifeformtech14201],
+technology-icon[lifeformtech14202],
+technology-icon[lifeformtech14203],
+technology-icon[lifeformtech14204],
+technology-icon[lifeformtech14205],
+technology-icon[lifeformtech14206],
+technology-icon[lifeformtech14207],
+technology-icon[lifeformtech14208],
+technology-icon[lifeformtech14209],
+technology-icon[lifeformtech14210],
+technology-icon[lifeformtech14211],
+technology-icon[lifeformtech14212],
+technology-icon[lifeformtech14213],
+technology-icon[lifeformtech14214],
+technology-icon[lifeformtech14215],
+technology-icon[lifeformtech14216],
+technology-icon[lifeformtech14217],
+technology-icon[lifeformtech14218] {
+    background-position-y: 90.56%;
+}
+
+technology-icon[lifeformtech11201],
+technology-icon[lifeformtech12201],
+technology-icon[lifeformtech13201],
+technology-icon[lifeformtech14201] {
+    background-position-x: 0;
+}
+
+technology-icon[lifeformtech11202],
+technology-icon[lifeformtech12202],
+technology-icon[lifeformtech13202],
+technology-icon[lifeformtech14202] {
+    background-position-x: 5.88%;
+}
+
+technology-icon[lifeformtech11203],
+technology-icon[lifeformtech12203],
+technology-icon[lifeformtech13203],
+technology-icon[lifeformtech14203] {
+    background-position-x: 11.76%;
+}
+
+technology-icon[lifeformtech11204],
+technology-icon[lifeformtech12204],
+technology-icon[lifeformtech13204],
+technology-icon[lifeformtech14204] {
+    background-position-x: 17.65%;
+}
+
+technology-icon[lifeformtech11205],
+technology-icon[lifeformtech12205],
+technology-icon[lifeformtech13205],
+technology-icon[lifeformtech14205] {
+    background-position-x: 23.53%;
+}
+
+technology-icon[lifeformtech11206],
+technology-icon[lifeformtech12206],
+technology-icon[lifeformtech13206],
+technology-icon[lifeformtech14206] {
+    background-position-x: 29.41%;
+}
+
+technology-icon[lifeformtech11207],
+technology-icon[lifeformtech12207],
+technology-icon[lifeformtech13207],
+technology-icon[lifeformtech14207] {
+    background-position-x: 35.29%;
+}
+
+technology-icon[lifeformtech11208],
+technology-icon[lifeformtech12208],
+technology-icon[lifeformtech13208],
+technology-icon[lifeformtech14208] {
+    background-position-x: 41.17%;
+}
+
+technology-icon[lifeformtech11209],
+technology-icon[lifeformtech12209],
+technology-icon[lifeformtech13209],
+technology-icon[lifeformtech14209] {
+    background-position-x: 47.06%;
+}
+
+technology-icon[lifeformtech11210],
+technology-icon[lifeformtech12210],
+technology-icon[lifeformtech13210],
+technology-icon[lifeformtech14210] {
+    background-position-x: 52.94%;
+}
+
+technology-icon[lifeformtech11211],
+technology-icon[lifeformtech12211],
+technology-icon[lifeformtech13211],
+technology-icon[lifeformtech14211] {
+    background-position-x: 58.82%;
+}
+
+technology-icon[lifeformtech11212],
+technology-icon[lifeformtech12212],
+technology-icon[lifeformtech13212],
+technology-icon[lifeformtech14212] {
+    background-position-x: 64.70%;
+}
+
+technology-icon[lifeformtech11213],
+technology-icon[lifeformtech12213],
+technology-icon[lifeformtech13213],
+technology-icon[lifeformtech14213] {
+    background-position-x: 70.58%;
+}
+
+technology-icon[lifeformtech11214],
+technology-icon[lifeformtech12214],
+technology-icon[lifeformtech13214],
+technology-icon[lifeformtech14214] {
+    background-position-x: 76.46%;
+}
+
+technology-icon[lifeformtech11215],
+technology-icon[lifeformtech12215],
+technology-icon[lifeformtech13215],
+technology-icon[lifeformtech14215] {
+    background-position-x: 82.35%;
+}
+
+technology-icon[lifeformtech11216],
+technology-icon[lifeformtech12216],
+technology-icon[lifeformtech13216],
+technology-icon[lifeformtech14216] {
+    background-position-x: 88.23%;
+}
+
+technology-icon[lifeformtech11217],
+technology-icon[lifeformtech12217],
+technology-icon[lifeformtech13217],
+technology-icon[lifeformtech14217] {
+    background-position-x: 94.11%;
+}
+
+technology-icon[lifeformtech11218],
+technology-icon[lifeformtech12218],
+technology-icon[lifeformtech13218],
+technology-icon[lifeformtech14218] {
+    background-position-x: 100%;
+}
+
+/* *****************************************
+ ****** END TECHNOLOGY SPRITE IMAGES ******
+ ***************************************** */
+
+/* start resource icons */
+
+/* for resizing use a seperate class or an attribute sq20/sq28/... don't touch anything below */
+
+resource-icon {
+    width: 512px;
+    height: 512px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+resource-icon.metal {
+    background-image: url(/img/icons/4230ff01e100a38a72dadfa7de0661.png) !important;
+    background-size: contain;
+}
+
+resource-icon.crystal {
+    background-image: url(/img/icons/596ba85baa74145390e04f7428d93e.png) !important;
+    background-size: contain;
+}
+
+resource-icon.deuterium {
+    background-image: url(/img/icons/7a7bf2b8edcd74ebafe31dfbae14aa.png) !important;
+    background-size: contain;
+}
+
+resource-icon.energy {
+    background-image: url(/img/icons/9e2afdb81e238e0c0968f9cd0d9ca4.png) !important;
+    background-size: contain;
+}
+
+resource-icon.darkmatter {
+    background-image: url(/img/icons/4de426cb95e11af9cdabb901dfe802.png) !important;
+    background-size: contain;
+}
+
+resource-icon.food {
+    background-image: url(/img/icons/c1e0f3a58ccc09677455f19d8792a1.png) !important;
+    background-size: contain;
+}
+
+resource-icon.population {
+    background-image: url(/img/icons/9e6c01dbcd3acd2e1fb3b5d0a02fba.png) !important;
+    background-size: contain;
+}
+
+/* end ressource icons */
+
+/* start server settings icons */
+
+/* for resizing use a seperate class or an attribute sq20/sq28/... don't touch anything below */
+
+server-settings-icon {
+    width: 52px;
+    height: 52px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+server-settings-icon.acs_active {
+    background-image: url(/img/icons/bba367fbf3e7613a914f57d22e5abd.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.darkmatter_bonus {
+    background-image: url(/img/icons/9e5b03f98d1c4c8e14e5845a2a3f68.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.debris_defense {
+    background-image: url(/img/icons/312addcee32380091e0e5a75682993.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.debris_fleet {
+    background-image: url(/img/icons/cc4a9fba32f0aded9d723f7ae433fa.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.debris_deuterium {
+    background-image: url(/img/icons/da952f61e88f03853d2fcd6a7d12f7.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.deuterium_save {
+    background-image: url(/img/icons/9ef61a360aa80295751971aa90867d.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.fleetspeed_holding {
+    background-image: url(/img/icons/ea2d90bb5d0e29194a13b05d5acf82.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.fleetspeed_peace {
+    background-image: url(/img/icons/7191f3633561f7ba3a0922186b268d.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.fleetspeed_war {
+    background-image: url(/img/icons/dfa174a8875044e7b3ab080264e18a.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.ignore_empty {
+    background-image: url(/img/icons/025c93acb8b7550a42a02c0517ddbf.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.ignore_inactive {
+    background-image: url(/img/icons/f3f46bd8e55815109eeb33078d63ee.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.lifetime {
+    background-image: url(/img/icons/481c443464ea6f39dd9b16f868dec9.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.number_galaxies {
+    background-image: url(/img/icons/8dc157e3f067cd311f7f6639f4ff9d.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.planetfield_bonus {
+    background-image: url(/img/icons/1995d3be4ec69ecd07333ce75ceb51.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.speedfactor {
+    background-image: url(/img/icons/1ad7545bd6e855e8aee5cc3a7542c0.png) !important;
+    background-size: contain;
+}
+
+server-settings-icon.speedfactor_research {
+    background-image: url(/img/icons/4ac3e1a16a2592451996c7223582b1.png) !important;
+    background-size: contain;
+}
+
+/* end server settings icons */
+
+/* start class selection in radial menu */
+
+class-selection {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    z-index: 5 !important;
+    position: relative;
+}
+
+class-selection .classselection-menu {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 4 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+class-selection .classselection-menu + label {
+    width: 40px;
+    height: 40px;
+    display: block;
+    z-index: 3 !important;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+class-selection .classselection-menu.characterClass[data-class-id="0"] + label {
+    background-image: url(/img/icons/ca50f93455a3c6894f0c5ae03e665f.png);
+}
+
+class-selection .classselection-menu.characterClass[data-class-id="1"] + label {
+    background-image: url(/img/icons/f5b7a5620b23b5290ee5954f07d160.png);
+}
+
+class-selection .classselection-menu.characterClass[data-class-id="2"] + label {
+    background-image: url(/img/icons/c9a66d4b358353d42d503ca99388b6.png);
+}
+
+class-selection .classselection-menu.characterClass[data-class-id="3"] + label {
+    background-image: url(/img/icons/1433cc4b84f60df3034379f69f238a.png);
+}
+
+class-selection .classselection-menu.allianceClass[data-class-id="0"] + label {
+    background-image: url(/img/icons/17c83524ca049ab09fc5dee53e2004.png);
+}
+
+class-selection .classselection-menu.allianceClass[data-class-id="1"] + label {
+    background-image: url(/img/icons/10ca470f74ddd86449c6b4c85f331c.png);
+}
+
+class-selection .classselection-menu.allianceClass[data-class-id="2"] + label {
+    background-image: url(/img/icons/32c89f02522a44b46ca3dc359fe1e2.png);
+}
+
+class-selection .classselection-menu.allianceClass[data-class-id="3"] + label {
+    background-image: url(/img/icons/eaa936531415467b959dfcd67bfcf9.png);
+}
+
+class-selection .classselection-menu:hover + label {
+    filter: brightness(150%);
+}
+
+class-selection .classselection-menu:checked ~ ul .menu-item {
+    opacity: 1;
+    pointer-events: all;
+}
+
+class-selection .classselection-menu:checked ~ ul .menu-item:nth-child(1) {
+    transform: rotate(30deg) translate(-55px);
+}
+
+class-selection .classselection-menu:checked ~ ul .menu-item:nth-child(2) {
+    transform: rotate(90deg) translateX(-55px);
+}
+
+class-selection .classselection-menu:checked ~ ul .menu-item:nth-child(3) {
+    transform: rotate(150deg) translateX(-55px);
+}
+
+class-selection .classselection-menu:checked ~ ul .menu-item:nth-child(4) {
+    transform: rotate(210deg) translateX(-55px);
+}
+
+class-selection .menu-item {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 2 !important;
+    pointer-events: none;
+}
+
+class-selection .menu-item:after {
+    z-index: -1 !important;
+}
+
+class-selection .menu-item characterclass-icon:hover,
+class-selection .menu-item allianceclass-icon:hover {
+    filter: brightness(150%);
+}
+
+class-selection ul .menu-item:nth-child(1) characterclass-icon {
+    transform: rotate(-30deg);
+}
+
+class-selection ul .menu-item:nth-child(2) characterclass-icon {
+    transform: rotate(-90deg);
+}
+
+class-selection ul .menu-item:nth-child(3) characterclass-icon {
+    transform: rotate(-150deg);
+}
+
+class-selection ul .menu-item:nth-child(4) characterclass-icon {
+    transform: rotate(-210deg);
+}
+
+class-selection ul .menu-item:nth-child(1) allianceclass-icon {
+    transform: rotate(-30deg);
+}
+
+class-selection ul .menu-item:nth-child(2) allianceclass-icon {
+    transform: rotate(-90deg);
+}
+
+class-selection ul .menu-item:nth-child(3) allianceclass-icon {
+    transform: rotate(-150deg);
+}
+
+class-selection ul .menu-item:nth-child(4) allianceclass-icon {
+    transform: rotate(-210deg);
+}
+
+/* end class selection in radial menu */
+
+/* selected language styling start */
+
+selected-language-icon {
+    display: inline-block;
+    width: 16px;
+    height: 11px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* selected language styling end */
+
+/* fleet speed bar start */
+
+fleetspeed-section {
+    width: 334px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+fleetspeed-section .speed {
+    height: 100%;
+    width: 100%;
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    z-index: 1 !important;
+}
+
+fleetspeed-section .speed-bar {
+    height: 16px;
+    border-radius: 4px;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    transition: 0.3s linear;
+    -webkit-transition-property: width, background-color;
+    -moz-transition-property: width, background-color;
+    -o-transition-property: width, background-color;
+    transition-property: width, background-color;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+    margin-top: -16px;
+}
+
+fleetspeed-section .radio {
+    display: none;
+}
+
+fleetspeed-section .label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    text-shadow: 0 1px black;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 16px;
+    width: calc(100% / 10);
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section .radio[data-attack-type="1"]:checked + .label,
+fleet-content:not([style*="display: none"]) fleetspeed-section .radio[data-attack-type="2"]:checked + .label {
+    color: white;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="1"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="1"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 10%;
+    background-color: #f63a0f;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="2"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="2"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 20%;
+    background-color: #f54810;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="3"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="3"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 30%;
+    background-color: #f36311;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="4"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="4"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 40%;
+    background-color: #f27d14;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="5"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="5"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 50%;
+    background-color: #f2b01e;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="6"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="6"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 60%;
+    background-color: #f2be1d;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="7"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="7"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 70%;
+    background-color: #f2cc1c;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="8"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="8"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 80%;
+    background-color: #dcd61c;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="9"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="9"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 90%;
+    background-color: #b1db1d;
+}
+
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="10"][data-attack-type="1"]:checked ~ .speed-bar,
+fleet-content:not([style*="display: none"]) fleetspeed-section > .speed > input[value="10"][data-attack-type="2"]:checked ~ .speed-bar {
+    width: 100%;
+    background-color: #86e01e;
+}
+
+/* fleet speed bar end */
+
+/* notification box start */
+
+body#standalonepage {
+    position: relative !important;
+}
+
+notification-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    z-index: 9999 !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: normal;
+    flex-direction: column-reverse;
+    row-gap: 5px;
+    overflow: hidden;
+}
+
+notification {
+    border-radius: 5px;
+    background: #fff;
+    padding: 5px 25px 5px 5px;
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    position: relative;
+}
+
+notification.active {
+    transform: translateX(0%);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+}
+
+notification notification-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    opacity: 0.7;
+    color: #fff;
+}
+
+notification notification-close:hover {
+    opacity: 1;
+}
+
+notification notification-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+notification {
+    background: #3d576d;
+}
+
+notification-content {
+    display: flex;
+    gap: 5px;
+    padding: 3px;
+}
+
+notification-content notification-message {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 160px;
+    max-width: 160px;
+}
+
+notification-content notification-message span {
+    font-size: 11px;
+    font-weight: 400;
+    color: #fff;
+}
+
+notification-content notification-message span.headline {
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    height: 16px;
+    line-height: 16px;
+}
+
+notification notification-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    min-width: 16px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
+}
+
+notification.notification-error::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #ffdddd !important;
+}
+
+notification.notification-info:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #ddffff !important;
+}
+
+notification.notification-success:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #ddffdd !important;
+}
+
+notification.notification-warning:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #ffffcc !important;
+}
+
+notification.notification-error notification-sign {
+    background-color: #830F07 !important;
+}
+
+notification.notification-info notification-sign {
+    background-color: #064374 !important;
+}
+
+notification.notification-success notification-sign {
+    background-color: #214A22 !important;
+}
+
+notification.notification-warning notification-sign {
+    background-color: #ffeb3b !important;
+    color: #000;
+}
+
+notification notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+notification notification-progress:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #647ab7;
+}
+
+notification notification-progress.active:before {
+    animation: notification-progress-animation 5s linear forwards;
+}
+
+@keyframes notification-progress-animation {
+    100% {
+        right: 100%;
+    }
+}
+
+/* notification box end */
+
+/* input radio selection start */
+
+.shipyardSelection .radioShipyardSelection {
+    -webkit-appearance: none;
+    /* remove default */
+    display: block;
+    margin: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: hsla(0,0%,100%,.15) 0 1px 1px, inset hsl(226.47deg 32.08% 64.28% / 50%) 0 0 0 1px;
+    background-color: hsla(0,0%,0%,.2);
+    background-image: -webkit-radial-gradient( hsla(200,100%,90%,1) 0%, hsla(200,100%,70%,1) 15%, hsla(200,100%,60%,.3) 28%, hsla(200,100%,30%,0) 70% );
+    background-repeat: no-repeat;
+    -webkit-transition: background-position .15s cubic-bezier(.8, 0, 1, 1),
+    -webkit-transform .25s cubic-bezier(.8, 0, 1, 1);
+    outline: none;
+}
+
+.shipyardSelection .radioShipyardSelection:checked {
+    -webkit-transition: background-position .2s .15s cubic-bezier(0, 0, .2, 1),
+    -webkit-transform .25s cubic-bezier(0, 0, .2, 1);
+}
+
+.shipyardSelection .radioShipyardSelection:active {
+    -webkit-transform: scale(1.5);
+    -webkit-transition: -webkit-transform .1s cubic-bezier(0, 0, .2, 1);
+}
+
+.shipyardSelection input,
+.shipyardSelection input:active {
+    background-position: 0 24px;
+}
+
+.shipyardSelection input:checked {
+    background-position: 0 0;
+}
+
+.shipyardSelection input:checked ~ input,
+.shipyardSelection input:checked ~ input:active {
+    background-position: 0 -24px;
+}
+
+.shipyardSelection {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 20px 150px;
+    grid-row: auto;
+    grid-column-gap: 5px;
+    grid-row-gap: 2px;
+    align-items: center;
+}
+
+.shipyardSelection label {
+    cursor: pointer;
+    color: #848484 !important;
+}
+
+/* input radio selection end */
+
+/* **
+    General section */
+
+*[sq20] {
+    width: 20px !important;
+    height: 20px !important;
+    --var-width: 20 !important;
+    --var-height: 20 !important;
+}
+
+*[sq22] {
+    width: 22px !important;
+    height: 22px !important;
+    --var-width: 22 !important;
+    --var-height: 22 !important;
+}
+
+*[sq28] {
+    width: 28px !important;
+    height: 28px !important;
+    --var-width: 28 !important;
+    --var-height: 28 !important;
+}
+
+*[sq30] {
+    width: 30px !important;
+    height: 30px !important;
+    --var-width: 30 !important;
+    --var-height: 30 !important;
+}
+
+*[sq40] {
+    width: 40px !important;
+    height: 40px !important;
+    --var-width: 40 !important;
+    --var-height: 40 !important;
+}
+
+*[sq50] {
+    width: 50px !important;
+    height: 50px !important;
+    --var-width: 50 !important;
+    --var-height: 50 !important;
+}
+
+*[sq100] {
+    width: 100px !important;
+    height: 100px !important;
+    --var-width: 100 !important;
+    --var-height: 100 !important;
+}
+
+*[sq200] {
+    width: 200px !important;
+    height: 200px !important;
+    --var-width: 200 !important;
+    --var-height: 200 !important;
+}
+
+*[w100] {
+    width: 100px !important;
+    --var-width: 100 !important;
+}
+
+*[w150] {
+    width: 150px !important;
+    --var-width: 150 !important;
+}
+
+*[w200] {
+    width: 200px !important;
+    --var-width: 200 !important;
+}
+
+*[h16] {
+    height: 16px !important;
+    --var-height: 16 !important;
+}
+
+*[h18] {
+    height: 18px !important;
+    --var-height: 18 !important;
+}
+
+*[h20] {
+    height: 20px !important;
+    --var-height: 20 !important;
+}
+
+*[h22] {
+    height: 22px !important;
+    --var-height: 22 !important;
+}
+
+#defense header {
+    position: relative;
+    width: 654px;
+    height: 250px;
+    margin: 0 auto 8px;
+    background: url("/img/icons/90f5ba1a698a8c5a6155717f3072df.jpg");
+}
+
+#defense header::after {
+    position: absolute;
+    left: -8px;
+    bottom: -2px;
+    width: 670px;
+    height: 39px;
+    background: url("/img/icons/e7a3f8489bd4c9c45d14851020c656.gif") bottom left no-repeat, url("/img/icons/7c3b7bb7038a638e9c122542398514.gif") bottom right no-repeat ;
+    content: "";
+}
+
+#defense header h2 {
+    position: absolute;
+    left: 144px;
+    top: 7px;
+    font: bold 18px/22px Verdana,Arial,Helvetica,sans-serif;
+    color: #fff;
+}
+
+#defense #technologies {
+    position: relative;
+    box-sizing: border-box;
+    width: 654px;
+    border: 2px solid #000;
+    margin: 0 auto 7px;
+    padding: 0 5px;
+    background: #0d1014;
+}
+
+#defense #technologies::before,
+#defense #technologies::after {
+    pointer-events: none;
+}
+
+#defense #technologies::before {
+    position: absolute;
+    left: -9px;
+    top: -3px;
+    width: 668px;
+    height: 28px;
+    background: url("/img/icons/f333e15eb738b8ec692340f507e1ae.png") bottom left no-repeat, url("/img/icons/66551209db14e23b3001901b996cc6.png") bottom right no-repeat;
+    content: "";
+}
+
+#defense #technologies::after {
+    position: absolute;
+    left: -9px;
+    bottom: -4px;
+    width: 668px;
+    height: 50px;
+    background: url("/img/icons/0330abcdca0d125d35a0ebace4b584.png") bottom left no-repeat, url("/img/icons/8003a40825bc96919c5fec01b018b8.png") bottom right no-repeat;
+    content: "";
+}
+
+#defense #technologies h3 {
+    position: relative;
+    width: 100%;
+    margin: -2px 0 5px;
+    background: url("/img/icons/a4e7913209228ebaf2297429aeb87b.png");
+    color: #6f9fc8;
+    font: bold 12px/27px Verdana,Arial,Helvetica,sans-serif;
+    text-align: center;
+}
+
+#defense #technologies h3::before,
+#defense #technologies h3::after {
+    position: absolute;
+    top: 0;
+    width: 26px;
+    height: 27px;
+    content: "";
+}
+
+#defense #technologies h3::before {
+    left: -5px;
+    background: url("/img/icons/127bd495b9325216af08a588ecc540.png");
+}
+
+#defense #technologies h3::after {
+    right: -5px;
+    background: url("/img/icons/80db96934a5b82ce002f839cd85a44.png");
+}
+
+#defense #technologies .icons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+#defense #technologies .icons::after {
+    display: inline-block;
+    content: "";
+    width: 208px;
+}
+
+.emoji {
+    background: url("/img/icons/5a565a8596ded258f57ed2e1c66027.png");
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin: 0 4px 0 0;
+}
+
+.emoji.deactivated {
+    background-position: -280px -360px;
+}
+
+.emoji.activated {
+    background-position: -300px -360px;
+}
+
+.emoji.smile {
+    background-position: -420px -380px;
+}
+
+.emoji.lol {
+    background-position: -320px -260px;
+}
+
+.emoji.angry {
+    background-position: -540px -140px;
+}
+
+.emoji.sad {
+    background-position: -320px -240px;
+}
+
+.emoji.sleep {
+    background-position: 0 -320px;
+}
+
+.emoji.sos {
+    background-position: -40px 0;
+}
+
+.emoji.cool {
+    background-position: -320px 0;
+}
+
+.emoji.moon {
+    background-position: 0 -80px;
+}
+
+.emoji.kiss {
+    background-position: -540px -180px;
+}
+
+.emoji.coffee {
+    background-position: -420px -40px;
+}
+
+.emoji.cry {
+    background-position: -540px -40px;
+}
+
+.emoji.angel {
+    background-position: -420px -220px;
+}
+
+.emoji.skull {
+    background-position: -440px -160px;
+}
+
+.emoji.mad {
+    background-position: -320px -160px;
+}
+
+.emoji.eyes {
+    background-position: -540px -200px;
+}
+
+.emoji.pray {
+    background-position: -540px -280px;
+}
+
+.emoji.alarm {
+    background-position: -100px -340px;
+}
+
+.emoji.thumbup {
+    background-position: -160px -380px;
+}
+
+.emoji.thumbdown {
+    background-position: -540px -360px;
+}
+
+.emoji.poo {
+    background-position: -40px -420px;
+}
+
+.emoji.present {
+    background-position: -400px -420px;
+}
+
+.emoji.rocket {
+    background-position: -300px -420px;
+}
+
+.emoji.ghost {
+    background-position: -440px -140px;
+}
+
+.emoji.win {
+    background-position: -320px -420px;
+}
+
+.emoji.sheep {
+    background-position: -140px -180px;
+}
+
+.emoji.warningsign {
+    background-position: -500px -220px;
+}
+
+.emoji.leader {
+    background-position: -320px -420px;
+}
+
+#empireComponent {
+    background-color: #000000;
+    background-image: url("/img/icons/d07c90d96bbc823d6d53953a94aacb.jpg");
+    background-position: 0 -100px;
+    background-repeat: no-repeat;
+    color: #f1f1f1;
+    font: 100 11px Verdana, Arial, SunSans-Regular, Sans-Serif;
+    /* height:101%; */
+    height: 100%;
+}
+
+#empireComponent #mainContent {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#empireComponent #empireTab {
+    color: #f1f1f1;
+    height: 35px;
+    line-height: 35px;
+}
+
+#empireComponent #mainWrapper {
+    margin: 0 auto;
+    padding: 30px 0 50px;
+    min-width: 840px;
+    font-size: 11px;
+}
+
+#empireComponent #loading {
+    margin-top: -50px;
+}
+
+#empireComponent .header {
+    float: left;
+    width: 180px;
+    margin: 0;
+    padding: 15px 0 0 0;
+    color: #ffffff;
+}
+
+#empireComponent .planetWrapper {
+    padding: 0;
+    margin: 0;
+}
+
+#empireComponent .planet {
+    float: left;
+    margin: 0;
+    width: 165px;
+}
+
+#empireComponent .move {
+    cursor: move;
+}
+
+#empireComponent .clearfloat {
+    /* this class should be placed on a div or break element
+    and should be the final element before the close of
+    a container that should fully contain a float */
+    clear: both;
+    height: 0;
+    font-size: 1px;
+    line-height: 0;
+}
+
+#empireComponent .textCenter {
+    text-align: center;
+}
+
+#empireComponent .textLeft {
+    text-align: left;
+}
+
+#empireComponent .textRight {
+    text-align: right;
+}
+
+#empireComponent .planetname {
+    color: #A26D00;
+    font-size: 11px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 145px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#empireComponent .planetImg {
+    margin: 4px auto 0;
+    width: 156px;
+    overflow: hidden;
+}
+
+#empireComponent .planetData {
+    padding: 0 5px;
+    line-height: 26px;
+    height: 77px;
+    color: #848484;
+    position: relative;
+}
+
+#empireComponent .planetData div {
+    height: 24px;
+    padding-left: 4px;
+}
+
+#empireComponent .no-touch .planetData:hover {
+    cursor: move;
+}
+
+#empireComponent .planetData a:link {
+    color: #848484;
+    text-decoration: none;
+}
+
+#empireComponent .planetDataTop li {
+    float: left;
+    width: 70px;
+}
+
+#empireComponent .planetDataBottom li {
+    width: 140px;
+    float: left;
+}
+
+#empireComponent .neutral {
+    color: #FFFFFF;
+}
+
+#empireComponent .firstCat,
+#empireComponent h3 {
+    text-align: left;
+}
+
+#empireComponent h2 {
+    font-size: 18px;
+    font-weight: 700;
+    padding-left: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#empireComponent .header h3 {
+    background: url("/img/icons/48f9f2b022ed5310e29c6d138c04dd.gif") no-repeat;
+    color: #576472;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    height: 28px;
+    line-height: 26px;
+    overflow: hidden;
+    width: 180px;
+    cursor: pointer;
+}
+
+#empireComponent h3.open {
+    background-position: -88px -83px;
+}
+
+#empireComponent h3.openhover {
+    background-position: -88px -111px;
+    color: #6F9FC8;
+}
+
+#empireComponent h3.close {
+    background-position: -88px -27px;
+}
+
+#empireComponent h3.closehover {
+    background-position: -88px -55px;
+    color: #6F9FC8;
+}
+
+#empireComponent h3 span {
+    padding-left: 40px;
+}
+
+#empireComponent .secondCat {
+    width: 172px;
+    margin-left: 5px;
+}
+
+#empireComponent .catbox-end,
+#empireComponent .box-end {
+    border-bottom: 1px solid #000;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-radius-bottomright: 10px;
+    -webkit-border-radius-bottomleft: 10px;
+}
+
+#empireComponent .secondCat li.catbox-end {
+    height: 24px;
+}
+
+#empireComponent .secondCat li {
+    background: #0d1014;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    color: #fff;
+    display: block;
+    height: 23px;
+    line-height: 23px;
+    overflow: hidden;
+    text-align: left;
+    width: 170px;
+}
+
+#empireComponent .secondCat li span {
+    padding-left: 15px;
+}
+
+#empireComponent div.values {
+    text-align: center;
+    margin: 0 auto 1px;
+    width: 158px;
+}
+
+#empireComponent div.values div.even,
+#empireComponent div.values div.odd {
+    background: #0d1014 url("/img/icons/93c3e0cb04b4dd9e0ed5c331690c81.gif") center no-repeat;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    height: 23px;
+    line-height: 23px;
+    overflow: hidden;
+}
+
+#empireComponent div.values div.odd {
+    background: #0d1014 none;
+}
+
+#empireComponent div.values .box-end {
+    height: 22px;
+}
+
+#empireComponent div.row {
+    background: url("/img/icons/f5cbcd1ce792c000c5f40dcf657b33.gif") center no-repeat;
+    height: 28px;
+    margin: 0 auto;
+    width: 164px;
+}
+
+#empireComponent .planetHead {
+    background: url("/img/icons/2a79578123dfab859b1440d465bf6b.gif") 0 0 no-repeat;
+    width: 158px;
+    margin: 0 auto;
+    margin-bottom: 1px;
+}
+
+#empireComponent a.save {
+    background: url("/img/icons/48f9f2b022ed5310e29c6d138c04dd.gif") 0 0 no-repeat;
+    border: 0 none;
+    color: #0c0c0c;
+    cursor: pointer;
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    height: 27px;
+    line-height: 27px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    width: 153px;
+}
+
+#empireComponent div.adjustable {
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+#empireComponent .no-touch a.save:hover {
+    color: #fff;
+}
+
+#empireComponent .values a.save {
+    background: url("/img/icons/48f9f2b022ed5310e29c6d138c04dd.gif") 0 -27px no-repeat;
+    width: 88px;
+}
+
+#empireComponent .secondCat li.set-end {
+    padding-top: 6px;
+    height: 40px;
+}
+
+#empireComponent .planet .values .set-end {
+    height: 40px;
+    padding-top: 5px;
+}
+
+#empireComponent div.values div.set-element {
+    line-height: 18px;
+    padding: 5px 5px 5px 0;
+}
+
+#empireComponent .set-element span {
+    float: left;
+    width: 50px;
+}
+
+#empireComponent .overmark {
+    color: #fe0000;
+}
+
+#empireComponent .undermark {
+    color: #00f200;
+}
+
+#empireComponent select:focus {
+    border-color: transparent;
+    outline: 0 none;
+}
+
+#empireComponent .figures {
+    float: left;
+    height: 23px;
+    line-height: 23px;
+    width: 90px;
+    overflow: hidden;
+}
+
+#empireComponent .ddown {
+    float: right;
+    width: 50px;
+    padding-top: 3px;
+}
+
+#empireComponent .planetData a:link,
+#empireComponent .planetData a:visited,
+#empireComponent .no-touch .planetData a:hover,
+#empireComponent .planetData a:active {
+    color: #6f9fC8;
+    text-decoration: none;
+}
+
+#empireComponent .no-touch .planetData a:hover {
+    text-decoration: underline;
+}
+
+#empireComponent div.planetData div.odd {
+    background: #0d1014 url("/img/icons/93c3e0cb04b4dd9e0ed5c331690c81.gif") center no-repeat;
+    height: 24px;
+    line-height: 22px;
+}
+
+#empireComponent #wrapTL {
+    height: 248px;
+}
+
+#empireComponent #tab-left {
+    height: 152px;
+    float: right;
+    margin: 18px -4px 0 0;
+    position: relative;
+    width: 98px;
+}
+
+#empireComponent #tab-left a:link,
+#empireComponent #tab-left a:visited,
+#empireComponent .no-touch #tab-left a:hover,
+#empireComponent #tab-left a:active {
+    cursor: pointer;
+    display: block;
+    height: 76px;
+    width: 98px;
+}
+
+#empireComponent #tab-left a:link span,
+#empireComponent #tab-left a:visited span,
+#empireComponent .no-touch #tab-left a:hover span,
+#empireComponent #tab-left a:active span {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+#empireComponent #tab-left a#planetsTab:link,
+#empireComponent #tab-left a#planetsTab:visited,
+#empireComponent .no-touch #tab-left a#planetsTab:hover,
+#empireComponent #tab-left a#planetsTab:active {
+    background: url("/img/icons/1f090fbf07ac01c46401e1849fbceb.gif") no-repeat 0 -228px;
+}
+
+#empireComponent .no-touch #tab-left a#planetsTab:hover,
+#empireComponent #tab-left a#planetsTab.active {
+    background: url("/img/icons/1f090fbf07ac01c46401e1849fbceb.gif") no-repeat 0 -152px;
+}
+
+#empireComponent #tab-left a#moonsTab:link,
+#empireComponent #tab-left a#moonsTab:visited,
+#empireComponent .no-touch #tab-left a#moonsTab:hover,
+#empireComponent #tab-left a#moonsTab:active {
+    background: url("/img/icons/1f090fbf07ac01c46401e1849fbceb.gif") no-repeat 0 -76px;
+}
+
+#empireComponent .no-touch #tab-left a#moonsTab:hover,
+#empireComponent #tab-left a#moonsTab.active {
+    background: url("/img/icons/1f090fbf07ac01c46401e1849fbceb.gif") no-repeat 0 0;
+}
+
+#empireComponent #tab-left a#moonsTab.nomoons:link,
+#empireComponent #tab-left a#moonsTab.nomoons:visited,
+#empireComponent .no-touch #tab-left a#moonsTab.nomoons:hover,
+#empireComponent #tab-left a#moonsTab.nomoons:active {
+    background: url("/img/icons/1f090fbf07ac01c46401e1849fbceb.gif") no-repeat 0 -76px;
+    cursor: default;
+}
+
+/* Schriftfarbe bei Ausbau etc. */
+
+#empireComponent .values div a.active,
+#empireComponent .values div span.active {
+    color: #FF00FF;
+}
+
+#empireComponent .values div a.loop {
+    color: #EF801F;
+}
+
+#empireComponent .values div span.loop {
+    color: #EF801F;
+}
+
+#empireComponent .values div a.disabled,
+#empireComponent .values div span.disabled {
+    color: #F10000;
+}
+
+#empireComponent .values div {
+    color: #a19491;
+}
+
+#empireComponent .values a:link,
+#empireComponent .values a:visited,
+#empireComponent .no-touch .values a:hover,
+#empireComponent .values a:active {
+    color: #A19491;
+}
+
+#empireComponent .values div a:link,
+#empireComponent .values div a:visited,
+#empireComponent .no-touch .values div a:hover,
+#empireComponent .values div a:active {
+    border: 1px solid transparent;
+    padding: 1px 4px;
+    text-decoration: none;
+    -moz-border-radius: 3px;
+}
+
+#empireComponent .no-touch .values div a:hover {
+    border-color: #A1a491;
+}
+
+#empireComponent .values div img {
+    padding: 0 4px;
+}
+
+#empireComponent .imghover {
+    cursor: help;
+}
+
+#empireComponent .secondCat li.saveWrap span {
+    padding-left: 0;
+}
+
+#empireComponent #planet0 .values div {
+    color: #fff;
+}
+
+#empireComponent .tab-part01 {
+    background: url("/img/icons/ab3159806baaa54a1447a45e570687.gif") no-repeat 0 0;
+    height: 35px;
+    position: absolute;
+    width: 226px;
+    top: 0;
+    left: 0;
+}
+
+#empireComponent .wrapTab {
+    background: url("/img/icons/0721fd07d84834abab94b85b6e7303.gif") repeat-x;
+    margin-left: 184px;
+    height: 35px;
+    position: relative;
+}
+
+#empireComponent .wrapCorner {
+    background: url("/img/icons/ab3159806baaa54a1447a45e570687.gif") no-repeat 0 -35px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 24px;
+    height: 35px;
+}
+
+#empireComponent .reset {
+    position: absolute;
+    left: 50%;
+}
+
+#empireComponent .reset img {
+    vertical-align: middle;
+    padding-right: 5px;
+}
+
+#empireComponent .reset a:link,
+#empireComponent .reset a:visited,
+#empireComponent .no-touch .reset a:hover,
+#empireComponent .reset a:active {
+    color: #fff;
+    font-size: 10px;
+}
+
+#empireComponent .secondCat li.equipment,
+#empireComponent div.values div.equipment {
+    background: #0D1014;
+    border: 1px solid black;
+    height: 187px;
+    text-align: left;
+}
+
+#empireComponent .secondCat li.equipment {
+    height: 188px;
+}
+
+#empireComponent .empireItems>li {
+    height: 190px;
+    overflow-y: auto;
+}
+
+#empireComponent .overview_equipment .anythingSlider {
+    height: 186px;
+    padding: 0 35px;
+}
+
+#empireComponent .empireItems>li>div {
+    float: left;
+    margin: 2px;
+}
+
+#empireComponent .empireItems>li .item_img {
+    margin: auto;
+}
+
+#empireComponent .no-touch .values div .arrow a:hover {
+    border-color: transparent;
+}
+
+#empireComponent .overview_equipment .anythingSlider .arrow a {
+    width: 20px;
+    margin: -67px 0 0;
+}
+
+/* middleSliderArrows: Koordinaten und Groesse der mittelgrossen Pfeile aus dem Shop-Sprite */
+
+#empireComponent .middleSliderArrows .anythingSlider .arrow a {
+    height: 130px;
+    width: 22px;
+}
+
+#empireComponent .middleSliderArrows div.anythingSlider .back.disabled a,
+#empireComponent .no-touch .middleSliderArrows div.anythingSlider .back.disabled a:hover,
+#empireComponent .middleSliderArrows div.anythingSlider .back.disabled a.hover {
+    background-position: -53px -310px;
+}
+
+#empireComponent .middleSliderArrows div.anythingSlider .back a {
+    background-position: -23px -310px;
+}
+
+#empireComponent .no-touch .middleSliderArrows div.anythingSlider .back a:hover,
+#empireComponent .middleSliderArrows div.anythingSlider .back a.hover {
+    background-position: 7px -310px;
+}
+
+#empireComponent .middleSliderArrows div.anythingSlider .forward.disabled a,
+#empireComponent .no-touch .middleSliderArrows div.anythingSlider .forward.disabled a:hover,
+#empireComponent .middleSliderArrows div.anythingSlider .forward.disabled a.hover {
+    background-position: -88px -310px;
+}
+
+#empireComponent .middleSliderArrows div.anythingSlider .forward a {
+    background-position: -118px -310px;
+}
+
+#empireComponent .no-touch .middleSliderArrows div.anythingSlider .forward a:hover,
+#empireComponent .middleSliderArrows div.anythingSlider .forward a.hover {
+    background-position: -148px -310px;
+}
+
+#empireComponent .hovered {
+    background: #212a33 !important;
+}
+
+#empire div#resources {
+    display: block;
+}
+
+.errorBox {
+    position: relative;
+    z-index: 999;
+}
+
+/* ************************* Eventlist ************************************** */
+
+.eventFleet td,
+.allianceAttack td {
+    font-size: 11px;
+    padding: 1px 0;
+}
+
+.detailsFleet {
+    width: 55px;
+}
+
+#eventContent {
+    background: transparent url("/img/icons/4f73643e86a952be4aed7fdd61805a.gif") 5px 0px  repeat-y;
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px 0 10px;
+    text-align: center;
+    border-spacing: 0;
+}
+
+#eventContent .originFleet span,
+#eventContent .destFleet span {
+    overflow: hidden;
+    width: 110px;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#eventFooter {
+    background: transparent url("/img/icons/aa3e8edec0a2681915b3c9c6795e6f.gif") 2px 0px no-repeat;
+    height: 17px;
+}
+
+#eventContent .odd,
+#eventContent .part-even {
+    background-color: #13181d;
+}
+
+.missionFleet {
+    text-align: left;
+}
+
+#eventHeader a.close_details {
+    right: 5px;
+    position: absolute;
+    margin: 7px 30px 7px 7px;
+}
+
+#eventHeader a.close_details:link,
+#eventHeader a.close_details:visited,
+.no-touch #eventHeader a.close_details:hover,
+#eventHeader a.close_details:active {
+    background: transparent url("/img/icons/f5f81e8302aaad56c958c033677fb8.png") no-repeat scroll -207px 0px;
+}
+
+.no-touch #eventHeader a.close_details:hover {
+    background: transparent url("/img/icons/f5f81e8302aaad56c958c033677fb8.png") no-repeat scroll -207px -17px;
+}
+
+.eventFleet .missionFleet img {
+    vertical-align: middle;
+}
+
+.eventFleet a.toggleInfos {
+    cursor: pointer;
+    line-height: normal;
+}
+
+.icon_movement {
+    background: url("/img/icons/f9cb590cdf265f499b0e2e5d91fc75.gif") no-repeat;
+}
+
+.icon_movement_reserve {
+    background: url("/img/icons/014a5d88b102d4b47ab5146d4807c6.gif") no-repeat;
+}
+
+.icon_movement,
+.icon_movement_reserve {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.icon_movement_reserve span,
+.icon_movement span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.eventFleet a.toggleInfos {
+    cursor: pointer;
+    line-height: normal;
+}
+
+.sendMail {
+    width: 17px;
+}
+
+.sendProbe {
+    width: 20px;
+}
+
+#eventContent .reversal {
+    cursor: pointer;
+}
+
+.countDown,
+.arrivalTime {
+    white-space: nowrap;
+}
+
+table.fleetinfo td,
+table.fleetinfo th {
+    text-align: left;
+}
+
+table.fleetinfo th {
+    font-weight: 700;
+    color: #848484;
+}
+
+table.fleetinfo td.value {
+    padding-left: 5px;
+    text-align: right;
+}
+
+.exodus h2 {
+    color: #6F9FC8;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.exodus h3 {
+    color: #6F9FC8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.exodus .side_navigation a {
+    font-weight: 700;
+    text-decoration: none;
+    display: block;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.exodus .side_navigation a.active {
+    color: #ffffff;
+}
+
+.exodus a.historylink {
+    font-weight: 700;
+    text-decoration: underline;
+    display: block;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.exodus .c-left,
+.marketplace .c-right {
+    top: 213px;
+}
+
+.exodus header {
+    position: relative;
+    width: 654px;
+    height: 250px;
+    background: url("/img/icons/505a4e2bfa28586bc525a891e5b043.jpg");
+    margin: 0 auto;
+}
+
+.exodus header h2 {
+    position: absolute;
+    left: 144px;
+    top: 7px;
+    font: bold 18px/22px Verdana,Arial,Helvetica,sans-serif;
+    color: #fff;
+}
+
+.exodus .wrapper .header {
+    position: relative;
+    height: 28px;
+    background-image: url("/img/icons/10e31cd5234445e4084558ea3506ea.gif");
+    background-repeat: no-repeat;
+}
+
+.exodus .wrapper .content {
+    position: relative;
+    background: url("/img/icons/db530b4ddcbe680361a6f837ce0dd7.gif") repeat-y;
+    min-height: 150px;
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+}
+
+.exodus .wrapper .content .filter-wrapper {
+    margin-top: -10px;
+}
+
+.exodus .wrapper .content .content-wrapper {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.exodus .wrapper .footer {
+    position: relative;
+    background: url("/img/icons/997fd607a76c0b713e24cb7f2d41f5.png") no-repeat;
+    height: 50px;
+    width: 667px;
+    z-index: 1;
+}
+
+.exodus #restrictions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.exodus .break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.exodus .spacer {
+    width: 100px;
+}
+
+.exodus .singleDesc {
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.66);
+    margin: 1px;
+    align-items: center;
+    padding: 3px;
+    line-height: 20px;
+}
+
+.exodus .restrictionOk,
+.exodus .restrictionNack {
+    background: url("/img/icons/8a1f887e234e345bf032302d5d81fe.png") no-repeat;
+    height: 20px;
+    width: 20px;
+    z-index: 1;
+}
+
+.exodus .restrictionOk {
+    background-position-x: 0px;
+}
+
+.exodus .restrictionNack {
+    background-position-x: -20px;
+}
+
+.exodus .content .inner-box {
+    border-radius: 2px;
+    background: linear-gradient(
+            to bottom,
+            rgba(19, 28, 38, 1) 0%,
+            rgba(30, 43, 56, 1) 50%,
+            rgba(30, 43, 57, 1) 51%,
+            rgba(30, 43, 57, 1) 100%
+    ) 0 28px;
+    border: 1px solid #1d2228;
+    border-top-color: #2e363e;
+    border-bottom-color: #000;
+    margin: 5px;
+}
+
+.exodus .content h2 {
+    padding: 0 11px 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(20,30,38,1) 0%,
+            rgba(20,30,38,1) 50%,
+            rgba(16,24,31,1) 51%,
+            rgba(16,24,31,1) 100%
+    );
+}
+
+.exodus .content .clearfix {
+    display: block;
+}
+
+.exodus .content h2 {
+    color: #619fc8;
+    font-size: 15px;
+    height: 27px;
+    line-height: 27px;
+    margin: 0 0 5px;
+    text-shadow: -1px -1px 0 #000;
+}
+
+.exodus .content p {
+    color: #848484;
+    font-size: 12px;
+    line-height: normal;
+    padding: 0 11px 0;
+    margin: 15px 0;
+}
+
+.exodus #incentiveContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0 11px;
+    margin-bottom: 5px;
+}
+
+.exodus .incentiveItem,
+.exodus .incentiveOfficer {
+    border-radius: 5px;
+    border: 1px solid #767b84;
+    width: 32px;
+    height: 32px;
+    margin-right: 3px;
+}
+
+.exodus .incentiveOfficer {
+    background-repeat: no-repeat;
+    background-image: url("/img/icons/f593aa158c734df9e6223f00721981.jpg");
+}
+
+.officer32.admiral {
+    background-position: -32px 0;
+}
+
+.officer32.engineer {
+    background-position: -64px 0;
+}
+
+.officer32.geologe {
+    background-position: -96px 0;
+}
+
+.exodus .commander {
+    background-position: 0 0;
+}
+
+.exodus .admiral {
+    background-position: -32px 0;
+}
+
+.exodus .engineer {
+    background-position: -64px 0;
+}
+
+.exodus .geologist {
+    background-position: -96px 0;
+}
+
+.exodus .technocrat {
+    background-position: -128px 0;
+}
+
+#exodus-indicator {
+    position: relative;
+    width: 138px;
+    height: 63px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("/img/icons/475a1ccd7c3d81e9bb757f1548557a.png");
+    cursor: pointer;
+}
+
+#exodus-indicator div {
+    position: absolute;
+    left: 47px;
+    top: 21px;
+    width: 35px;
+    height: 20px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+#exodus-indicator-acknowledged {
+    background-image: url("/img/icons/95a15ec4094e2f5ba1f12349d302eb.png");
+}
+
+#exodus-indicator-waiting {
+    background-image: url("/img/icons/a64bb7a1b9620875f071a00c08b64e.gif");
+}
+
+#exodus-indicator-processed {
+    position: relative;
+    width: 138px;
+    height: 63px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("/img/icons/635528fe5c717cda8a97c8f16dd36f.png");
+}
+
+#exodus-overlay {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+#exodus-dialog {
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    width: 793px;
+    margin-left: -398px;
+    background-color: #0d1014;
+    border: 1px solid #000000;
+    text-align: left;
+    -moz-box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#exodus-close {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    cursor: pointer;
+}
+
+#exodus-header {
+    height: 35px;
+    overflow: hidden;
+    margin: 2px 4px 0 2px;
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -35px repeat-x;
+}
+
+#exodus-header-content {
+    position: relative;
+    display: inline-block;
+    height: 33px;
+    overflow: hidden;
+    padding: 6px 30px 0 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -70px repeat-x;
+    text-shadow: #000000 -1px -1px 2px;
+}
+
+#exodus-header-content:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 35px;
+    overflow: hidden;
+    content: '';
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -105px no-repeat;
+}
+
+#exodus-header-content:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 35px;
+    overflow: hidden;
+    content: '';
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 0 no-repeat;
+}
+
+#exodus-content {
+    margin: 2px 4px 4px 4px;
+    padding: 5px 7px;
+    background-color: #14181d;
+    border-top: 2px solid #16202a;
+}
+
+#exodus-top-content {
+    padding: 2px 5px 5px 5px;
+    margin-bottom: 10px;
+}
+
+#exodus-tab-content,
+#exodus-ally-content,
+#exodus-rules-content,
+#exodus-buddy-content {
+    padding: 5px;
+    border: 1px solid #000000;
+    background-color: #0d1014;
+}
+
+.exodus .og-table {
+    padding: 0 11px 0;
+    margin: 15px 0;
+}
+
+.exodus .serverselect h2 {
+    color: #6F9FC8;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 3px 0;
+    padding: 0;
+    background: none;
+    height: 15px;
+    line-height: 15px;
+}
+
+.exodus .serverselect .og-table {
+    margin: 8px 0;
+}
+
+.exodus .serverselect select,
+.exodus .serverselect .og-input,
+.exodus .serverselect .og-button {
+    margin-top: 3px;
+}
+
+.exodus .serverselect .og-button {
+    height: 24px;
+    line-height: 24px;
+}
+
+.exodus .serverselect #noServer {
+    display: block;
+    position: relative;
+    font-size: 11px;
+    line-height: 20px;
+    color: #ffffff;
+    margin-top: 4px;
+}
+
+.exodus .disabled {
+    pointer-events: none;
+    cursor: not-allowed !important;
+    background-color: #333333 !important;
+    background: none !important;
+}
+
+.exodus .serverselect {
+    background: none !important;
+}
+
+.exodus .og-loading > .og-loading-overlay > .og-loading-indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+    background: url("/img/icons/6e0f46d7504242302bc8055ad9c8c2.gif");
+    background-size: 100%;
+}
+
+#expeditionFleetTemplates.list {
+    background: rgba(0, 0, 0, 0.6);
+    background: transparent url(/img/icons/6ed70123ac0cf419b30c31d99ae208.png) repeat;
+    margin: 0 0 10px 0;
+}
+
+#expeditionFleetTemplates td {
+    padding: 2px 0;
+}
+
+#expeditionFleetTemplates td {
+    height: 35px;
+}
+
+#expeditionFleetTemplates a {
+    text-decoration: inherit;
+}
+
+#expeditionFleetTemplatesEdit {
+    width: 335px !important;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+#expeditionFleetTemplatesEdit * {
+    box-sizing: border-box;
+}
+
+#expeditionFleetTemplatesEdit form {
+    color: #6F9FC8;
+    overflow: hidden;
+    background: transparent url("/img/icons/6ed70123ac0cf419b30c31d99ae208.png") repeat;
+    background: rgba(0,0,0,0.6);
+    padding: 5px;
+}
+
+#expeditionFleetTemplatesEdit #expeditionFleetTemplateName {
+    width: 287px;
+    height: 25px;
+}
+
+#expeditionFleetTemplatesEdit ship-section {
+    gap: 5px;
+    margin-top: 10px;
+}
+
+#expeditionFleetTemplatesEdit .expeditionFleetTemplateActionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#expeditionFleetTemplatesEdit .expeditionFleetTemplateActionsContainer gradient-button {
+    height: 30px;
+    width: 150px;
+}
+
+#expeditionFleetTemplateHoldingTime,
+#expeditionFleetTemplateSpeed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+#expeditionFleetTemplateSpeed {
+    flex-direction: column;
+}
+
+#expeditionFleetTemplateHoldingTimeSelect,
+#expeditionFleetTemplateSpeedSelect {
+    width: 60px;
+}
+
+#expeditionFleetTemplateSpeedWarning {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+    font-size: 9px;
+    display: none;
+}
+
+#facilities header {
+    position: relative;
+    width: 654px;
+    height: 300px;
+    margin: 0 auto 8px;
+}
+
+#facilities header::after {
+    position: absolute;
+    left: -8px;
+    bottom: -2px;
+    width: 670px;
+    height: 39px;
+    background: url("/img/icons/e7a3f8489bd4c9c45d14851020c656.gif") bottom left no-repeat, url("/img/icons/7c3b7bb7038a638e9c122542398514.gif") bottom right no-repeat ;
+    content: "";
+}
+
+#facilities header h2 {
+    position: absolute;
+    left: 144px;
+    top: 7px;
+    font: bold 18px/22px Verdana,Arial,Helvetica,sans-serif;
+    color: #fff;
+}
+
+#facilities .exhausted,
+#facilities .exhausted a {
+    color: #d43635;
+    display: inline;
+}
+
+#facilities #technologies {
+    position: relative;
+    box-sizing: border-box;
+    width: 654px;
+    border: 2px solid #000;
+    margin: 0 auto 7px;
+    padding: 0 5px;
+    background: #0d1014;
+}
+
+#facilities #technologies::before,
+#facilities #technologies::after {
+    pointer-events: none;
+}
+
+#facilities #technologies::before {
+    position: absolute;
+    left: -9px;
+    top: -3px;
+    width: 668px;
+    height: 28px;
+    background: url("/img/icons/f333e15eb738b8ec692340f507e1ae.png") bottom left no-repeat, url("/img/icons/66551209db14e23b3001901b996cc6.png") bottom right no-repeat;
+    content: "";
+}
+
+#facilities #technologies::after {
+    position: absolute;
+    left: -9px;
+    bottom: -4px;
+    width: 668px;
+    height: 50px;
+    background: url("/img/icons/0330abcdca0d125d35a0ebace4b584.png") bottom left no-repeat, url("/img/icons/8003a40825bc96919c5fec01b018b8.png") bottom right no-repeat;
+    content: "";
+}
+
+#facilities #technologies h3 {
+    position: relative;
+    width: 100%;
+    margin: -2px 0 5px;
+    background: url("/img/icons/a4e7913209228ebaf2297429aeb87b.png");
+    color: #6f9fc8;
+    font: bold 12px/27px Verdana,Arial,Helvetica,sans-serif;
+    text-align: center;
+}
+
+#facilities #technologies h3::before,
+#facilities #technologies h3::after {
+    position: absolute;
+    top: 0;
+    width: 26px;
+    height: 27px;
+    content: "";
+}
+
+#facilities #technologies h3::before {
+    left: -5px;
+    background: url("/img/icons/127bd495b9325216af08a588ecc540.png");
+}
+
+#facilities #technologies h3::after {
+    right: -5px;
+    background: url("/img/icons/80db96934a5b82ce002f839cd85a44.png");
+}

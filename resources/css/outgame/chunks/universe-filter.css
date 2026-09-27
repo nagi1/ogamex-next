@@ -1,0 +1,295 @@
+
+
+.characteristic {
+    position: relative;
+    min-width: 52px;
+    height: 52px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-left: 55px;
+    background-repeat: no-repeat;
+}
+
+.characteristic strong {
+    color: goldenrod;
+    font-size: medium;
+}
+
+.characteristic.dm {
+    background-image: url('/img/outgame/9e5b03f98d1c4c8e14e5845a2a3f68.png');
+}
+
+.characteristic.aks_on {
+    background-image: url('/img/outgame/bba367fbf3e7613a914f57d22e5abd.png');
+}
+
+.characteristic.aks_off {
+    background-image: url('/img/outgame/ff766c2b1edd3de7e227b82286aaa7.png');
+}
+
+.characteristic.universe_small {
+    background-image: url('/img/outgame/32fc0510e42b8f2e19080ce234e559.png');
+}
+
+.characteristic.universe_big {
+    background-image: url('/img/outgame/8dc157e3f067cd311f7f6639f4ff9d.png');
+}
+
+.characteristic.planet_fields {
+    background-image: url('/img/outgame/1995d3be4ec69ecd07333ce75ceb51.png');
+}
+
+.characteristic.defence_in_debris_field {
+    background-image: url('/img/outgame/312addcee32380091e0e5a75682993.png');
+}
+
+.characteristic.ships_in_debris_field {
+    background-image: url('/img/outgame/cc4a9fba32f0aded9d723f7ae433fa.png');
+}
+
+.characteristic.wreck_field {
+    background-image: url('/img/outgame/defa50481c475d8d94bf69a57cfa5b.png');
+}
+
+.characteristic.speed {
+    background-image: url('/img/outgame/f246b628b81dce4d88ee9dc1c92848.png');
+}
+
+.characteristic.speed_economy {
+    background-image: url('/img/outgame/1ad7545bd6e855e8aee5cc3a7542c0.png');
+}
+
+.characteristic.speed_fleet {
+    background-image: url('/img/outgame/71455eedf7de8b8f603e7ecabaccb4.png');
+}
+
+.characteristic.speed_economy_fleet {
+    background-image: url('/img/outgame/95ac54a185eb8c32e9b016e0ba1b5d.png');
+}
+
+.characteristic.speed_fleet_economy {
+    background-image: url('/img/outgame/1d606f9aec8d4698157579b06537f5.png');
+}
+
+.tabContent .filter {
+    width: 710px;
+    background: linear-gradient(rgba(255,165,0,0.7),rgba(255,140,0,0.7),rgba(255,165,0,0.7));
+    border-radius: 3px;
+}
+
+.tabContent .filter h2 {
+    color: gold;
+    text-shadow: 0 0 1px black;
+}
+
+.tabContent .filter h3 {
+    color: white;
+    text-shadow: 0 0 1px black;
+}
+
+.tabContent li.server {
+    margin: 0 15px 0 0;
+    clear: both;
+    padding: 5px 15px 0;
+    border-radius: 3px;
+}
+
+.tabContent .serverlist {
+    height: 400px;
+    width: 700px;
+    margin: 0 0 0 10px;
+    overflow-y: scroll;
+}
+
+.tabContent .serverlist>li {
+    height: 100px;
+    width: 650px;
+}
+
+.tabContent .serverlist>li:nth-child(even) {
+    background-color: rgba(220,220,220,0.1);
+}
+
+.tabContent .serverlist>li:nth-child(odd) {
+    background-color: rgba(220,220,220,0.1);
+}
+
+.tabContent .characteristic {
+    margin: 0 10px 35px 10px !important;
+    float: left;
+    cursor: help;
+}
+
+.tabContent .inner-box li.characteristic {
+    position: relative;
+    padding: 0;
+}
+
+.tabContent .characteristic span,
+.characteristic .value {
+    position: relative;
+    top: 32px;
+    display: inline-block;
+    height: 16px;
+    width: 44px;
+    margin: 0 4px;
+    color: darkorange;
+    font-weight: bold;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.characteristic .value {
+    position: absolute;
+    top: 32px;
+    left: 0;
+}
+
+.filter_off {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.hidden {
+    display: none;
+}
+
+.filter_settings {
+    position: absolute;
+    width: 60px;
+    left: -3px;
+}
+
+.filter span.filter_min,
+.filter span.filter_max,
+.filter span.filter_range {
+    top: 55px !important;
+    display: inline-block !important;
+    width: 26px !important;
+    margin: 0 !important;
+}
+
+.filter span.filter_range {
+    width: 7px !important;
+}
+
+.tabContent .characteristic .ui-slider {
+    position: relative;
+    top: 63px;
+    text-align: left;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333;
+}
+
+.tabContent .characteristic .ui-slider .ui-slider-horizontal {
+    height: .8em;
+}
+
+.tabContent .characteristic .ui-slider .ui-slider-horizontal .ui-slider-handle {
+    top: -.3em;
+    margin-left: -.6em;
+}
+
+.tabContent .characteristic .ui-slider .ui-slider-handle {
+    position: absolute;
+    top: -7px;
+    z-index: 2;
+    width: .5em;
+    height: 1.2em;
+    margin: 0 0 0 -0.3em;
+    cursor: move;
+}
+
+.tabContent .characteristic .ui-slider .ui-state-default {
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+}
+
+.tabContent .characteristic .ui-slider .ui-corner-all {
+    border-radius: 10px;
+}
+
+.fancybox-slide>* {
+    background-color: inherit;
+}
+
+label[for=server] a {
+    color: darkgoldenrod;
+}
+
+#transition_email_only_login_dialog {
+    display: none;
+}
+
+.ui-dialog {
+    position: relative;
+    margin: 35px 10px 0 0;
+    z-index: 20;
+    background-color: lightyellow;
+    border: 1px solid black;
+    font-weight: bold;
+    opacity: .9;
+    box-shadow: lightyellow 0 0 5px 1px;
+}
+
+.ui-dialog:after,
+.ui-dialog:before {
+    left: 100%;
+    top: 30px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.right.ui-dialog::after {
+    top: 18px;
+    left: -10px;
+    border-color: transparent #666;
+    border-width: 10px 10px 10px 0;
+}
+
+.left.ui-dialog::after {
+    top: 18px;
+    right: -10px;
+    border-color: transparent #666;
+    border-width: 10px 0 10px 10px;
+}
+
+.ui-dialog:after {
+    border-color: rgba(136,183,213,0);
+    border-left-color: lightyellow;
+    border-width: 20px;
+}
+
+.ui-dialog:before {
+    border-color: rgba(194,225,245,0);
+    border-left-color: black;
+    border-width: 21px;
+}
+
+.ui-corner-all {
+    border-radius: 5px;
+}
+
+.ui-corner-top {
+    border-radius: 5px 5px 0 0;
+}
+
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+    display: none;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: 5px 5px 0;
+    background-color: lightgray;
+}
+
+.ui-dialog .ui-dialog-content {
+    padding: 5px;
+}

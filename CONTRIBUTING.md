@@ -117,6 +117,12 @@ During development, you can run the Vite dev server to automatically recompile a
 $ npm run dev
 ```
 
+The legacy in-game and out-game CSS and JS are split into named files with a
+generated manifest, and that split is order-sensitive. Read
+[docs/legacy-asset-tooling.md](docs/legacy-asset-tooling.md) before editing
+anything under `resources/css/*/chunks/`, `resources/js/*/chunks/`, or the legacy
+bundle lists in `vite.config.js`.
+
 ## AI-Assisted Contributions
 
 AI-assisted contributions are welcome at OGameX, and many of us use AI tooling in our own workflow. What matters is the quality of what you submit, not how you wrote it. That said, **AI-assisted contributions are held to the same bar as any other contribution.** In the past we have received PRs that were clearly unreviewed AI output: code that didn't fit the project, broke existing behavior, or showed no understanding of the game mechanics it was trying to implement. These create a heavy burden on reviewers and will be closed without detailed review.

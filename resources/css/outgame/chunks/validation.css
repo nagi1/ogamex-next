@@ -1,0 +1,229 @@
+
+
+.inviteText {
+    position: absolute;
+    top: -52px;
+    left: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+    z-index: 5000;
+    height: 48px;
+    width: 222px;
+}
+
+.inviteText .inviteTextContent {
+    display: table-cell;
+    color: #619fc8;
+    width: 208px;
+    height: 32px;
+    font-family: tahoma;
+    font-size: 13px;
+    font-weight: bold;
+    vertical-align: middle;
+    padding: 5px;
+    background: #0b3f4f url(/img/outgame/55622d4c1d05da88df11a06110eb13.png) repeat-x;
+    border: 2px solid goldenrod;
+    box-shadow: 2px 2px 10px #000;
+    -moz-box-shadow: 2px 2px 10px #000;
+    -webkit-box-shadow: 2px 2px 10px #000;
+}
+
+.inviteText .inviteTextArrow {
+    height: 0;
+    position: absolute;
+    width: 0;
+    left: 95px;
+}
+
+.inviteText .inviteTextArrow.one {
+    border-color: goldenrod transparent;
+    border-style: solid;
+    border-width: 15px 15px 0;
+}
+
+.inviteText .inviteTextArrow.two {
+    border-color: #0d2b35 transparent;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    margin-top: -3px;
+}
+
+.inviteServerBox {
+    border: 2px solid goldenrod !important;
+}
+
+.formError {
+    position: absolute;
+    display: block;
+    text-align: left;
+    z-index: 5000;
+}
+
+#debugMode {
+    background: #000;
+    position: fixed;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    left: 0;
+    overflow: scroll;
+    opacity: .8;
+    display: block;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+    z-index: 100000;
+}
+
+.ajaxSubmit {
+    padding: 20px;
+    background: #55ea55;
+    border: 1px solid #999;
+    display: none;
+}
+
+.formError .formErrorContent {
+    color: red;
+    width: 250px;
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    background: #0b3f4f url(/img/outgame/55622d4c1d05da88df11a06110eb13.png) repeat-x;
+    border: 1px solid #00c1fc;
+    box-shadow: 2px 2px 10px #000;
+    -moz-box-shadow: 2px 2px 10px #000;
+    -webkit-box-shadow: 2px 2px 10px #000;
+    padding: 5px 5px 5px 10px;
+}
+
+.formError .icon {
+    background: url(/img/outgame/8bc74fbd158a617a783d2147cbd0f8.gif) no-repeat scroll 5px 2px;
+    padding: 4px 10px 6px 35px;
+}
+
+.formErrorContent::before {
+    background: url(/img/outgame/8bc74fbd158a617a783d2147cbd0f8.gif) no-repeat scroll 5px 2px;
+    padding-right: 0;
+    content: '';
+    width: 26px;
+    display: inline-block;
+    height: 20px;
+    float: left;
+    left: -10px;
+    position: relative;
+    top: -5px;
+}
+
+.formError::before {
+    height: 15px;
+    left: 1px;
+    position: absolute;
+    top: 5px;
+    width: 15px;
+    z-index: 5001;
+    content: '';
+}
+
+.greenPopup .formErrorContent {
+    width: 230px;
+}
+
+.blackPopup .formErrorContent {
+    background: #393939;
+    color: #02ace0;
+}
+
+.formError .formErrorArrow {
+    background: url(/img/outgame/5fc5c01277c9a15e23f15cdbc1beb1.gif) no-repeat;
+    height: 15px;
+    left: 1px;
+    position: absolute;
+    top: 5px;
+    width: 15px;
+    z-index: 5001;
+}
+
+.formError .formErrorArrowBottom {
+    top: 0;
+    margin: -6px;
+}
+
+.formError .formErrorArrow div {
+    font-size: 0;
+    height: 1px;
+    background: #ee0101;
+    margin: 0 auto;
+    line-height: 0;
+    font-size: 0;
+    display: block;
+}
+
+.formError .formErrorArrowBottom div {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.blackPopup .formErrorArrow div {
+    background: #393939;
+    color: #FFF;
+}
+
+.agbformError {
+    margin-left: 170px;
+}
+
+#subscribeForm #submitWrap .green {
+    color: #0c0;
+}
+
+.invalid-char {
+    height: 15px;
+}
+
+#validChar {
+    color: #af1b03;
+    font-weight: bold;
+}
+
+.valid-icon {
+    background: transparent url(/img/outgame/0c37a522004cccdedb0c90a20fe1c7.gif) no-repeat;
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 0 4px 0 0;
+    width: 16px;
+}
+
+.invalid {
+    background-position: 0 -16px;
+}
+
+#pwdWarning {
+    float: right;
+    display: none;
+    margin-top: 32px;
+    padding: 0;
+    position: relative;
+    width: 180px;
+}
+
+#pwdWarning label {
+    font-weight: 700;
+}
+
+body .passwordLoginformError,
+body .usernameLoginformError {
+    margin-left: -465px;
+}
+
+body .passwordLoginformError .formErrorArrow,
+body .usernameLoginformError .formErrorArrow {
+    background: url(/img/outgame/d98b205c69f06eafee17531200b17a.gif) no-repeat;
+    left: 266px;
+}
+
+.nodisplay {
+    display: none;
+}

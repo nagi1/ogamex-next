@@ -1,0 +1,298 @@
+
+
+/*  */
+
+#server.exodus-server,
+#server.exodus-server option {
+    padding-left: 30px;
+    background: none #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-new,
+#server.exodus-server .exodus-server-new {
+    background: url(/img/outgame/75032c7386f3b361cfbbac3fac191b.png) no-repeat center left #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-old,
+#server.exodus-server .exodus-server-old {
+    background: url(/img/outgame/9ec040e9c5cc03591fdb3f4fb9a5f8.png) no-repeat center left #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-normal,
+#server.exodus-server .exodus-server-normal {
+    background: url(/img/outgame/f67aba37557d8330ef458210f510f4.png) no-repeat center left #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-exodus,
+#server.exodus-server .exodus-server-exodus {
+    background: url(/img/outgame/44da3997a3901d8ff72f3a73fa8ac0.png) no-repeat center left #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-exodus-closed,
+#server.exodus-server .exodus-server-exodus-closed {
+    background: url(/img/outgame/c53b5682ff49d72e03f06dae112e2c.png) no-repeat center left #8d9aa7;
+}
+
+#server.exodus-server.exodus-server-target,
+#server.exodus-server .exodus-server-target {
+    background: url(/img/outgame/025c32b25c5593e4ab4ec536507714.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-target {
+    background: url(/img/outgame/025c32b25c5593e4ab4ec536507714.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-exodus {
+    background: url(/img/outgame/44da3997a3901d8ff72f3a73fa8ac0.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-exodus-closed {
+    background: url(/img/outgame/c53b5682ff49d72e03f06dae112e2c.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-normal {
+    background: url(/img/outgame/f67aba37557d8330ef458210f510f4.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-old {
+    background: url(/img/outgame/9ec040e9c5cc03591fdb3f4fb9a5f8.png) no-repeat center left #8d9aa7;
+}
+
+.exodus-server-new {
+    background: url(/img/outgame/75032c7386f3b361cfbbac3fac191b.png) no-repeat center left #8d9aa7;
+}
+
+.server-row {
+    background-color: #8d9aa7;
+    border: 1px solid #8399af;
+    width: 190px;
+}
+
+.uni_span {
+    color: #30576f;
+}
+
+.hoverSelectbox .uni_span {
+    color: HighlightText !important;
+}
+
+.hoverSelectbox {
+    background-color: highlight !important;
+    color: white !important;
+}
+
+#uni_selection {
+    display: none;
+    position: absolute;
+    top: 19px;
+    left: 10px;
+    width: 198px;
+    height: 196px;
+    z-index: 120;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.server_table {
+    width: 194px;
+    height: 18px;
+    background: url('/img/outgame/113abb97b5fff99cb7d4d5019f04eb.gif') repeat-x scroll 0 0 #8d9aa7;
+    border: 2px solid #9eb4cb;
+    color: #30576f;
+    cursor: pointer;
+    width: 198px;
+    margin-left: 10px;
+}
+
+.margin-uni-selection {
+    padding-left: 30px;
+}
+
+#universeDistinction {
+    left: 207px;
+    opacity: .87;
+    position: relative;
+    display: none;
+}
+
+#dieIE6 {
+    display: none;
+}
+
+#usk {
+    float: left;
+    margin: 22.5px 7px;
+    width: 45px;
+    height: 45px;
+    background-image: url('/img/outgame/501329185ddd5630eb6a1e785e587b.png');
+    background-repeat: no-repeat;
+    background-size: 45px auto;
+}
+
+#safeplay {
+    float: left;
+    height: 72px;
+    width: 60px;
+    margin: 9px 7px;
+    background-image: url('/img/outgame/e33da11dfe7f3e0c511125dbdd95ee.png');
+    background-repeat: no-repeat;
+}
+
+.socialMediaLogo {
+    height: 32px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 37px;
+    padding-top: 5px;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.twitterLogo {
+    background-image: url('/img/outgame/3b7dbd92d0b9534d3919fbbb505e9e.png');
+}
+
+.gPlusLogo {
+    background-image: url('/img/outgame/9ee28c83e3a3554b9d195e29309ebe.png');
+}
+
+.fbLogo {
+    background-image: url('/img/outgame/246742ee5fa2f53100ef6a5b823249.png');
+}
+
+.input-wrap.expand {
+    height: auto;
+}
+
+#agbLabel {
+    color: #848484;
+}
+
+#ipadapp {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.align_center {
+    text-align: center;
+}
+
+::-webkit-input-placeholder {
+    color: white !important;
+    font-weight: bold;
+}
+
+::-moz-placeholder {
+    color: white !important;
+    font-weight: bold;
+}
+
+:-ms-input-placeholder {
+    color: white !important;
+    font-weight: bold;
+}
+
+:-moz-placeholder {
+    color: white !important;
+    font-weight: bold;
+}
+
+#generateNameContainer {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-position-y: -32px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+#generateName {
+    display: inline-block !important;
+    position: relative;
+    width: calc(10px * 1.02);
+    height: 10px;
+    background: rgba(0,0,0,0);
+    border: calc(10px / 8) solid #000;
+    border-right: calc(10px / 8) solid transparent;
+    border-radius: 100%;
+    box-sizing: content-box;
+}
+
+#generateName:before {
+    position: absolute;
+    content: '';
+    margin: auto;
+    top: calc(10px / -2);
+    bottom: 0;
+    left: calc(10px / 1.2);
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: calc(10px / 3) solid #000;
+    border-top: calc(10px / 3) solid transparent;
+    border-bottom: calc(10px / 3) solid transparent;
+    transform: rotate(45deg);
+}
+
+#generateName:hover {
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#characteristicsTooltip {
+    position: absolute;
+    top: -10px;
+    left: 200px;
+    z-index: 999;
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: honeydew;
+    border-style: ridge;
+    border-width: 2px;
+    color: snow;
+    background-color: #0d2b35;
+    opacity: .9;
+    overflow-y: scroll;
+}
+
+#tooltip_header {
+    padding: 5px;
+    margin: 0 0 5px;
+    font-size: 14px;
+    background-color: black;
+}
+
+li.characteristic {
+    display: table;
+}
+
+li.characteristic span {
+    display: table-cell;
+    vertical-align: middle;
+}
