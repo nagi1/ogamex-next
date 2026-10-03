@@ -38,6 +38,7 @@ x-grand-env: &grand-env
   # fallback an absent or failed sidecar degrades to.
   AI_COGNITION_MODE: external
   AI_COGNITION_DRIVER: fatima
+  AI_COGNITION_FATIMA_URLS: http://host.docker.internal:8092,http://host.docker.internal:8095
   AI_EXPERIENCE_DRIVER: cbrkit
   AI_MEMORY_DRIVER: agentos
   # Generative lanes ON for the deepseek off-peak (owner direction 18 Sep 2026, 13:05 UTC; the
