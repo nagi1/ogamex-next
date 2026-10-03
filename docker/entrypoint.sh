@@ -31,10 +31,10 @@ if [ -r /var/www/docker/module-hooks.sh ]; then
 fi
 
 if [ "$role" = "scheduler" ]; then
-    while true; do
-        php /var/www/artisan schedule:run --verbose --no-interaction
-        sleep 60
-    done
+    # schedule:work keeps one long-lived process that fires on the minute boundary.
+    # A `schedule:run; sleep 60` loop drifts off the boundary, so everyFiveMinutes()
+    # events (highscores, ranks) almost never matched.
+    exec php /var/www/artisan schedule:work --no-interaction
 elif [ "$role" = "queue" ]; then
       # One queue container, two possible backends, chosen from the configured queue
       # driver so operators only ever manage a single queue service:
