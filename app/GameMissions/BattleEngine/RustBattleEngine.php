@@ -50,12 +50,32 @@ class RustBattleEngine extends BattleEngine
     {
         parent::__construct($attackers, $defenderPlanet, $defenders, $settings);
 
-        self::$sharedFfi ??= FFI::cdef(
-            "char* fight_battle_rounds(const char* input_json);
-            void free_battle_result(char* ptr);",
-            base_path('storage/rust-libs/libbattle_engine_ffi.so')
-        );
-        $this->ffi = self::$sharedFfi;
+        $this->ffi = self::binding();
+    }
+
+    /**
+     * The process's one binding to the library, shared with the AI module's case similarity so the same
+     * .so is never dlopened twice. A library built before `rank_case_similarities` existed is bound
+     * without it, so battles keep working and the module falls back to its sidecar.
+     */
+    public static function binding(): FFI
+    {
+        if (self::$sharedFfi !== null) {
+            return self::$sharedFfi;
+        }
+
+        $library = base_path('storage/rust-libs/libbattle_engine_ffi.so');
+        $battle = "char* fight_battle_rounds(const char* input_json);
+            void free_battle_result(char* ptr);";
+
+        try {
+            self::$sharedFfi = FFI::cdef($battle . "
+            char* rank_case_similarities(const char* input_json);", $library);
+        } catch (FFI\Exception) {
+            self::$sharedFfi = FFI::cdef($battle, $library);
+        }
+
+        return self::$sharedFfi;
     }
 
     /**
