@@ -37,6 +37,8 @@
 //!   no longer bounce in the same round).
 //! - Rapidfire is rolled after every shot, including bounced shots and shots wasted on units
 //!   already destroyed this round, with probability (n - 1) / n.
+pub mod case_similarity;
+
 use serde::{Deserialize, Serialize};
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
