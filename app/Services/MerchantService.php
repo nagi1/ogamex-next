@@ -3,6 +3,7 @@
 namespace OGame\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use OGame\Models\Resources;
 use RuntimeException;
@@ -496,7 +497,7 @@ class MerchantService
             cache()->forever($cacheKey, [
                 'type' => $merchantType,
                 'trade_rates' => $tradeRates,
-                'called_at' => time(),
+                'called_at' => Date::now()->getTimestamp(),
             ]);
 
             return [

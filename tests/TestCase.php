@@ -6,7 +6,10 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 use OGame\Models\Planet\Coordinate;
 use OGame\Services\SettingsService;
@@ -28,6 +31,17 @@ abstract class TestCase extends BaseTestCase
         // wants a response fakes it. This is what keeps the module's provider path honest: it stays
         // enabled exactly as production runs it, and the boundary is what is faked.
         Http::preventStrayRequests();
+
+        // OGAMEX_TEST_NOW stands the whole run at one instant (e.g. 2026-10-07T03:00:00Z). Unset, the wall
+        // clock decides as before. The AI module's clock-sweep runs a test at several hours with it to find
+        // a test whose outcome depends on the time of day.
+        $frozenNow = getenv('OGAMEX_TEST_NOW');
+        if ($frozenNow !== false && trim($frozenNow) !== '') {
+            $at = CarbonImmutable::parse(trim($frozenNow));
+            Date::setTestNow($at);
+            Carbon::setTestNow($at);
+            CarbonImmutable::setTestNow($at);
+        }
 
         if ($this->app->environment('testing') && DB::getDriverName() === 'mysql') {
             DB::unprepared('SET SESSION innodb_lock_wait_timeout = 1');
