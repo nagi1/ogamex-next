@@ -32,6 +32,13 @@ class RustBattleEngine extends BattleEngine
     private FFI $ffi;
 
     /**
+     * One FFI binding per process. `FFI::cdef` dlopens the library each time it is called, and a battle
+     * engine is built per fight, so a long-lived process (a queue worker, a simulation of hours of play)
+     * piled up thousands of bindings and crashed with a segmentation fault when they were torn down.
+     */
+    private static FFI|null $sharedFfi = null;
+
+    /**
      * RustBattleEngine constructor.
      *
      * @param array<AttackerFleet> $attackers All attacking fleets.
@@ -43,11 +50,12 @@ class RustBattleEngine extends BattleEngine
     {
         parent::__construct($attackers, $defenderPlanet, $defenders, $settings);
 
-        $this->ffi = FFI::cdef(
+        self::$sharedFfi ??= FFI::cdef(
             "char* fight_battle_rounds(const char* input_json);
             void free_battle_result(char* ptr);",
             base_path('storage/rust-libs/libbattle_engine_ffi.so')
         );
+        $this->ffi = self::$sharedFfi;
     }
 
     /**
