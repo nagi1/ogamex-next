@@ -12,6 +12,7 @@ use OGame\Models\FleetMission;
 use OGame\Models\Planet;
 use OGame\Models\Planet\Coordinate;
 use OGame\Models\PlanetMove;
+use Random\Randomizer;
 use RuntimeException;
 
 class PlanetMoveService
@@ -167,7 +168,7 @@ class PlanetMoveService
         $planetModel->planet = $move->target_position;
 
         $planetData = $planetServiceFactory->planetData($move->target_position, false);
-        $planetModel->temp_max = rand($planetData['temperature'][0], $planetData['temperature'][1]);
+        $planetModel->temp_max = app(Randomizer::class)->getInt($planetData['temperature'][0], $planetData['temperature'][1]);
         $planetModel->temp_min = $planetModel->temp_max - 40;
         $planetModel->save();
 

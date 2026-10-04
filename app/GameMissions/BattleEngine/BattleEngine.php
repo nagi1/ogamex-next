@@ -22,6 +22,7 @@ use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
 use OGame\Services\WreckFieldService;
+use Random\Randomizer;
 use RuntimeException;
 
 /**
@@ -127,7 +128,7 @@ abstract class BattleEngine
      *
      * @param int|null $seed An explicit seed for reproducible simulation. Every
      * combat draw is taken from a seeded generator, so the same inputs and seed
-     * return the same result. Null keeps the current random behaviour.
+     * return the same result. Null draws a seed from the container's Randomizer.
      * @param bool $pure A read-only question when true: the defender's planet is
      * never written and no BattleResolved event is fired, so a "what if" changes
      * nothing in the world. The default remains the live battle path.
@@ -136,14 +137,14 @@ abstract class BattleEngine
      */
     public function simulateBattle(int|null $seed = null, bool $pure = false): BattleResult
     {
-        $this->seed = $seed;
+        // A live battle draws its seed from the game's randomness source: random in production, and
+        // replayable when a simulation or test binds a seeded engine. Every combat draw follows this seed.
+        $this->seed = $seed ?? app(Randomizer::class)->getInt(0, PHP_INT_MAX);
         $this->pure = $pure;
 
         // Seeding the global Mersenne Twister makes every mt_rand/rand/array_rand
         // draw in the round path reproducible under this seed.
-        if ($seed !== null) {
-            mt_srand($seed);
-        }
+        mt_srand($this->seed);
 
         $result = new BattleResult();
 

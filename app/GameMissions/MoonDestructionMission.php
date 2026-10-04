@@ -28,6 +28,7 @@ use OGame\Services\DebrisFieldService;
 use OGame\Services\MilitaryStatisticsService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
+use Random\Randomizer;
 use RuntimeException;
 
 class MoonDestructionMission extends GameMission
@@ -274,11 +275,11 @@ class MoonDestructionMission extends GameMission
         $lossChance = $this->calculateDeathstarLossChance($moonDiameter);
 
         // Roll for moon destruction (1-100 for precise percentages)
-        $destructionRoll = random_int(1, 100);
+        $destructionRoll = app(Randomizer::class)->getInt(1, 100);
         $moonDestroyed = $destructionRoll <= $destructionChance;
 
         // Roll for Deathstar loss - single roll for entire fleet
-        $lossRoll = random_int(1, 100);
+        $lossRoll = app(Randomizer::class)->getInt(1, 100);
         $allDeathstarsLost = $lossRoll <= $lossChance;
 
         // Update surviving units if all Deathstars are lost

@@ -3,6 +3,7 @@
 namespace OGame\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Random\Randomizer;
 use RuntimeException;
 
 class AppUtil extends Facade
@@ -220,7 +221,7 @@ class AppUtil extends Facade
         // max(1, ...) keeps random_int valid when every weight is zero; the loop then never
         // matches and we fall through to the first key below.
         $totalWeight = array_sum($weights);
-        $rand = random_int(1, max(1, $totalWeight));
+        $rand = app(Randomizer::class)->getInt(1, max(1, $totalWeight));
 
         $cumulative = 0;
         foreach ($weights as $key => $weight) {

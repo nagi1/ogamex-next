@@ -19,6 +19,7 @@ use OGame\Observers\FleetMissionObserver;
 use OGame\Observers\UserObserver;
 use OGame\Services\HostilityGuard;
 use OGame\Services\SettingsService;
+use Random\Randomizer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -111,5 +112,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ExceptionHandler::class, Handler::class);
 
         $this->app->singleton(HostilityGuard::class, static fn (): HostilityGuard => new HostilityGuard());
+
+        // The one source of game randomness (expeditions, espionage detection, planet creation, battle
+        // seeds, merchants). The default engine is the CSPRNG random_int() uses; a replay, a test or a
+        // simulation binds a seeded engine (e.g. new Randomizer(new Xoshiro256StarStar($seed))) so the
+        // same seed plays the same game.
+        $this->app->singleton(Randomizer::class, static fn (): Randomizer => new Randomizer());
     }
 }

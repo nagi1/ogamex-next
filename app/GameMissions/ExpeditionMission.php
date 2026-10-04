@@ -48,6 +48,7 @@ use OGame\Services\ObjectService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
+use Random\Randomizer;
 use RuntimeException;
 
 class ExpeditionMission extends GameMission
@@ -335,7 +336,7 @@ class ExpeditionMission extends GameMission
         $player = $this->playerServiceFactory->make($mission->user_id, true);
 
         // Pick a random speedup percentage between 5% and 30%.
-        $additionalReturnTripTimePercentage = random_int(5, 10);
+        $additionalReturnTripTimePercentage = app(Randomizer::class)->getInt(5, 10);
 
         // Calculate one way mission duration.
         $onewayMissionDuration = ($mission->time_arrival - $mission->time_departure) + $mission->time_holding;
@@ -379,7 +380,7 @@ class ExpeditionMission extends GameMission
 
         // Determine the resource type: metal, crystal or deuterium.
         $cargoCapacityConstrainedAmount = 0;
-        $resource_type_int = random_int(0, 2);
+        $resource_type_int = app(Randomizer::class)->getInt(0, 2);
         switch ($resource_type_int) {
             case 0:
                 $resource_type = ResourceType::Metal;
@@ -532,8 +533,8 @@ class ExpeditionMission extends GameMission
         $cargoCapacityConstrainedAmount = min($maxCargoCapacity, $maxShipFind);
 
         // Select 1-6 random ship types from possible ships.
-        $num_ship_types = min(random_int(1, 6), count($possibleShips));
-        shuffle($possibleShips);
+        $num_ship_types = min(app(Randomizer::class)->getInt(1, 6), count($possibleShips));
+        $possibleShips = app(Randomizer::class)->shuffleArray($possibleShips);
         $selectedShips = array_slice($possibleShips, 0, $num_ship_types);
 
         // Distribute resources per ship type with randomness (up to 75% variance), last ship gets the remainder.
@@ -556,7 +557,7 @@ class ExpeditionMission extends GameMission
                 $maxResources = $averageResourcePerShip * 1.75;
                 $randomResources = min(
                     $remainingResources,
-                    random_int((int)round($minResources), (int)round($maxResources))
+                    app(Randomizer::class)->getInt((int)round($minResources), (int)round($maxResources))
                 );
             } else {
                 // Last ship gets all remaining resources
@@ -972,8 +973,8 @@ class ExpeditionMission extends GameMission
         $selectedVariant = AppUtil::selectWeightedRandom(['normal' => 89, 'rare' => 10, 'exceptional' => 1]);
 
         $multiplier = match($selectedVariant) {
-            'rare' => random_int(2, 3),
-            'exceptional' => random_int(5, 10),
+            'rare' => app(Randomizer::class)->getInt(2, 3),
+            'exceptional' => app(Randomizer::class)->getInt(5, 10),
             default => 1,
         };
 
@@ -1037,7 +1038,7 @@ class ExpeditionMission extends GameMission
         // outcomes with small fractional weights (e.g. merchant 0.4, black_hole 0.2)
         // can fall into sub-integer gaps in the cumulative range and become unreachable.
         $scaledTotal = (int)round($totalWeight * 10);
-        $random = random_int(1, $scaledTotal);
+        $random = app(Randomizer::class)->getInt(1, $scaledTotal);
 
         // Find which outcome was selected
         $currentWeight = 0;
@@ -1098,7 +1099,7 @@ class ExpeditionMission extends GameMission
         $min = max(1, (int)floor($max * 0.1));
 
         // Pick a random amount between min and max.
-        return random_int($min, $max);
+        return app(Randomizer::class)->getInt($min, $max);
     }
 
     /**

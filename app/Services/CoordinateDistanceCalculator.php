@@ -2,6 +2,7 @@
 
 namespace OGame\Services;
 
+use Illuminate\Support\Facades\Date;
 use OGame\GameConstants\UniverseConstants;
 use OGame\Models\Planet;
 use OGame\Models\Planet\Coordinate;
@@ -155,8 +156,11 @@ class CoordinateDistanceCalculator
 
         // Count systems where all planets belong to inactive users
         // A user is considered inactive if time is older than 7 days (matching PlayerService::isInactive())
+        // The cutoff is the application's clock, not the database server's NOW(), so a test or a simulation
+        // that moves time sees the same activity as the rest of the game; the SQL is portable across drivers.
+        $activeSince = Date::now()->subDays(7)->timestamp;
         $inactiveSystems = Planet::selectRaw('planets.system')
-            ->selectRaw('SUM(IF(users.time >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY)), 1, 0)) AS active_count')
+            ->selectRaw('SUM(CASE WHEN CAST(users.time AS SIGNED) >= ? THEN 1 ELSE 0 END) AS active_count', [$activeSince])
             ->join('users', 'users.id', '=', 'planets.user_id')
             ->where('planets.galaxy', '=', $from->galaxy)
             ->where('planets.system', '>=', $start)
