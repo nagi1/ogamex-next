@@ -15,6 +15,11 @@
 node_modules
 vendor
 
+# Runtime state is bind-mounted from the host at /var/www, so it never needs to
+# be in the image. It also holds container-owned 0700 directories that make the
+# build context unreadable to the builder ("open ...: permission denied").
+storage
+
 # Editor / IDE
 .idea
 .vscode
