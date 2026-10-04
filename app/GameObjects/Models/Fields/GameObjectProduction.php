@@ -477,7 +477,7 @@ class GameObjectProduction
      *
      * @return int
      */
-    private function getMaxUsableCrawlers(): int
+    public function getMaxUsableCrawlers(): int
     {
         $metalMineLevel = $this->planetService->getObjectLevel('metal_mine');
         $crystalMineLevel = $this->planetService->getObjectLevel('crystal_mine');
