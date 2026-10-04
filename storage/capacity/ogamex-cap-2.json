@@ -1,0 +1,54 @@
+{
+    "days": 1,
+    "profiles": 2,
+    "work": {
+        "created": 2956,
+        "completed": 2958,
+        "retried": 0,
+        "stuck": 0
+    },
+    "actions": {
+        "Accepted": 9,
+        "Rejected": 1439
+    },
+    "lateness": {
+        "p50": 0,
+        "p95": 3,
+        "sessions": 2958
+    },
+    "language": {
+        "attempts": 0,
+        "tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_hit_rate": 0,
+        "cost": 0
+    },
+    "score": {
+        "enabled": true,
+        "accounts": 2,
+        "samples": 46,
+        "general_delta": {
+            "min": 1229,
+            "median": 1229,
+            "max": 53930
+        },
+        "largest_hourly_jump": 32358,
+        "zero_growth_accounts": 0,
+        "military_lost": 0,
+        "per_account_deltas": [
+            {
+                "player_id": 3,
+                "delta": 1229
+            },
+            {
+                "player_id": 4,
+                "delta": 53930
+            }
+        ]
+    },
+    "feedback": null,
+    "read_cost": {
+        "milliseconds": 203.2,
+        "queries": 10
+    }
+}
