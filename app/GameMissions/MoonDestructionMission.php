@@ -35,6 +35,7 @@ class MoonDestructionMission extends GameMission
 {
     protected static string $name = 'Moon Destruction';
     protected static int $typeId = 9;
+    protected static array $requiredShipMachineNames = ['deathstar'];
     protected static bool $hasReturnMission = true;
     protected static bool $blockedByServerAttackBlock = true;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::war;
