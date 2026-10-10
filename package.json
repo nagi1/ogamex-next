@@ -5,13 +5,29 @@
         "dev": "vite",
         "build": "vite build",
         "prod": "npm run build",
-        "production": "npm run build"
+        "production": "npm run build",
+        "assets:check": "npm run ingame:validate && npm run ingame:css:validate && npm run outgame:css:validate",
+        "ingame:validate": "node scripts/validate-chunks.js --input=resources/js/ingame/e7c74974620fa35b197315ebdbb8c2.js --chunks=resources/js/ingame/chunks",
+        "ingame:group": "node scripts/group-javascript.js --input=resources/js/ingame/e7c74974620fa35b197315ebdbb8c2.js --output=resources/js/ingame/chunks --plan=tmp/ingame-js-plan.json",
+        "ingame:css:validate": "node scripts/validate-chunks.js --type=css --input=resources/css/ingame/469500b3cd5158332fb20a56b14b2c.css --chunks=resources/css/ingame/chunks",
+        "ingame:css:group": "node scripts/group-css.js --output=resources/css/ingame/chunks --plan=tmp/ingame-css-plan.json",
+        "outgame:css:validate": "node scripts/validate-chunks.js --type=css --input=resources/css/outgame/175d13751348e190f1ff2a51466c5f.css --chunks=resources/css/outgame/chunks",
+        "outgame:css:group": "node scripts/group-css.js --areas=outgame --input=resources/css/outgame/175d13751348e190f1ff2a51466c5f.css --target=8000 --output=resources/css/outgame/chunks --plan=tmp/outgame-css-plan.json",
+        "asset:group": "node scripts/group-javascript.js",
+        "asset:validate": "node scripts/validate-chunks.js",
+        "asset:group-css": "node scripts/group-css.js",
+        "asset:validate-css": "node scripts/validate-chunks.js --type=css",
+        "asset:beautify-css": "node scripts/beautify-css.js",
+        "asset:beautify-js": "node scripts/beautify-js.js"
     },
     "devDependencies": {
+        "acorn": "^8.18.0",
         "axios": "^1.20.0",
-        "laravel-echo": "^2.4.0",
+        "laravel-echo": "^2.5.0",
         "laravel-vite-plugin": "^3.2",
+        "postcss": "^8.5.28",
         "pusher-js": "^8.6.0",
-        "vite": "^8.2"
+        "terser": "^5.51.2",
+        "vite": "^8.3"
     }
 }

@@ -5,6 +5,7 @@ namespace OGame\Services;
 use Exception;
 use OGame\Facades\AppUtil;
 use OGame\GameObjects\Models\Units\UnitCollection;
+use Random\Randomizer;
 
 /**
  * NPCFleetGeneratorService - Generates NPC fleets for expedition battles.
@@ -220,7 +221,7 @@ class NPCFleetGeneratorService
 
         // Apply random variance within range: base ± variance
         // Generate random value between -1.0 and 1.0
-        $randomVariance = (random_int(-100, 100) / 100) * $variance;
+        $randomVariance = (app(Randomizer::class)->getInt(-100, 100) / 100) * $variance;
         $finalPercentage = $basePercentage + $randomVariance;
 
         // Calculate fleet value with proper rounding
@@ -269,8 +270,8 @@ class NPCFleetGeneratorService
         $remainingValue = $allocatedValue;
 
         // Add 1-2 random combat ships (optional, 70% chance)
-        if (random_int(1, 100) <= 70) {
-            $combatShipCount = random_int(1, 2);
+        if (app(Randomizer::class)->getInt(1, 100) <= 70) {
+            $combatShipCount = app(Randomizer::class)->getInt(1, 2);
 
             // Select combat ships based on NPC type and player tier
             if ($npcType === 'pirate') {
@@ -293,7 +294,7 @@ class NPCFleetGeneratorService
 
             // Add 1-2 combat ships
             for ($i = 0; $i < $combatShipCount; $i++) {
-                $shipType = $possibleCombatShips[array_rand($possibleCombatShips)];
+                $shipType = $possibleCombatShips[app(Randomizer::class)->pickArrayKeys($possibleCombatShips, 1)[0]];
                 try {
                     $ship = $objectService->getShipObjectByMachineName($shipType);
                     $shipCost = $ship->price->resources->sum();
@@ -308,7 +309,7 @@ class NPCFleetGeneratorService
         }
 
         // Add 1 Espionage Probe (optional, 50% chance)
-        if (random_int(1, 100) <= 50) {
+        if (app(Randomizer::class)->getInt(1, 100) <= 50) {
             try {
                 $probe = $objectService->getShipObjectByMachineName('espionage_probe');
                 $probeCost = $probe->price->resources->sum();

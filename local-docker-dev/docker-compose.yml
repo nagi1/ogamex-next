@@ -1,0 +1,90 @@
+name: ogamex-local-docker-dev
+
+x-host-services: &host-services
+  DB_HOST: ${LOCAL_DB_HOST:-mysql}
+  DB_PORT: ${LOCAL_DB_PORT:-3306}
+  DB_DATABASE: ${LOCAL_DB_DATABASE:-ogamex-test}
+  DB_USERNAME: ${LOCAL_DB_USERNAME:-root}
+  DB_PASSWORD: ${LOCAL_DB_PASSWORD:-}
+  # Keep statement emulation configurable for compatibility with the existing
+  # local workflow; the database itself is now reached directly over Docker DNS.
+  DB_EMULATE_PREPARES: ${LOCAL_DB_EMULATE_PREPARES:-true}
+  REDIS_HOST: ${LOCAL_REDIS_HOST:-redis}
+  REDIS_PORT: ${LOCAL_REDIS_PORT:-6379}
+  REDIS_PASSWORD: ${LOCAL_REDIS_PASSWORD:-null}
+
+x-service: &service
+  image: ogamex-local-docker-dev:latest
+  volumes:
+    - ..:/var/www
+    - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  networks:
+    - app-network
+    - shared-services
+
+services:
+  ogamex-app:
+    <<: *service
+    environment:
+      CONTAINER_ROLE: app
+      REVERB_HOST: ogamex-reverb
+      REVERB_SCHEME: http
+      <<: *host-services
+    ports:
+      - "${PHP_FPM_PORT:-9000}:9000"
+
+  ogamex-scheduler:
+    <<: *service
+    environment:
+      CONTAINER_ROLE: scheduler
+      <<: *host-services
+    depends_on:
+      - ogamex-app
+
+  # Runs Laravel Horizon when QUEUE_CONNECTION=redis and the database worker pools
+  # otherwise (see docker/entrypoint.sh), so there is a single queue service to start:
+  #   docker compose -f local-docker-dev/docker-compose.yml --profile queue up -d
+  ogamex-queue-worker:
+    <<: *service
+    profiles: ["queue"]
+    environment:
+      CONTAINER_ROLE: queue
+      REVERB_HOST: ogamex-reverb
+      REVERB_SCHEME: http
+      QUEUE_WORKERS_LIGHT: ${QUEUE_WORKERS_LIGHT:-2}
+      QUEUE_WORKERS_HEAVY: ${QUEUE_WORKERS_HEAVY:-3}
+      <<: *host-services
+    healthcheck:
+      test: ["CMD-SHELL", "sh /var/www/docker/queue-healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - ogamex-app
+
+  ogamex-reverb:
+    <<: *service
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - /opt/yerd/web/certs/sites:/etc/ssl/yerd:ro
+    environment:
+      CONTAINER_ROLE: reverb
+      REVERB_SERVER_TLS_CERTIFICATE: /etc/ssl/yerd/ogamex-next.test.crt
+      REVERB_SERVER_TLS_KEY: /etc/ssl/yerd/ogamex-next.test.key
+      REVERB_SERVER_TLS_VERIFY_PEER: "false"
+      <<: *host-services
+    ports:
+      - "${REVERB_SERVER_PORT:-8090}:${REVERB_SERVER_PORT:-8090}"
+    depends_on:
+      - ogamex-app
+
+networks:
+  app-network:
+    driver: bridge
+  shared-services:
+    external: true
+    name: ogamex-shared-services

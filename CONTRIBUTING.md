@@ -87,7 +87,8 @@ To run the tests locally, you can use the following command:
 $ composer run tests
 ```
 
-You are also able to apply the `--filter` parameter to run a specific class or method such as :
+Tests always run in parallel with `--bail`, and every worker process gets its own
+cloned database, so a targeted run stays fast:
 
 ```
 $ composer run tests -- --filter PlanetServiceTest
@@ -115,6 +116,12 @@ During development, you can run the Vite dev server to automatically recompile a
 ```
 $ npm run dev
 ```
+
+The legacy in-game and out-game CSS and JS are split into named files with a
+generated manifest, and that split is order-sensitive. Read
+[docs/legacy-asset-tooling.md](docs/legacy-asset-tooling.md) before editing
+anything under `resources/css/*/chunks/`, `resources/js/*/chunks/`, or the legacy
+bundle lists in `vite.config.js`.
 
 ## AI-Assisted Contributions
 

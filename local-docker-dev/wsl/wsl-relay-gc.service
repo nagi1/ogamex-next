@@ -1,0 +1,9 @@
+[Unit]
+Description=Reap orphaned WSL Relay processes (microsoft/WSL#41242 order-7 ring leak)
+Documentation=https://github.com/microsoft/WSL/issues/41242
+
+[Service]
+Type=oneshot
+# Relays are root-owned and ignore SIGTERM, so this needs root and uses SIGKILL.
+ExecStart=/home/nagi/.local/bin/wsl-relay-gc --kill
+# The census line lands in the journal: journalctl -u wsl-relay-gc.service -n 5

@@ -1,0 +1,93 @@
+# Capacity comparison stack — one fresh, isolated universe per run, pointed at its own
+# database and redis prefixes. Nothing here is shared with the dev stack or the holy
+# `ogamex-grand` universe except the bind-mounted code and the host cognition sidecars.
+#
+#   CAP_DB=ogamex-cap-2 CAP_PORT=9102 CAP_PLAYERS=2 \
+#     docker compose -f local-docker-dev/docker-compose.capacity.yml --profile queue up -d
+#
+# The run is driven by local-docker-dev/capacity-run.sh, which creates the database,
+# migrates, seeds, sets the speed rows and collects the report — this file only owns the
+# container wiring.
+name: ogamex-capacity
+
+x-capacity-env: &capacity-env
+  APP_ENV: local
+  APP_DEBUG: "true"
+  DB_HOST: mysql
+  DB_PORT: "3306"
+  DB_DATABASE: "${CAP_DB:-ogamex-cap-2}"
+  DB_USERNAME: root
+  DB_PASSWORD: ""
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: "null"
+  REDIS_CLIENT: phpredis
+  QUEUE_CONNECTION: redis
+  REDIS_QUEUE_RETRY_AFTER: "660"
+  CACHE_STORE: redis
+  CACHE_PREFIX: "${CAP_PREFIX:-ogamex_cap2}"
+  HORIZON_PREFIX: "${CAP_HORIZON:-ogamex_cap2_horizon:}"
+  BROADCAST_CONNECTION: log
+  SESSION_DRIVER: database
+  AI_HORIZON_WORK_PROCESSES: "${CAP_WORKERS:-8}"
+  AI_HORIZON_WORK_BALANCE: simple
+  AI_HORIZON_WORK_TIMEOUT: "300"
+  AI_HORIZON_LANGUAGE_PROCESSES: "1"
+  AI_POPULATION_SESSION_INTERVAL_SECONDS: "${CAP_SESSION_INTERVAL:-5}"
+  AI_COGNITION_MODE: "${CAP_MODE:-hybrid}"
+  AI_COGNITION_DRIVER: fatima
+  AI_EXPERIENCE_DRIVER: cbrkit
+  AI_MEMORY_DRIVER: agentos
+  AI_LANGUAGE_ENABLED: "false"
+  AI_CONVERSATION_ENABLED: "true"
+
+services:
+  ogamex-app:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *capacity-env
+      CONTAINER_ROLE: app
+    ports:
+      - "${CAP_PORT:-9102}:9000"
+    networks: [capacity-network, shared-services]
+
+  ogamex-scheduler:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *capacity-env
+      CONTAINER_ROLE: scheduler
+    depends_on:
+      - ogamex-app
+    networks: [capacity-network, shared-services]
+
+  ogamex-queue-worker:
+    image: ogamex-local-docker-dev:latest
+    volumes:
+      - ..:/var/www
+      - ../php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      <<: *capacity-env
+      CONTAINER_ROLE: queue
+    profiles: ["queue"]
+    depends_on:
+      - ogamex-app
+    networks: [capacity-network, shared-services]
+
+networks:
+  capacity-network:
+    driver: bridge
+  shared-services:
+    external: true
+    name: ogamex-shared-services

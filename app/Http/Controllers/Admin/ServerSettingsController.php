@@ -6,12 +6,21 @@ use Cache;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use OGame\Enums\HighscoreTypeEnum;
+use OGame\GameConstants\UniverseConstants;
 use OGame\Http\Controllers\OGameController;
+use OGame\Models\Planet;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
 
 class ServerSettingsController extends OGameController
 {
+    /**
+     * Minimum number of days a non-zero inactive-player-deletion threshold is clamped to.
+     * Because this setting permanently deletes accounts, a low value could wipe recently
+     * inactive players by accident; 0 remains valid and disables the feature entirely.
+     */
+    private const MIN_INACTIVE_DELETION_DAYS = 30;
+
     /**
      * Shows the server settings page.
      *
@@ -35,6 +44,8 @@ class ServerSettingsController extends OGameController
             'universe_name' => $settingsService->universeName(),
             'planet_fields_bonus' => $settingsService->planetFieldsBonus(),
             'dark_matter_bonus' => $settingsService->darkMatterBonus(),
+            'espionage_probe_capacity_on' => $settingsService->espionageProbeCapacityOn(),
+            'deuterium_consumption' => $settingsService->deuteriumConsumption(),
             'alliance_combat_system_on' => $settingsService->allianceCombatSystemOn(),
             'alliance_cooldown_days' => $settingsService->allianceCooldownDays(),
             'debris_field_from_ships' => $settingsService->debrisFieldFromShips(),
@@ -49,6 +60,7 @@ class ServerSettingsController extends OGameController
             'ignore_empty_systems_on' => $settingsService->ignoreEmptySystemsOn(),
             'ignore_inactive_systems_on' => $settingsService->ignoreInactiveSystemsOn(),
             'number_of_galaxies' => $settingsService->numberOfGalaxies(),
+            'number_of_systems' => $settingsService->numberOfSystems(),
             'battle_engine' => $settingsService->battleEngine(),
             'dark_matter_regen_enabled' => (bool)$settingsService->get('dark_matter_regen_enabled', 0),
             'dark_matter_regen_amount' => (int)$settingsService->get('dark_matter_regen_amount', 150000),
@@ -73,6 +85,7 @@ class ServerSettingsController extends OGameController
             'expedition_weight_items' => $settingsService->expeditionWeightItems(),
             'hamill_probability' => $settingsService->hamillManoeuvreChance(),
             'highscore_admin_visible' => $settingsService->highscoreAdminVisible(),
+            'inactive_player_deletion_days' => $settingsService->inactivePlayerDeletionDays(),
         ]);
     }
 
@@ -84,6 +97,31 @@ class ServerSettingsController extends OGameController
      */
     public function update(SettingsService $settingsService): RedirectResponse
     {
+        $numberOfGalaxies = max(4, min(9, (int)request('number_of_galaxies', 9)));
+        $numberOfSystems = max(
+            UniverseConstants::MIN_SYSTEM,
+            min(UniverseConstants::MAX_SYSTEM_COUNT, (int)request('number_of_systems', UniverseConstants::MAX_SYSTEM_COUNT))
+        );
+
+        $maxOccupiedGalaxy = (int)(Planet::query()->max('galaxy') ?? 0);
+        $maxOccupiedSystem = (int)(Planet::query()->max('system') ?? 0);
+        if (
+            ($maxOccupiedGalaxy > 0 && $numberOfGalaxies < $maxOccupiedGalaxy)
+            || ($maxOccupiedSystem > 0 && $numberOfSystems < $maxOccupiedSystem)
+        ) {
+            return redirect()->route('admin.serversettings.index')->with(
+                'error',
+                __('Cannot shrink the universe below existing planets (highest occupied: galaxy :galaxy, system :system).', [
+                    'galaxy' => max($maxOccupiedGalaxy, UniverseConstants::MIN_GALAXY),
+                    'system' => max($maxOccupiedSystem, UniverseConstants::MIN_SYSTEM),
+                ])
+            );
+        }
+
+        $deuteriumConsumption = SettingsService::normalizeDeuteriumConsumption(
+            (float)request('deuterium_consumption', 1.0)
+        );
+
         $settingsService->set('fleet_speed_war', request('fleet_speed_war'));
         $settingsService->set('fleet_speed_holding', request('fleet_speed_holding'));
         $settingsService->set('fleet_speed_peaceful', request('fleet_speed_peaceful'));
@@ -96,9 +134,13 @@ class ServerSettingsController extends OGameController
         $settingsService->set('basic_income_energy', request('basic_income_energy'));
 
         $settingsService->set('registration_planet_amount', request('registration_planet_amount'));
+        $settingsService->set('universe_name', request('universe_name', 'Universe'));
 
         $settingsService->set('planet_fields_bonus', request('planet_fields_bonus'));
-        $settingsService->set('dark_matter_bonus', request('dark_matter_bonus'));
+        // Persist as dark_matter_initial so registration (UserObserver) picks it up.
+        $settingsService->set('dark_matter_initial', max(0, (int)request('dark_matter_bonus', 8000)));
+        $settingsService->set('espionage_probe_capacity_on', request('espionage_probe_capacity_on', 0));
+        $settingsService->set('deuterium_consumption', (string)$deuteriumConsumption);
         $settingsService->set('alliance_combat_system_on', request('alliance_combat_system_on', 0));
         $settingsService->set('alliance_cooldown_days', request('alliance_cooldown_days', 3));
         $settingsService->set('debris_field_from_ships', request('debris_field_from_ships'));
@@ -113,7 +155,8 @@ class ServerSettingsController extends OGameController
 
         $settingsService->set('ignore_empty_systems_on', request('ignore_empty_systems_on', 0));
         $settingsService->set('ignore_inactive_systems_on', request('ignore_inactive_systems_on', 0));
-        $settingsService->set('number_of_galaxies', request('number_of_galaxies'));
+        $settingsService->set('number_of_galaxies', $numberOfGalaxies);
+        $settingsService->set('number_of_systems', $numberOfSystems);
 
         $settingsService->set('battle_engine', request('battle_engine'));
 
@@ -143,6 +186,13 @@ class ServerSettingsController extends OGameController
         $settingsService->set('hamill_manoeuvre_chance', max(1, (int)request('hamill_probability', 1000)));
 
         $settingsService->set('highscore_admin_visible', request('highscore_admin_visible', 0));
+
+        // Clamp non-zero values up to a safe minimum floor; 0 stays valid and disables the feature.
+        $inactiveDeletionDays = (int) request('inactive_player_deletion_days', 0);
+        if ($inactiveDeletionDays > 0) {
+            $inactiveDeletionDays = max(self::MIN_INACTIVE_DELETION_DAYS, $inactiveDeletionDays);
+        }
+        $settingsService->set('inactive_player_deletion_days', $inactiveDeletionDays);
 
         // Clear highscore cache when admin visibility setting changes
         $this->clearHighscoreCache();

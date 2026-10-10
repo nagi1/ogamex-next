@@ -1,7 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
+/public/modules/ai/build
 /storage/*.key
+/storage/grand-backups
 /vendor
 /.idea
 /.vagrant
@@ -19,3 +21,10 @@ yarn-error.log
 rust/*/target
 # Compiled rust apps (rust modules are recompiled during container start)
 storage/rust-libs/*.so
+
+# Local output from in-game JavaScript tooling.
+tmp/
+
+# Separately-maintained modules live in their own repositories (their own clone,
+# their own remote). The host ignores the path instead of pinning a submodule.
+/Modules/AI/

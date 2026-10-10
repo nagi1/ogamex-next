@@ -7,6 +7,7 @@
             height: 32px;
             left: 0;
             padding: 0;
+            position: relative;
             text-align: center;
             top: 0;
             width: 100%;
@@ -84,10 +85,14 @@
                 <li><a class="{{(Request::is('admin/server-settings') ? 'active' : '') }}" href="{{ route('admin.serversettings.index') }}">Server settings</a></li>
                 <li><a class="{{(Request::is('admin/modules*') ? 'active' : '') }}" href="{{ route('admin.modules.index') }}">Modules</a></li>
                 <li><a class="{{(Request::is('admin/fleet-timing*') ? 'active' : '') }}" href="{{ route('admin.fleettiming.index') }}">Fleet Timing</a></li>
+                <li><a class="{{(Request::is('admin/activity-logs*') ? 'active' : '') }}" href="{{ route('admin.activitylogs.index') }}">Activity logs</a></li>
+                <li><a class="{{(Request::is('admin/cron-tasks*') ? 'active' : '') }}" href="{{ route('admin.crontasks.index') }}">Cron tasks</a></li>
+                {{-- Horizon is opt-in and only runs on the Redis queue backend, so hide the dashboard link otherwise. --}}
+                @if (config('queue.default') === 'redis')
+                    <li><a class="{{(Request::is('admin/horizon*') ? 'active' : '') }}" href="{{ route('horizon.index') }}">{{ __('Queue monitoring') }}</a></li>
+                @endif
                 <li><a class="{{(Request::is('admin/rules') ? 'active' : '') }}" href="{{ route('admin.rules.index') }}">Rules & Legal</a></li>
                 <li><a class="{{(Request::is('admin/server-administration*') ? 'active' : '') }}" href="{{ route('admin.server-administration.index') }}">Server Administration</a></li>
-                {{-- Module extension point: additional admin nav links --}}
-                @moduleSlot('admin.nav')
             </ul>
         @endif
     </div>

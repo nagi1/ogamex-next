@@ -3,8 +3,10 @@
 namespace OGame\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use OGame\Models\Resources;
+use Random\Randomizer;
 use RuntimeException;
 
 /**
@@ -160,7 +162,7 @@ class MerchantService
         }
 
         // Select a random weighted index
-        $randomValue = rand(1, (int)$totalWeight);
+        $randomValue = app(Randomizer::class)->getInt(1, (int)$totalWeight);
         $cumulativeWeight = 0;
 
         foreach ($weights as $index => $weight) {
@@ -487,7 +489,7 @@ class MerchantService
             // No active merchant - call a random RESOURCE TRADER for free
             // Expeditions ONLY call resource traders, never scrap merchants
             $resourceTypes = ['metal', 'crystal', 'deuterium'];
-            $merchantType = $resourceTypes[array_rand($resourceTypes)];
+            $merchantType = $resourceTypes[app(Randomizer::class)->pickArrayKeys($resourceTypes, 1)[0]];
 
             // Generate trade rates
             $tradeRates = self::generateTradeRates($merchantType);
@@ -496,7 +498,7 @@ class MerchantService
             cache()->forever($cacheKey, [
                 'type' => $merchantType,
                 'trade_rates' => $tradeRates,
-                'called_at' => time(),
+                'called_at' => Date::now()->getTimestamp(),
             ]);
 
             return [

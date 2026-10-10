@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use OGame\Events\Game\BuildingCompleted;
 use OGame\Factories\PlanetServiceFactory;
 use OGame\Factories\PlayerServiceFactory;
 use OGame\GameObjects\Models\Abstracts\GameObject;
@@ -1731,7 +1732,9 @@ class PlanetService
                 // ended up in the building queue due to a prior bug), skip it gracefully. The item is
                 // already marked processed above, so it will not be retried on the next page load.
                 try {
+                    $object = ObjectService::getObjectById($item->object_id);
                     $this->setObjectLevel($item->object_id, $item->object_level_target, $save_planet);
+                    event(new BuildingCompleted($this->getPlanetId(), $object->machine_name, $item->object_level_target));
                 } catch (RuntimeException $e) {
                     Log::error('Building queue item skipped due to invalid object type.', [
                         'planet_id' => $this->getPlanetId(),
@@ -1829,7 +1832,12 @@ class PlanetService
 
             // If time_end has fully elapsed, award all remaining units at once.
             // This handles cases where time was reduced (e.g. via DM halving/complete).
-            if ($now >= $item->time_end) {
+            //
+            // A zero-length order is included on purpose: at high universe speeds a whole batch can be
+            // due in under a second, which rounds the duration to zero. The incremental branch below
+            // divides by that duration, so without this an instant-speed universe crashes the whole
+            // queue (DivisionByZeroError) instead of handing over the ships it already paid for.
+            if ($now >= $item->time_end || $item->time_end <= $item->time_start) {
                 $remaining = $item->object_amount - $item->object_amount_progress;
                 if ($remaining > 0) {
                     $item->time_progress = $item->time_end;
@@ -2419,6 +2427,23 @@ class PlanetService
         $productionIndex->total->energy->set(floor($productionIndex->total->energy->get()));
 
         return $productionIndex->total;
+    }
+
+    /**
+     * The most of a unit this planet can put to use, or null when the host sets no such bound. A crawler adds to
+     * production only up to what the mines can use, so a player stops ordering them there; asked by machine name
+     * so the caller need not know which units are bounded.
+     */
+    public function getUsableUnitCap(string $machineName): int|null
+    {
+        if ($machineName !== 'crawler') {
+            return null;
+        }
+
+        $metalMine = ObjectService::getGameObjectsWithProductionByMachineName('metal_mine');
+        $metalMine->production->planetService = $this;
+
+        return $metalMine->production->getMaxUsableCrawlers();
     }
 
     /**

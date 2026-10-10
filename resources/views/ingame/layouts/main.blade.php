@@ -28,7 +28,7 @@
     <meta name="ogame-version" content="{{ \OGame\Facades\GitInfoUtil::getAppVersion() }}"/>
     <meta name="ogame-timestamp" content="1513426692"/>
     <meta name="ogame-universe" content="s1"/>
-    <meta name="ogame-universe-name" content="Home"/>
+    <meta name="ogame-universe-name" content="{{ $settings->universeName() }}"/>
     <meta name="ogame-universe-speed" content="{{ $settings->economySpeed() }}"/>
     <meta name="ogame-universe-speed-fleet" content="{{ $settings->fleetSpeed() }}"/>
     <meta name="ogame-language" content="en"/>
@@ -45,7 +45,7 @@
     <meta name="ogame-planet-coordinates" content="{{ $currentPlanet->getPlanetCoordinates()->asString() }}"/>
     <meta name="ogame-planet-type" content="planet"/>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $settings->universeName() }}</title>
 
     @vite(['resources/css/ingame.css', 'resources/js/ingame.js'])
 
@@ -559,8 +559,20 @@
                     <li>
                         <span class="menu_icon">
                             @if ($currentPlanet->isMoon() && $currentPlanet->getObjectLevel('jump_gate') > 0)
-                                <a href="{{ route('jumpgate.index') }}" class="overlay tooltipRight js_hideTipOnMobile" target="_self" data-overlay-title="{{ __('t_ingame.layout.menu_jump_gate') }}" title="{{ __('t_ingame.layout.menu_jump_gate') }}">
-                                    <div class="menuImage station highlighted ipiHintable" data-ipi-hint="ipiToolbarJumpgate"></div>
+                                <a href="{{ route('jumpgate.index') }}"
+                                class="overlay tooltipRight js_hideTipOnMobile"
+                                target="_self"
+                                data-overlay-title="{{ __('t_ingame.layout.menu_jump_gate') }}"
+                                title="{{ __('t_ingame.layout.menu_jump_gate') }}">
+                                    <div class="menuImage station highlighted ipiHintable"
+                                        data-ipi-hint="ipiToolbarJumpgate"></div>
+                                </a>
+                            @elseif ($currentPlanet->isPlanet())
+                                <a href="{{ route('facilities.index', ['openSpaceDock' => 1]) }}"
+                                class="tooltipRight js_hideTipOnMobile"
+                                target="_self"
+                                title="{{ __('t_resources.space_dock.title') }}">
+                                    <div class="menuImage station{{ Request::is('facilities') ? ' active' : ($currentPlanet->getObjectLevel('space_dock') > 0 ? ' highlighted' : '') }}"></div>
                                 </a>
                             @else
                                 <div class="menuImage station"></div>
@@ -1931,17 +1943,17 @@ However, the Space Dock's engineers think that some of the remains can be salvag
 
     @if (\Session::has('success'))
     $(document).ready(function () {
-        fadeBox("{!! \Session::get('success') !!}", 0);
+        fadeBox(@json(\Session::get('success')), 0);
     });
     @endif
     @if (\Session::has('error'))
     $(document).ready(function () {
-        fadeBox("{!! \Session::get('error') !!}", 1);
+        fadeBox(@json(\Session::get('error')), 1);
     });
     @endif
     @if (\Session::has('success_logout'))
     $(document).ready(function () {
-        errorBoxNotify("Ok", "{!! \Session::get('success_logout') !!}", "Ok", redirectLogout);
+        errorBoxNotify("Ok", @json(\Session::get('success_logout')), "Ok", redirectLogout);
     });
     @endif
 </script>

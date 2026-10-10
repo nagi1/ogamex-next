@@ -9,6 +9,7 @@ WORKDIR /var/www
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    libssl-dev \
     libonig-dev \
     mariadb-client \
     libpng-dev \
@@ -24,6 +25,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     dos2unix \
     pkg-config \
+    supervisor \
     libffi-dev  # Install PHP FFI development files required to interface with Rust for BattleEngine  \
     && \ apt-get clean && rm -rf /var/lib/apt/lists/ # Clear cache
 
@@ -31,6 +33,9 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install ffi pdo_mysql mbstring zip exif pcntl && \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     docker-php-ext-install gd
+
+# Install the Redis extension used by the Horizon queue backend.
+RUN pecl install redis && docker-php-ext-enable redis && rm -rf /tmp/pear
 
 # Enable and configure opcache only if OPCACHE_ENABLE is set to "1"
 ARG OPCACHE_ENABLE=0

@@ -27,7 +27,7 @@ class HelloWorldServiceProvider extends ModuleServiceProvider
 
         // Additive view slots let a module enhance a documented core view
         // without replacing the template or editing core routes.
-        ModuleSlotService::register('admin.nav', static function (array $data): string {
+        ModuleSlotService::register('admin.modules', static function (array $data): string {
             return view('helloworld::partials.admin-nav')->render();
         });
     }

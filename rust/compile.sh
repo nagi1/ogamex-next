@@ -15,7 +15,10 @@ fi
 # workspace so the production artifact cannot be overwritten by a
 # feature-unified build.
 if [ -f rust/target/release/libbattle_engine_ffi.so ]; then
-    cp rust/target/release/libbattle_engine_ffi.so storage/rust-libs/
+    # Install by rename, never by overwriting in place: a process that already mapped the old file (a queue
+    # worker, a simulation) would otherwise see its pages change under it and crash with a segmentation fault.
+    cp rust/target/release/libbattle_engine_ffi.so storage/rust-libs/.libbattle_engine_ffi.so.new
+    mv -f storage/rust-libs/.libbattle_engine_ffi.so.new storage/rust-libs/libbattle_engine_ffi.so
     echo "Copied libbattle_engine_ffi.so"
 else
     echo "ERROR: libbattle_engine_ffi.so not found after compilation!"
@@ -30,7 +33,8 @@ if ! cargo build "--manifest-path=rust/Cargo.toml" "--release"; then
 fi
 
 if [ -f rust/target/release/libtest_ffi.so ]; then
-    cp rust/target/release/libtest_ffi.so storage/rust-libs/
+    cp rust/target/release/libtest_ffi.so storage/rust-libs/.libtest_ffi.so.new
+    mv -f storage/rust-libs/.libtest_ffi.so.new storage/rust-libs/libtest_ffi.so
     echo "Copied libtest_ffi.so"
 fi
 

@@ -4,6 +4,7 @@ namespace OGame\Factories;
 
 use Cache;
 use Illuminate\Support\Facades\Date;
+use OGame\Events\Game\PlanetCreated;
 use OGame\GameConstants\UniverseConstants;
 use OGame\Models\Enums\PlanetType;
 use OGame\Models\Planet;
@@ -12,6 +13,7 @@ use OGame\Services\CharacterClassService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
+use Random\Randomizer;
 use RuntimeException;
 
 /**
@@ -94,6 +96,16 @@ class PlanetServiceFactory
         } else {
             unset($this->planetInstancesByCoordinate[$coordinateKey]);
         }
+    }
+
+    /**
+     * Clear cached PlanetService instances after a long-running batch.
+     */
+    public function clearInstances(): void
+    {
+        $this->planetInstancesByCoordinate = [];
+        $this->moonInstancesByCoordinate = [];
+        $this->instancesById = [];
     }
 
     /**
@@ -200,6 +212,13 @@ class PlanetServiceFactory
             'planet' => $planet,
             'planet_id' => null,
         ]);
+
+        // A detached copy (exists = false, e.g. a planet as an espionage report saw it) is handed back
+        // but never cached: cached under the live planet's id it would answer later make() calls.
+        if (!$planet->exists) {
+            return $planetService;
+        }
+
         $this->instancesById[$planet->id] = $planetService;
 
         if ($planetService->planetInitialized()) {
@@ -242,8 +261,8 @@ class PlanetServiceFactory
             /** @var PlanetService */
             $planetService = resolve(PlanetService::class, [
                 'player' => null,
-                'planet' => null,
-                'planet_id' => $planet->id,
+                'planet' => $planet,
+                'planet_id' => null,
             ]);
 
             if ($type === PlanetType::Planet) {
@@ -351,7 +370,7 @@ class PlanetServiceFactory
             if ($planetCount < $maxPlanetsForTier) {
                 // Find a random position between 4 and 12 that's not already taken
                 $positions = range(4, 12);
-                shuffle($positions);
+                $positions = app(Randomizer::class)->shuffleArray($positions);
 
                 foreach ($positions as $position) {
                     $existingPlanet = Planet::where('galaxy', $galaxy)->where('system', $system)->where('planet', $position)->first();
@@ -366,7 +385,7 @@ class PlanetServiceFactory
 
             // System is full, move to next system
             $system++;
-            if ($system > UniverseConstants::MAX_SYSTEM_COUNT) {
+            if ($system > $this->settings->numberOfSystems()) {
                 // Galaxy is full, move to next galaxy
                 $system = UniverseConstants::MIN_SYSTEM;
                 $galaxy++;
@@ -522,6 +541,8 @@ class PlanetServiceFactory
 
         $planet->save();
 
+        event(new PlanetCreated($planet->id, $player->getId(), $planet_type->value));
+
         return $this->makeForPlayer($player, $planet->id);
     }
 
@@ -546,7 +567,7 @@ class PlanetServiceFactory
         // diameter = floor((x + 3 * debris / 100000) ^ 0.5 * 1000)
         // where x is between 10 and 20 (random if not specified)
         if ($xFactor === null) {
-            $x = rand(10, 20);
+            $x = app(Randomizer::class)->getInt(10, 20);
         } else {
             // Clamp x factor to valid range (10-20)
             $x = max(10, min(20, $xFactor));
@@ -599,7 +620,7 @@ class PlanetServiceFactory
         $planet_data = $this->planetData($planet->planet, $is_first_planet);
 
         // Random field count between the min and max values and add the Server planet fields bonus setting.
-        $base_fields = rand($planet_data['fields'][0], $planet_data['fields'][1]) + $this->settings->planetFieldsBonus();
+        $base_fields = app(Randomizer::class)->getInt($planet_data['fields'][0], $planet_data['fields'][1]) + $this->settings->planetFieldsBonus();
 
         // Apply Discoverer class planet size bonus (+10%)
         // Only apply character class bonus if user has selected a class
@@ -619,7 +640,7 @@ class PlanetServiceFactory
         $planet->diameter = (int) (36.14 * $planet->field_max + 5697.23);
 
         // Random temperature between the min and max values is assigned to temp_max, then temp_min is calculated as temp_max - 40.
-        $planet->temp_max = rand($planet_data['temperature'][0], $planet_data['temperature'][1]);
+        $planet->temp_max = app(Randomizer::class)->getInt($planet_data['temperature'][0], $planet_data['temperature'][1]);
         $planet->temp_min = $planet->temp_max - 40;
 
         // Starting resources for planets.
@@ -756,8 +777,8 @@ class PlanetServiceFactory
     private function getMaxPlanetsForDensityTier(int $densityTier): int
     {
         return match ($densityTier) {
-            1 => (rand(1, 10) < 7) ? 2 : 3,  // 70% chance of 2, 30% chance of 3
-            2 => (rand(1, 10) < 7) ? 6 : 7,  // 70% chance of 6, 30% chance of 7
+            1 => (app(Randomizer::class)->getInt(1, 10) < 7) ? 2 : 3,  // 70% chance of 2, 30% chance of 3
+            2 => (app(Randomizer::class)->getInt(1, 10) < 7) ? 6 : 7,  // 70% chance of 6, 30% chance of 7
             default => 9,                     // Max 9 planets (positions 4-12)
         };
     }

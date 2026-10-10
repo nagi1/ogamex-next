@@ -1,0 +1,360 @@
+@charset "utf-8";
+
+html,
+body {
+    background: #000 url(/img/outgame/0a5fa2929f5326fade793585415a22.gif) repeat-x 0 32px;
+    height: 100%;
+    color: #473e39;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+
+#start {
+    background: url(/img/outgame/1867da5b5f8769b547bb91d88bb4f8.jpg) no-repeat scroll 50% 32px;
+}
+
+#start.partner-rtl2 {
+    background: url(/img/outgame/eefc1525c9146ec397005829278f0b.jpg) no-repeat scroll 50% 32px;
+}
+
+#start.partner-komputerswiat {
+    background: url(/img/outgame/5a4adf8a719acabfb76cd494eba2f4.jpg) no-repeat scroll 50% 32px;
+}
+
+#start.partner-juegosweb {
+    background: url(/img/outgame/a231c432106494699442d9bf11d8aa.jpg) no-repeat scroll 50% 32px;
+}
+
+#start.partner-onet {
+    background: url(/img/outgame/1867da5b5f8769b547bb91d88bb4f8.jpg) no-repeat scroll 50% 0;
+}
+
+#start.partner-freenet {
+    background: url(/img/outgame/a89d5b89a698c4b265e1903527a8d0.jpg) no-repeat scroll 50% 32px;
+}
+
+#parallax {
+    background: url("/img/outgame/73dd4d54cf59c3aa92e6fcce6e462a.jpg") repeat-x scroll 0 0 transparent;
+    height: 875px;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+    width: 100%;
+}
+
+#parallax div {
+    position: absolute;
+}
+
+#nebula {
+    background: url(/img/outgame/99fe8260e63d379f48ec6b26970a98.png) no-repeat;
+    height: 433px;
+    width: 1400px;
+}
+
+a:link {
+    color: #4579a4;
+    font-weight: bold;
+    outline: 0;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #619fc8;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: #619fc8;
+    outline: 0;
+}
+
+a:active {
+    position: relative;
+    top: 1px;
+}
+
+p {
+    color: #848484;
+    font-size: 12px;
+    line-height: normal;
+    margin: 15px 0;
+}
+
+a.button,
+a.button:visited {
+    background: url("/img/outgame/f1c317aff2183c9b8b905bbbca9e8a.jpg") repeat-x scroll 0 top #22303f;
+    display: inline-block;
+    padding: 5px 20px 6px;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid #23313f;
+    border-left: 1px solid #2c3e4f;
+    border-right: 1px solid #23313f;
+    border-top: 1px solid #3b4d5f;
+    position: relative;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+a.button:hover {
+    background-position: 0 -27px;
+}
+
+a.button:active {
+    top: 1px;
+}
+
+a.small.button,
+a.small.button:visited {
+    font-size: 11px;
+}
+
+a.button,
+a.button:visited,
+a.medium.button,
+a.medium.button:visited {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+a.large.button,
+a.large.button:visited {
+    font-size: 14px;
+    padding: 8px 14px 9px;
+}
+
+a.blue.button,
+a.blue.button:visited {
+    background-color: #002341;
+}
+
+a.blue.button:hover {
+    background-color: #0364b9;
+}
+
+#header {
+    height: 110px;
+    margin: 0 auto;
+    padding: 32px 0 0;
+    position: relative;
+    width: 715px;
+}
+
+.partner-onet #header {
+    padding: 0;
+}
+
+h1 {
+    height: 80px;
+    float: left;
+    margin: 30px 0 0;
+    width: 260px;
+}
+
+h1 a {
+    display: block;
+    height: 80px;
+    text-indent: -9999px;
+}
+
+h2 {
+    color: #619fc8;
+    font-size: 15px;
+    height: 27px;
+    line-height: 27px;
+    margin: 0 0 5px;
+    text-shadow: -1px -1px 0 #000;
+}
+
+h4 {
+    color: #619fc8;
+}
+
+a#loginBtn {
+    background: url(/img/outgame/f88cc2bd8efa2b7d232e50d56a1180.png) no-repeat scroll 0 0;
+    color: #FFF;
+    display: block;
+    float: right;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    margin: 32px 32px 0 0;
+    width: 102px;
+    text-align: center;
+    text-shadow: -1px -1px 0 #501313;
+}
+
+a#loginBtnEvent {
+    background: url(/img/outgame/ab34783d8892885c7d9cdbbcfa8a1a.png) no-repeat scroll 0 0;
+    color: #FFF;
+    display: block;
+    float: right;
+    font-size: 16px;
+    height: 60px;
+    line-height: 16px;
+    margin: 28px 28px 0 0;
+    width: 292px;
+    text-align: center;
+    text-shadow: -1px -1px 0 #501313;
+}
+
+span#eventText {
+    display: block;
+    top: 15px;
+    left: 15px;
+    position: relative;
+    width: 240px;
+}
+
+a#loginBtnEvent:hover {
+    background-position: 0 -60px;
+}
+
+a#loginBtn:hover {
+    background-position: -102px 0;
+}
+
+#login {
+    background: url(/img/outgame/c732feb94125f1122741b89857eaf6.gif) no-repeat;
+    height: 267px;
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 97px;
+    width: 223px;
+    z-index: 20;
+}
+
+.partner-onet #login {
+    top: 65px;
+}
+
+#resendLinkForm,
+#pwLostForm,
+#loginForm {
+    height: 195px;
+    margin: 10px auto 0;
+    width: 190px;
+    overflow: visible;
+    z-index: 100000;
+}
+
+#resendLink .black-border,
+#pwLostForm .black-border,
+#loginForm .black-border {
+    width: 188px;
+}
+
+#resendLink .black-border input,
+#pwLostForm .black-border input,
+#loginForm .black-border input {
+    width: 174px;
+}
+
+.cookie-txt {
+    background: none repeat scroll 0 0 transparent;
+    color: #848484;
+    font-size: 11px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+}
+
+.server-predefined {
+    margin-left: 10px;
+    background: #8d9aa7 url(/img/outgame/113abb97b5fff99cb7d4d5019f04eb.gif) repeat-x;
+    border: 2px solid #9eb4cb;
+    color: #0d334c;
+    height: 16px;
+    padding: 0 5px;
+    width: 184px;
+}
+
+.checked {
+    color: #619fc8;
+}
+
+#loginForm a {
+    background: url(/img/outgame/76cbf0115f4559fb1d6f25e9819ecb.gif) no-repeat 0 3px;
+    font-size: 11px;
+    font-weight: normal;
+    height: 15px;
+    line-height: 15px;
+    padding: 0 0 0 11px;
+}
+
+#resendLink #formSubmit,
+#pwLostForm #formSubmit,
+#loginForm #loginSubmit {
+    background: url(/img/outgame/5f68e42f93bad65d7a1a6ddd130543.gif) no-repeat;
+    color: #FFF;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px auto;
+    padding: 0;
+    text-align: center;
+    text-shadow: -1px -1px 0 #501313;
+    width: 187px;
+}
+
+#resendLink #formSubmit:hover,
+#pwLostForm #formSubmit:hover,
+#loginForm #loginSubmit:hover {
+    background-position: 0 -30px;
+}
+
+#resendLinkForm,
+#pwLostForm {
+    margin: 10px 0 0;
+}
+
+#resendLink,
+#passwordLost {
+    display: none;
+}
+
+#resendLinkForm,
+#pwLostForm {
+    float: left;
+}
+
+#resendLinkForm #formSubmit,
+#pwLostForm #formSubmit {
+    font-size: 14px;
+    margin: 25px 0 10px;
+}
+
+#resendLinkInfo,
+#pwLostInfo {
+    border: 1px solid #2e363e;
+    float: right;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 160px;
+}
+
+#content {
+    width: 718px;
+    margin: 0 auto;
+}
+
+#footerContent {
+    padding-top: 10px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+}

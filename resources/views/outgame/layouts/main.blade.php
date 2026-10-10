@@ -32,7 +32,7 @@
           content="OGameX - The legendary game in the space! Discover the universe together with thousands of players."/>
     <meta name="robots" content="index,follow"/>
     <meta name="Revisit" content="After 14 days"/>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ app(\OGame\Services\SettingsService::class)->universeName() }}</title>
 
     <link rel="apple-touch-icon" href="/img/outgame/20da7e6c416e6cd5f8544a73f588e5.png"/>
     @vite(['resources/css/outgame.css', 'resources/js/outgame.js'])
@@ -200,15 +200,15 @@
                     <div class="black-border">
                         <select class="js_uniUrl" id="serverLogin" name="uni">
                             <option value="s1">
-                                {{ __('t_external.login.universe_option_1') }}
+                                {{ app(\OGame\Services\SettingsService::class)->universeName() }}
                             </option>
                         </select>
                     </div>
                 </div>
                 <input type="submit" id="loginSubmit" value="{{ __('t_external.login.submit') }}"/>
-                <a href="#" id="pwLost" target="_blank" title="{{ __('t_external.login.forgot_password') }}">{{ __('t_external.login.forgot_password') }}</a>
+                <a href="{{ route('password.request') }}" id="pwLost" title="{{ __('t_external.login.forgot_password') }}">{{ __('t_external.login.forgot_password') }}</a>
                 <br/>
-                <a href="#" id="emailLost" target="_blank" title="{{ __('t_external.login.forgot_email') }}">{{ __('t_external.login.forgot_email') }}</a>
+                <a href="{{ route('password.email-lookup') }}" id="emailLost" title="{{ __('t_external.login.forgot_email') }}">{{ __('t_external.login.forgot_email') }}</a>
                 <p id="TermsAndConditionsAcceptWithLogin">
                     {!! __('t_external.login.terms_accept_html') !!}</p>
             </form>

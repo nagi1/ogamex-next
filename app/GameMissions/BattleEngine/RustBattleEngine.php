@@ -32,6 +32,13 @@ class RustBattleEngine extends BattleEngine
     private FFI $ffi;
 
     /**
+     * One FFI binding per process. `FFI::cdef` dlopens the library each time it is called, and a battle
+     * engine is built per fight, so a long-lived process (a queue worker, a simulation of hours of play)
+     * piled up thousands of bindings and crashed with a segmentation fault when they were torn down.
+     */
+    private static FFI|null $sharedFfi = null;
+
+    /**
      * RustBattleEngine constructor.
      *
      * @param array<AttackerFleet> $attackers All attacking fleets.
@@ -43,11 +50,32 @@ class RustBattleEngine extends BattleEngine
     {
         parent::__construct($attackers, $defenderPlanet, $defenders, $settings);
 
-        $this->ffi = FFI::cdef(
-            "char* fight_battle_rounds(const char* input_json);
-            void free_battle_result(char* ptr);",
-            base_path('storage/rust-libs/libbattle_engine_ffi.so')
-        );
+        $this->ffi = self::binding();
+    }
+
+    /**
+     * The process's one binding to the library, shared with the AI module's case similarity so the same
+     * .so is never dlopened twice. A library built before `rank_case_similarities` existed is bound
+     * without it, so battles keep working and the module falls back to its sidecar.
+     */
+    public static function binding(): FFI
+    {
+        if (self::$sharedFfi !== null) {
+            return self::$sharedFfi;
+        }
+
+        $library = base_path('storage/rust-libs/libbattle_engine_ffi.so');
+        $battle = "char* fight_battle_rounds(const char* input_json);
+            void free_battle_result(char* ptr);";
+
+        try {
+            self::$sharedFfi = FFI::cdef($battle . "
+            char* rank_case_similarities(const char* input_json);", $library);
+        } catch (FFI\Exception) {
+            self::$sharedFfi = FFI::cdef($battle, $library);
+        }
+
+        return self::$sharedFfi;
     }
 
     /**
@@ -169,6 +197,9 @@ class RustBattleEngine extends BattleEngine
         return [
             'attacker_fleets' => $attackerFleets,
             'defender_fleets' => $defenderFleets,
+            // The round combat runs in Rust, so the base class's seed has to
+            // travel with the input for the battle to be replayable.
+            'seed' => $this->seed,
         ];
     }
 
@@ -335,7 +366,7 @@ class RustBattleEngine extends BattleEngine
         // Roll the dice for Hamill Manoeuvre
         $settings = app(SettingsService::class);
         $probability = $settings->hamillManoeuvreChance();
-        $dice = random_int(1, $probability);
+        $dice = $this->random(1, $probability);
 
         if ($dice === 1) {
             // Hamill Manoeuvre triggered! Destroy one Deathstar

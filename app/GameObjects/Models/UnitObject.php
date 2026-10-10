@@ -37,7 +37,8 @@ abstract class UnitObject extends GameObject
             if ($rapidfire->object_machine_name == $object->machine_name) {
                 // Rapidfire continues with probability (n - 1) / n, matching the original game.
                 // For example amount 4 means 3/4 = 75% chance.
-                return random_int(1, $rapidfire->amount) > 1;
+                // mt_rand so a seeded battle (mt_srand in BattleEngine) replays identically.
+                return mt_rand(1, $rapidfire->amount) > 1;
             }
         }
 

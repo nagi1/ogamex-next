@@ -3,6 +3,7 @@
 namespace OGame\GameMissions\BattleEngine;
 
 use InvalidArgumentException;
+use OGame\Events\Game\BattleResolved;
 use OGame\GameMissions\BattleEngine\Models\AttackerFleet;
 use OGame\GameMissions\BattleEngine\Models\AttackerFleetResult;
 use OGame\GameMissions\BattleEngine\Models\BattleResult;
@@ -21,6 +22,7 @@ use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
 use OGame\Services\WreckFieldService;
+use Random\Randomizer;
 use RuntimeException;
 
 /**
@@ -44,6 +46,26 @@ abstract class BattleEngine
      * @var bool Whether the attacking initiator withdraws if the defender flees.
      */
     protected bool $retreatAfterDefenderRetreat = false;
+
+    /**
+     * @var bool|null Memoised moon existence for the defender planet. The planet is
+     * fixed for the engine's life, so the moon cannot appear between two runs of the
+     * same engine — and a Monte-Carlo raid estimate runs it 50+ times, where each
+     * uncached lookup was a query against the planets table.
+     */
+    protected bool|null $moonExisted = null;
+
+    /**
+     * @var int|null Seed for reproducible simulation. When set, every combat
+     * draw is drawn from a seeded generator; when null, behaviour is unchanged.
+     */
+    protected ?int $seed = null;
+
+    /**
+     * @var bool Whether this run is a pure, read-only question: no planet
+     * writes, no events. A pure run must not change the world it is asked about.
+     */
+    protected bool $pure = false;
 
     /**
      * BattleEngine constructor.
@@ -104,10 +126,26 @@ abstract class BattleEngine
     /**
      * Simulate a battle between two players.
      *
+     * @param int|null $seed An explicit seed for reproducible simulation. Every
+     * combat draw is taken from a seeded generator, so the same inputs and seed
+     * return the same result. Null draws a seed from the container's Randomizer.
+     * @param bool $pure A read-only question when true: the defender's planet is
+     * never written and no BattleResolved event is fired, so a "what if" changes
+     * nothing in the world. The default remains the live battle path.
+     *
      * @return BattleResult Information about the battle result.
      */
-    public function simulateBattle(): BattleResult
+    public function simulateBattle(int|null $seed = null, bool $pure = false): BattleResult
     {
+        // A live battle draws its seed from the game's randomness source: random in production, and
+        // replayable when a simulation or test binds a seeded engine. Every combat draw follows this seed.
+        $this->seed = $seed ?? app(Randomizer::class)->getInt(0, PHP_INT_MAX);
+        $this->pure = $pure;
+
+        // Seeding the global Mersenne Twister makes every mt_rand/rand/array_rand
+        // draw in the round path reproducible under this seed.
+        mt_srand($this->seed);
+
         $result = new BattleResult();
 
         // Initialize the battle result object with the attacker and defender information.
@@ -254,7 +292,10 @@ abstract class BattleEngine
         if ($defenderPlayer->hasEngineer()) {
             $defenseRepairRate = (int)round($defenseRepairRate + (100 - $defenseRepairRate) / 2);
         }
-        $defenseRepairService = new DefenseRepairService($defenseRepairRate);
+        // The repair service re-seeds the global generator, so it receives a
+        // distinct sub-stream rather than replaying the round draws.
+        $repairSeed = $this->seed === null ? null : $this->seed ^ 0x9E3779B9;
+        $defenseRepairService = new DefenseRepairService($defenseRepairRate, $repairSeed);
         $result->repairedDefenses = $defenseRepairService->calculateRepairedDefenses($result->defenderUnitsLost);
 
         // Determine winner of battle.
@@ -286,7 +327,7 @@ abstract class BattleEngine
 
         // Determine if a moon already exists for defender's planet.
         // If defender is a moon, moonExisted should be true (the moon itself exists).
-        $result->moonExisted = $this->defenderPlanet->isMoon() || $this->defenderPlanet->hasMoon();
+        $result->moonExisted = $this->moonExisted ??= $this->defenderPlanet->isMoon() || $this->defenderPlanet->hasMoon();
 
         // Calculate moon percentage if a moon does not exist yet.
         if ($result->moonExisted) {
@@ -295,6 +336,16 @@ abstract class BattleEngine
         } else {
             $result->moonChance = $this->calculateMoonChance($result->debris);
             $result->moonCreated = $this->rollMoonCreation($result->moonChance);
+        }
+
+        $attackerPlayerIds = array_map(
+            static fn (AttackerFleet $attacker): int => $attacker->ownerId,
+            $this->attackers,
+        );
+
+        // A pure question fires no event: the world must not react to a "what if".
+        if (!$this->pure) {
+            event(new BattleResolved($attackerPlayerIds, $defenderPlayer->getId(), $this->defenderPlanet->getPlanetId()));
         }
 
         return $result;
@@ -327,7 +378,8 @@ abstract class BattleEngine
         }
 
         // Deduct flee deuterium before loot calculation so cargo theft uses updated stocks.
-        if ($decision->deuteriumCost > 0) {
+        // A pure question skips the write: the defender's planet is left exactly as it was.
+        if ($decision->deuteriumCost > 0 && !$this->pure) {
             $this->defenderPlanet->deductResources(new Resources(0, 0, $decision->deuteriumCost, 0));
         }
 
@@ -835,7 +887,17 @@ abstract class BattleEngine
      */
     protected function rollMoonCreation($moonChance): bool
     {
-        $dice = random_int(1, 100);
+        $dice = $this->random(1, 100);
         return $dice <= $moonChance;
+    }
+
+    /**
+     * One combat draw, seeded when a seed is set and cryptographically random
+     * otherwise. This is the single point every draw in the round path should
+     * go through so a seeded simulation is fully reproducible.
+     */
+    protected function random(int $min, int $max): int
+    {
+        return $this->seed !== null ? mt_rand($min, $max) : random_int($min, $max);
     }
 }

@@ -1,3 +1,5 @@
+OGameX Next is not intended to replace the original OGameX repository. It is a faster-moving future version of the same project. When our work and the original project cross paths, we want improvements to flow back into OGameX where they belong.
+
 <div align="center">
 
 🌟 **If you find this project useful, please consider giving it a star!** 🌟
@@ -146,6 +148,10 @@ If you instead wish to install OGameX manually, note that OGameX requires PHP ^8
 ### <a name="development"></a> a) Install for local development
 For local development use the default docker-compose file that is included in this repository. This configuration is optimized for development and includes several tools that are useful for debugging and testing.
 
+#### Using existing host services
+
+If you already use Lerd, Laravel Herd, Valet, or another local development environment, use [`local-docker-dev`](local-docker-dev/README.md) instead of the default Compose stack. It runs only the PHP application services in Docker and connects them to MySQL and Redis already running on your host, so it does not take ports 80, 443, 3306, or 8080 from your existing environment.
+
 Please note that performance of the development mode is slow on Windows (compared to MacOS/Linux) due to overhead of running Docker on Windows. Loading pages with development mode enabled can take multiple seconds on Windows. If you want to run OGameX on Windows, I advise to use the production mode instead. One of the main differences is that the production configuration enables PHP OPcache which speeds up the application, but this also means that the PHP files are not updated (instantly) when you change them. This makes it less suitable for development.
 
 1. Clone the repository.
@@ -167,6 +173,24 @@ After the docker containers have started, visit http://localhost to access OGame
 Create a new account to start using OGameX. The first account created will be automatically assigned the admin role.
 
 > Note: if you need to run manual `php artisan` commands, you can SSH into the `ogamex-app` container with the `docker compose exec -it ogamex-app bash` command.
+
+### Fleet arrival queue workers
+
+Fleet arrivals are processed in the background by the `ogamex-queue-worker` container. It has a light lane for logistics and a heavy lane for battle-capable missions. The worker is opt-in locally so it cannot consume jobs while you are inspecting or testing queues:
+
+```
+$ docker compose --profile queue up -d
+```
+
+Set `QUEUE_WORKERS_LIGHT` and `QUEUE_WORKERS_HEAVY` in `.env` to tune the pools. Recreate the queue worker after changing them.
+
+The same container can run [Laravel Horizon](https://laravel.com/docs/horizon) instead. Horizon adds a monitoring dashboard and manages its worker pools itself. It only supports the Redis queue backend, which the Compose stack already provides, so enabling it is a single change: set `QUEUE_CONNECTION=redis` in `.env` and bring the stack back up (Compose recreates the containers with the new value):
+
+```
+$ docker compose --profile queue up -d
+```
+
+The container detects the driver and starts Horizon instead of the database pools, and a "Queue monitoring" link appears in the admin bar. The dashboard is at `/admin/horizon` and is limited to admins. Worker pools, queue names, timeouts and memory limits are defined in `config/horizon.php` and read their queue names from `app/Enums/QueueName.php`. Pool sizes have per-environment defaults for `local`, `staging` and `production` (any other `APP_ENV` falls back to the local sizes), and every worker limit can be tuned from `.env` with the `HORIZON_*` variables listed in `.env.example`. On Redis the fleet-arrival service cannot track delayed jobs by their integer jobs-table ID, so mission updates may dispatch duplicate (still idempotent) arrival jobs.
 
 ### <a name="production"></a> b) Install for production
 For production there is a separate docker-compose file called `docker-compose.prod.yml`. This configuration contains

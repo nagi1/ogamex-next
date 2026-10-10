@@ -16,8 +16,11 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Lab404\Impersonate\Models\Impersonate;
 use OGame\Enums\CharacterClass;
+use OGame\Mail\ResetPasswordMail;
+use OGame\Models\Concerns\HasModuleData;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -51,6 +54,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int|null $character_class
  * @property bool $character_class_free_used
  * @property Carbon|null $character_class_changed_at
+ * @property int $military_units_destroyed_points
+ * @property int $military_units_lost_points
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read UserTech|null $tech
@@ -94,6 +99,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasFactory;
+    use HasModuleData;
     use HasRoles;
     use Impersonate;
     use Notifiable;
@@ -103,6 +109,14 @@ class User extends Authenticatable
      * @var bool
      */
     public $remember_token = false;
+
+    /**
+     * The entity type used to namespace module data for this model.
+     */
+    protected function moduleEntityType(): string
+    {
+        return 'player';
+    }
 
     /**
      * Boot method to attach model events.
@@ -307,6 +321,19 @@ class User extends Authenticatable
     public function canBeImpersonated(): bool
     {
         return true;
+    }
+
+    /**
+     * Send the password reset notification using the OGameX branded email.
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $resetUrl = url(route('password.reset', [
+            'token' => $token,
+            'email' => $this->email,
+        ], false));
+
+        Mail::to($this->email)->send(new ResetPasswordMail($resetUrl, $this->username));
     }
 
     /**

@@ -35,47 +35,47 @@ class ModuleSlotServiceTest extends TestCase
 
     public function test_registered_renderer_is_called_on_render(): void
     {
-        ModuleSlotService::register('admin.nav', fn (array $data): string => '<div>hello</div>');
+        ModuleSlotService::register('admin.modules', fn (array $data): string => '<div>hello</div>');
 
-        $this->assertSame('<div>hello</div>', ModuleSlotService::render('admin.nav'));
+        $this->assertSame('<div>hello</div>', ModuleSlotService::render('admin.modules'));
     }
 
     public function test_has_slot_returns_true_after_registration(): void
     {
-        ModuleSlotService::register('admin.nav', fn (array $data): string => '');
+        ModuleSlotService::register('admin.modules', fn (array $data): string => '');
 
-        $this->assertTrue(ModuleSlotService::hasSlot('admin.nav'));
+        $this->assertTrue(ModuleSlotService::hasSlot('admin.modules'));
     }
 
     public function test_multiple_renderers_for_same_slot_are_concatenated(): void
     {
-        ModuleSlotService::register('admin.nav', fn (array $data): string => 'A');
-        ModuleSlotService::register('admin.nav', fn (array $data): string => 'B');
+        ModuleSlotService::register('admin.modules', fn (array $data): string => 'A');
+        ModuleSlotService::register('admin.modules', fn (array $data): string => 'B');
 
-        $this->assertSame('AB', ModuleSlotService::render('admin.nav'));
+        $this->assertSame('AB', ModuleSlotService::render('admin.modules'));
     }
 
     public function test_renderer_receives_data_array(): void
     {
-        ModuleSlotService::register('admin.nav', fn (array $data): string => $data['key'] ?? 'missing');
+        ModuleSlotService::register('admin.modules', fn (array $data): string => $data['key'] ?? 'missing');
 
-        $this->assertSame('value', ModuleSlotService::render('admin.nav', ['key' => 'value']));
+        $this->assertSame('value', ModuleSlotService::render('admin.modules', ['key' => 'value']));
     }
 
     public function test_reset_slots_clears_all_renderers(): void
     {
-        ModuleSlotService::register('admin.nav', fn (array $data): string => 'x');
-        $this->assertTrue(ModuleSlotService::hasSlot('admin.nav'));
+        ModuleSlotService::register('admin.modules', fn (array $data): string => 'x');
+        $this->assertTrue(ModuleSlotService::hasSlot('admin.modules'));
 
         ModuleSlotService::resetSlots();
 
-        $this->assertFalse(ModuleSlotService::hasSlot('admin.nav'));
-        $this->assertSame('', ModuleSlotService::render('admin.nav'));
+        $this->assertFalse(ModuleSlotService::hasSlot('admin.modules'));
+        $this->assertSame('', ModuleSlotService::render('admin.modules'));
     }
 
-    public function test_only_the_admin_nav_slot_is_supported(): void
+    public function test_only_the_admin_modules_slot_is_supported(): void
     {
-        $this->assertSame(['admin.nav'], ModuleSlotService::SLOTS);
+        $this->assertSame(['admin.modules'], ModuleSlotService::SLOTS);
     }
 
     public function test_unknown_slot_is_rejected_with_the_supported_slots(): void

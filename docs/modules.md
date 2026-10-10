@@ -201,7 +201,7 @@ injection. Discuss new extension points before adding them.
 Keep module tests under `Modules/MyFeature/tests`. Run the module suite with:
 
 ```bash
-php artisan test --testsuite=Modules --filter=MyFeature
+php artisan test --testsuite=Modules --filter=MyFeature --parallel --bail
 ```
 
 The `HelloWorld` test shows how to enable a module before application boot. Use
@@ -237,3 +237,26 @@ composer dump-autoload
 ```bash
 php artisan optimize:clear
 ```
+
+## Separately-maintained modules
+
+A module can live in its own repository, with its own remote and its own releases, and
+still be developed against this host. `Modules/AI` is one, and it is deliberately **not**
+a submodule: the host pins nothing, so the module checkout is entirely yours.
+
+```bash
+git clone https://github.com/nagi1/ogamex-module-ai.git Modules/AI
+git -C Modules/AI pull origin main        # update whenever you like
+```
+
+- `.gitignore` ignores `/Modules/AI/`, so the host never stages or tracks it and cannot
+  accidentally absorb it as an embedded repository.
+- `.vscode/settings.json` scans two levels deep for repositories, so the module appears
+  in Source Control as its own repository with its own changes, branches and remotes.
+- The host treats it exactly like an in-tree module: `ogamex:module:install` migrates it,
+  runs its hooks, refreshes the caches and restarts the workers
+  (see `docs/module-lifecycle.md`).
+- CI stays host-only: the host workflows run the host's own testsuites
+  (`--testsuite=Feature,Unit`), so the host suite, its shard timings and its CI never
+  depend on separately-maintained module code. Running a module's suite is the
+  module's own concern — the module ships a `scripts/ogamex` runner for its checkout.

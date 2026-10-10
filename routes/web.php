@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use OGame\Http\Controllers\Admin\ActivityLogsController;
+use OGame\Http\Controllers\Admin\CronTasksController;
 use OGame\Http\Controllers\Admin\DeveloperShortcutsController;
 use OGame\Http\Controllers\Admin\FleetTimingController;
 use OGame\Http\Controllers\Admin\ModulesController;
@@ -17,6 +19,7 @@ use OGame\Http\Controllers\DefenseController;
 use OGame\Http\Controllers\FacilitiesController;
 use OGame\Http\Controllers\FleetController;
 use OGame\Http\Controllers\FleetEventsController;
+use OGame\Http\Controllers\ForgotEmailController;
 use OGame\Http\Controllers\GalaxyController;
 use OGame\Http\Controllers\HighscoreController;
 use OGame\Http\Controllers\JumpGateController;
@@ -56,6 +59,10 @@ Route::redirect('/', '/overview', 301);
 
 // Language switcher — accessible to both guests and authenticated users.
 Route::get('/lang/{lang}', [LanguageController::class, 'switchLang'])->name('language.switch');
+
+// Forgot email lookup (guest only).
+Route::get('/forgot-email', [ForgotEmailController::class, 'show'])->name('password.email-lookup');
+Route::post('/forgot-email', [ForgotEmailController::class, 'send'])->middleware('throttle:forgot-email');
 
 // Public AJAX endpoints (no auth required).
 Route::get('/ajax/main/rules', [RulesController::class, 'ajaxRules'])->name('rules.ajax');
@@ -279,6 +286,13 @@ Route::middleware(['auth', 'globalgame', 'locale', 'admin'])->group(function () 
     // Modules
     Route::get('/admin/modules', [ModulesController::class, 'index'])->name('admin.modules.index');
     Route::post('/admin/modules/toggle', [ModulesController::class, 'toggle'])->name('admin.modules.toggle');
+
+    // Activity logs (constructions, fleets, research)
+    Route::get('/admin/activity-logs', [ActivityLogsController::class, 'index'])->name('admin.activitylogs.index');
+
+    // Cron / scheduled task management
+    Route::get('/admin/cron-tasks', [CronTasksController::class, 'index'])->name('admin.crontasks.index');
+    Route::post('/admin/cron-tasks/run', [CronTasksController::class, 'run'])->name('admin.crontasks.run');
 
     // Server administration (multi-account detection, bans)
     Route::get('/admin/server-administration', [ServerAdministrationController::class, 'index'])->name('admin.server-administration.index');

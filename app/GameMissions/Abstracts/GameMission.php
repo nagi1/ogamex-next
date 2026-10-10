@@ -23,10 +23,13 @@ use OGame\Models\Planet\Coordinate;
 use OGame\Models\Resources;
 use OGame\Services\FleetMissionService;
 use OGame\Services\FleetUnionService;
+use OGame\Services\HostilityGuard;
 use OGame\Services\MessageService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
+use OGame\Support\FleetMissionPlanetFormatter;
+use Throwable;
 
 abstract class GameMission
 {
@@ -59,6 +62,23 @@ abstract class GameMission
      * @var FleetMissionStatus The friendly status for UI styling.
      */
     protected static FleetMissionStatus $friendlyStatus;
+
+    /**
+     * @var array<int, string> The ship machine names this mission refuses to run without. Missions
+     *                          with no fixed required ship (attack, transport, deployment, ...)
+     *                          leave this empty.
+     */
+    protected static array $requiredShipMachineNames = [];
+
+    /**
+     * @var array<string, int> The research a player must have before this mission can run, as
+     *                         machine name => minimum level. It answers "which research does this
+     *                         mission wait on?" without the caller naming a technology, so a
+     *                         mod-added mission declares its own technology and every reader — this
+     *                         host's checks and any module planner — stays name-free. Missions with
+     *                         no research gate leave this empty.
+     */
+    protected static array $requiredResearch = [];
 
     /**
      * @param FleetMissionService $fleetMissionService
@@ -112,6 +132,29 @@ abstract class GameMission
     }
 
     /**
+     * The ship machine names this mission refuses to run without. Missions with
+     * no fixed required ship (attack, transport, deployment, ...) leave this empty.
+     *
+     * @return array<int, string>
+     */
+    public static function getRequiredShipMachineNames(): array
+    {
+        return static::$requiredShipMachineNames;
+    }
+
+    /**
+     * The research this mission waits on, as machine name => minimum level. Missions with no research
+     * gate leave this empty. The caller reads a technology's name from here rather than carrying it,
+     * so a mod-added mission's technology is reachable with no host or module edit (gate 1).
+     *
+     * @return array<string, int>
+     */
+    public static function getRequiredResearch(): array
+    {
+        return static::$requiredResearch;
+    }
+
+    /**
      * Checks if the mission is possible under the given circumstances.
      * Child classes should call parent::isMissionPossible() first and return early if not possible,
      * then add their own mission-specific checks.
@@ -137,6 +180,10 @@ abstract class GameMission
             return new MissionPossibleStatus(false, __('The attack block is active. In that time only friendly fleets can be started.'));
         }
 
+        if (static::$blockedByServerAttackBlock && app(HostilityGuard::class)->forbids($player->getId(), $this->defenderPlayerId($targetCoordinate, $targetType))) {
+            return new MissionPossibleStatus(false, __('Hostile actions are disabled in this universe.'));
+        }
+
         // If mission from and to coordinates and types are the same, the mission is not possible.
         if ($planet->getPlanetCoordinates()->equals($targetCoordinate) && $planet->getPlanetType() === $targetType) {
             return new MissionPossibleStatus(false);
@@ -144,6 +191,17 @@ abstract class GameMission
 
         // Default: mission is possible. Child classes should call parent first and then add their own checks.
         return new MissionPossibleStatus(true);
+    }
+
+    /**
+     * Resolve the target planet's owner from its coordinates and type, or null when the
+     * target does not exist. The guard then decides from the two player ids alone.
+     */
+    private function defenderPlayerId(Coordinate $targetCoordinate, PlanetType $targetType): int|null
+    {
+        $targetPlanet = $this->planetServiceFactory->makeForCoordinate($targetCoordinate, true, $targetType);
+
+        return $targetPlanet?->getPlayer()?->getId();
     }
 
     /**
@@ -160,7 +218,8 @@ abstract class GameMission
             $fleetUnionService->handleFleetRecall($mission);
         }
 
-        $currentTime = (int)Date::now()->timestamp;
+        $currentMoment = Date::now();
+        $currentTime = (int) $currentMoment->timestamp;
 
         // Store the original arrival time before modifying it.
         // For ACS Defend, we need physical arrival time for return trip calculation.
@@ -178,6 +237,7 @@ abstract class GameMission
         // Always update time_arrival to now for consistency.
         // This ensures startReturn() calculates departure time as "now".
         $mission->time_arrival = $currentTime;
+        $mission->time_arrival_ms = (int) $currentMoment->valueOf();
 
         // Clear the holding time for recalled missions (expeditions, ACS Defend, etc.)
         // The fleet should return immediately without waiting at the destination.
@@ -297,12 +357,14 @@ abstract class GameMission
             throw new Exception('Resources exceed fleet cargo capacity.');
         }
 
-        // Time this fleet mission will depart (now).
-        $time_start = (int)Date::now()->timestamp;
+        $dispatchMoment = Date::now();
+        $time_start = (int) $dispatchMoment->timestamp;
+        $time_start_ms = (int) $dispatchMoment->valueOf();
 
         // Time fleet mission will arrive.
         // TODO: refactor calculate to gamemission base class?
-        $time_end = $time_start + $this->fleetMissionService->calculateFleetMissionDuration($planet, $targetCoordinate, $units, $this, $speedPercent);
+        $flightDuration = $this->fleetMissionService->calculateFleetMissionDuration($planet, $targetCoordinate, $units, $this, $speedPercent);
+        $time_end = $time_start + $flightDuration;
 
         $mission = new FleetMission();
 
@@ -336,14 +398,21 @@ abstract class GameMission
             $mission->time_holding = $holdingHours * 3600;
             $targetType = PlanetType::DeepSpace;
             $mission->time_arrival = $time_end;
+            $mission->time_arrival_ms = $time_start_ms + ($flightDuration * 1000);
         } elseif (static::class === AcsDefendMission::class) {
             $mission->time_holding = $holdingHours * 3600;
             // For ACS Defend, time_arrival includes the hold time.
             // This means the mission won't be processed until hold time expires.
             // Hold time is stored as raw game time (not affected by fleet speed).
             $mission->time_arrival = $time_end + ($holdingHours * 3600);
+            $mission->time_arrival_ms = $time_start_ms + (($flightDuration + ($holdingHours * 3600)) * 1000);
+            // Set processed_hold explicitly: the database default (0) is not reflected on the
+            // in-memory model after save(), and the created-observer's job sync requires
+            // processed_hold === 0 to schedule the physical-arrival (hold start) job.
+            $mission->processed_hold = 0;
         } else {
             $mission->time_arrival = $time_end;
+            $mission->time_arrival_ms = $time_start_ms + ($flightDuration * 1000);
         }
 
         $mission->type_to = $targetType->value;
@@ -536,6 +605,10 @@ abstract class GameMission
             $time_start = $parentMission->time_arrival + $actualHoldingTime;
         }
 
+        $departureTimeMs = ($parentMission->mission_type === 5)
+            ? $parentMission->time_arrival_ms
+            : ($parentMission->time_arrival_ms + ($actualHoldingTime * 1000));
+
         // Time fleet mission will arrive (departure time + one-way duration)
         // If an override duration is provided (e.g. recalculated natural speed after battle), use it.
         // For ACS Defend, one-way duration = physical arrival - departure
@@ -577,6 +650,7 @@ abstract class GameMission
         $mission->mission_type = $parentMission->mission_type;
         $mission->time_departure = $time_start;
         $mission->time_arrival = $time_end;
+        $mission->time_arrival_ms = $departureTimeMs + (($oneWayDuration + $additionalReturnTripTime) * 1000);
         $mission->planet_id_to = $parentMission->planet_id_from;
 
         // Coordinates
@@ -627,21 +701,8 @@ abstract class GameMission
     {
         $return_resources = $this->fleetMissionService->getResources($mission);
 
-        // Define from string based on whether the planet is available or not.
-        $from = "[coordinates]{$mission->galaxy_from}:{$mission->system_from}:{$mission->position_from}[/coordinates]";
-        switch ($mission->type_from) {
-            case PlanetType::Planet->value:
-            case PlanetType::Moon->value:
-                if ($mission->planet_id_from !== null) {
-                    $from = __('planet') . " [planet]{$mission->planet_id_from}[/planet]";
-                }
-                break;
-            case PlanetType::DebrisField->value:
-                $from = "[debrisfield]{$mission->galaxy_from}:{$mission->system_from}:{$mission->position_from}[/debrisfield]";
-                break;
-        }
-
-        $to = __('planet') . " [planet]{$mission->planet_id_to}[/planet]";
+        $from = FleetMissionPlanetFormatter::returnEndpointLabel($mission, 'from');
+        $to = FleetMissionPlanetFormatter::returnEndpointLabel($mission, 'to');
 
         if ($return_resources->any()) {
             $params = [
@@ -770,4 +831,34 @@ abstract class GameMission
      * @return void
      */
     abstract protected function processReturn(FleetMission $mission): void;
+
+    /**
+     * Snapshot attacker origin display fields for battle reports.
+     *
+     * PlanetServiceFactory::make() throws when the body no longer exists, so this
+     * must catch failures and return an empty array rather than aborting report creation.
+     *
+     * @return array{planet_coords?: string, planet_name?: string, planet_type?: string}
+     */
+    protected function buildAttackerPlanetSnapshot(int|null $planetId): array
+    {
+        if ($planetId === null) {
+            return [];
+        }
+
+        try {
+            $planet = $this->planetServiceFactory->make($planetId, true);
+            if ($planet === null) {
+                return [];
+            }
+
+            return [
+                'planet_coords' => $planet->getPlanetCoordinates()->asString(),
+                'planet_name' => $planet->getPlanetName(),
+                'planet_type' => $planet->getPlanetType() === PlanetType::Moon ? 'Moon' : 'Planet',
+            ];
+        } catch (Throwable) {
+            return [];
+        }
+    }
 }

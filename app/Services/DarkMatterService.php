@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use OGame\Enums\DarkMatterTransactionType;
 use OGame\Models\User;
+use Random\Randomizer;
 
 /**
  * Class DarkMatterService.
@@ -242,7 +243,7 @@ class DarkMatterService
             $max = (int)$this->settingsService->get('expedition_dark_matter_max_no_pathfinder', 200);
         }
 
-        $baseReward = rand($min, $max);
+        $baseReward = app(Randomizer::class)->getInt($min, $max);
         return (int)($baseReward * $multiplier);
     }
 

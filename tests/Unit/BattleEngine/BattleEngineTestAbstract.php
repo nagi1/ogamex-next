@@ -963,4 +963,45 @@ abstract class BattleEngineTestAbstract extends UnitTestCase
         $this->assertEquals(400, $battleResult->attackerUnitsResult->getAmountByMachineName('light_fighter'));
         $this->assertEquals(25, $battleResult->attackerUnitsResult->getAmountByMachineName('cruiser'));
     }
+
+    /**
+     * A seeded run is a reproducible question: the same inputs and the same seed return the same
+     * battle, so a battle that was only asked as a "what if" can be replayed afterwards. Every
+     * engine has to honour this, because a caller samples one shared seed stream to compare
+     * candidates through identical draws.
+     */
+    public function testSameSeedReturnsTheSameBattle(): void
+    {
+        // Both sides well past a single unit type, so target choice, rapidfire and hull
+        // explosions all get exercised: an unseeded repeat would not coincide.
+        $this->createAndSetPlanetModel([
+            'metal' => 100000,
+            'crystal' => 100000,
+            'deuterium' => 10000,
+            'rocket_launcher' => 300,
+            'light_fighter' => 200,
+        ]);
+        $this->createAndSetUserTechModel([
+            'weapon_technology' => 5,
+            'shielding_technology' => 3,
+            'armor_technology' => 18,
+        ]);
+
+        $attackerFleet = new UnitCollection();
+        $attackerFleet->addUnit(ObjectService::getUnitObjectByMachineName('cruiser'), 200);
+
+        $digest = static fn (BattleResult $result): string => sprintf(
+            '%d|%d|%d|%d|%d',
+            count($result->rounds),
+            $result->attackerUnitsResult->getAmount(),
+            $result->defenderUnitsResult->getAmount(),
+            $result->attackerUnitsLost->getAmount(),
+            (int) $result->debris->metal->get(),
+        );
+
+        $first = $this->createBattleEngine($attackerFleet)->simulateBattle(1234, true);
+        $second = $this->createBattleEngine($attackerFleet)->simulateBattle(1234, true);
+
+        $this->assertSame($digest($first), $digest($second), 'The same inputs and seed must return the same battle.');
+    }
 }

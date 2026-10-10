@@ -4,13 +4,51 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Http;
 use OGame\Models\Planet\Coordinate;
 use OGame\Services\SettingsService;
 
 abstract class TestCase extends BaseTestCase
 {
+    /**
+     * Fail quickly when a test tries to wait on an InnoDB row lock or MySQL metadata lock.
+     *
+     * These are session settings, so they must be applied after Laravel has selected the
+     * per-worker parallel test database connection.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // No test may reach a real outbound service. An unmocked request throws here instead of
+        // spending money or returning something the assertion never expected, and a test that
+        // wants a response fakes it. This is what keeps the module's provider path honest: it stays
+        // enabled exactly as production runs it, and the boundary is what is faked.
+        Http::preventStrayRequests();
+
+        // OGAMEX_TEST_NOW stands the whole run at one instant (e.g. 2026-10-07T03:00:00Z). Unset, the wall
+        // clock decides as before. The AI module's clock-sweep runs a test at several hours with it to find
+        // a test whose outcome depends on the time of day.
+        $frozenNow = getenv('OGAMEX_TEST_NOW');
+        if ($frozenNow !== false && trim($frozenNow) !== '') {
+            $at = CarbonImmutable::parse(trim($frozenNow));
+            Date::setTestNow($at);
+            Carbon::setTestNow($at);
+            CarbonImmutable::setTestNow($at);
+        }
+
+        if ($this->app->environment('testing') && DB::getDriverName() === 'mysql') {
+            DB::unprepared('SET SESSION innodb_lock_wait_timeout = 1');
+            DB::unprepared('SET SESSION lock_wait_timeout = 1');
+        }
+    }
+
     /**
      * Creates the application.
      *
@@ -19,6 +57,14 @@ abstract class TestCase extends BaseTestCase
     public function createApplication(): Application
     {
         $app = require __DIR__ . '/../bootstrap/app.php';
+
+        // Ignition records every query, model and log line for its error pages. That
+        // recorder costs milliseconds per query, which dwarfs the work under test (the
+        // whole suite runs roughly ten times faster without it). Error pages keep the
+        // recorders outside the test environment.
+        $app->afterBootstrapping(LoadConfiguration::class, function (Application $app): void {
+            $app['config']->set('ignition.recorders', []);
+        });
 
         $app->make(Kernel::class)->bootstrap();
 

@@ -32,6 +32,8 @@ class ModuleHostTest extends TestCase
         }
 
         putenv('MODULES_STATUSES_FILE=' . $this->statusesFile);
+        $_ENV['MODULES_STATUSES_FILE'] = $this->statusesFile;
+        $_SERVER['MODULES_STATUSES_FILE'] = $this->statusesFile;
 
         return parent::createApplication();
     }
@@ -52,6 +54,7 @@ class ModuleHostTest extends TestCase
             unlink($this->statusesFile);
         }
         putenv('MODULES_STATUSES_FILE');
+        unset($_ENV['MODULES_STATUSES_FILE'], $_SERVER['MODULES_STATUSES_FILE']);
 
         parent::tearDown();
     }
@@ -71,7 +74,7 @@ class ModuleHostTest extends TestCase
         $this->refreshApplication();
 
         $this->assertTrue(Route::has('helloworld.index'));
-        $this->assertStringContainsString('/admin/hello-world', ModuleSlotService::render('admin.nav'));
+        $this->assertStringContainsString('/admin/hello-world', ModuleSlotService::render('admin.modules'));
     }
 
     public function test_disabling_a_module_removes_its_routes(): void

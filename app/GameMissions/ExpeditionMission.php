@@ -40,6 +40,7 @@ use OGame\Services\CharacterClassService;
 use OGame\Services\DarkMatterService;
 use OGame\Services\DebrisFieldService;
 use OGame\Services\MerchantService;
+use OGame\Services\MilitaryStatisticsService;
 use OGame\Services\NPCFleetGeneratorService;
 use OGame\Services\NPCPlanetService;
 use OGame\Services\NPCPlayerService;
@@ -47,15 +48,29 @@ use OGame\Services\ObjectService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
+use Random\Randomizer;
 use RuntimeException;
 
 class ExpeditionMission extends GameMission
 {
+    /**
+     * Outcome weights do not change during a mission. Keep only the last mission's
+     * weights so repeated outcome selection is cheap without retaining old missions.
+     *
+     * @var array<string, float>
+     */
+    private array $outcomeWeightsCache = [];
+
+    private int|string|null $outcomeWeightsCacheKey = null;
+
     protected static string $name = 'Expedition';
     protected static int $typeId = 15;
     protected static bool $hasReturnMission = true;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::peaceful;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Neutral;
+
+    /** Expedition is gated on Astrophysics level 1 ("You have to research Astrophysics first."). */
+    protected static array $requiredResearch = ['astrophysics' => 1];
 
     /**
      * Get configurable outcome weights based on community research.
@@ -66,6 +81,11 @@ class ExpeditionMission extends GameMission
      */
     protected function getOutcomeWeights(FleetMission $mission): array
     {
+        $cacheKey = $mission->getKey() ?? spl_object_id($mission);
+        if ($this->outcomeWeightsCacheKey === $cacheKey) {
+            return $this->outcomeWeightsCache;
+        }
+
         $settingsService = app(SettingsService::class);
 
         $weights = [
@@ -90,6 +110,9 @@ class ExpeditionMission extends GameMission
             $weights['pirates'] *= $combatMultiplier;
             $weights['aliens'] *= $combatMultiplier;
         }
+
+        $this->outcomeWeightsCacheKey = $cacheKey;
+        $this->outcomeWeightsCache = $weights;
 
         return $weights;
     }
@@ -313,7 +336,7 @@ class ExpeditionMission extends GameMission
         $player = $this->playerServiceFactory->make($mission->user_id, true);
 
         // Pick a random speedup percentage between 5% and 30%.
-        $additionalReturnTripTimePercentage = random_int(5, 10);
+        $additionalReturnTripTimePercentage = app(Randomizer::class)->getInt(5, 10);
 
         // Calculate one way mission duration.
         $onewayMissionDuration = ($mission->time_arrival - $mission->time_departure) + $mission->time_holding;
@@ -357,7 +380,7 @@ class ExpeditionMission extends GameMission
 
         // Determine the resource type: metal, crystal or deuterium.
         $cargoCapacityConstrainedAmount = 0;
-        $resource_type_int = random_int(0, 2);
+        $resource_type_int = app(Randomizer::class)->getInt(0, 2);
         switch ($resource_type_int) {
             case 0:
                 $resource_type = ResourceType::Metal;
@@ -510,8 +533,8 @@ class ExpeditionMission extends GameMission
         $cargoCapacityConstrainedAmount = min($maxCargoCapacity, $maxShipFind);
 
         // Select 1-6 random ship types from possible ships.
-        $num_ship_types = min(random_int(1, 6), count($possibleShips));
-        shuffle($possibleShips);
+        $num_ship_types = min(app(Randomizer::class)->getInt(1, 6), count($possibleShips));
+        $possibleShips = app(Randomizer::class)->shuffleArray($possibleShips);
         $selectedShips = array_slice($possibleShips, 0, $num_ship_types);
 
         // Distribute resources per ship type with randomness (up to 75% variance), last ship gets the remainder.
@@ -534,7 +557,7 @@ class ExpeditionMission extends GameMission
                 $maxResources = $averageResourcePerShip * 1.75;
                 $randomResources = min(
                     $remainingResources,
-                    random_int((int)round($minResources), (int)round($maxResources))
+                    app(Randomizer::class)->getInt((int)round($minResources), (int)round($maxResources))
                 );
             } else {
                 // Last ship gets all remaining resources
@@ -679,6 +702,16 @@ class ExpeditionMission extends GameMission
         // Load the mission owner user
         $player = $this->playerServiceFactory->make($mission->user_id, true);
 
+        // Track military statistics for lost fleet
+        $fleetUnits = $this->fleetMissionService->getFleetUnits($mission);
+        $militaryStatisticsService = app(MilitaryStatisticsService::class);
+        $lostPoints = $militaryStatisticsService->calculateMilitaryPoints($fleetUnits);
+
+        if ($lostPoints > 0) {
+            $user = $player->getUser();
+            $militaryStatisticsService->addLostPoints($user, $lostPoints);
+        }
+
         // Send a message to the player with the fleet destroyed outcome.
         $message_variation_id = ExpeditionLossOfFleet::getRandomMessageVariationId();
         $this->messageService->sendSystemMessageToPlayer($player, ExpeditionLossOfFleet::class, ['message_variation_id' => $message_variation_id]);
@@ -749,6 +782,15 @@ class ExpeditionMission extends GameMission
         );
 
         $battleResult = $battleEngine->simulateBattle();
+
+        // Track military statistics for expedition battles
+        // Player only gets "lost" points (no "destroyed" points against NPCs)
+        $militaryStatisticsService = app(MilitaryStatisticsService::class);
+        $playerLostPoints = $militaryStatisticsService->calculateMilitaryPoints($battleResult->attackerUnitsLost);
+        if ($playerLostPoints > 0) {
+            $user = $player->getUser();
+            $militaryStatisticsService->addLostPoints($user, $playerLostPoints);
+        }
 
         // Create battle report for expedition battle
         // Note: Battle report uses origin planet coordinates, not deep space position 16
@@ -931,8 +973,8 @@ class ExpeditionMission extends GameMission
         $selectedVariant = AppUtil::selectWeightedRandom(['normal' => 89, 'rare' => 10, 'exceptional' => 1]);
 
         $multiplier = match($selectedVariant) {
-            'rare' => random_int(2, 3),
-            'exceptional' => random_int(5, 10),
+            'rare' => app(Randomizer::class)->getInt(2, 3),
+            'exceptional' => app(Randomizer::class)->getInt(5, 10),
             default => 1,
         };
 
@@ -996,7 +1038,7 @@ class ExpeditionMission extends GameMission
         // outcomes with small fractional weights (e.g. merchant 0.4, black_hole 0.2)
         // can fall into sub-integer gaps in the cumulative range and become unreachable.
         $scaledTotal = (int)round($totalWeight * 10);
-        $random = random_int(1, $scaledTotal);
+        $random = app(Randomizer::class)->getInt(1, $scaledTotal);
 
         // Find which outcome was selected
         $currentWeight = 0;
@@ -1057,7 +1099,7 @@ class ExpeditionMission extends GameMission
         $min = max(1, (int)floor($max * 0.1));
 
         // Pick a random amount between min and max.
-        return random_int($min, $max);
+        return app(Randomizer::class)->getInt($min, $max);
     }
 
     /**

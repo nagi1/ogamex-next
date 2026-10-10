@@ -126,7 +126,7 @@ class WreckFieldService
             ->where('system', $coordinate->system)
             ->where('planet', $coordinate->position)
             ->whereIn('status', ['active', 'blocked'])
-            ->orderByRaw("FIELD(status, 'active', 'blocked')")
+            ->orderByRaw("CASE status WHEN 'active' THEN 1 WHEN 'blocked' THEN 2 ELSE 3 END")
             ->first();
 
         if ($wreckField !== null) {
@@ -1009,7 +1009,7 @@ class WreckFieldService
             ->where('planet', $coordinates->position)
             ->where('owner_player_id', $this->playerService->getId())
             ->whereIn('status', ['active', 'repairing', 'blocked', 'completed'])
-            ->orderByRaw("FIELD(status, 'repairing', 'active', 'blocked', 'completed')")
+            ->orderByRaw("CASE status WHEN 'repairing' THEN 1 WHEN 'active' THEN 2 WHEN 'blocked' THEN 3 WHEN 'completed' THEN 4 ELSE 5 END")
             ->orderBy('created_at', 'asc')
             ->get();
 

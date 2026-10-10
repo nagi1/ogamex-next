@@ -39,6 +39,13 @@ class PlanetListService
      */
     public function __construct(private PlayerService $player, private PlanetServiceFactory $planetServiceFactory)
     {
+        // The placeholder player (id 0) has no planets by definition, and the
+        // battle engine builds one per simulation just to hand it a message
+        // service; querying the planets table for it is pure waste.
+        if ($this->player->getId() === 0) {
+            return;
+        }
+
         // Get all active (non-destroyed) planets and moons of user.
         $planets = Planet::where('user_id', $this->player->getId())
             ->where('destroyed', 0)
@@ -177,13 +184,21 @@ class PlanetListService
     {
         $result = [];
 
-        // First add all planets
+        // Pair each planet with its moon from the list already loaded in the
+        // constructor. hasMoon()/moon() would query the moon table per planet,
+        // and a session calls all() several times over the same loaded list —
+        // that was the dominant query cost of a perception build.
+        $moonsByCoordinate = [];
+        foreach ($this->moons as $moon) {
+            $moonsByCoordinate[$moon->getPlanetCoordinates()->asString()] = $moon;
+        }
+
         foreach ($this->planets as $planet) {
             $result[] = $planet;
 
-            // Check if this planet has a moon
-            if ($planet->hasMoon()) {
-                $result[] = $planet->moon();
+            $moon = $moonsByCoordinate[$planet->getPlanetCoordinates()->asString()] ?? null;
+            if ($moon !== null) {
+                $result[] = $moon;
             }
         }
 

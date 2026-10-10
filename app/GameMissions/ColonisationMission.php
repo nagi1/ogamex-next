@@ -26,6 +26,15 @@ class ColonisationMission extends GameMission
     protected static bool $hasReturnMission = false;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::peaceful;
     protected static FleetMissionStatus $friendlyStatus = FleetMissionStatus::Neutral;
+    protected static array $requiredShipMachineNames = ['colony_ship'];
+
+    /**
+     * The first colony is gated on Astrophysics level 1 ("Your knowledge of astrophysics is not
+     * sufficient to colonize this planet position."); further colonies need a higher level, which the
+     * max-colonies calculation enforces at arrival. This declares the entry requirement so a caller
+     * can see which research the mission waits on without naming it.
+     */
+    protected static array $requiredResearch = ['astrophysics' => 1];
 
     /**
      * @inheritdoc

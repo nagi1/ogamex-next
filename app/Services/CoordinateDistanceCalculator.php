@@ -2,6 +2,7 @@
 
 namespace OGame\Services;
 
+use Illuminate\Support\Facades\Date;
 use OGame\GameConstants\UniverseConstants;
 use OGame\Models\Planet;
 use OGame\Models\Planet\Coordinate;
@@ -21,14 +22,26 @@ class CoordinateDistanceCalculator
     }
 
     /**
+     * Shortest galaxy distance, accounting for donut wrap-around.
+     */
+    public function getGalaxyDistance(int $fromGalaxy, int $toGalaxy): int
+    {
+        $diffGalaxies = abs($fromGalaxy - $toGalaxy);
+        $wrapDiff = abs($diffGalaxies - $this->settingsService->numberOfGalaxies());
+
+        return min($diffGalaxies, $wrapDiff);
+    }
+
+    /**
      * Shortest system distance within a galaxy, accounting for donut wrap-around.
      *
-     * Example: system 490 to system 5 is 14 systems via the wrap, not 485.
+     * Example: system 490 to system 5 is 14 systems via the wrap, not 485
+     * (when the universe is configured with 499 systems).
      */
     public function getSystemDistance(int $fromSystem, int $toSystem): int
     {
         $diffSystems = abs($fromSystem - $toSystem);
-        $wrapDiff = abs($diffSystems - UniverseConstants::MAX_SYSTEM_COUNT);
+        $wrapDiff = abs($diffSystems - $this->settingsService->numberOfSystems());
 
         return min($diffSystems, $wrapDiff);
     }
@@ -54,12 +67,13 @@ class CoordinateDistanceCalculator
         }
 
         $diffSystems = abs($from->system - $to->system);
+        $maxSystems = $this->settingsService->numberOfSystems();
 
         // Check if donut galaxy wrapping provides a shorter path
         if ($this->getSystemDistance($from->system, $to->system) < $diffSystems) {
             // Path wraps around, split into two segments
             $split1 = new Coordinate($from->galaxy, UniverseConstants::MIN_SYSTEM, UniverseConstants::MAX_PLANET_POSITION);
-            $split2 = new Coordinate($to->galaxy, UniverseConstants::MAX_SYSTEM_COUNT, UniverseConstants::MAX_PLANET_POSITION);
+            $split2 = new Coordinate($to->galaxy, $maxSystems, UniverseConstants::MAX_PLANET_POSITION);
             return $this->getNumEmptySystemsAux($split1, $to)
                 + $this->getNumEmptySystemsAux($split2, $from);
         }
@@ -112,12 +126,13 @@ class CoordinateDistanceCalculator
         }
 
         $diffSystems = abs($from->system - $to->system);
+        $maxSystems = $this->settingsService->numberOfSystems();
 
         // Check if donut galaxy wrapping provides a shorter path
         if ($this->getSystemDistance($from->system, $to->system) < $diffSystems) {
             // Path wraps around, split into two segments
             $split1 = new Coordinate($from->galaxy, UniverseConstants::MIN_SYSTEM, UniverseConstants::MAX_PLANET_POSITION);
-            $split2 = new Coordinate($to->galaxy, UniverseConstants::MAX_SYSTEM_COUNT, UniverseConstants::MAX_PLANET_POSITION);
+            $split2 = new Coordinate($to->galaxy, $maxSystems, UniverseConstants::MAX_PLANET_POSITION);
             return $this->getNumInactiveSystemsAux($split1, $to)
                 + $this->getNumInactiveSystemsAux($split2, $from);
         }
@@ -141,8 +156,11 @@ class CoordinateDistanceCalculator
 
         // Count systems where all planets belong to inactive users
         // A user is considered inactive if time is older than 7 days (matching PlayerService::isInactive())
+        // The cutoff is the application's clock, not the database server's NOW(), so a test or a simulation
+        // that moves time sees the same activity as the rest of the game; the SQL is portable across drivers.
+        $activeSince = Date::now()->subDays(7)->timestamp;
         $inactiveSystems = Planet::selectRaw('planets.system')
-            ->selectRaw('SUM(IF(users.time >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY)), 1, 0)) AS active_count')
+            ->selectRaw('SUM(CASE WHEN CAST(users.time AS SIGNED) >= ? THEN 1 ELSE 0 END) AS active_count', [$activeSince])
             ->join('users', 'users.id', '=', 'planets.user_id')
             ->where('planets.galaxy', '=', $from->galaxy)
             ->where('planets.system', '>=', $start)

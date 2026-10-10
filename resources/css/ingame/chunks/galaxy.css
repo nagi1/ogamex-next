@@ -1,0 +1,5392 @@
+
+
+#facilities #technologies .icons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    gap: 2px;
+}
+
+#facilities #technologies .icons::after {
+    display: inline-block;
+    content: "";
+    width: 422px;
+}
+
+/* *************** Overlay - Federationlayer ******************************** */
+
+#FederationLayer #changefleetname .wrapInner {
+    float: left;
+    width: 202px;
+}
+
+#FederationLayer #changefleetname .buttonWrap {
+    float: left;
+    margin: 25px 0 0;
+    padding: 5px 0;
+    text-align: center;
+    width: 225px;
+}
+
+#FederationLayer #buddyselect,
+#FederationLayer #participantselect {
+    background: #1C242B;
+    border-radius: 3px;
+    height: 150px;
+    overflow-y: scroll;
+    margin: 5px 0 0 0;
+}
+
+#FederationLayer #buddyselect li,
+#FederationLayer #participantselect li {
+    border: 1px solid transparent;
+    line-height: 15px;
+    padding: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+}
+
+#FederationLayer .no-touch .no-touch #buddyselect li:hover,
+#FederationLayer #buddyselect li:active,
+#FederationLayer .no-touch .no-touch #participantselect li:hover,
+#FederationLayer #participantselect li:active {
+    background: #26303B;
+}
+
+#FederationLayer #buddyselect li.ui-selected,
+#FederationLayer #participantselect li.ui-selected {
+    background: #2E3A48;
+    border: 1px solid #3C4B5D;
+    color: #fff;
+}
+
+#FederationLayer #fleetOK {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+}
+
+#FederationLayer #holdtimeline select,
+#expeditiontimeline select {
+    width: 45px;
+}
+
+#FederationLayer #fleet1 .allornonewrap .firstcol {
+    width: 300px;
+}
+
+#FederationLayer #fleet3 #buttonz ul#missions {
+    height: 75px;
+    margin: 0 15px;
+}
+
+#FederationLayer #fleet3 #buttonz ul#missions li a {
+    font-size: 9px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#FederationLayer #fleet3 ul#missions span.textlabel {
+    display: inline-block;
+    left: -3px;
+    height: 25px;
+    position: relative;
+    text-overflow: ellipsis;
+    top: 54px;
+    width: 60px;
+}
+
+#FederationLayer #fleet3 #buttonz ul#missions a:active,
+#FederationLayer .no-touch #fleet3 #buttonz ul#missions a:hover,
+#FederationLayer #fleet3 #buttonz ul#missions  a.selected {
+    color: #F1F1F1;
+}
+
+#FederationLayer #fleet3 #missionNameWrapper {
+    font-size: 12px;
+    padding: 10px 18px;
+    text-align: left;
+}
+
+#FederationLayer #fleet3 #missionNameWrapper .mission_description {
+    font-weight: 100;
+}
+
+#FederationLayer #fleet3 #missionNameWrapper.off {
+    color: #848484;
+}
+
+#fleetdispatchcomponent #planet h2 {
+    color: #fff;
+    font: bold 18px/22px Verdana,Arial,Helvetica,sans-serif;
+    height: 22px;
+    margin: 0 0 0 144px;
+    overflow: hidden;
+    padding-top: 7px;
+    white-space: nowrap;
+    width: 470px;
+    text-overflow: ellipsis;
+}
+
+#fleetdispatchcomponent #planet.shortHeader,
+#fleet2 #planet.shortHeader {
+    background: transparent no-repeat;
+    height: 40px !important;
+    position: relative;
+    width: 654px;
+}
+
+#fleet1 #planet.shortHeader {
+    background-image: url("/img/icons/b273a68d316bd137d6d28e68a4bf79.jpg");
+}
+
+#fleet2 #planet.shortHeader {
+    background-image: url("/img/icons/70fb73489c34883a2e015e76b8f7d5.jpg");
+}
+
+#fleetdispatchcomponent .fadeBox {
+    top: 40%;
+}
+
+#fleet2 #sendfleet h2 {
+    color: #6F9FC8;
+    font: 700 12px/28px Verdana,Arial,Helvetica,sans-serif;
+}
+
+#fleetdispatchcomponent .content input[type="number"] {
+    height: 17px;
+    line-height: 17px;
+}
+
+/* *****************************************************************************
+   FLEET 1 and FLEET 2
+***************************************************************************** */
+
+#fleetdispatchcomponent #fleet1 #buttonz .content {
+    padding: 0;
+}
+
+#fleet2 #planet,
+#fleetdispatchcomponent #planet {
+    background-repeat: no-repeat;
+    height: 250px;
+    position: relative;
+    width: 654px;
+    margin: 0 auto 3px;
+}
+
+#fleet2 #planet {
+    background-image: url("/img/icons/260bd2d0f00df0dc483087f430bcfe.jpg");
+}
+
+#fleetdispatchcomponent #planet {
+    background-image: url("/img/icons/914bfb88ef92ee476420e282108544.jpg");
+}
+
+/* shortHeader - kurze */
+
+/* #fleetdispatchcomponent #planet.shortHeader {background: transparent url("/img/icons/b273a68d316bd137d6d28e68a4bf79.jpg") no-repeat;}
+#fleet2 #planet.shortHeader {background: transparent url("/img/icons/70fb73489c34883a2e015e76b8f7d5.jpg") no-repeat;} */
+
+#fleetdispatchcomponent .fleetStatus #movements {
+    display: inline;
+    margin-right: 12px;
+}
+
+#fleetdispatchcomponent .fleetStatus a,
+#fleetdispatchcomponent .fleetStatus a:link,
+#fleet2 .fleetStatus a,
+#fleet2 .fleetStatus a:link {
+    color: #9c0;
+    line-height: 25px;
+    text-decoration: none;
+}
+
+.fleetStatus ul {
+    list-style-type: none;
+    margin-left: 11px;
+    text-align: justify;
+}
+
+.fleetStatus ul li {
+    display: inline;
+    margin: 0 20px 0 0;
+    line-height: 15px;
+}
+
+.fleetStatus span.title {
+    color: #6F9FC8;
+    font-weight: 700;
+}
+
+.fleetStatus span.sprite.characterclass.small {
+    display: inline-block;
+    float: left;
+}
+
+.no-touch #fleetdispatchcomponent .fleetStatus a:hover span,
+.no-touch #fleet2 .fleetStatus a:hover span {
+    text-decoration: underline;
+}
+
+#fleetdispatchcomponent .fleetStatus a img,
+#fleet2 .fleetStatus a img {
+    margin-right: 7px;
+    vertical-align: middle;
+}
+
+#fleetdispatchcomponent #slots a.disabled {
+    color: #444;
+}
+
+#fleetdispatchcomponent #inhalt .shortCorner,
+#fleetdispatchcomponent #inhalt .shortCorner,
+#fleet2 #inhalt .shortCorner,
+#fleet2 #inhalt .shortCorner,
+#movement #inhalt .shortCorner {
+    top: 4px;
+}
+
+#fleet2 .c-left,
+#fleet2 .c-right,
+#fleetdispatchcomponent .c-left,
+#fleetdispatchcomponent .c-right {
+    height: 39px;
+    width: 28px;
+    position: absolute;
+    top: 214px;
+}
+
+#fleet2 #mission {
+    position: relative;
+    width: 640px;
+    margin: -37px auto 0 auto;
+}
+
+#fleet2 div#mission {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+ul.fleetBriefing {
+    margin: 12px 0 12px 20px;
+}
+
+ul#fleetBriefingPart1_2 {
+    margin-left: 30px;
+}
+
+ul.fleetBriefing {
+    width: 290px;
+}
+
+#fleet2 div#mission .missionHeader {
+    color: #6F9FC8;
+    font-weight: bold;
+    padding: 7px 0 5px 10px;
+}
+
+#fleet2 div#mission .percentageBarWrapper {
+    grid-column: 1/3;
+}
+
+#fleet2 #buttonz {
+    text-align: center;
+    overflow: auto;
+}
+
+#fleet2 #start,
+#fleet2 #target {
+    background: #0d151b url("/img/icons/5fbbb1876fcff20a8a265c06862495.png") 0 -1130px repeat-x;
+    /* Old browsers */
+    background: -moz-linear-gradient(top,  #0d1014 0%, #0d1014 48%, #192026 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0d1014), color-stop(48%,#0d1014), color-stop(100%,#192026));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* W3C */
+}
+
+#fleet2 #resources {
+    background: #0d151b url("/img/icons/5fbbb1876fcff20a8a265c06862495.png") 0 -1130px repeat-x;
+    /* Old browsers */
+    background: -moz-linear-gradient(top,  #0d1014 0%, #0d1014 48%, #192026 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0d1014), color-stop(48%,#0d1014), color-stop(100%,#192026));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  #0d1014 0%,#0d1014 48%,#192026 100%);
+    /* W3C */
+}
+
+#fleet2 #distance {
+    width: 115px;
+}
+
+#fleet2 #target {
+    width: 165px;
+}
+
+#fleet2 #shortcuts {
+    width: 190px;
+}
+
+#fleet2 #start a:not(.dropdown a),
+#fleet2 #target a:not(.dropdown a) {
+    display: block;
+    float: left;
+    height: 36px;
+    width: 44px;
+    background: transparent url("/img/icons/b63220183e356430158dc998a2bb99.gif") no-repeat;
+}
+
+#fleet2 #start a.planet,
+#fleet2 #start a.planet_source,
+#fleet2 #start a.planet_selected,
+#fleet2 #start a.planet_source_selected {
+    margin-left: 47px;
+}
+
+#fleet2 #target a.planet,
+#fleet2 #target a.planet_source,
+#fleet2 #target a.planet_selected,
+#fleet2 #target a.planet_source_selected {
+    margin-left: 20px;
+    padding: 0;
+}
+
+#fleet2 #mission a:not(.dropdown a).planet,
+#fleet2 #mission a:not(.dropdown a).planet_source {
+    background-position: 0 0;
+}
+
+.no-touch #fleet2 #mission a:not(.dropdown a).planet:hover,
+#fleet2 #mission a:not(.dropdown a).planet_selected,
+#fleet2 #mission a:not(.dropdown a).planet_source_selected {
+    background-position: 0 -36px;
+}
+
+#fleet2 #mission a:not(.dropdown a).moon,
+#fleet2 #mission a:not(.dropdown a).moon_source {
+    background-position: -44px 0;
+}
+
+.no-touch #fleet2 #mission a:not(.dropdown a).moon:hover,
+#fleet2 #mission a:not(.dropdown a).moon_selected,
+#fleet2 #mission a:not(.dropdown a).moon_source_selected {
+    background-position: -44px -36px;
+}
+
+.no-touch #fleet2 #mission a:not(.dropdown a).moon:hover,
+.no-touch #fleet2 #mission a:not(.dropdown a).planet:hover,
+.no-touch #fleet2 #mission a:not(.dropdown a).debris:hover {
+    cursor: pointer;
+}
+
+#fleet2 #mission a:not(.dropdown a).debris {
+    background-position: -88px 0;
+}
+
+.no-touch #fleet2 #mission a:not(.dropdown a).debris:hover,
+#fleet2 #mission a:not(.dropdown a).debris_selected {
+    background-position: -88px -36px;
+}
+
+#fleet2 .planetname {
+    color: #a26d00;
+    font-size: 12px;
+    font-weight: bold;
+    height: 17px;
+    padding-top: 7px;
+    overflow: hidden;
+    text-align: center;
+    width: 170px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#fleet2 .target {
+    padding: 10px 0;
+}
+
+#fleet2 #distanceValue {
+    background: url("/img/icons/2ffc68d87ae69f098d429b9fa18bf0.png") no-repeat;
+    height: 36px;
+    line-height: 36px;
+    margin: 50px 0 0;
+    width: 115px;
+}
+
+#fleet2 .coords {
+    color: #848484;
+    font-size: 11px;
+    height: 44px;
+}
+
+#fleet2 #mission #shortcuts {
+    color: #a1a1a1;
+    font-size: 11px;
+}
+
+#fleet2 #mission #shortcuts a:link,
+#fleet2 #mission #shortcuts a:visited {
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+.no-touch #fleet2 #mission #shortcuts a:hover {
+    text-decoration: underline;
+    color: #a1a1a1;
+}
+
+#fleet2 #mission #shortcuts div {
+    text-align: left;
+}
+
+#fleet2 #mission #shortcuts a:active,
+#fleet2 #mission #shortcuts a:focus {
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+#fleet2 .planets,
+#fleet2 .combatunits,
+#fleetdispatchcomponent .combatunits,
+#fleetdispatchcomponent .expeditionFleetTemplateSelect {
+    /* background-color:#000000;
+        border:1px solid #191e23;
+        color:#c2c2c2;
+        font-size:11px;
+        text-align:center; */
+    width: 144px;
+    overflow: hidden;
+    float: right;
+}
+
+#fleet2 .glow {
+    -webkit-box-shadow: 0 0 10px 3px #192026;
+    /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    box-shadow: 0 0 10px 3px #192026;
+    /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+    display: inline-block;
+    margin: 5px 0 0;
+}
+
+#fleet2 #mission #shortcuts #shortlinks,
+#fleet2 #mission #shortcuts #combatunits,
+#fleetdispatchcomponent #buttonz a#combatunits,
+#fleetdispatchcomponent #buttonz a#expeditionFleetTemplateBtn {
+    height: 18px;
+    width: 125px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#fleetdispatchcomponent #buttonz a#expeditionFleetTemplateBtn {
+    min-width: 125px;
+    width: auto;
+}
+
+#fleetdispatchcomponent .icon_combatunits {
+    margin: 0 0 -4px 0;
+}
+
+.no-touch #fleet2 #mission #shortcuts #shortlinks:hover,
+.no-touch #fleetdispatchcomponent #buttonz a#combatunits:hover,
+.no-touch #fleetdispatchcomponent #buttonz a#expeditionFleetTemplateBtn:hover {
+    text-decoration: underline;
+}
+
+#fleet2 #mission #shortcuts #combatunits {
+    cursor: auto;
+}
+
+#fleet2 #mission #shortcuts #shortlinks {
+    width: 125px;
+}
+
+#fleetdispatchcomponent #buttonz a#combatunits,
+#fleetdispatchcomponent #buttonz a#combatunits:link,
+#fleetdispatchcomponent #buttonz a#expeditionFleetTemplateBtn,
+#fleetdispatchcomponent #buttonz a#expeditionFleetTemplateBtn:link {
+    color: #6F9FC8;
+    display: inline-block;
+}
+
+#fleetdispatchcomponent #slots {
+    margin-left: 10px;
+}
+
+#fleet1 #slots div {
+    margin-left: 10px;
+}
+
+#fleetdispatchcomponent #slots div {
+    line-height: 24px;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#fleetdispatchcomponent #slots div img {
+    padding-top: 4px;
+    vertical-align: top;
+}
+
+#fleet2 #shortcuts {
+    padding: 23px 0 0 23px;
+}
+
+#fleetdispatchcomponent #buttonz a:not(.dropdown a):link,
+#fleetdispatchcomponent #buttonz a:not(.dropdown a):visited,
+.no-touch #fleetdispatchcomponent #buttonz a:not(.dropdown a):hover,
+#fleetdispatchcomponent #buttonz a:not(.dropdown a):active {
+    color: #848484;
+    text-decoration: none;
+}
+
+.no-touch #fleetdispatchcomponent #buttonz a:not(.dropdown a):hover {
+    text-decoration: underline;
+}
+
+#fleet2 .coords .coordsSection {
+    display: inline-block;
+    margin: 3px 1px 1px 1px;
+    padding: 0 1px 2px 1px;
+}
+
+#fleet2 .coords .galaxy,
+#fleet2 .coords .system,
+#fleet2 .coords .planet {
+    padding: 0;
+    text-align: center;
+    font-weight: 700;
+    width: 40px;
+}
+
+#fleet2 #buttonz ul#missions {
+    width: 648px;
+    height: 75px;
+    margin: 10px auto 0 15px;
+    position: relative;
+    list-style-type: none;
+}
+
+#fleet2 #buttonz ul#missions div.buildingimg {
+    height: 54px;
+}
+
+#fleet2 #buttonz ul#missions li.on a,
+.no-touch #fleet2 #buttonz ul#missions li.on a:hover,
+#fleet2 #buttonz ul#missions li.on a.active,
+#fleet2 #buttonz ul#missions li.off a {
+    background: url("/img/icons/f45a18b5e55d2d38e7bdc3151b1fee.jpg") no-repeat;
+}
+
+#fleet2 #buttonz ul#missions li {
+    width: 54px;
+    height: 54px;
+    background-repeat: no-repeat;
+    float: left;
+    margin: 0 5px;
+}
+
+#fleet2 #buttonz ul#missions li a {
+    display: block;
+    width: 54px;
+    height: 54px;
+    font-size: 9px;
+    text-align: center;
+    color: #848484;
+}
+
+#fleet2 ul#missions span.textlabel,
+#fleet2 #mission span.textlabel {
+    height: 1px;
+    left: -9999px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+}
+
+#fleet2 ul#missions span.textlabel {
+    display: inline-block;
+    left: -3px;
+    height: 26px;
+    position: relative;
+    text-overflow: ellipsis;
+    top: 54px;
+    width: 60px;
+}
+
+#fleet2 #speedLinks>a.speed,
+#fleet2 #speedLinks>a.speed:link,
+#fleet2 #speedLinks>a.speed:visited,
+#fleet2 #speedLinks>a.speed:active {
+    text-decoration: none;
+    color: #6F9FC8;
+    padding: 2px 4px;
+    display: inline-block;
+    border: 1px solid transparent;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#fleet2 #speedPercentage {
+    margin-top: 20px;
+}
+
+#fleet2 #speedPercentage {
+    height: 20px;
+    line-height: 20px;
+}
+
+#speedLinks {
+    margin-top: 20px;
+}
+
+#fleet2.no-touch #speedLinks>a.speed:hover,
+#fleet2 #speedLinks>a.speed:focus {
+    border-color: black;
+    background-color: #181F26;
+}
+
+#fleet2 #speedLinks>a.speed.selected:link {
+    border-color: #FF9600;
+}
+
+#fleet2 #speedLinks>a.speed.selected,
+#fleet2 #speedLinks>a.speed.selected:link,
+#fleet2.no-touch #speedLinks>a.speed:hover,
+#fleet2 #speedLinks>a.speed:focus {
+    color: #99CC00;
+}
+
+#fleet2 #speedLinks>a.speed.middle.selected,
+#fleet2 #speedLinks>a.speed.middle.selected:link,
+#fleet2.no-touch #speedLinks>a.speed.middle:hover,
+#fleet2 #speedLinks>a.speed.middle:focus {
+    color: #D29D00;
+}
+
+#fleet2 #speedLinks>a.speed.low.selected,
+#fleet2 #speedLinks>a.speed.low.selected:link,
+#fleet2.no-touch #speedLinks>a.speed.low:hover,
+#fleet2 #speedLinks>a.speed.low:focus {
+    color: #D43635;
+}
+
+/* Expedition */
+
+#fleet2 #buttonz ul#missions li#button15.on a:link,
+#fleet2 #buttonz ul#missions li#button15.on a:visited,
+#fleet2 #buttonz ul#missions li#button15.on a:active {
+    background-position: 0 0;
+}
+
+#fleet2 #buttonz ul#missions li#button15.off a:link,
+#fleet2 #buttonz ul#missions li#button15.off a:visited,
+#fleet2 #buttonz ul#missions li#button15.off a:active {
+    background-position: 0 -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button15.on a:hover,
+#fleet2 #buttonz ul#missions li#button15.on a.selected {
+    background-position: 0 -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button15.off a:hover,
+#fleet2 #buttonz ul#missions li#button15.off a.selected {
+    background-position: 0 -161px;
+}
+
+/* Kolonisieren */
+
+#fleet2 #buttonz ul#missions li#button7.on a:link,
+#fleet2 #buttonz ul#missions li#button7.on a:visited,
+#fleet2 #buttonz ul#missions li#button7.on a:active,
+#fleet2 #buttonz ul#missions li#button7.on a:focus {
+    background-position: -108px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button7.off a:link,
+#fleet2 #buttonz ul#missions li#button7.off a:visited,
+#fleet2 #buttonz ul#missions li#button7.off a:active,
+#fleet2 #buttonz ul#missions li#button7.off a:focus {
+    background-position: -108px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button7.on a:hover,
+#fleet2 #buttonz ul#missions li#button7.on a.selected {
+    background-position: -108px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button7.off a:hover,
+#fleet2 #buttonz ul#missions li#button7.off a.selected {
+    background-position: -108px -161px;
+}
+
+/* Trümmerfeld abbauen */
+
+#fleet2 #buttonz ul#missions li#button8.on a:link,
+#fleet2 #buttonz ul#missions li#button8.on a:visited,
+#fleet2 #buttonz ul#missions li#button8.on a:active,
+#fleet2 #buttonz ul#missions li#button8.on a:focus {
+    background-position: -216px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button8.off a:link,
+#fleet2 #buttonz ul#missions li#button8.off a:visited,
+#fleet2 #buttonz ul#missions li#button8.off a:active,
+#fleet2 #buttonz ul#missions li#button8.off a:focus {
+    background-position: -216px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button8.on a:hover,
+#fleet2 #buttonz ul#missions li#button8.on a.selected {
+    background-position: -216px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button8.off a:hover,
+#fleet2 #buttonz ul#missions li#button8.off a.selected {
+    background-position: -216px -161px;
+}
+
+/* Transport */
+
+#fleet2 #buttonz ul#missions li#button3.on a:link,
+#fleet2 #buttonz ul#missions li#button3.on a:visited,
+#fleet2 #buttonz ul#missions li#button3.on a:active,
+#fleet2 #buttonz ul#missions li#button3.on a:focus {
+    background-position: -270px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button3.off a:link,
+#fleet2 #buttonz ul#missions li#button3.off a:visited,
+#fleet2 #buttonz ul#missions li#button3.off a:active,
+#fleet2 #buttonz ul#missions li#button3.off a:focus {
+    background-position: -270px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button3.on a:hover,
+#fleet2 #buttonz ul#missions li#button3.on a.selected {
+    background-position: -270px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button3.off a:hover,
+#fleet2 #buttonz ul#missions li#button3.off a.selected {
+    background-position: -270px -161px;
+}
+
+/* Stationieren */
+
+#fleet2 #buttonz ul#missions li#button4.on a:link,
+#fleet2 #buttonz ul#missions li#button4.on a:visited,
+#fleet2 #buttonz ul#missions li#button4.on a:active,
+#fleet2 #buttonz ul#missions li#button4.on a:focus {
+    background-position: -162px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button4.off a:link,
+#fleet2 #buttonz ul#missions li#button4.off a:visited,
+#fleet2 #buttonz ul#missions li#button4.off a:active,
+#fleet2 #buttonz ul#missions li#button4.off a:focus {
+    background-position: -162px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button4.on a:hover,
+#fleet2 #buttonz ul#missions li#button4.on a.selected {
+    background-position: -162px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button4.off a:hover,
+#fleet2 #buttonz ul#missions li#button4.off a.selected {
+    background-position: -162px -161px;
+}
+
+/* Spionieren */
+
+#fleet2 #buttonz ul#missions li#button6.on a:link,
+#fleet2 #buttonz ul#missions li#button6.on a:visited,
+#fleet2 #buttonz ul#missions li#button6.on a:active,
+#fleet2 #buttonz ul#missions li#button6.on a:focus {
+    background-position: -324px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button6.off a:link,
+#fleet2 #buttonz ul#missions li#button6.off a:visited,
+#fleet2 #buttonz ul#missions li#button6.off a:active,
+#fleet2 #buttonz ul#missions li#button6.off a:focus {
+    background-position: -324px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button6.on a:hover,
+#fleet2 #buttonz ul#missions li#button6.on a.selected {
+    background-position: -324px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button6.off a:hover,
+#fleet2 #buttonz ul#missions li#button6.off a.selected {
+    background-position: -324px -161px;
+}
+
+/* Halten */
+
+#fleet2 #buttonz ul#missions li#button5.on a:link,
+#fleet2 #buttonz ul#missions li#button5.on a:visited,
+#fleet2 #buttonz ul#missions li#button5.on a:active,
+#fleet2 #buttonz ul#missions li#button5.on a:focus {
+    background-position: -378px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button5.off a:link,
+#fleet2 #buttonz ul#missions li#button5.off a:visited,
+#fleet2 #buttonz ul#missions li#button5.off a:active,
+#fleet2 #buttonz ul#missions li#button5.off a:focus {
+    background-position: -378px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button5.on a:hover,
+#fleet2 #buttonz ul#missions li#button5.on a.selected {
+    background-position: -378px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button5.off a:hover,
+#fleet2 #buttonz ul#missions li#button5.off a.selected {
+    background-position: -378px -161px;
+}
+
+/* Angreifen */
+
+#fleet2 #buttonz ul#missions li#button1.on a:link,
+#fleet2 #buttonz ul#missions li#button1.on a:visited,
+#fleet2 #buttonz ul#missions li#button1.on a:active,
+#fleet2 #buttonz ul#missions li#button1.on a:focus {
+    background-position: -432px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button1.off a:link,
+#fleet2 #buttonz ul#missions li#button1.off a:visited,
+#fleet2 #buttonz ul#missions li#button1.off a:active,
+#fleet2 #buttonz ul#missions li#button1.off a:focus {
+    background-position: -432px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button1.on a:hover,
+#fleet2 #buttonz ul#missions li#button1.on a.selected {
+    background-position: -432px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button1.off a:hover,
+#fleet2 #buttonz ul#missions li#button1.off a.selected {
+    background-position: -432px -161px;
+}
+
+/* Verbandsangriff */
+
+#fleet2 #buttonz ul#missions li#button2.on a:link,
+#fleet2 #buttonz ul#missions li#button2.on a:visited,
+#fleet2 #buttonz ul#missions li#button2.on a:active,
+#fleet2 #buttonz ul#missions li#button2.on a:focus {
+    background-position: -540px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button2.off a:link,
+#fleet2 #buttonz ul#missions li#button2.off a:visited,
+#fleet2 #buttonz ul#missions li#button2.off a:active,
+#fleet2 #buttonz ul#missions li#button2.off a:focus {
+    background-position: -540px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button2.on a:hover,
+#fleet2 #buttonz ul#missions li#button2.on a.selected {
+    background-position: -540px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button2.off a:hover,
+#fleet2 #buttonz ul#missions li#button2.off a.selected {
+    background-position: -540px -161px;
+}
+
+/* Zerstören */
+
+#fleet2 #buttonz ul#missions li#button9.on a:link,
+#fleet2 #buttonz ul#missions li#button9.on a:visited,
+#fleet2 #buttonz ul#missions li#button9.on a:active,
+#fleet2 #buttonz ul#missions li#button9.on a:focus {
+    background-position: -486px 0;
+}
+
+#fleet2 #buttonz ul#missions li#button9.off a:link,
+#fleet2 #buttonz ul#missions li#button9.off a:visited,
+#fleet2 #buttonz ul#missions li#button9.off a:active,
+#fleet2 #buttonz ul#missions li#button9.off a:focus {
+    background-position: -486px -108px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button9.on a:hover,
+#fleet2 #buttonz ul#missions li#button9.on a.selected {
+    background-position: -486px -54px;
+}
+
+.no-touch #fleet2 #buttonz ul#missions li#button9.off a:hover,
+#fleet2 #buttonz ul#missions li#button9.off a.selected {
+    background-position: -486px -161px;
+}
+
+/* **********************************************************
+***************** Fleet 2                 *******************
+************************************************************ */
+
+#fleet2 .briefing {
+    background: -moz-linear-gradient(top,  #192026 0%, #0d1014 13%, #0d1014 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#192026), color-stop(13%,#0d1014), color-stop(100%,#0d1014));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #192026 0%,#0d1014 13%,#0d1014 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #192026 0%,#0d1014 13%,#0d1014 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #192026 0%,#0d1014 13%,#0d1014 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  #192026 0%,#0d1014 13%,#0d1014 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#192026', endColorstr='#0d1014',GradientType=0 );
+    /* IE6-9 */
+    left: 15px;
+    margin: 13px 0 0;
+    min-height: 145px;
+    position: relative;
+    width: 637px;
+    z-index: 2;
+}
+
+body#fleetdispatchcomponent {
+    overflow: visible;
+}
+
+#fleetdispatchcomponent #buttonz #technologies {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#fleetdispatchcomponent #buttonz #battleships {
+    width: 400px;
+}
+
+#fleetdispatchcomponent #buttonz #civilships {
+    width: 270px;
+}
+
+#fleetdispatchcomponent #buttonz #battleships .header {
+    background-position-x: left;
+}
+
+#fleetdispatchcomponent #buttonz #civilships .header {
+    background-position-x: right;
+}
+
+#fleetdispatchcomponent #fleet1 #buttonz ul {
+    position: relative;
+    list-style-type: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px 0 20px;
+}
+
+#fleetdispatchcomponent #buttonz #battleships ul {
+    padding: 0 10px 0 20px;
+}
+
+#fleetdispatchcomponent #buttonz #civilships ul {
+    padding: 0 20px 0 10px;
+}
+
+.shipImage {
+    float: left;
+    width: 28px;
+    height: 28px;
+}
+
+.shipImage img {
+    background: transparent url("/img/icons/3b19b4263662f5a383524052047f4f.png") 0 0 no-repeat;
+}
+
+.shipImage img.tech202 {
+    background-position: 0 0;
+}
+
+.shipImage img.tech203 {
+    background-position: -28px 0;
+}
+
+.shipImage img.tech204 {
+    background-position: -56px 0;
+}
+
+.shipImage img.tech205 {
+    background-position: -84px 0;
+}
+
+.shipImage img.tech206 {
+    background-position: -112px 0;
+}
+
+.shipImage img.tech207 {
+    background-position: -140px 0;
+}
+
+.shipImage img.tech208 {
+    background-position: -168px 0;
+}
+
+.shipImage img.tech209 {
+    background-position: -196px 0;
+}
+
+.shipImage img.tech210 {
+    background-position: -224px 0;
+}
+
+.shipImage img.tech211 {
+    background-position: -252px 0;
+}
+
+.shipImage img.tech212 {
+    background: transparent url("/img/icons/0adc600b59f15369f1c82ac6a35db7.png") no-repeat -56px -140px;
+}
+
+.shipImage img.tech213 {
+    background-position: -308px 0;
+}
+
+.shipImage img.tech214 {
+    background-position: -336px 0;
+}
+
+.shipImage img.tech215 {
+    background-position: -364px 0;
+}
+
+.shipImage img.tech217 {
+    background-position: -448px 0;
+}
+
+.shipImage img.tech218 {
+    background-position: -392px 0;
+}
+
+.shipImage img.tech219 {
+    background-position: -420px 0;
+}
+
+.shipImage img.tech202.off {
+    background-position: 0 -56px;
+}
+
+.shipImage img.tech203.off {
+    background-position: -28px -56px;
+}
+
+.shipImage img.tech204.off {
+    background-position: -56px -56px;
+}
+
+.shipImage img.tech205.off {
+    background-position: -84px -56px;
+}
+
+.shipImage img.tech206.off {
+    background-position: -112px -56px;
+}
+
+.shipImage img.tech207.off {
+    background-position: -140px -56px;
+}
+
+.shipImage img.tech208.off {
+    background-position: -168px -56px;
+}
+
+.shipImage img.tech209.off {
+    background-position: -196px -56px;
+}
+
+.shipImage img.tech210.off {
+    background-position: -224px -56px;
+}
+
+.shipImage img.tech211.off {
+    background-position: -252px -56px;
+}
+
+.shipImage img.tech213.off {
+    background-position: -308px -56px;
+}
+
+.shipImage img.tech214.off {
+    background-position: -336px -56px;
+}
+
+.shipImage img.tech215.off {
+    background-position: -364px -56px;
+}
+
+.shipImage img.tech217.off {
+    background-position: -448px -56px;
+}
+
+.shipImage img.tech218.off {
+    background-position: -392px -56px;
+}
+
+.shipImage img.tech219.off {
+    background-position: -420px -56px;
+}
+
+/* #fleetdispatchcomponent #buttonz ul li.on div.buildingimg,
+#div_traderScrap div.anythingWindow li.on div.buildingimg
+{background: url("/cdn/img/navigation/ships-on.png") no-repeat;}
+#fleetdispatchcomponent #buttonz ul li.off div.buildingimg,
+#div_traderScrap div.anythingWindow li.off div.buildingimg
+{background: url("/cdn/img/navigation/ships-off.png") no-repeat;}
+#fleetdispatchcomponent #buttonz ul li.disabled div.buildingimg,
+#div_traderScrap div.anythingWindow li.disabled div.buildingimg
+{background: url("/cdn/img/navigation/ships-disabled.png") no-repeat;} */
+
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a),
+#div_traderScrap .image a:not(.dropdown a),
+#div_traderScrap div.anythingWindow li div.buildingimg {
+    display: block;
+    width: 80px;
+    height: 80px;
+}
+
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a):link,
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a):visited,
+#div_traderScrap div.anythingWindow li a:not(.dropdown a):link,
+#div_traderScrap div.anythingWindow li a:not(.dropdown a):visited {
+    background: url("/img/icons/e3d481656bab1b216428a98a2e022e.gif") no-repeat;
+    color: #ff9600;
+    text-decoration: none;
+}
+
+.no-touch #fleetdispatchcomponent #buttonz ul li a:not(.dropdown a):hover,
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a):focus,
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a).active,
+.no-touch #div_traderScrap div.anythingWindow li a:not(.dropdown a):hover {
+    background: url("/img/icons/85ac39e8f55c11b1634688f52030a6.gif") no-repeat;
+}
+
+#fleetdispatchcomponent #buttonz ul li a:not(.dropdown a):active {
+    background: url("/img/icons/e3d481656bab1b216428a98a2e022e.gif") no-repeat;
+}
+
+#fleetdispatchcomponent #buttonz ul span.ecke,
+#rocketattack #number span.ecke {
+    position: relative;
+    float: left;
+    top: 65px;
+    left: 10px;
+    width: 60px;
+    text-align: right;
+}
+
+#fleetdispatchcomponent #buttonz ul span.level,
+#rocketattack #number span.level {
+    color: #ff9600;
+    font-size: 11px;
+}
+
+/* #fleetdispatchcomponent #buttonz ul span.textlabel {
+    height:1px;
+    left:-9999px;
+    overflow:hidden;
+    position:absolute;
+    width:1px;
+} */
+
+#fleetdispatchcomponent #allornone,
+#div_traderScrap #allornone {
+    text-align: left;
+    color: #A1A1A1;
+    font-size: 11px;
+    padding-left: 15px;
+    z-index: 2;
+}
+
+#fleetdispatchcomponent #allornone .info {
+    color: #848484;
+    text-align: right;
+}
+
+#fleetdispatchcomponent .allornonewrap {
+    background: #13181D;
+    border: 1px solid #030303;
+    padding: 15px 7px;
+    width: 623px;
+}
+
+#fleetdispatchcomponent .allornonewrap .secondcol {
+    background: #13181D;
+    display: inline;
+    /* IE6 */
+    margin-right: 13px;
+    padding: 5px 10px;
+    border: 1px solid #030303;
+    width: 78px;
+}
+
+/* #fleetdispatchcomponent #allornone .firstcol {	float:left;	} */
+
+#fleet1 .allornonewrap .firstcol {
+    width: 320px;
+    margin-right: 5px;
+    line-height: 24px;
+    margin-bottom: 2px;
+}
+
+#fleetdispatchcomponent #allornone img {
+    vertical-align: middle;
+}
+
+/* #fleetdispatchcomponent #sendfleet h3 {	font-size:12px;	} */
+
+#fleetdispatchcomponent #sendfleet #options,
+#fleet2 #resources {
+    float: left;
+    height: 150px;
+    width: 305px;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    position: relative;
+}
+
+#fleet2 #resources.lifeforms-enabled {
+    height: 215px;
+}
+
+#fleetdispatchcomponent #sendfleet #information {
+    float: left;
+    margin-left: 25px;
+    display: inline;
+}
+
+#fleet2 #sendfleet #resources {
+    margin-left: 18px;
+    position: relative;
+}
+
+#fleetdispatchcomponent #sendfleet #options .content,
+#fleetdispatchcomponent #sendfleet #information .content {
+    padding: 25px 0 0 33px;
+    line-height: 15px;
+}
+
+#fleetdispatchcomponent #planet .content span.value,
+#fleetdispatchcomponent #planet .content span.order,
+#fleetdispatchcomponent #planet .content span.destination,
+#fleet2 #planet span.value,
+#fleetdispatchcomponent #planet span.value {
+    color: #fff;
+}
+
+#fleet2 #resources .res_wrap {
+    background: #0d151b url("/img/icons/5fbbb1876fcff20a8a265c06862495.png") 0 -60px repeat-x;
+    /* Old browsers */
+    background: -moz-linear-gradient(top,  #0d151b 0%, #1f2a35 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0d151b), color-stop(100%,#1f2a35));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #0d151b 0%,#1f2a35 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #0d151b 0%,#1f2a35 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #0d151b 0%,#1f2a35 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  #0d151b 0%,#1f2a35 100%);
+    /* W3C */
+    border: 1px solid #252f3a;
+    height: 32px;
+    margin: 5px 0 8px 0;
+    padding: 2px;
+    width: 152px;
+}
+
+#fleet2 #resources .fleet_dispatch_toggle_wrap {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    margin: 5px 0 0 0;
+    padding: 2px;
+    min-width: 152px;
+    box-sizing: border-box;
+}
+
+#fleet2 .res input {
+    height: 17px;
+    margin: 1px 0;
+    width: 76px;
+    font-size: 11px;
+    padding: 0 2px;
+}
+
+#fleet2 .res_img {
+    margin: 1px 0 0;
+    position: absolute;
+}
+
+#fleet2 .res {
+    margin: 0 0 0 50px;
+    width: 82px;
+}
+
+#fleet2 #resources.lifeforms-enabled .res_wrap {
+    width: 146px;
+}
+
+#fleet2 .lifeforms-enabled .res {
+    width: 95px;
+}
+
+#fleet2 .lifeforms-enabled .res input {
+    width: 89px;
+}
+
+#loadAllResources {
+    background: url("/img/icons/fcc481845b0bec05eef8bdc2d22309.png") no-repeat;
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    left: 160px;
+    font-size: 11px;
+    width: 139px;
+    height: 103px;
+    z-index: 0;
+}
+
+#fleet2 #sendfleet #resources a.max,
+#fleet2 #sendfleet #resources a.min {
+}
+
+#fleet2 #sendfleet #resources a.max {
+    margin-left: 48px;
+}
+
+#fleet2 #resources .allResourcesWrap {
+    height: 32px;
+    width: 32px;
+    margin: 10px auto;
+}
+
+#fleet2 a#allresources {
+    display: block;
+    background: url("/img/icons/f5f81e8302aaad56c958c033677fb8.png") -374px -162px no-repeat;
+    height: 32px;
+    width: 32px;
+}
+
+.no-touch #fleet2 #resources a#allresources:hover {
+    background-position: -374px -194px;
+}
+
+#loadRoom {
+    font-size: 11px;
+    left: 161px;
+    position: absolute;
+    text-align: center;
+    top: 92px;
+    z-index: 0;
+}
+
+#fleet2 .bar_container {
+    margin: 3px 5px;
+    width: 130px;
+}
+
+#fleet2 #sendfleet #summary {
+    margin-top: 50px;
+}
+
+#fleet2 #sendfleet #summary img {
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+#fleet2 #sendfleet #summary .order,
+#fleet2 #sendfleet #summary .destination {
+    color: #fff;
+}
+
+#fleet2 a.start:link,
+#fleet2 a.start:visited,
+.no-touch #fleet2 a.start:hover,
+#fleet2 a.start:active {
+    display: block;
+    float: right;
+    cursor: pointer;
+    width: 276px;
+    height: 56px;
+    background: url("/img/icons/d5c8b4d6c6b63467b8392874a373b7.jpg") no-repeat 0 -56px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 auto 0;
+}
+
+.no-touch #fleet2 a.start:hover {
+    background: url("/img/icons/d5c8b4d6c6b63467b8392874a373b7.jpg") no-repeat;
+}
+
+#fleet2 a.start.off:link,
+#fleet2 a.start.off:visited,
+.no-touch #fleet2 a.start.off:hover,
+#fleet2 a.start.off:active {
+    background: url("/img/icons/d5c8b4d6c6b63467b8392874a373b7.jpg") 0 -112px no-repeat;
+}
+
+#fleet1 a.continue:active,
+#fleet1 a.continue:link,
+#fleet1 a.continue:visited,
+#fleet2 a.continue:link,
+#fleet2 a.continue:visited,
+#fleet2 a.back:active,
+#fleet2 a.back:link,
+#fleet2 a.back:visited {
+    display: block;
+    width: 104px;
+    height: 38px;
+    background: transparent url("/img/icons/f5f81e8302aaad56c958c033677fb8.png") 0 -240px;
+    margin: 0 10px 0 10px;
+    float: right;
+    overflow: hidden;
+    padding: 0;
+    text-decoration: none;
+}
+
+#naviActions {
+    padding: 10px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+#fleet1 a.continue:active,
+#fleet2 a.continue:active,
+.no-touch #fleet1 a.continue:hover,
+.no-touch #fleet2 a.continue:hover,
+.no-touch #station #jumpgate a#continue:hover,
+.no-touch #station-moon #jumpgate a#continue:hover {
+    background-position: -104px -240px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#fleet2 a.back:link,
+#fleet2 a.back:visited,
+#fleet2 a.back:active,
+.no-touch #fleet2 a.back:hover {
+    background-position: -104px -278px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#fleet1 a.continue.off:link,
+#fleet1 a.continue.off:visited,
+#fleet2 a.continue.off:link,
+#fleet2 a.continue.off:visited
+
+#fleet1 a.continue.off:active,
+#fleet2 a.continue.off:active,
+.no-touch #fleet1 a.continue.off:hover,
+.no-touch #fleet2 a.continue.off:hover {
+    background-position: -206px -240px;
+}
+
+#fleet1 a.continue span,
+#fleet2 a.continue span,
+#fleet2 a.start span,
+#fleet2 a.back span,
+#fleet1 a.continue.on:link span,
+#fleet1 a.continue.off:link span,
+#fleet2 a.continue.on:link span,
+#fleet2 a.continue.off:link span {
+    display: block;
+    color: #fff;
+    text-align: center;
+    height: 38px;
+    line-height: 38px;
+    overflow: hidden;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+#fleet2 a.start span {
+    padding-top: 20px;
+}
+
+#fleet2 .briefing_overlay {
+    background: rgba(12, 16, 20, 0.95);
+    color: #848484;
+    min-height: calc(100% - 30px);
+    padding: 12px;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    z-index: 3;
+    box-sizing: border-box;
+    margin-top: 30px;
+}
+
+#fleetdispatchcomponent #planet #movements,
+#fleetdispatchcomponent #planet #slots {
+    height: 25px;
+    width: 231px;
+    position: absolute;
+    right: 3px;
+    bottom: 36px;
+    text-align: center;
+    font-size: 11px;
+}
+
+#fleetdispatchcomponent #planet #movements a:link,
+#fleetdispatchcomponent #planet #movements a:visited,
+.no-touch #fleetdispatchcomponent #planet #movements a:hover,
+#fleetdispatchcomponent #planet #movements a:active {
+    text-decoration: none;
+}
+
+#fleetdispatchcomponent #planet #slots {
+    background: url("/img/icons/f5f81e8302aaad56c958c033677fb8.png") -143px -162px no-repeat;
+    bottom: 9px;
+    height: 19px;
+    font-size: 11px;
+    width: 217px;
+    padding: 6px 7px 0 7px;
+}
+
+#movement #planet #slots {
+    position: absolute;
+    right: 3px;
+    bottom: 9px;
+}
+
+#fleetdispatchcomponent #planet #movements img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#fleet2 #buttonz ul#missions a:active,
+.no-touch #fleet2 #buttonz ul#missions a:hover,
+#fleet2 #buttonz ul#missions  a.selected {
+    color: #F1F1F1;
+}
+
+#fleetdispatchcomponent #planet div a:link,
+#fleetdispatchcomponent #planet div a:visited,
+#fleetdispatchcomponent #planet div a:active,
+#fleetdispatchcomponent #planet div {
+    color: #848484;
+    text-decoration: none;
+}
+
+.no-touch #fleetdispatchcomponent #planet div a:hover {
+    text-decoration: underline;
+}
+
+#fleetdispatchcomponent #warning,
+#fleet2 #warning,
+#movement #warning {
+    height: 150px;
+    width: 670px;
+    background: url("/img/icons/77c5d0b60f22b387b9dc90e2c4a30e.gif") no-repeat;
+    margin: 1px auto;
+}
+
+#fleetdispatchcomponent #warning h3,
+#fleet2 #warning h3,
+#movement #warning h3 {
+    padding: 7px 0;
+}
+
+#fleetdispatchcomponent #warning p,
+#fleet2 #warning p,
+#movement #warning p {
+    padding: 15px;
+}
+
+#fleetdispatchcomponent #warning p,
+#fleet2 #warning p,
+#fleetdispatchcomponent #warning h3,
+#fleet2 #warning h3,
+#movement #warning p,
+#movement #warning h3 {
+    text-align: center;
+    font-weight: 700;
+    color: #B00000;
+}
+
+#fleetdispatchcomponent #warning p img,
+#fleet2 #warning p img,
+#movement #warning p img {
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+#fleetdispatchcomponent .icon_warning {
+    margin: 0 0 -3px 0;
+}
+
+#fleet2 #buttonz ul {
+    list-style-type: square;
+    color: #848484;
+    float: left;
+    display: inline;
+    /* IE6 fix */
+    text-align: left;
+}
+
+#fleet2 #buttonz ul li {
+    color: #6F9FC8;
+    font: 700 11px/15px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#fleet2 #buttonz ul li span {
+    color: #6F9FC8;
+    font-weight: 100;
+}
+
+#fleet2 #buttonz ul li span.tooltip {
+    color: #fff;
+    cursor: help;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+#fleet2 #buttonz ul li#fightAfterRetreat {
+    margin-bottom: 6px;
+}
+
+#fleet1 a.continue.on:link,
+#fleet1 a.continue.off:link {
+    margin: 0;
+    padding: 0;
+    height: 38px;
+    width: 104px;
+    float: right;
+    position: static;
+    display: inline;
+}
+
+#fleet2 #holdtimeline select,
+#fleet2 #expeditiontimeline select {
+    width: 45px;
+}
+
+/* ******************************
+STANDARTFLOTTEN
+****************************** */
+
+#fleetTemplatesEdit .fleet_tpl_name {
+    display: inline-block;
+    min-height: 30px;
+    padding: 5px;
+    text-align: right;
+    width: 205px;
+}
+
+#fleetTemplates.list {
+    background: transparent url("/img/icons/6ed70123ac0cf419b30c31d99ae208.png") repeat;
+    background: rgba(0,0,0,0.6);
+    margin: 0 0 10px 0;
+}
+
+#fleetTemplates td {
+    height: 35px;
+}
+
+#fleetTemplates td.textCenter {
+    text-align: center;
+}
+
+#fleetTemplates td.fleetDesc .fleetDescCont {
+    width: 185px;
+    overflow: hidden;
+}
+
+#sftcontainer th.label {
+    padding: 5px 3px 10px 3px;
+}
+
+#sftcontainer th {
+    padding: 3px 0;
+}
+
+#fleetTemplates td {
+    padding: 2px 0;
+}
+
+#sftcontainer th {
+    text-align: center;
+}
+
+#sftcontainer tr.separator th {
+    border-bottom: 1px dotted #848484;
+}
+
+#sftcontainer th.fleet_id {
+    width: 30px;
+}
+
+#sftcontainer th.fleet_name {
+    width: 200px;
+}
+
+#sftcontainer th.fleet_actions {
+    width: 90px;
+}
+
+#sftcontainer td a:link,
+#sftcontainer td a:visited,
+.no-touch #sftcontainer td a:hover,
+#sftcontainer td a:active,
+#jumpgate a:link,
+#jumpgate a:visited,
+#jumpgate a:active {
+    text-decoration: none;
+}
+
+.no-touch #jumpgate a:hover {
+    text-decoration: underline;
+}
+
+#sftcontainer td input.textinput {
+    color: #848484;
+    font-size: 11px;
+    border: 1px solid #141a1e;
+    background-color: #274650;
+    padding: 2px 5px;
+}
+
+#sftcontainer td input.textinput {
+    height: 13px;
+    line-height: 13px;
+    padding: 1px 3px;
+    margin: 0;
+}
+
+#fleetdispatchcomponent #sftcontainer a.close {
+    float: right;
+    display: inline;
+    margin-right: 10px;
+}
+
+#fleet2 #missionNameWrapper {
+    color: #A26D00;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    padding: 18px;
+}
+
+#fleet2 #missionNameWrapper.off {
+    color: #848484;
+}
+
+#fleet2 .mission_description {
+    font-weight: 100;
+}
+
+#fleetdispatchcomponent #planet #slots img {
+    float: left;
+    margin: -3px 0 0 2px;
+    display: inline;
+}
+
+#fleet2 #remainingresources {
+    float: none;
+    margin: 0 5px 0 0;
+    text-align: center;
+    width: 100%;
+}
+
+#fleetdispatchcomponent a#sendall:link,
+#fleetdispatchcomponent a#sendall:visited,
+.no-touch #fleetdispatchcomponent a#sendall:hover,
+#fleetdispatchcomponent a#sendall:active {
+    text-decoration: none;
+}
+
+#sftcontainer a.close_details {
+    margin: -1px 8px 0 0;
+}
+
+#sftcontainer #fleetTemplatesEdit .shipDesc {
+    padding: 4px 5px;
+}
+
+#sftcontainer #fleetTemplatesEdit .shipDesc img {
+    float: left;
+    margin: 1px 10px 2px 0;
+}
+
+#sftcontainer .fleetDesc a:link,
+#sftcontainer .fleetDesc a:visited,
+.no-touch #sftcontainer .fleetDesc a:hover,
+#sftcontainer .fleetDesc a:active {
+    display: block;
+}
+
+#sftcontainer .fleetDesc-hover {
+    background-color: #212933;
+}
+
+/* *****************************************************************************
+   FILL LEVEL BAR FOR STORAGE ROOMS AND CARGO SPACE
+***************************************************************************** */
+
+.bar_container,
+.filllevel_bar,
+.filllevel_undermark,
+.filllevel_middlemark,
+.filllevel_overmark,
+.premium_bar {
+    background-image: url(/img/icons/fbe2638880f7c292a43439c0f328ad.png);
+    background-repeat: repeat-x;
+}
+
+.bar_container {
+    background-position: 0 -24px;
+    height: 8px;
+    width: 290px;
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #000;
+}
+
+.filllevel_bar {
+    border-radius: 3px;
+    box-shadow: inset 0 0 1px #000;
+    height: 100%;
+    float: left;
+    width: 0;
+}
+
+.premium_bar {
+    background-position: 0 -32px;
+    height: 100%;
+    float: left;
+    width: 0;
+}
+
+.filllevel_undermark {
+    background-position: 0 -16px;
+}
+
+.filllevel_middlemark {
+    background-position: 0 -8px;
+}
+
+.filllevel_overmark {
+    background-position: 0 0;
+}
+
+/* **************************
+AJAX LOADING INDICATOR
+************************** */
+
+.ajax_loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    z-index: 10;
+    display: none;
+}
+
+.ajax_loading > .ajax_loading_overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0 0 20px #000;
+}
+
+.ajax_loading > .ajax_loading_overlay > .ajax_loading_indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 128px;
+    height: 128px;
+    margin-left: -64px;
+    margin-top: -64px;
+    background: url(/img/icons/6e0f46d7504242302bc8055ad9c8c2.gif);
+}
+
+#fleetRetreatSquareCheckbox {
+    height: 16px;
+    width: 16px;
+}
+
+#fleetRetreatSquareCheckbox > label {
+    width: 12px;
+    height: 12px;
+}
+
+#fleetRetreatSquareCheckbox > label::after {
+    width: 8px;
+    height: 8px;
+}
+
+/* * FLEET STATUS BOX */
+
+.fleetStatus {
+    background: transparent url("/img/icons/8b1b8753656d41d90d32e41a2000af.gif") no-repeat;
+    color: #7c8e9a;
+    font: normal 10px Verdana, Arial, Helvetica, sans-serif;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 658px;
+}
+
+.fleetStatus span a img {
+    margin-right: 7px;
+    vertical-align: middle;
+}
+
+.fleetStatus span a,
+.fleetStatus span a:link {
+    text-decoration: none;
+}
+
+.no-touch .fleetStatus span a:hover span {
+    color: #6F9FC8;
+    text-decoration: underline;
+}
+
+.fleetStatus .icon_reload {
+    margin: 0 0 -4px;
+}
+
+.fleetStatus span.current,
+.fleetStatus span.all {
+    color: #fff;
+}
+
+.fleetStatus .fleetSlots,
+.fleetStatus .expSlots {
+    margin-left: 108px;
+}
+
+.fleetStatus .closeAll,
+.fleetStatus .newWindow {
+    line-height: normal;
+    right: -1px;
+    position: absolute;
+    top: 3px;
+}
+
+.fleetStatus .closeAll a {
+    background: url("/img/icons/d55059f8c9bab5ebf9e8a3563f26d1.gif") no-repeat 0 0;
+    height: 22px;
+    width: 22px;
+    display: block;
+}
+
+.fleetStatus .closeAll .all_closed {
+    background-position: 0 0;
+}
+
+.fleetStatus .closeAll .all_open {
+    background-position: 0 -22px;
+}
+
+.fleetStatus .newWindow {
+    top: 6px;
+    right: 35px;
+}
+
+.fleetStatus .newWindow a img {
+    margin: 0;
+}
+
+#galaxytable td.position {
+    padding-right: 3px;
+    padding-left: 3px;
+    width: 28px;
+}
+
+#galaxytable td.allytag {
+    padding-left: 4px;
+    padding-right: 3px;
+}
+
+#expeditionbutton:before,
+.galaxy_icons {
+    background-image: url("/img/icons/e81e8e6d5e6a45e1ad45505ef3dc52.png");
+    background-repeat: no-repeat;
+}
+
+#expeditionbutton:before,
+#sendExpeditionFleetTemplateFleet:before,
+.galaxy_icons {
+    float: left;
+    display: block;
+    height: 16px;
+    margin: 0 1px;
+    width: 16px;
+}
+
+.galaxy_icons.prev {
+    background-position: 0px 0px;
+}
+
+.galaxy_icons.next {
+    background-position: 0px -16px;
+}
+
+no-touch .galaxy_icons.prev:hover {
+    background-position: 0px -32px;
+}
+
+no-touch .galaxy_icons.next:hover {
+    background-position: 0px -48px;
+}
+
+.galaxy_icons.galaxy {
+    background-position: 0px -65px;
+}
+
+.galaxy_icons.solarsystem {
+    background-position: 0px -82px;
+}
+
+.galaxy_icons.galaxy,
+.galaxy_icons.solarsystem {
+    height: 17px;
+    width: 18px;
+}
+
+/* ************* Header: Common, adapted for Galaxy ************************* */
+
+#galaxytable #message-wrapper {
+    background: transparent url("/img/icons/101294706c45bb61bc8bc933bfa1a8.png") no-repeat;
+    height: 52px;
+    left: 163px;
+    padding: 9px 0 0 22px;
+    top: 81px;
+    width: 665px;
+}
+
+#galaxytable .comm_menu {
+    height: 20px;
+    width: 60px;
+}
+
+#galaxytable #messages_collapsed {
+    margin: 2px 0 0 15px;
+    width: 435px;
+}
+
+#galaxytable #messages_collapsed a:link,
+#galaxytable #messages_collapsed a:visited,
+#galaxytable.no-touch #messages_collapsed a:hover,
+#messages_collapsed a:active {
+    margin: -17px 1px 0 0;
+}
+
+#galaxytable #eventboxBlank,
+#galaxytable #eventboxLoading {
+    line-height: 20px;
+}
+
+/* ************* Header: Galaxy specific ************************************ */
+
+#galaxyHeader {
+    height: 21px;
+    /* margin: -24px 0 0 15px; */
+    /* width: 567px; */
+    padding: 5px 4px 2px 2px;
+    margin: 0px 8px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-bottom: 0px;
+}
+
+.solarsystem {
+    margin: 0 2px 0 6px;
+}
+
+#galaxyHeader .btn_blue {
+    display: block;
+    float: left;
+    height: 14px;
+    line-height: 13px;
+    margin: 0 2px;
+    min-width: 0px;
+    padding: 0 5px;
+}
+
+#galaxyHeader .btn_system_action {
+    min-width: 65px;
+}
+
+#galaxyHeader .systembuttons {
+    float: right;
+}
+
+#discoverSystemBtn {
+    display: flex !important;
+    line-height: 14px;
+}
+
+#discoverSystemBtn > div {
+    background-image: url("/img/icons/1bcb107d4cdd48d0878fe850157e46.png");
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 14px;
+    background-position: -126px;
+    background-size: 154px 14px;
+    display: inline-block;
+    line-height: 14px;
+    margin-left: -5px;
+}
+
+#discoverSystemBtn > div.disabled {
+    background-position: -140px;
+}
+
+#galaxy_input,
+#system_input {
+    display: block;
+    float: left;
+    height: 14px;
+    line-height: 16px;
+    margin: 0 2px;
+    padding: 0px 3px;
+    text-align: center;
+    width: 26px;
+    -moz-appearance: textfield;
+}
+
+#expeditionbutton.btn_blue,
+#sendExpeditionFleetTemplateFleet.btn_blue {
+    float: right;
+    padding: 0 5px 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+#expeditionbutton:before {
+    background-position: 0px -99px;
+    content: '';
+    height: 14px;
+    margin: 0 0 0 -16px;
+    position: absolute;
+    width: 20px;
+}
+
+#sendExpeditionFleetTemplateFleet:before {
+    background-image: url(/img/icons/580a1e90c314d97d0dbb9b60645c28.png);
+    background-repeat: no-repeat;
+    content: '';
+    height: 13px;
+    margin: 1px 0 0 -16px;
+    position: absolute;
+    width: 20px;
+    background-size: contain;
+    left: 20px;
+}
+
+/* ************* Other Galaxy Stuff ************************************ */
+
+#galaxytable {
+    width: 654px;
+}
+
+table.legende {
+    width: 250px;
+    margin: 0px auto;
+}
+
+#legendTT dt {
+    clear: left;
+    float: left;
+    width: 20px;
+}
+
+#legendTT dd {
+    float: left;
+}
+
+table.legende td.abbreviation {
+    text-align: center;
+}
+
+#extendedgalaxy {
+    width: 200px;
+    padding-top: 2px;
+    display: inline;
+    /* IE6 */
+    text-align: right;
+}
+
+#extendedgalaxy a {
+    color: #7c7c7c;
+    text-decoration: none;
+}
+
+#galaxytable td.emptyspace {
+    height: 31px;
+}
+
+#galaxyheadbg2 {
+    background-position: 0 -2px;
+    /* display: block; */
+    height: 26px;
+    position: relative;
+    width: 654px;
+}
+
+#galaxyheadbg2 th {
+    height: 25px;
+    text-align: center;
+}
+
+#galaxytable {
+    min-height: 610px;
+    height: 610px;
+    border: 1px solid black;
+    border-spacing: 2px 2px;
+}
+
+#galaxytable tbody {
+    width: 652px;
+    border-spacing: 5px 3px;
+}
+
+#galaxytable tbody td {
+    background-color: rgba(0, 0, 0, 0.66);
+    border-radius: 6px;
+    line-height: 20px;
+    height: 20px;
+}
+
+#galaxytable td.microplanet,
+#galaxytable td.moon,
+#galaxytable td.debris,
+#galaxytable td.action {
+    border: none;
+    background: none;
+}
+
+#galaxytable .ListImage .planetTooltip,
+#galaxytable tr.row td.moon img,
+#galaxytable tr.row td.debris img {
+    position: absolute;
+    top: 0px;
+}
+
+#galaxytable .moon,
+#galaxytable .moon_a,
+#galaxytable .noMoon,
+.moonTooltip.micromoon.moon,
+.moonTooltip.micromoon.moon_a,
+.moonTooltip.micromoon.noMoon {
+    width: 30px;
+    height: 30px;
+    background: url('/img/icons/c9643df71b262232a4d66e591f7543.gif') no-repeat center;
+    background-size: 90%;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+#galaxytable .moon_c,
+.moonTooltip.micromoon.moon_c {
+    width: 30px;
+    height: 30px;
+    background: url('/img/icons/eb809a4e639ccc9fb943e15a4b25bb.gif') no-repeat center;
+    background-size: 90%;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+#galaxytable .debrisField,
+#galaxytable .noDebrisField,
+.debrisTooltip.microdebris.debris_1 {
+    width: 30px;
+    height: 30px;
+    background: url('/img/icons/fa3e396b8af2ae31e28ef3b44eca91.gif') no-repeat center;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+#galaxytable .noMoon,
+#galaxytable .noDebrisField {
+    background-image: none;
+}
+
+#galaxytable .moon:hover,
+#galaxytable .debrisField:hover {
+    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+}
+
+#galaxytable .planetEmpty,
+#galaxytable .action {
+    padding: 5px 0 0;
+}
+
+#galaxytable,
+#galaxytableHead {
+    color: #CFCBC2;
+    margin: 0 auto 1px auto;
+    overflow: hidden;
+}
+
+#galaxytable td.planetname a:link,
+#galaxytable td.planetname a:visited,
+.no-touch #galaxytable  td.planetname a:hover,
+#galaxytable td.planetname a:active,
+#galaxytable td.planetname1 a:link,
+#galaxytable td.planetname1 a:visited,
+.no-touch #galaxytable  td.planetname1 a:hover,
+#galaxytable td.planetname1 a:active {
+    color: #1A1313;
+}
+
+#galaxytable  td.planetname a.phalanxlink:link,
+#galaxytable  td.planetname a.phalanxlink:visited,
+.no-touch #galaxytable  td.planetname a.phalanxlink:hover,
+#galaxytable  td.planetname a.phalanxlink:active {
+    color: #8cacdc;
+    text-decoration: none;
+}
+
+.no-touch #galaxytable  td.planetname a.phalanxlink:hover {
+    color: #9c0;
+    text-decoration: none;
+}
+
+.no-touch #galaxytable  td.planetname a:hover,
+.no-touch #galaxytable  td.planetname1 a:hover {
+    color: #99cc00;
+}
+
+#galaxyContent table th {
+    font-weight: 700;
+}
+
+#galaxytable  tr.row {
+    position: relative;
+    height: 30px;
+}
+
+.no-touch #galaxytable  tr.row td.microplanet:hover,
+.no-touch .no-touch #galaxytable  tr.row td.microplanet1:hover,
+.no-touch .no-touch #galaxytable  tr.row td.moon img:hover,
+.no-touch .no-touch #galaxytable  tr.row td.debris img:hover,
+.no-touch .no-touch #galaxytable  tr.row td.playername:hover,
+.no-touch .no-touch #galaxytable  tr.row td.allytag span.allytagwrapper:hover {
+    color: #55ccdd;
+    cursor: pointer;
+}
+
+#galaxytable .planetEmpty {
+    cursor: default !important;
+}
+
+#galaxytable  tr.row td.playername a {
+    text-decoration: none;
+}
+
+#galaxytable  tr.row td span.status {
+    font-size: 10px;
+}
+
+#galaxytable  td.toppad {
+    padding-top: 3px;
+}
+
+#galaxytable  td.microplanet,
+#galaxytable  td.microplanet1 {
+    width: 40px;
+    padding: 0px 0px 0px 0px;
+    text-align: left;
+    position: relative;
+}
+
+.no-touch #galaxytable  td.microplanet1:hover {
+    cursor: auto;
+}
+
+#galaxytable  tr.row td.planetname,
+#galaxytable  tr.row td.planetname1 {
+    width: 161px;
+    vertical-align: middle;
+}
+
+.no-touch #galaxytable  td.planetname1:hover {
+    cursor: auto;
+}
+
+#galaxytable  td.moon {
+    width: 34px;
+    text-align: center;
+    position: relative;
+}
+
+#galaxytable  td.moon a,
+#galaxytable  td.debris a {
+    height: 30px;
+    width: 30px;
+    display: block;
+}
+
+#galaxytable  td.spacer02 {
+    width: 14px;
+}
+
+#galaxytable  td.debris {
+    vertical-align: top;
+    width: 38px;
+    position: relative;
+}
+
+/* #galaxytable  td.debris a {
+}
+
+#galaxytable  td.debris img {
+} */
+
+#galaxytable  td.playername {
+    width: 151px;
+    padding-top: 2px;
+}
+
+#galaxytable  td.spacer03 {
+    width: 5px;
+}
+
+#galaxytable  tr.row td.allytag {
+    width: 101px;
+    padding-top: 2px;
+    vertical-align: middle;
+}
+
+#galaxytable  td.end {
+    width: 4px;
+}
+
+#galaxytable  tr.footer td {
+    height: 28px;
+    color: #ccd3cf;
+    font-size: 11px;
+}
+
+#galaxytable  tr.footer span {
+    padding: 0px 10px;
+}
+
+.no-touch #galaxytable  tr.footer span#probes :hover,
+#galaxytable  tr.footer span#recycler
+.no-touch :hover,
+.no-touch .no-touch #galaxytable  tr.footer span#rockets :hover,
+#galaxytable  tr.footer span#slots
+.no-touch :hover {
+    color: #5cd;
+    cursor: help;
+}
+
+#galaxytable  tr.footer span span {
+    padding: 0px;
+}
+
+/* **************** rocketattack ******************** */
+
+#extendedgalaxy {
+    position: absolute;
+}
+
+#extendedgalaxy {
+    top: 0px;
+    left: 402px;
+}
+
+#extendedgalaxy {
+    width: 200px;
+    padding-top: 2px;
+    display: inline;
+    /* IE6 */
+    text-align: right;
+}
+
+#extendedgalaxy a {
+    color: #7c7c7c;
+    text-decoration: none;
+}
+
+.no-touch #extendedgalaxy a:hover {
+    color: #99CC00;
+}
+
+#galaxytable  td.emptyspace {
+    height: 31px;
+}
+
+#galaxytable  td.planetname a:link,
+#galaxytable  td.planetname a:visited,
+.no-touch #galaxytable  td.planetname a:hover,
+#galaxytable  td.planetname a:active,
+#galaxytable  td.planetname1 a:link,
+#galaxytable  td.planetname1 a:visited,
+.no-touch #galaxytable  td.planetname1 a:hover,
+#galaxytable  td.planetname1 a:active {
+    color: #1A1313;
+}
+
+.no-touch #galaxytable  td.planetname a:hover,
+.no-touch #galaxytable  td.planetname1 a:hover {
+    color: #99cc00;
+    text-decoration: none;
+}
+
+#galaxyContent table th,
+#galaxyContent table td {
+    text-align: center;
+    padding: 0px 0px;
+    font-size: 12px;
+}
+
+#galaxyContent table th {
+    font-weight: 700;
+}
+
+#galaxyContent table .info_header th {
+    font-weight: normal;
+}
+
+#galaxytable  tr.row {
+    /* background: transparent url("/img/icons/ce3b330c9755b61ee541ef6df7d105.gif") no-repeat; */
+    /* position:relative; */
+    /* display: block; */
+    /* breaks iOS10 table rows */
+    /* width:654px; */
+}
+
+#galaxytable  tr.row td {
+    vertical-align: middle;
+    font-size: 11px;
+    height: 23px;
+    /* overflow:hidden; */
+}
+
+#galaxytable  tr.row td.action>span {
+    display: inline-block;
+    position: relative;
+    height: 16px;
+    width: 76px;
+}
+
+#galaxytable  tr.row td.moon img {
+    margin: 0 0 0 2px;
+}
+
+.no-touch #galaxytable  tr.row td.microplanet:hover,
+.no-touch #galaxytable  tr.row td.microplanet1:hover,
+.no-touch #galaxytable  tr.row td.moon img:hover,
+.no-touch #galaxytable  tr.row td.debris img:hover,
+.no-touch #galaxytable  tr.row td.playername:hover,
+.no-touch #galaxytable  tr.row td.allytag span.allytagwrapper:hover {
+    /* https://jira.gameforge.com/browse/OGAME-4658 */
+    /* color:#55ccdd; */
+    /* cursor:pointer; */
+}
+
+#galaxytable  tr.row td.playername a {
+    text-decoration: none;
+}
+
+#galaxytable  tr.row td span.status {
+    font-size: 10px;
+}
+
+#galaxytable  td.toppad {
+    padding-top: 3px;
+}
+
+#galaxytable  td {
+    vertical-align: top;
+}
+
+#galaxytable  tr.none {
+    background: none;
+    position: relative;
+}
+
+#galaxytable  td.spacer01 {
+    width: 6px;
+}
+
+#galaxytable  td.position {
+    width: 16px;
+    text-align: center;
+}
+
+#galaxytable  td.microplanet1 {
+    background-repeat: no-repeat;
+    background-position: 4px 0;
+    width: 38px;
+    padding: 0;
+    text-align: left;
+    position: relative;
+}
+
+.no-touch #galaxytable  td.microplanet1:hover {
+    cursor: auto;
+}
+
+#galaxytable  tr.row td.planetname,
+#galaxytable  tr.row td.planetname1 {
+    width: 140px;
+    vertical-align: middle;
+}
+
+.no-touch #galaxytable  td.planetname1:hover {
+    cursor: auto;
+}
+
+#galaxytable  td.moon {
+    width: 38px;
+    text-align: center;
+}
+
+#galaxytable  td.spacer02 {
+    width: 14px;
+}
+
+#galaxytable  td.playername {
+    width: 140px;
+    padding-top: 2px;
+}
+
+#galaxytable  td.spacer03 {
+    width: 5px;
+}
+
+#galaxytable  tr.row td.allytag {
+    width: 101px;
+    padding-top: 1px;
+    vertical-align: middle;
+}
+
+#galaxytable  td.spacer04 {
+    width: 5px;
+}
+
+#galaxytable  td.action {
+    margin: 0 0 0 1px;
+    /* padding:0 0 0 2px; */
+    /* text-align:left; */
+    /* vertical-align:top; */
+    width: 83px;
+    white-space: nowrap;
+}
+
+#galaxytable  td.action a {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    /* IE6 */
+    /* position: absolute; */
+    top: 0;
+}
+
+#galaxytable  td.action a.espionage {
+    left: 0px;
+}
+
+#galaxytable .action .sendMail {
+    left: 18px;
+}
+
+#galaxytable  td.action a.buddyrequest {
+    left: 36px;
+}
+
+#galaxytable  td.action a.missleattack {
+    left: 54px;
+}
+
+#galaxytable  td.action img {
+    padding: 0px;
+    margin: 0;
+    border: none 0px;
+    width: 16px;
+    height: 16px;
+}
+
+#galaxytable  td.end {
+    width: 4px;
+}
+
+/* Tabellenende Footer/Info */
+
+#galaxytable .footer,
+#galaxytable .info,
+#galaxytableHead .info {
+    background-position: 0 -2px;
+    position: relative;
+}
+
+#galaxytable  tr.footer td,
+#galaxytable  tr.info th,
+#galaxytable  tr.info td,
+#galaxytable Head tr.footer td,
+#galaxytable Head tr.info th {
+    border-right: 2px solid #000;
+    border-left: 2px solid #000;
+    color: #ccd3cf;
+    font-size: 11px;
+    height: 27px;
+    padding-top: 0;
+}
+
+#galaxyheadbg2 .first {
+    border-left: 2px solid #000;
+}
+
+#galaxyheadbg2 .last {
+    border-right: 2px solid #000;
+}
+
+#galaxytable #inhalt #fleetstatusrow {
+    padding: 0px;
+    height: 25px;
+    /* display: block; */
+    overflow: hidden;
+}
+
+td#fleetstatusrow div {
+    border: none;
+    font-weight: 700;
+    padding: 5px 5px 7px 5px;
+    background: url(/img/icons/d03835718066a5a592a6426736e019.png) 0 -29px repeat-x;
+    height: 13px;
+}
+
+#fleetstatusrow .success {
+    color: #149B0D;
+}
+
+#fleetstatusrow .error {
+    color: #D43635;
+}
+
+#fleetstatusrow .notice {
+    color: #D43635;
+}
+
+#fleetstatusrow .vacation {
+    color: #6f9fc8;
+}
+
+#galaxytable .footer span,
+#galaxytableHead .info span,
+#galaxytable .info span {
+    color: #6f9fc8;
+    padding: 0px 4px;
+}
+
+#galaxytable .info_header span {
+    color: #616161;
+    display: inline-block;
+}
+
+.no-touch #galaxytable  tr.footer span#probes:hover,
+.no-touch #galaxytable  tr.footer span#recycler:hover,
+.no-touch #galaxytable  tr.footer span#rockets:hover,
+.no-touch #galaxytable  tr.footer span#slots:hover {
+    color: #6f9fc8;
+    cursor: help;
+}
+
+.no-touch #galaxytable  tr.footer span:hover {
+    color: #99cc00;
+    cursor: help;
+}
+
+#galaxytable  tr.footer span span,
+#galaxytable  tr.info span span {
+    padding: 0px;
+}
+
+/* **************** rocketattack ******************** */
+
+#extendedgalaxy {
+    top: 0px;
+    left: 402px;
+}
+
+/* **************************************
+		Raketenangriff
+************************************** */
+
+#galaxyadv #rocketattack .textinput,
+#galaxytable #rocketattack .textinput {
+    width: 60px;
+}
+
+.fleetAction {
+    height: 12px;
+    margin-left: 25px;
+    overflow: hidden;
+    text-align: center;
+    width: 12px;
+    bottom: 0px;
+    position: absolute;
+    z-index: 10;
+}
+
+.fleetNormal {
+    background: url("/img/icons/190f40521bd19ab1ddf1f8873a83bc.gif") no-repeat;
+}
+
+.fleetHostile {
+    background: url("/img/icons/6c1943c1f05410dea6cdaa048af470.gif") no-repeat;
+}
+
+.fleetNeutral {
+    background: url("/img/icons/87ece81b17235b551e68a5ca7a91c9.gif") no-repeat;
+}
+
+#galaxytable tr.info span#colonized {
+    float: left;
+}
+
+#galaxytable #legend {
+    float: right;
+}
+
+#galaxytable #legend a {
+    height: 16px;
+    width: 16px;
+    display: block;
+}
+
+.galaxyTooltip {
+    min-width: 220px;
+}
+
+.galaxyTooltip h1 {
+    margin: 0 16px 0 0;
+}
+
+.galaxyTooltip ul {
+    list-style: none;
+}
+
+.galaxyTooltip .ListImage {
+    display: block;
+    float: left;
+}
+
+.galaxyTooltip .ListLinks {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    width: 170px;
+}
+
+#rocketattack {
+    text-align: center;
+    width: 420px;
+}
+
+#rocketattack #target {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#rocketattack #arrivalTime {
+    margin-bottom: 10px;
+}
+
+#rocketattack .btn_blue {
+    margin-top: 15px;
+}
+
+#number.amount_input {
+    /* field for amount of ships/defense to build */
+    font-size: 20px;
+}
+
+#rocketattack #number {
+    color: white;
+}
+
+#rocketattack #priority {
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#rocketattack #priority a {
+    background: none;
+}
+
+#rocketattack #priority a:hover,
+#rocketattack #priority a.active {
+    background: url("/img/icons/dff15e77d7fbbc0f963f8dd2a68886.gif") no-repeat;
+}
+
+#rocketattack #priority ul {
+    margin-top: 5px;
+}
+
+#rocketattack #numberrockets {
+    height: 120px;
+}
+
+#rocketattack #numberrockets li {
+    float: none;
+    height: 80px;
+    width: 80px;
+    margin: 0 0 3px 0;
+    display: inline-block;
+}
+
+/* *********************** Galaxy Planet Images ************************************** */
+
+/* #galaxyContent td.microplanet.colonized, */
+
+.ListImage img.planetTooltip {
+    background-image: url("/img/icons/f247669201ef59cce65def611f0c59.png");
+    background-repeat: no-repeat;
+}
+
+#galaxyContent td.microplanet.desert_1,
+.ListImage img.planetTooltip.desert_1 {
+    background-position: 0px 0px;
+}
+
+#galaxyContent td.microplanet.desert_2,
+.ListImage img.planetTooltip.desert_2 {
+    background-position: -38px 0px;
+}
+
+#galaxyContent td.microplanet.desert_3,
+.ListImage img.planetTooltip.desert_3 {
+    background-position: -76px 0px;
+}
+
+#galaxyContent td.microplanet.desert_4,
+.ListImage img.planetTooltip.desert_4 {
+    background-position: -114px 0px;
+}
+
+#galaxyContent td.microplanet.desert_5,
+.ListImage img.planetTooltip.desert_5 {
+    background-position: -152px 0px;
+}
+
+#galaxyContent td.microplanet.desert_6,
+.ListImage img.planetTooltip.desert_6 {
+    background-position: -190px 0px;
+}
+
+#galaxyContent td.microplanet.desert_7,
+.ListImage img.planetTooltip.desert_7 {
+    background-position: -228px 0px;
+}
+
+#galaxyContent td.microplanet.desert_8,
+.ListImage img.planetTooltip.desert_8 {
+    background-position: -266px 0px;
+}
+
+#galaxyContent td.microplanet.desert_9,
+.ListImage img.planetTooltip.desert_9 {
+    background-position: -304px 0px;
+}
+
+#galaxyContent td.microplanet.desert_10,
+.ListImage img.planetTooltip.desert_10 {
+    background-position: -342px 0px;
+}
+
+#galaxyContent td.microplanet.dry_1,
+.ListImage img.planetTooltip.dry_1 {
+    background-position: 0px -33px;
+}
+
+#galaxyContent td.microplanet.dry_2,
+.ListImage img.planetTooltip.dry_2 {
+    background-position: -38px -33px;
+}
+
+#galaxyContent td.microplanet.dry_3,
+.ListImage img.planetTooltip.dry_3 {
+    background-position: -76px -33px;
+}
+
+#galaxyContent td.microplanet.dry_4,
+.ListImage img.planetTooltip.dry_4 {
+    background-position: -114px -33px;
+}
+
+#galaxyContent td.microplanet.dry_5,
+.ListImage img.planetTooltip.dry_5 {
+    background-position: -152px -33px;
+}
+
+#galaxyContent td.microplanet.dry_6,
+.ListImage img.planetTooltip.dry_6 {
+    background-position: -190px -33px;
+}
+
+#galaxyContent td.microplanet.dry_7,
+.ListImage img.planetTooltip.dry_7 {
+    background-position: -228px -33px;
+}
+
+#galaxyContent td.microplanet.dry_8,
+.ListImage img.planetTooltip.dry_8 {
+    background-position: -266px -33px;
+}
+
+#galaxyContent td.microplanet.dry_9,
+.ListImage img.planetTooltip.dry_9 {
+    background-position: -304px -33px;
+}
+
+#galaxyContent td.microplanet.dry_10,
+.ListImage img.planetTooltip.dry_10 {
+    background-position: -342px -33px;
+}
+
+#galaxyContent td.microplanet.gas_1,
+.ListImage img.planetTooltip.gas_1 {
+    background-position: 0px -66px;
+}
+
+#galaxyContent td.microplanet.gas_2,
+.ListImage img.planetTooltip.gas_2 {
+    background-position: -38px -66px;
+}
+
+#galaxyContent td.microplanet.gas_3,
+.ListImage img.planetTooltip.gas_3 {
+    background-position: -76px -66px;
+}
+
+#galaxyContent td.microplanet.gas_4,
+.ListImage img.planetTooltip.gas_4 {
+    background-position: -114px -66px;
+}
+
+#galaxyContent td.microplanet.gas_5,
+.ListImage img.planetTooltip.gas_5 {
+    background-position: -152px -66px;
+}
+
+#galaxyContent td.microplanet.gas_6,
+.ListImage img.planetTooltip.gas_6 {
+    background-position: -190px -66px;
+}
+
+#galaxyContent td.microplanet.gas_7,
+.ListImage img.planetTooltip.gas_7 {
+    background-position: -228px -66px;
+}
+
+#galaxyContent td.microplanet.gas_8,
+.ListImage img.planetTooltip.gas_8 {
+    background-position: -266px -66px;
+}
+
+#galaxyContent td.microplanet.gas_9,
+.ListImage img.planetTooltip.gas_9 {
+    background-position: -304px -66px;
+}
+
+#galaxyContent td.microplanet.gas_10,
+.ListImage img.planetTooltip.gas_10 {
+    background-position: -342px -66px;
+}
+
+#galaxyContent td.microplanet.ice_1,
+.ListImage img.planetTooltip.ice_1 {
+    background-position: 0px -99px;
+}
+
+#galaxyContent td.microplanet.ice_2,
+.ListImage img.planetTooltip.ice_2 {
+    background-position: -38px -99px;
+}
+
+#galaxyContent td.microplanet.ice_3,
+.ListImage img.planetTooltip.ice_3 {
+    background-position: -76px -99px;
+}
+
+#galaxyContent td.microplanet.ice_4,
+.ListImage img.planetTooltip.ice_4 {
+    background-position: -114px -99px;
+}
+
+#galaxyContent td.microplanet.ice_5,
+.ListImage img.planetTooltip.ice_5 {
+    background-position: -152px -99px;
+}
+
+#galaxyContent td.microplanet.ice_6,
+.ListImage img.planetTooltip.ice_6 {
+    background-position: -190px -99px;
+}
+
+#galaxyContent td.microplanet.ice_7,
+.ListImage img.planetTooltip.ice_7 {
+    background-position: -228px -99px;
+}
+
+#galaxyContent td.microplanet.ice_8,
+.ListImage img.planetTooltip.ice_8 {
+    background-position: -266px -99px;
+}
+
+#galaxyContent td.microplanet.ice_9,
+.ListImage img.planetTooltip.ice_9 {
+    background-position: -304px -99px;
+}
+
+#galaxyContent td.microplanet.ice_10,
+.ListImage img.planetTooltip.ice_10 {
+    background-position: -342px -99px;
+}
+
+#galaxyContent td.microplanet.jungle_1,
+.ListImage img.planetTooltip.jungle_1 {
+    background-position: 0px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_2,
+.ListImage img.planetTooltip.jungle_2 {
+    background-position: -38px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_3,
+.ListImage img.planetTooltip.jungle_3 {
+    background-position: -76px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_4,
+.ListImage img.planetTooltip.jungle_4 {
+    background-position: -114px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_5,
+.ListImage img.planetTooltip.jungle_5 {
+    background-position: -152px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_6,
+.ListImage img.planetTooltip.jungle_6 {
+    background-position: -190px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_7,
+.ListImage img.planetTooltip.jungle_7 {
+    background-position: -228px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_8,
+.ListImage img.planetTooltip.jungle_8 {
+    background-position: -266px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_9,
+.ListImage img.planetTooltip.jungle_9 {
+    background-position: -304px -132px;
+}
+
+#galaxyContent td.microplanet.jungle_10,
+.ListImage img.planetTooltip.jungle_10 {
+    background-position: -342px -132px;
+}
+
+#galaxyContent td.microplanet.normal_1,
+.ListImage img.planetTooltip.normal_1 {
+    background-position: 0px -165px;
+}
+
+#galaxyContent td.microplanet.normal_2,
+.ListImage img.planetTooltip.normal_2 {
+    background-position: -38px -165px;
+}
+
+#galaxyContent td.microplanet.normal_3,
+.ListImage img.planetTooltip.normal_3 {
+    background-position: -76px -165px;
+}
+
+#galaxyContent td.microplanet.normal_4,
+.ListImage img.planetTooltip.normal_4 {
+    background-position: -114px -165px;
+}
+
+#galaxyContent td.microplanet.normal_5,
+.ListImage img.planetTooltip.normal_5 {
+    background-position: -152px -165px;
+}
+
+#galaxyContent td.microplanet.normal_6,
+.ListImage img.planetTooltip.normal_6 {
+    background-position: -190px -165px;
+}
+
+#galaxyContent td.microplanet.normal_7,
+.ListImage img.planetTooltip.normal_7 {
+    background-position: -228px -165px;
+}
+
+#galaxyContent td.microplanet.normal_8,
+.ListImage img.planetTooltip.normal_8 {
+    background-position: -266px -165px;
+}
+
+#galaxyContent td.microplanet.normal_9,
+.ListImage img.planetTooltip.normal_9 {
+    background-position: -304px -165px;
+}
+
+#galaxyContent td.microplanet.normal_10,
+.ListImage img.planetTooltip.normal_10 {
+    background-position: -342px -165px;
+}
+
+#galaxyContent td.microplanet.water_1,
+.ListImage img.planetTooltip.water_1 {
+    background-position: 0px -198px;
+}
+
+#galaxyContent td.microplanet.water_2,
+.ListImage img.planetTooltip.water_2 {
+    background-position: -38px -198px;
+}
+
+#galaxyContent td.microplanet.water_3,
+.ListImage img.planetTooltip.water_3 {
+    background-position: -76px -198px;
+}
+
+#galaxyContent td.microplanet.water_4,
+.ListImage img.planetTooltip.water_4 {
+    background-position: -114px -198px;
+}
+
+#galaxyContent td.microplanet.water_5,
+.ListImage img.planetTooltip.water_5 {
+    background-position: -152px -198px;
+}
+
+#galaxyContent td.microplanet.water_6,
+.ListImage img.planetTooltip.water_6 {
+    background-position: -190px -198px;
+}
+
+#galaxyContent td.microplanet.water_7,
+.ListImage img.planetTooltip.water_7 {
+    background-position: -228px -198px;
+}
+
+#galaxyContent td.microplanet.water_8,
+.ListImage img.planetTooltip.water_8 {
+    background-position: -266px -198px;
+}
+
+#galaxyContent td.microplanet.water_9,
+.ListImage img.planetTooltip.water_9 {
+    background-position: -304px -198px;
+}
+
+#galaxyContent td.microplanet.water_10,
+.ListImage img.planetTooltip.water_10 {
+    background-position: -342px -198px;
+}
+
+#galaxytable #galaxyContent td.moon div.activity {
+    margin-left: -3px;
+}
+
+#galaxytable #galaxyContent td.moon div.fleetAction {
+    margin-left: 21px;
+}
+
+#galaxytable span.filter {
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    cursor: pointer;
+    border-radius: 3px;
+    background: linear-gradient(#6E899E, #829CAF);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.filtered_filter_empty {
+    opacity: 0.2;
+}
+
+.filtered_filter_inactive {
+    opacity: 0.2;
+}
+
+.filtered_filter_newbie {
+    opacity: 0.2;
+}
+
+.filtered_filter_strong {
+    opacity: 0.2;
+}
+
+.filtered_filter_vacation {
+    opacity: 0.2;
+}
+
+#galaxytable span.filter_active {
+    background: linear-gradient(#561f1f, #7d4747);
+}
+
+#filter_empty {
+    background-position: 0px 0px;
+}
+
+#filter_inactive {
+    background-position: -16px 0px;
+}
+
+#filter_newbie {
+    background-position: -32px 0px;
+}
+
+#filter_strong {
+    background-position: -48px 0px;
+}
+
+#filter_vacation {
+    background-position: -64px 0px;
+}
+
+.debris .fleetAction {
+    margin-left: 21px;
+}
+
+#galaxyContent .gatenetworkActive {
+    box-shadow: 0px 0px 10px 1px #F00ECE, inset 0px 0px 2px 2px #F00ECE;
+    border-radius: 16px;
+}
+
+/* ************** GALAXY EXPEDITION DEBRIS SLOT ************* */
+
+#galaxyHeader .wreckFieldIcon {
+    float: right;
+}
+
+#galaxytable tr.expeditionDebrisSlot {
+    /* background: transparent url("/img/icons/6ed70123ac0cf419b30c31d99ae208.png") repeat;
+    background: rgba(0,0,0,0.6); */
+}
+
+#galaxytable tr.expeditionDebrisSlot td {
+    background: none;
+}
+
+#galaxytable tr.expeditionDebrisSlot .expeditionDebrisSlotBox {
+    background: #090d12 url("/img/icons/5fbbb1876fcff20a8a265c06862495.png") 0 -590px repeat-x;
+    /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(20,29,37,0.8) 0%, rgba(9,13,18,0.8) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(20,29,37,0.8)), color-stop(100%,rgba(9,13,18,0.8)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* W3C */
+    border: 1px solid #23303A;
+    border-color: #24323D #131A20 #131A20 #131A20;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 1px black, inset 0 1px 2px 1px hsl(205, 33%, 11%);
+    box-shadow: 0 0 2px 1px black, inset 0 1px 2px 1px hsl(205, 33%, 11%);
+    font-size: 11px;
+    line-height: 15px;
+    margin: 3px 4px 3px 5px;
+    min-height: 41px;
+    padding: 4px 4px 5px 4px;
+    flex-direction: row;
+    width: calc(100% - 32px);
+    box-sizing: border-box;
+    display: inline-flex;
+}
+
+#galaxytable tr.expeditionDebrisSlot .expeditionDebrisSlotBox .title {
+    color: #3a7fb4;
+    font-weight: 700;
+    padding: 6px 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px black, 0 0 7px hsl(200, 60%, 35%);
+    width: 205px;
+}
+
+#galaxytable tr.expeditionDebrisSlot .expeditionDebrisSlotBox img {
+    margin: 0 5px 0 0;
+}
+
+/* NEW GALAXY LAYOUT START */
+
+#galaxycomponent #warning {
+    height: 150px;
+    width: 670px;
+    background: url("/img/icons/77c5d0b60f22b387b9dc90e2c4a30e.gif") no-repeat;
+    margin: 1px auto;
+}
+
+#galaxycomponent #warning h3 {
+    padding: 7px 0;
+}
+
+#galaxycomponent #warning p {
+    padding: 15px;
+}
+
+#galaxycomponent #warning p,
+#galaxycomponent #warning h3 {
+    text-align: center;
+    font-weight: 700;
+    color: #B00000;
+}
+
+#galaxycomponent #warning p img {
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+#galaxycomponent .icon_warning {
+    margin: 0 2px -3px 2px;
+}
+
+#galaxycomponent .icon_allianceBonus {
+    width: 14px;
+    height: 14px;
+    float: left;
+    margin-left: -5px;
+}
+
+#galaxyContent .galaxyTable {
+    width: 654px;
+    margin: 0 auto 1px auto;
+    border: 1px solid black;
+    gap: 2px 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+#galaxyContent .ctGalaxyHead,
+#galaxyContent .ctGalaxyFleetInfo,
+#galaxyContent .ctGalaxyFooter {
+    background: #050101;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #050101 1%, #141e26 1%, #141e26 50%, #10181f 50%, #10181f 99%, #000000 99%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #050101 1%,#141e26 1%,#141e26 50%,#10181f 50%,#10181f 99%,#000000 99%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #050101 1%,#141e26 1%,#141e26 50%,#10181f 50%,#10181f 99%,#000000 99%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050101', endColorstr='#000000',GradientType=0 );
+    /* IE6-9 */
+    height: 24px !important;
+    min-height: 24px !important;
+}
+
+#galaxyContent .ctGalaxyFooter {
+    color: #6f9fc8;
+}
+
+#galaxyContent .ctGalaxyFleetInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+#galaxyContent .ctGalaxyFleetInfo>div {
+    border: 0;
+}
+
+#galaxyContent .ctGalaxyFooter #colonized {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 11px;
+    padding-left: 5px;
+}
+
+#galaxyContent .galaxyRow {
+    display: flex;
+    min-height: 33px;
+    gap: 5px 3px;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+#galaxyContent .ctContentRow .galaxyCell {
+    background-color: rgba(0, 0, 0, 0.66);
+    border-radius: 6px;
+    font-size: 11px;
+    color: #CFCBC2;
+}
+
+#galaxyContent .galaxyRow .galaxyCell.cellPlayerName > span:not(.ownPlayerRow) {
+    cursor: pointer;
+}
+
+#galaxyContent .galaxyRow .galaxyCell.cellPlayerName > pre > span {
+    cursor: pointer;
+}
+
+#galaxyContent .ctContentRow .cellPlanet,
+#galaxyContent .ctContentRow .cellMoon,
+#galaxyContent .ctContentRow .cellDebris,
+#galaxyContent .ctContentRow .cellAction {
+    border: none;
+    background: none;
+}
+
+#galaxyContent .galaxyRow .galaxyCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 2px;
+}
+
+#galaxyContent .galaxyRow .galaxyCell.cellPlayerName span.playerName {
+    word-break: break-word;
+}
+
+#galaxyContent .span1-2 {
+    width: 64px;
+}
+
+#galaxyContent .span11 {
+    flex: 1;
+    gap: 10px;
+    color: #616161;
+    font-size: 11px;
+}
+
+#galaxyContent .headBold {
+    font-weight: 700;
+}
+
+#galaxyContent .filterCell {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+}
+
+#galaxyContent .filterCell>div {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 3px;
+    background: linear-gradient(#6E899E, #829CAF);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#galaxyContent .filterCell>div.filter_active {
+    background: linear-gradient(#6e9e74, #82af88);
+}
+
+#galaxyContent .cellPosition {
+    width: 22px;
+}
+
+#galaxyContent .cellPlanet {
+    width: 40px;
+}
+
+#galaxyContent .cellPlanetName,
+#galaxyContent .cellPlayerName {
+    flex: 1;
+}
+
+#galaxyContent .cellPlanetName {
+    gap: 3px;
+}
+
+#galaxyContent .cellMoon {
+    width: 38px;
+    position: relative;
+}
+
+#galaxyContent .cellDebris {
+    width: 38px;
+    position: relative;
+}
+
+#galaxyContent .cellAlliance {
+    width: 70px;
+}
+
+#galaxyContent .cellAction {
+    width: 101px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .microplanet,
+#galaxyContent .ctContentRow .cellPlanet a {
+    height: 33px;
+    width: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#galaxyContent .ctContentRow .cellMoon a,
+#galaxyContent .ctContentRow .cellDebris a {
+    height: 30px;
+    width: 30px;
+    display: block;
+}
+
+#galaxyContent .ctContentRow .cellMoon .moon,
+#galaxyContent .ctContentRow .cellMoon .moon_a,
+#galaxyContent .ctContentRow .cellMoon .moon_c,
+#galaxyContent .ctContentRow .cellDebris .debris_1 {
+    width: 30px;
+    height: 30px;
+    background-size: 90%;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+#galaxyContent .ctContentRow .cellMoon .moon_a {
+    background: url('/img/icons/c9643df71b262232a4d66e591f7543.gif') no-repeat center;
+}
+
+#galaxyContent .ctContentRow .cellMoon .moon_c {
+    background: url('/img/icons/eb809a4e639ccc9fb943e15a4b25bb.gif') no-repeat center;
+}
+
+#galaxyContent .ctContentRow .cellDebris .debris_1 {
+    background: url('/img/icons/fa3e396b8af2ae31e28ef3b44eca91.gif')  no-repeat center;
+}
+
+#galaxy #galaxytable .moon:hover,
+#galaxyContent .ctContentRow .cellPlanet .microplanet:hover,
+#galaxyContent .ctContentRow .cellMoon .moon_a:hover,
+#galaxyContent .ctContentRow .cellMoon .moon_c:hover,
+#galaxyContent .ctContentRow .cellDebris .debris_1:hover {
+    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+}
+
+/* *********************** Galaxy Planet Images ************************************** */
+
+#galaxyContent .ctContentRow .cellPlanet .microplanet,
+.planetTooltip.microplanet {
+    background-image: url("/img/icons/f247669201ef59cce65def611f0c59.png");
+    background-repeat: no-repeat;
+}
+
+.planetTooltip.microplanet {
+    height: 33px;
+    width: 38px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_1,
+.planetTooltip.microplanet.desert_1 {
+    background-position: -2px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_2,
+.planetTooltip.microplanet.desert_2 {
+    background-position: -40px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_3,
+.planetTooltip.microplanet.desert_3 {
+    background-position: -78px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_4,
+.planetTooltip.microplanet.desert_4 {
+    background-position: -116px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_5,
+.planetTooltip.microplanet.desert_5 {
+    background-position: -154px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_6,
+.planetTooltip.microplanet.desert_6 {
+    background-position: -192px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_7,
+.planetTooltip.microplanet.desert_7 {
+    background-position: -230px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_8,
+.planetTooltip.microplanet.desert_8 {
+    background-position: -268px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_9,
+.planetTooltip.microplanet.desert_9 {
+    background-position: -306px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .desert_10,
+.planetTooltip.microplanet.desert_10 {
+    background-position: -344px 1px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_1,
+.planetTooltip.microplanet.dry_1 {
+    background-position: -2px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_2,
+.planetTooltip.microplanet.dry_2 {
+    background-position: -40px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_3,
+.planetTooltip.microplanet.dry_3 {
+    background-position: -78px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_4,
+.planetTooltip.microplanet.dry_4 {
+    background-position: -116px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_5,
+.planetTooltip.microplanet.dry_5 {
+    background-position: -154px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_6,
+.planetTooltip.microplanet.dry_6 {
+    background-position: -192px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_7,
+.planetTooltip.microplanet.dry_7 {
+    background-position: -230px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_8,
+.planetTooltip.microplanet.dry_8 {
+    background-position: -268px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_9,
+.planetTooltip.microplanet.dry_9 {
+    background-position: -306px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .dry_10,
+.planetTooltip.microplanet.dry_10 {
+    background-position: -344px -32px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_1,
+.planetTooltip.microplanet.gas_1 {
+    background-position: -2px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_2,
+.planetTooltip.microplanet.gas_2 {
+    background-position: -40px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_3,
+.planetTooltip.microplanet.gas_3 {
+    background-position: -78px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_4,
+.planetTooltip.microplanet.gas_4 {
+    background-position: -116px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_5,
+.planetTooltip.microplanet.gas_5 {
+    background-position: -154px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_6,
+.planetTooltip.microplanet.gas_6 {
+    background-position: -192px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_7,
+.planetTooltip.microplanet.gas_7 {
+    background-position: -230px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_8,
+.planetTooltip.microplanet.gas_8 {
+    background-position: -268px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_9,
+.planetTooltip.microplanet.gas_9 {
+    background-position: -306px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .gas_10,
+.planetTooltip.microplanet.gas_10 {
+    background-position: -344px -65px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_1,
+.planetTooltip.microplanet.ice_1 {
+    background-position: -2px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_2,
+.planetTooltip.microplanet.ice_2 {
+    background-position: -40px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_3,
+.planetTooltip.microplanet.ice_3 {
+    background-position: -78px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_4,
+.planetTooltip.microplanet.ice_4 {
+    background-position: -116px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_5,
+.planetTooltip.microplanet.ice_5 {
+    background-position: -154px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_6,
+.planetTooltip.microplanet.ice_6 {
+    background-position: -192px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_7,
+.planetTooltip.microplanet.ice_7 {
+    background-position: -230px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_8,
+.planetTooltip.microplanet.ice_8 {
+    background-position: -268px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_9,
+.planetTooltip.microplanet.ice_9 {
+    background-position: -306px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .ice_10,
+.planetTooltip.microplanet.ice_10 {
+    background-position: -344px -98px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_1,
+.planetTooltip.microplanet.jungle_1 {
+    background-position: -2px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_2,
+.planetTooltip.microplanet.jungle_2 {
+    background-position: -40px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_3,
+.planetTooltip.microplanet.jungle_3 {
+    background-position: -78px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_4,
+.planetTooltip.microplanet.jungle_4 {
+    background-position: -116px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_5,
+.planetTooltip.microplanet.jungle_5 {
+    background-position: -154px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_6,
+.planetTooltip.microplanet.jungle_6 {
+    background-position: -192px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_7,
+.planetTooltip.microplanet.jungle_7 {
+    background-position: -230px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_8,
+.planetTooltip.microplanet.jungle_8 {
+    background-position: -268px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_9,
+.planetTooltip.microplanet.jungle_9 {
+    background-position: -306px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .jungle_10,
+.planetTooltip.microplanet.jungle_10 {
+    background-position: -344px -131px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_1,
+.planetTooltip.microplanet.normal_1 {
+    background-position: -2px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_2,
+.planetTooltip.microplanet.normal_2 {
+    background-position: -40px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_3,
+.planetTooltip.microplanet.normal_3 {
+    background-position: -78px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_4,
+.planetTooltip.microplanet.normal_4 {
+    background-position: -116px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_5,
+.planetTooltip.microplanet.normal_5 {
+    background-position: -154px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_6,
+.planetTooltip.microplanet.normal_6 {
+    background-position: -192px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_7,
+.planetTooltip.microplanet.normal_7 {
+    background-position: -230px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_8,
+.planetTooltip.microplanet.normal_8 {
+    background-position: -268px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_9,
+.planetTooltip.microplanet.normal_9 {
+    background-position: -306px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .normal_10,
+.planetTooltip.microplanet.normal_10 {
+    background-position: -344px -164px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_1,
+.planetTooltip.microplanet.water_1 {
+    background-position: -2px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_2,
+.planetTooltip.microplanet.water_2 {
+    background-position: -40px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_3,
+.planetTooltip.microplanet.water_3 {
+    background-position: -78px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_4,
+.planetTooltip.microplanet.water_4 {
+    background-position: -116px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_5,
+.planetTooltip.microplanet.water_5 {
+    background-position: -154px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_6,
+.planetTooltip.microplanet.water_6 {
+    background-position: -192px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_7,
+.planetTooltip.microplanet.water_7 {
+    background-position: -230px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_8,
+.planetTooltip.microplanet.water_8 {
+    background-position: -268px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_9,
+.planetTooltip.microplanet.water_9 {
+    background-position: -306px -197px;
+}
+
+#galaxyContent .ctContentRow .cellPlanet .water_10,
+.planetTooltip.microplanet.water_10 {
+    background-position: -344px -197px;
+}
+
+#galaxyContent .ctContentRow div.activity {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    height: 15px;
+    width: 12px;
+}
+
+#galaxyContent .ctContentRow .micromoon div.activity {
+    left: 0;
+}
+
+#galaxyContent .ctContentRow div.fleetAction {
+    position: absolute;
+    right: 3px;
+    bottom: 0;
+    height: 12px;
+    width: 12px;
+    overflow: hidden;
+    text-align: center;
+    z-index: 10;
+    margin-left: 0;
+}
+
+#galaxyContent .ctContentRow .micromoon div.fleetAction,
+#galaxyContent .ctContentRow .microdebris div.fleetAction {
+    right: 0;
+}
+
+#galaxyContent .ctContentRow div.activity.minute15 {
+    background: url("/img/icons/91ad13c8f9a7e9390085d12adde508.png") no-repeat 0 -656px;
+    z-index: 10;
+}
+
+#galaxyContent .ctContentRow  div.activity.minute60 {
+    background: url("/img/icons/91ad13c8f9a7e9390085d12adde508.png") no-repeat 0 -640px;
+    z-index: 10;
+}
+
+#galaxyContent .ctContentRow  div.activity.showMinutes {
+    width: 15px;
+    background-color: #000000;
+    color: #ffa800;
+    padding: 0 1px 0px 0;
+    border: 1px solid #ffa800;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    z-index: 10;
+    line-height: 14px;
+    text-align: center;
+}
+
+#galaxyContent .ctContentRow  div.phalanxActive,
+#galaxyContent .ctContentRow  div.phalanxInctive {
+    height: 16px;
+    width: 16px;
+    margin-left: 3px;
+}
+
+#galaxyContent .ctContentRow  div.phalanxActive {
+    background-image: url(/img/icons/1cae570e41fc188133be9d548d6523.gif);
+}
+
+#galaxyContent .ctContentRow  div.phalanxInctive {
+    background-image: url(/img/icons/a2971aab52113ceb949b180e408f16.gif);
+}
+
+#galaxyContent .expeditionDebrisSlotBoxRow,
+#galaxyContent .eventSlotRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+#galaxyContent .expeditionDebrisSlotBoxCell,
+#galaxyContent .eventSlotBoxCell {
+    background-color: rgba(0, 0, 0, 0.66);
+    border-radius: 6px;
+    font-size: 11px;
+    color: #CFCBC2;
+    height: 43px;
+    width: 22px !important;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#galaxyContent .expeditionDebrisSlotBox,
+#galaxyContent .bdaySlotBox {
+    background: #090d12 url("/img/icons/5fbbb1876fcff20a8a265c06862495.png") 0 -590px repeat-x;
+    /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(20,29,37,0.8) 0%, rgba(9,13,18,0.8) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(20,29,37,0.8)), color-stop(100%,rgba(9,13,18,0.8)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* IE10+ */
+    background: linear-gradient(top,  rgba(20,29,37,0.8) 0%,rgba(9,13,18,0.8) 100%);
+    /* W3C */
+    border: 1px solid #23303A;
+    border-color: #24323D #131A20 #131A20 #131A20;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 1px black, inset 0 1px 2px 1px hsl(205, 33%, 11%);
+    font-size: 11px;
+    line-height: 15px;
+    margin: 3px 4px 3px 5px;
+    min-height: 41px;
+    padding: 4px 4px 5px 4px;
+    flex-direction: row;
+    width: calc(100% - 32px);
+    box-sizing: border-box;
+    display: inline-flex;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div,
+#galaxyContent .bdaySlotBox > div {
+    display: flex;
+    width: 38%;
+    justify-content: center;
+    align-items: center;
+}
+
+#galaxyContent .bdaySlotBox > div.birthdayNameWrapper {
+    width: 62%;
+    justify-content: flex-start;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotDebrisContainer {
+    flex-direction: column;
+    width: 9%;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions {
+    width: 53%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    flex-direction: row;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions #sendExpeditionFleetTemplateFleet {
+    justify-content: center;
+    position: relative;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions > div#galaxyExpeditionFleetTemplateContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    width: calc(100% - 100px);
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions > div#galaxyExpeditionFleetTemplateContainer > a#expeditionFleetTemplateBtn {
+    color: #6F9FC8;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2px;
+    line-height: 12px;
+    width: calc(100% - 80px);
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions > div#galaxyExpeditionFleetTemplateContainer.disabled > a#expeditionFleetTemplateBtn {
+    color: #444444;
+    cursor: not-allowed !important;
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions #expeditionFleetTemplateBtn > span.expedtionFleetTemplateBtnTitle {
+    word-break: break-all;
+    max-width: calc(100% - 20px);
+}
+
+#galaxyContent .expeditionDebrisSlotBox > div#expeditionDebrisSlotActions > div#galaxyExpeditionFleetTemplateContainer > select {
+    width: 80px;
+    overflow: hidden;
+    float: right;
+}
+
+#galaxyContent .expeditionDebrisSlotBox .title,
+#galaxyContent .bdaySlotBox .title {
+    color: #3a7fb4;
+    font-weight: 700;
+    padding: 6px 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px black, 0 0 7px hsl(200, 60%, 35%);
+    width: 100%;
+}
+
+#galaxyContent .expeditionDebrisSlotBox img {
+    margin: 0 5px 0 0;
+}
+
+#galaxyContent #birthdayName,
+#galaxyContent #expeditionDebris {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#galaxyContent #birthdayName {
+    padding-left: 12px;
+    justify-content: flex-start;
+}
+
+#galaxyContent .ctContentRow .cellAction {
+    gap: 2px;
+}
+
+#galaxyContent .ctContentRow .cellAction .emptyAction,
+#galaxyContent .ctContentRow .cellAction>span {
+    display: inline-block;
+    position: relative;
+    height: 16px;
+    width: 16px;
+}
+
+#galaxyContent .ctContentRow .cellAction a {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    /* IE6 */
+    /* position: absolute; */
+    top: 0;
+}
+
+#galaxyContent .ctContentRow .cellAction img {
+    padding: 0px;
+    margin: 0;
+    border: none 0px;
+    width: 16px;
+    height: 16px;
+}
+
+/* NEW GALAXY LAYOUT END */
+
+.graveyard h2 {
+    color: #6F9FC8;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.graveyard h3 {
+    color: #6F9FC8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.graveyard .side_navigation a {
+    font-weight: 700;
+    text-decoration: none;
+    display: block;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.graveyard .side_navigation a.active {
+    color: #ffffff;
+}
+
+.graveyard a.historylink {
+    font-weight: 700;
+    text-decoration: underline;
+    display: block;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.graveyard .c-left,
+.marketplace .c-right {
+    top: 213px;
+}
+
+.graveyard header {
+    position: relative;
+    width: 654px;
+    height: 250px;
+    background: url("/img/icons/505a4e2bfa28586bc525a891e5b043.jpg");
+    margin: 0 auto;
+}
+
+.graveyard header h2 {
+    position: absolute;
+    left: 144px;
+    top: 7px;
+    font: bold 18px/22px Verdana,Arial,Helvetica,sans-serif;
+    color: #fff;
+}
+
+.graveyard .wrapper .header {
+    position: relative;
+    height: 28px;
+    background-image: url("/img/icons/10e31cd5234445e4084558ea3506ea.gif");
+    background-repeat: no-repeat;
+}
+
+.graveyard .wrapper .content {
+    position: relative;
+    background: url("/img/icons/db530b4ddcbe680361a6f837ce0dd7.gif") repeat-y;
+    min-height: 150px;
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+}
+
+.graveyard .wrapper .content .filter-wrapper {
+    margin-top: -10px;
+}
+
+.graveyard .wrapper .content .content-wrapper {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.graveyard .wrapper .footer {
+    position: relative;
+    background: url("/img/icons/997fd607a76c0b713e24cb7f2d41f5.png") no-repeat;
+    height: 50px;
+    width: 667px;
+    z-index: 1;
+}
+
+.graveyard #restrictions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.graveyard .break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.graveyard .spacer {
+    width: 100px;
+}
+
+.graveyard .singleDesc {
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.66);
+    margin: 1px;
+    align-items: center;
+    padding: 3px;
+    line-height: 20px;
+}
+
+.graveyard .restrictionOk,
+.graveyard .restrictionNack {
+    background: url("/img/icons/8a1f887e234e345bf032302d5d81fe.png") no-repeat;
+    height: 20px;
+    width: 20px;
+    z-index: 1;
+}
+
+.graveyard .restrictionOk {
+    background-position-x: 0px;
+}
+
+.graveyard .restrictionNack {
+    background-position-x: -20px;
+}
+
+.graveyard .content .inner-box {
+    border-radius: 2px;
+    background: linear-gradient(
+            to bottom,
+            rgba(19, 28, 38, 1) 0%,
+            rgba(30, 43, 56, 1) 50%,
+            rgba(30, 43, 57, 1) 51%,
+            rgba(30, 43, 57, 1) 100%
+    ) 0 28px;
+    border: 1px solid #1d2228;
+    border-top-color: #2e363e;
+    border-bottom-color: #000;
+    margin: 5px;
+}
+
+.graveyard .content h2 {
+    padding: 0 11px 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(20,30,38,1) 0%,
+            rgba(20,30,38,1) 50%,
+            rgba(16,24,31,1) 51%,
+            rgba(16,24,31,1) 100%
+    );
+}
+
+.graveyard .content .clearfix {
+    display: block;
+}
+
+.graveyard .content h2 {
+    color: #619fc8;
+    font-size: 15px;
+    height: 27px;
+    line-height: 27px;
+    margin: 0 0 5px;
+    text-shadow: -1px -1px 0 #000;
+}
+
+.graveyard .content p {
+    color: #848484;
+    font-size: 12px;
+    line-height: normal;
+    padding: 0 11px 0;
+    margin: 15px 0;
+}
+
+.graveyard #incentiveContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0 11px;
+    margin-bottom: 5px;
+}
+
+.graveyard .incentiveItem,
+.graveyard .incentiveOfficer {
+    border-radius: 5px;
+    border: 1px solid #767b84;
+    width: 32px;
+    height: 32px;
+    margin-right: 3px;
+}
+
+.graveyard .incentiveOfficer {
+    background-repeat: no-repeat;
+    background-image: url("/img/icons/f593aa158c734df9e6223f00721981.jpg");
+}
+
+.officer32.admiral {
+    background-position: -32px 0;
+}
+
+.officer32.engineer {
+    background-position: -64px 0;
+}
+
+.officer32.geologe {
+    background-position: -96px 0;
+}
+
+.graveyard .commander {
+    background-position: 0 0;
+}
+
+.graveyard .admiral {
+    background-position: -32px 0;
+}
+
+.graveyard .engineer {
+    background-position: -64px 0;
+}
+
+.graveyard .geologist {
+    background-position: -96px 0;
+}
+
+.graveyard .technocrat {
+    background-position: -128px 0;
+}
+
+#exodus-indicator {
+    position: relative;
+    width: 138px;
+    height: 63px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("/img/icons/475a1ccd7c3d81e9bb757f1548557a.png");
+    cursor: pointer;
+}
+
+#exodus-indicator div {
+    position: absolute;
+    left: 47px;
+    top: 21px;
+    width: 35px;
+    height: 20px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+#exodus-indicator-acknowledged {
+    background-image: url("/img/icons/95a15ec4094e2f5ba1f12349d302eb.png");
+}
+
+#exodus-indicator-waiting {
+    background-image: url("/img/icons/a64bb7a1b9620875f071a00c08b64e.gif");
+}
+
+#exodus-indicator-processed {
+    position: relative;
+    width: 138px;
+    height: 63px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("/img/icons/635528fe5c717cda8a97c8f16dd36f.png");
+}
+
+#exodus-overlay {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+#exodus-dialog {
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    width: 793px;
+    margin-left: -398px;
+    background-color: #0d1014;
+    border: 1px solid #000000;
+    text-align: left;
+    -moz-box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    box-shadow: 0 0 0 1px #0d1014, 0 0 0 3px #000000, 0 0 4px 3px #ffffff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#exodus-close {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    cursor: pointer;
+}
+
+#exodus-header {
+    height: 35px;
+    overflow: hidden;
+    margin: 2px 4px 0 2px;
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -35px repeat-x;
+}
+
+#exodus-header-content {
+    position: relative;
+    display: inline-block;
+    height: 33px;
+    overflow: hidden;
+    padding: 6px 30px 0 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -70px repeat-x;
+    text-shadow: #000000 -1px -1px 2px;
+}
+
+#exodus-header-content:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 35px;
+    overflow: hidden;
+    content: '';
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 -105px no-repeat;
+}
+
+#exodus-header-content:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 35px;
+    overflow: hidden;
+    content: '';
+    background: url("/img/icons/a2521ce1d8e2bc37d89c654a1c1382.png") 0 0 no-repeat;
+}
+
+#exodus-content {
+    margin: 2px 4px 4px 4px;
+    padding: 5px 7px;
+    background-color: #14181d;
+    border-top: 2px solid #16202a;
+}
+
+#exodus-top-content {
+    padding: 2px 5px 5px 5px;
+    margin-bottom: 10px;
+}
+
+#exodus-tab-content,
+#exodus-ally-content,
+#exodus-rules-content,
+#exodus-buddy-content {
+    padding: 5px;
+    border: 1px solid #000000;
+    background-color: #0d1014;
+}
+
+.graveyard .og-table {
+    padding: 0 11px 0;
+    margin: 15px 0;
+}
+
+.graveyard .serverselect h2 {
+    color: #6F9FC8;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 3px 0;
+    padding: 0;
+    background: none;
+    height: 15px;
+    line-height: 15px;
+}
+
+.graveyard .serverselect .og-table {
+    margin: 8px 0;
+}
+
+.graveyard .serverselect select,
+.graveyard .serverselect .og-input,
+.graveyard .serverselect .og-button {
+    margin-top: 3px;
+}
+
+.graveyard .serverselect .og-button {
+    height: 24px;
+    line-height: 24px;
+}
+
+.graveyard .serverselect #noServer {
+    display: block;
+    position: relative;
+    font-size: 11px;
+    line-height: 20px;
+    color: #ffffff;
+    margin-top: 4px;
+}
+
+.graveyard .disabled {
+    pointer-events: none;
+    cursor: not-allowed !important;
+    background-color: #333333 !important;
+    background: none !important;
+}
+
+.graveyard .serverselect {
+    background: none !important;
+}
+
+.graveyard .og-loading > .og-loading-overlay > .og-loading-indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+    background: url("/img/icons/6e0f46d7504242302bc8055ad9c8c2.gif");
+    background-size: 100%;
+}
+
+#happyedit #traderEdit li {
+    margin-left: 20px;
+}
+
+#happyedit ul#items {
+    list-style-type: none;
+}
+
+#happyedit ul#items>li {
+    display: inline-block;
+    margin-left: 3px;
+}
+
+#happyedit ul#items>li>a {
+    display: block;
+}
+
+#dbedit h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#dbedit p {
+    margin-top: 30px;
+}
+
+#saveDBForm .backupName {
+    width: 200px;
+}
+
+#restoreDBForm .backupName {
+    width: 213px;
+}
+
+.dropdown .redWarning {
+    color: red;
+}
+
+.happyedit {
+    background: #000000;
+}
+
+.happyedit .content {
+    padding-left: 5px;
+}
+
+.happyedit .happyeditTask:nth-child(odd) {
+    background-color: #2f3744;
+}
+
+.happyedit .happyeditTask:nth-child(even) {
+    background-color: #142433;
+}
+
+.happyedit .happyeditTask {
+    padding: 5px;
+}
+
+.happyedit .happyeditTask span {
+    font-weight: bold;
+}
+
+.happyedit .smallDesc {
+    color: #848484;
+    font-size: 11px;
+    line-height: 130%;
+    margin: 3px 0 0 4px;
+    height: 12px;
+}
+
+.happyedit .changes {
+    line-height: 10px;
+}
+
+.happyedit .changes input {
+    margin-right: 5px;
+}
+
+.happyedit .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.happyedit .tabs div {
+    position: relative;
+    width: auto;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    flex-basis: 20%;
+}
+
+.happyedit .tabs div a {
+    position: relative;
+    min-width: 110px;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 28px;
+    border: 1px solid #89c2f3;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 0 5px;
+}
+
+.happyedit .tabs div a span {
+    color: #ffffff;
+}
+
+.happyedit .tabs div.active a {
+    background-color: #628ed2;
+}
+
+.happyedit .tabs div a:hover {
+    background-color: #628ed2;
+}
+
+.happyedit .happyedit-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.happyedit .happyedit-itembox {
+    width: 51px;
+    height: 51px;
+    display: block;
+    overflow: hidden;
+    padding: 2px;
+    position: relative;
+}
+
+.happyedit .happyedit-itembox .amount {
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    background: black;
+    color: white;
+    padding: 2px;
+    font-size: 9px;
+}
+
+.happyedit .happyedit-itembox img {
+    width: 100%;
+}
+
+.happyedit .marginLeft25 {
+    margin-left: 25px;
+}
+
+.happyedit hr {
+    margin: 20px 0;
+}
+
+.happyedit table {
+    border-spacing: 10px;
+    /* table-layout: fixed; */
+}
+
+.happyedit .debrisTable input {
+    width: 100px;
+}
+
+.happyedit .happyedit-finish-fleet {
+    cursor: pointer;
+}
+
+.happyedit .allInputHolder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+}
+
+.happyedit h2 {
+    font-size: 1rem;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.happyedit .isFlex {
+    display: flex;
+}
+
+.happyedit .marginRight25 {
+    margin-right: 25px;
+}
+
+.happyedit .verticalPadding20 {
+    padding: 20px 0;
+}
+
+.happyedit .width100 {
+    width: 100px;
+}
+
+.happyedit #eventContent .originFleet span,
+.happyedit #eventContent .destFleet span {
+    width: 70px;
+}
+
+.happyedit .detailsFleet {
+    max-width: 55px;
+    min-width: 55px;
+}
+
+.happyedit .detailsFleet span {
+    word-break: break-all;
+}
+
+#happyeditcomponent header,
+#happyeditcomponent .row {
+    display: flex;
+}
+
+#happyeditcomponent .col {
+    flex: 1;
+}
+
+#happyeditcomponent .lifeformSel {
+    width: 38px;
+}
+
+#happyeditcomponent #lifeformSettings >p,
+#happyeditcomponent #lifeformBuilding >p {
+    text-align: left;
+    font-weight: 300;
+    padding: 15px;
+}
+
+#happyeditcomponent .icon.icon_warning {
+    background: url(/img/icons/91ad13c8f9a7e9390085d12adde508.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-position: 0 -208px;
+}
+
+#happyeditcomponent #lifeformSettings .icon_warning,
+#happyeditcomponent #lifeformBuilding .icon_warning {
+    margin: 0 5px -3px 0;
+}
+
+#happyeditcomponent section hr {
+    margin: 3px 0;
+}
+
+/* The container */
+
+#happyeditcomponent section .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-height: 25px;
+}
+
+/* Hide the browser's default checkbox */
+
+#happyeditcomponent section .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+
+#happyeditcomponent section .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+
+#happyeditcomponent section .container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+#happyeditcomponent section .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+#happyeditcomponent section .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+#happyeditcomponent section .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+#happyeditcomponent section .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#happyeditcomponent header {
+    width: inherit !important;
+    height: inherit !important;
+}
+
+/* Create a custom radio button */
+
+#happyeditcomponent section .radiocheckmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+
+#happyeditcomponent section .container:hover input ~ .radiocheckmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+
+#happyeditcomponent section .container input:checked ~ .radiocheckmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+#happyeditcomponent section .radiocheckmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+
+#happyeditcomponent section .container input:checked ~ .radiocheckmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+
+#happyeditcomponent section .container .radiocheckmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+#happyeditcomponent section .lifeformsection {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+#happyeditcomponent .lifeformimg {
+    position: relative;
+    width: 36px;
+    display: block;
+    transition: all 0.2s ease-in;
+    border-radius: 5px;
+    border: 1px solid #767b84;
+    height: 36px;
+    padding: 1px;
+}
+
+#happyeditcomponent .lifeformimg:hover {
+    transform: scale(1.2);
+}
+
+#happyeditcomponent .lifeform-item-icon {
+    width: 32px;
+    height: 32px;
+    background-position-y: -280px;
+}
+
+#happyeditcomponent .lifeform-item-icon.lifeform0 {
+    display: block;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 3px;
+    background: linear-gradient(#445982, #253249);
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+
+#happyeditcomponent .lifeformTech0 {
+    display: block;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 3px;
+    background: linear-gradient(#445982, #253249);
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+
+#happyeditcomponent .lifeform-item-icon.lifeform1 {
+    background-position-x: -4px;
+}
+
+#happyeditcomponent .lifeform-item-icon.lifeform2 {
+    background-position-x: -45px;
+}
+
+#happyeditcomponent .lifeform-item-icon.lifeform3 {
+    background-position-x: -80px;
+}
+
+#happyeditcomponent .lifeform-item-icon.lifeform4 {
+    background-position-x: -115px;
+}
+
+#happyeditcomponent .infodetail {
+    display: block;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border-radius: 3px;
+    background: linear-gradient(#445982, #253249);
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+
+#happyeditcomponent .infodetail:hover {
+    background: linear-gradient(#6b86b4, #384c6b);
+}
+
+#happyeditcomponent .queuePic.lifeformqueuetiny {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#happyeditcomponent .happyedit-buffs-list {
+    padding-right: 5px;
+}
+
+#happyeditcomponent .happyedit-buffs-list li:nth-child(even) {
+    background-color: #111111;
+}
+
+#happyeditcomponent .happyedit-buffs-buff {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin: 10px 10px 0 10px;
+    padding: 5px;
+}
+
+#happyeditcomponent .happyedit-buffs-buff .happyedit-buffs-buffimage {
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #89c2f3;
+}
+
+#happyeditcomponent .happyedit-buffs-groupactions {
+    margin: 10px 10px 10px 15px;
+    text-align: center;
+}
+
+#happyeditcomponent .happyedit-buffs-groupactions button {
+    margin: 0 5px 0 5px;
+}
+
+#happyeditcomponent .classSelector {
+    cursor: pointer;
+}
+
+#happyeditcomponent #resetBashing {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+#happyeditcomponent #resetBashingInput {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 15px;
+}
+
+#happyeditcomponent #resetBashingInput span {
+    width: 200px;
+}
+
+#headerbarcomponent {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#headerbarcomponent .OGameClock {
+    color: #848484;
+    font-weight: 700;
+}
+
+#siteHeader {
+    /* Positioning */
+    position: absolute;
+    /* Box-Model */
+    height: 19px;
+    width: 100%;
+    /* Typography */
+    /* Visual */
+    background: transparent url("/img/icons/92e5dcfd750b5ecd8734e3d13b7fee.gif") repeat-x 0px 0px;
+    /* Misc */
+}
+
+body.no-commander #pageContent {
+    top: 35px;
+}
+
+#pageContentEnd {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+#top {
+    height: 143px;
+    background-image: url("/img/icons/0d9cdd8b2ddfd7664a3e29c86a1436.png");
+}
+
+#left {
+    width: 160px;
+    float: left;
+    position: relative;
+    top: -32px;
+}
+
+#middle {
+    width: 670px;
+    margin-left: 10px;
+    float: left;
+}
+
+#right {
+    width: 150px;
+    float: right;
+}
+
+#bottom {
+    clear: both;
+}
+
+.grayscale {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale") brightness(70%);
+    /* Firefox 10+, Firefox on Android */
+    filter: gray;
+    /* IE6-9 */
+    filter: grayscale(100%) brightness(70%);
+    -webkit-filter: grayscale(100%) brightness(70%);
+    /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.grayscale-60 {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'saturate\' values=\'0.6\'/></filter></svg>#grayscale");
+    /* Firefox 10+, Firefox on Android */
+    filter: gray;
+    /* IE6-9 */
+    -webkit-filter: grayscale(60%);
+    /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.hueRotate {
+    filter: hue-rotate(275deg) contrast(130%);
+    /* Firefox... */
+    -webkit-filter: hue-rotate(275deg) contrast(130%);
+    /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}

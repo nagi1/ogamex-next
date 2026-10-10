@@ -76,6 +76,27 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="fieldwrapper">
+                                <label class="styled textBeefy">@lang('Deuterium consumption:')</label>
+                                <div class="thefield">
+                                    <select name="deuterium_consumption" class="w130">
+                                        @foreach([0.5, 0.6, 0.7, 0.8, 0.9, 1.0] as $value)
+                                            <option value="{{ $value }}"{{ (float) $deuterium_consumption === $value ? ' selected' : '' }}>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="smallFont">@lang('Universe-wide fleet deuterium consumption multiplier.')</div>
+                            </div>
+                            <div class="fieldwrapper">
+                                <label class="styled textBeefy">@lang('Espionage probe capacity:')</label>
+                                <div class="thefield">
+                                    <square-checkbox class="square-checkbox">
+                                        <input type="checkbox" id="square-checkEspionageProbeCapacity" name="espionage_probe_capacity_on" value="1" {{ $espionage_probe_capacity_on ? 'checked' : '' }}>
+                                        <label for="square-checkEspionageProbeCapacity"></label>
+                                    </square-checkbox>
+                                </div>
+                                <div class="smallFont">@lang('When enabled, each espionage probe has a cargo capacity of 5.')</div>
+                            </div>
                         </div>
 
                         <p class="box_highlight textCenter no_buddies">{{ __('t_ingame.admin.section_income_note') }}</p>
@@ -122,6 +143,18 @@
                                 <div class="thefield">
                                     <input type="text" pattern="[0-9]*" class="textInput w50 textCenter textBeefy" value="{{ $dark_matter_bonus }}" size="6" name="dark_matter_bonus">
                                 </div>
+                            </div>
+                        </div>
+
+                        <p class="box_highlight textCenter no_buddies">@lang('Player deletion settings.')</p>
+
+                        <div class="group bborder" style="display: block;">
+                            <div class="fieldwrapper">
+                                <label class="styled textBeefy">@lang('Inactive days before player deletion:')</label>
+                                <div class="thefield">
+                                    <input type="text" pattern="[0-9]*" class="textInput w50 textCenter textBeefy" value="{{ $inactive_player_deletion_days }}" size="6" name="inactive_player_deletion_days" id="inactive_player_deletion_days">
+                                </div>
+                                <div class="smallFont">@lang('Number of days of inactivity after which a player is permanently deleted and their planets are removed. Set to 0 to disable. When enabled, values below 30 are raised to a minimum of 30 days.')</div>
                             </div>
                         </div>
 
@@ -472,12 +505,19 @@
                                 <label class="styled textBeefy">{{ __('t_ingame.admin.galaxy_count') }}</label>
                                 <div class="thefield">
                                     <select name="number_of_galaxies" class="w130" data-value="{{ $number_of_galaxies }}">
+                                        <option value="4"{{ $number_of_galaxies == 4 ? ' selected' : '' }}>4</option>
                                         <option value="5"{{ $number_of_galaxies == 5 ? ' selected' : '' }}>5</option>
                                         <option value="6"{{ $number_of_galaxies == 6 ? ' selected' : '' }}>6</option>
                                         <option value="7"{{ $number_of_galaxies == 7 ? ' selected' : '' }}>7</option>
                                         <option value="8"{{ $number_of_galaxies == 8 ? ' selected' : '' }}>8</option>
                                         <option value="9"{{ $number_of_galaxies == 9 ? ' selected' : '' }}>9</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="fieldwrapper">
+                                <label class="styled textBeefy">@lang('Number of systems:')</label>
+                                <div class="thefield">
+                                    <input type="number" min="1" max="499" class="textInput w50 textCenter textBeefy" value="{{ $number_of_systems }}" name="number_of_systems">
                                 </div>
                             </div>
                         </div>
@@ -494,6 +534,25 @@
         <script language="javascript">
             initBBCodes();
             initOverlays();
+
+            document.form.addEventListener('submit', function (event) {
+                var field = document.getElementById('inactive_player_deletion_days');
+                if (!field || parseInt(field.value, 10) <= 0) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                errorBoxDecision(
+                    LocalizationStrings.attention,
+                    'Enabling inactive player deletion will PERMANENTLY delete inactive accounts and remove their planets. This action cannot be undone. Are you sure you want to continue?',
+                    LocalizationStrings.yes,
+                    LocalizationStrings.no,
+                    function () {
+                        document.form.submit();
+                    }
+                );
+            });
         </script>
     </div>
 

@@ -1,0 +1,13 @@
+[Unit]
+Description=Hourly WSL Relay leak sweep
+Documentation=https://github.com/microsoft/WSL/issues/41242
+
+[Timer]
+# The leak is boot-scoped and accumulates over hours of session-heavy use, so first sweep
+# after the transport is settled, then hourly.
+OnBootSec=15min
+OnUnitActiveSec=1h
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

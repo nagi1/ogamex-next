@@ -18,6 +18,7 @@ use OGame\Models\Planet\Coordinate;
 use OGame\Services\BuddyService;
 use OGame\Services\CharacterClassService;
 use OGame\Services\DebrisFieldService;
+use OGame\Services\HostilityGuard;
 use OGame\Services\PhalanxService;
 use OGame\Services\PlanetMoveService;
 use OGame\Services\PlanetService;
@@ -69,6 +70,13 @@ class GalaxyController extends OGameController
             $system = (int)$system_qs;
         }
 
+        $maxGalaxies = $settingsService->numberOfGalaxies();
+        $maxSystems = $settingsService->numberOfSystems();
+
+        // Clamp coordinates to configured universe bounds.
+        $galaxy = max(1, min($maxGalaxies, $galaxy));
+        $system = max(1, min($maxSystems, $system));
+
         return view('ingame.galaxy.index')->with([
             'current_galaxy' => $galaxy,
             'current_system' => $system,
@@ -77,7 +85,8 @@ class GalaxyController extends OGameController
             'interplanetary_missiles_count' => $planet->getObjectAmount('interplanetary_missile'),
             'used_slots' => $player->getFleetSlotsInUse(),
             'max_slots' => $player->getFleetSlotsMax(),
-            'max_galaxies' => $settingsService->numberOfGalaxies(),
+            'max_galaxies' => $maxGalaxies,
+            'max_systems' => $maxSystems,
             'is_in_vacation_mode' => $player->isInVacationMode(),
             'planet_relocation_cost' => (int)$settingsService->get('planet_relocation_cost', 240000),
         ]);
@@ -721,7 +730,7 @@ class GalaxyController extends OGameController
      * @param PhalanxService $phalanxService
      * @return JsonResponse
      */
-    public function ajax(Request $request, PlayerService $player, PlanetServiceFactory $planetServiceFactory, PhalanxService $phalanxService): JsonResponse
+    public function ajax(Request $request, PlayerService $player, PlanetServiceFactory $planetServiceFactory, PhalanxService $phalanxService, SettingsService $settingsService): JsonResponse
     {
         $this->playerService = $player;
         $this->planetServiceFactory = $planetServiceFactory;
@@ -734,8 +743,10 @@ class GalaxyController extends OGameController
         }
 
         $planet = $player->planets->current();
-        $galaxy = $request->input('galaxy');
-        $system = $request->input('system');
+        $maxGalaxies = $settingsService->numberOfGalaxies();
+        $maxSystems = $settingsService->numberOfSystems();
+        $galaxy = max(1, min($maxGalaxies, (int)$request->input('galaxy')));
+        $system = max(1, min($maxSystems, (int)$request->input('system')));
         $galaxyContent = $this->getGalaxyArray($galaxy, $system, $player, $planetServiceFactory, $phalanxService);
         $slotsColonized = $this->calculateColonizedSlots($galaxyContent);
 
@@ -965,15 +976,15 @@ class GalaxyController extends OGameController
      * @param PlanetServiceFactory $planetServiceFactory
      * @return JsonResponse
      */
-    public function missileAttack(Request $request, PlayerService $player, PlanetServiceFactory $planetServiceFactory): JsonResponse
+    public function missileAttack(Request $request, PlayerService $player, PlanetServiceFactory $planetServiceFactory, SettingsService $settingsService): JsonResponse
     {
         $this->playerService = $player;
         $this->planetServiceFactory = $planetServiceFactory;
 
         // Validate input
         $validated = $request->validate([
-            'galaxy' => 'required|integer|min:1',
-            'system' => 'required|integer|min:1',
+            'galaxy' => 'required|integer|min:1|max:' . $settingsService->numberOfGalaxies(),
+            'system' => 'required|integer|min:1|max:' . $settingsService->numberOfSystems(),
             'position' => 'required|integer|min:1|max:15',
             'type' => 'required|integer',
             'missile_count' => 'required|integer|min:0',
@@ -1026,6 +1037,13 @@ class GalaxyController extends OGameController
             ], 403);
         }
 
+        if (app(HostilityGuard::class)->forbids($player->getId(), $targetPlanet->getPlayer()?->getId())) {
+            return response()->json([
+                'success' => false,
+                'error' => __('Hostile actions are disabled in this universe.'),
+            ], 403);
+        }
+
         // Check range
         $missileRange = $player->getMissileRange();
         $distance = $this->calculateSystemDistance($currentPlanet->getPlanetCoordinates(), $targetCoordinate);
@@ -1053,9 +1071,11 @@ class GalaxyController extends OGameController
         $mission->position_to = $position;
         $mission->type_from = $currentPlanet->getPlanetType()->value;
         $mission->type_to = $type;
+        $dispatchMoment = now();
         $mission->mission_type = 10; // Missile attack mission
-        $mission->time_departure = time();
-        $mission->time_arrival = time() + $flightTime;
+        $mission->time_departure = (int) $dispatchMoment->timestamp;
+        $mission->time_arrival = (int) $dispatchMoment->timestamp + $flightTime;
+        $mission->time_arrival_ms = (int) $dispatchMoment->valueOf() + ($flightTime * 1000);
         $mission->canceled = 0;
         $mission->processed = 0;
 

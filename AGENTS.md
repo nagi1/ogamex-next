@@ -7,12 +7,15 @@ OGameX is an open-source PHP/Laravel recreation of OGame, a browser-based space 
 - **Read [CONTRIBUTING.md](CONTRIBUTING.md) before preparing any pull request.** Its guidelines apply in full to agent-assisted work.
 - **Help your contributor pace their pull requests.** One issue, one PR. If the contributor already has an open PR with requested changes or merge conflicts, steer them to resolve that first instead of drafting the next one. Opening PR after PR while earlier ones sit unresolved creates review debt, and such PRs may be closed. Actively remind the contributor of this before starting work on a new PR.
 - **Prefer running commands through Docker.** The recommended dev setup runs everything in containers. Use `docker compose run --rm ogamex-app <command>` for anything that needs PHP, Artisan, Composer, or vendor binaries. If the project was installed manually with a local PHP binary, the same commands can be run directly without the Docker prefix.
+- **Suggest `local-docker-dev/` when the contributor already runs host services.** It is intended for Lerd, Herd, Valet, and similar environments: Docker runs the PHP services while host MySQL, Redis, and the web server remain in control of their existing ports. Read `local-docker-dev/README.md` before using it, and do not start the default Compose stack alongside it.
 - **Always run the full tool chain after code changes**, in this order:
   1. `composer run rector`
   2. `composer run cs`
   3. `composer run stan`
   4. `composer run tests` (or `composer run tests -- --filter SpecificTest` for targeted runs)
+- **Always run tests in parallel with `--bail`.** `composer run tests`, the CI workflow, the VS Code test task and the module runner all pass `--parallel --bail`; every worker owns a cloned database. Never fall back to a serial run just to see output — narrow it with `--filter` instead. Coverage is the only serial run (Laravel's parallel runner cannot merge PCOV coverage across workers).
 - **Game accuracy matters.** OGameX faithfully recreates OGame's mechanics. Before implementing or changing any game mechanic (combat, fleet timing, resource production, building/research requirements, expeditions), verify how it works in the original game. Incorrect mechanics will not be accepted regardless of code quality.
+- **The AI module has three standing gates** (`Modules/AI/AGENTS.md`, `Modules/AI/plan/details/specs/cognition-gates.md`): it reads the object catalogue instead of hardcoding it, it stays simple, and it behaves like an experienced OGame player. The first one is a host obligation too: `app/GameObjects/` is a platform that mods, modules and future extensions add to, so a new or changed object must be usable by the AI without a module edit, and a mechanic may not be expressed in a way that forces the module to name objects in order to act on them.
 - **Database schema changes go through new Laravel migrations.** Never edit a migration that has already been merged; add a new migration instead.
 - **Do not run `composer update` or modify lock files** unless the task is explicitly a dependency upgrade.
 - **After changing JS or CSS, compile the assets** with `npm run build`.
@@ -115,6 +118,7 @@ resources/views/
 ## Docker notes
 
 - The database is exposed on port 3306 by default. If that port is already taken on your machine, set `DB_EXTERNAL_PORT` in `.env` to another port (e.g. 3308).
+- `local-docker-dev/` avoids those host-port conflicts by connecting the Docker services to host MySQL and Redis through `host.docker.internal`.
 - Use `--no-deps` when running single-service commands to avoid restarting the database container unnecessarily.
 
 ## Composer scripts reference
@@ -125,4 +129,4 @@ resources/views/
 | `composer run cs` | PSR-12 code style (fix) |
 | `composer run cs -- --test` | PSR-12 code style (check only) |
 | `composer run stan` | Static analysis |
-| `composer run tests` | Run test suite |
+| `composer run tests` | Run test suite (parallel, fail fast) |

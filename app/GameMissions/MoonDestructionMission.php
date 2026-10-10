@@ -25,14 +25,17 @@ use OGame\Models\FleetMission;
 use OGame\Models\Planet\Coordinate;
 use OGame\Models\Resources;
 use OGame\Services\DebrisFieldService;
+use OGame\Services\MilitaryStatisticsService;
 use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
+use Random\Randomizer;
 use RuntimeException;
 
 class MoonDestructionMission extends GameMission
 {
     protected static string $name = 'Moon Destruction';
     protected static int $typeId = 9;
+    protected static array $requiredShipMachineNames = ['deathstar'];
     protected static bool $hasReturnMission = true;
     protected static bool $blockedByServerAttackBlock = true;
     protected static FleetSpeedType $fleetSpeedType = FleetSpeedType::war;
@@ -273,17 +276,28 @@ class MoonDestructionMission extends GameMission
         $lossChance = $this->calculateDeathstarLossChance($moonDiameter);
 
         // Roll for moon destruction (1-100 for precise percentages)
-        $destructionRoll = random_int(1, 100);
+        $destructionRoll = app(Randomizer::class)->getInt(1, 100);
         $moonDestroyed = $destructionRoll <= $destructionChance;
 
         // Roll for Deathstar loss - single roll for entire fleet
-        $lossRoll = random_int(1, 100);
+        $lossRoll = app(Randomizer::class)->getInt(1, 100);
         $allDeathstarsLost = $lossRoll <= $lossChance;
 
         // Update surviving units if all Deathstars are lost
         if ($allDeathstarsLost) {
+            // Track military statistics for lost Deathstars
+            $militaryStatisticsService = app(MilitaryStatisticsService::class);
+            $attackerPlayer = $this->playerServiceFactory->make($mission->user_id, true);
+
             foreach ($survivingUnits->units as $unit) {
                 if ($unit->unitObject->machine_name === 'deathstar') {
+                    // Calculate lost points before zeroing the amount
+                    $lostPoints = $militaryStatisticsService->calculateMilitaryPointsFromMachineName('deathstar', $unit->amount);
+                    if ($lostPoints > 0) {
+                        $user = $attackerPlayer->getUser();
+                        $militaryStatisticsService->addLostPoints($user, $lostPoints);
+                    }
+
                     $unit->amount = 0;
                     break;
                 }
@@ -464,7 +478,7 @@ class MoonDestructionMission extends GameMission
             ],
         ];
 
-        $report->attacker = [
+        $report->attacker = array_merge([
             'player_id' => $attackPlayer->getId(),
             'resource_loss' => $battleResult->attackerResourceLoss->sum(),
             'units' => $battleResult->attackerUnitsStart->toArray(),
@@ -472,7 +486,7 @@ class MoonDestructionMission extends GameMission
             'shielding_technology' => $battleResult->attackerShieldLevel,
             'armor_technology' => $battleResult->attackerArmorLevel,
             'planet_id' => $battleResult->attackerPlanetId,
-        ];
+        ], $this->buildAttackerPlanetSnapshot($battleResult->attackerPlanetId));
 
         $report->defender = [
             'player_id' => $defenderPlayer->getId(),

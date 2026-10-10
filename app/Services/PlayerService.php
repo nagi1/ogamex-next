@@ -7,8 +7,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use OGame\Events\Game\ResearchCompleted;
+use OGame\Factories\PlanetServiceFactory;
 use OGame\GameObjects\Models\Calculations\CalculationType;
 use OGame\Models\BuildingQueue;
+use OGame\Models\Enums\PlanetType;
 use OGame\Models\FleetMission;
 use OGame\Models\Highscore;
 use OGame\Models\Message;
@@ -699,6 +703,8 @@ class PlayerService
             // Update planet and update level of the building that has been processed.
             $this->setResearchLevel($object->machine_name, $item->object_level_target);
 
+            event(new ResearchCompleted($this->getId(), $object->machine_name, $item->object_level_target));
+
             // Update build queue record
             $item->processed = 1;
             $item->save();
@@ -717,51 +723,37 @@ class PlayerService
      */
     public function updateFleetMissions(): void
     {
-        DB::transaction(function () {
-            // Attempt to acquire a lock on the row for this planet. This is to prevent
-            // race conditions when multiple requests are updating the fleet missions for the
-            // same planet and potentially doing double insertions or overwriting each other's changes.
-            $planetIds = $this->planets->allIds();
-            $planetMissionUpdateLock = Planet::whereIn('id', $planetIds)
-                ->lockForUpdate()
-                ->get();
+        $planetIds = $this->planets->allIds();
 
-            if ($planetMissionUpdateLock->count() === count($planetIds)) {
-                try {
-                    $fleetMissionService = resolve(FleetMissionService::class, ['player' => $this]);
-                    $missions = $fleetMissionService->getArrivedMissionsByPlanetIds($planetIds);
+        try {
+            $fleetMissionService = resolve(FleetMissionService::class, ['player' => $this]);
+            $missions = $fleetMissionService->getArrivedMissionsByPlanetIds($planetIds);
 
-                    foreach ($missions as $mission) {
-                        // Attempt to acquire a lock on the row for this fleet mission. This is to prevent
-                        // race conditions when multiple requests are updating the same fleet mission and
-                        // potentially doing double insertions or overwriting each other's changes.
-                        $fleetMissionLock = FleetMission::where('id', $mission->id)
-                            ->lockForUpdate()
-                            ->first();
-
-                        if ($fleetMissionLock) {
-                            try {
-                                $fleetMissionService->updateMission($mission);
-                            } catch (Exception $e) {
-                                throw new Exception('Could not update fleet mission with ID ' . $mission->id . ': ' . $e->getMessage());
-                            }
-                        } else {
-                            throw new Exception('Could not acquire update fleet mission update lock.');
-                        }
-                    }
-
-                    if ($missions->count() > 0) {
-                        // Update the current player object and all child planets to make sure any changes
-                        // to the fleet missions are reflected in the player/planet objects.
-                        $this->load($this->getId());
-                    }
-                } catch (Exception $e) {
-                    throw new RuntimeException('Fleet mission service process error: ' . $e->getMessage());
+            $handledDestinations = [];
+            foreach ($missions as $mission) {
+                $destinationKey = $fleetMissionService->getMissionDestinationLockKey($mission);
+                if (isset($handledDestinations[$destinationKey])) {
+                    continue;
                 }
-            } else {
-                throw new Exception('Could not acquire update fleet mission planet lock.');
+
+                $handledDestinations[$destinationKey] = true;
+                $fleetMissionService->processDueMissionEventsForMission($mission);
             }
-        });
+
+            if (!empty($handledDestinations)) {
+                // Update the current player object and all child planets to make sure any changes
+                // to the fleet missions are reflected in the player/planet objects.
+                $this->load($this->getId());
+            }
+        } catch (Exception $e) {
+            // Page-load processing is a best-effort fallback; the queue worker is the primary
+            // processor. Log the error but do not break the player's request — the queue worker
+            // or scheduler fallback will process the mission on its next run.
+            Log::error('Fleet mission processing error on page load', [
+                'player_id' => $this->getId(),
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -848,6 +840,20 @@ class PlayerService
     }
 
     /**
+     * Whether upgrading the given object is blocked right now because ships or
+     * defence are in production. The two unit-producing stations — the shipyard
+     * and the nanite factory — cannot be upgraded while a unit is queued or
+     * building, the same answer the building controller gives.
+     *
+     * @param int $object_id
+     * @return bool
+     */
+    public function isObjectUpgradeBlocked(int $object_id): bool
+    {
+        return ($object_id === 21 || $object_id === 15) && $this->isBuildingShipsOrDefense();
+    }
+
+    /**
      * Get is the player researching the tech or not
      *
      * @param string $machine_name
@@ -906,49 +912,95 @@ class PlayerService
     /**
      * Delete the player and all associated records from the database.
      *
-     * @return void
+     * @param bool $permanentlyDeletePlanets Whether to remove planets through the permanent
+     * deletion lifecycle. This safely recalls foreign fleets before freeing the galaxy slots.
      */
-    public function delete(): void
+    public function delete(bool $permanentlyDeletePlanets = false): void
     {
-        // Include destroyed planets still awaiting purge so related rows are cleaned up.
+        DB::transaction(function () use ($permanentlyDeletePlanets): void {
+            // Clear the current-planet FK before removing any bodies.
+            $this->user->planet_current = null;
+            $this->user->save();
+
+            if ($permanentlyDeletePlanets) {
+                $this->deleteOwnFleetMissions();
+                $this->permanentlyDeletePlanets();
+            } else {
+                $this->rawDeletePlanets();
+            }
+
+            Message::where('user_id', $this->getId())->delete();
+            UserTech::where('user_id', $this->getId())->delete();
+
+            // Sessions have no database FK to users.
+            DB::table('sessions')->where('user_id', $this->getId())->delete();
+
+            // Highscores cascade with the user. Battle and espionage reports deliberately
+            // retain their history through ON DELETE SET NULL foreign keys.
+            $this->user->delete();
+        });
+    }
+
+    /**
+     * Permanently remove every primary planet, including its moon, via the planet lifecycle.
+     *
+     * This is used for automatic inactive-account deletion. Unlike a raw cascade, it recalls
+     * fleets owned by other players that are still travelling to the account's planets.
+     */
+    private function permanentlyDeletePlanets(): void
+    {
+        $planetIds = Planet::query()
+            ->where('user_id', $this->getId())
+            ->where('planet_type', PlanetType::Planet->value)
+            ->pluck('id');
+
+        $planetServiceFactory = resolve(PlanetServiceFactory::class);
+
+        foreach ($planetIds as $planetId) {
+            $planet = $planetServiceFactory->make((int) $planetId, true);
+
+            if ($planet !== null) {
+                $planet->permanentlyDeletePlanet();
+            }
+        }
+    }
+
+    /**
+     * Hard-delete all planets and their dependent queues and fleet missions.
+     */
+    private function rawDeletePlanets(): void
+    {
         $planetIds = Planet::where('user_id', $this->getId())->pluck('id');
 
         foreach ($planetIds as $planetId) {
-            // Delete all queue items.
             ResearchQueue::where('planet_id', $planetId)->delete();
             BuildingQueue::where('planet_id', $planetId)->delete();
             UnitQueue::where('planet_id', $planetId)->delete();
-            // Delete all fleet missions.
-            // Get all fleet missions for this planet then loop through them and delete them.
-            // TODO: this might be a performance bottleneck if there are many missions. Consider using a bulk delete compatible
-            // with the foreign key constraints instead.
-            $missions = FleetMission::where('planet_id_from', $planetId)->orWhere('planet_id_to', $planetId)->get();
+
+            $missions = FleetMission::where('planet_id_from', $planetId)
+                ->orWhere('planet_id_to', $planetId)
+                ->get();
+
             foreach ($missions as $mission) {
-                // Delete any that have this mission as their parent.
                 FleetMission::where('parent_id', $mission->id)->delete();
-                // Delete mission itself.
                 $mission->delete();
             }
         }
 
-        // Delete all messages.
-        Message::where('user_id', $this->getId())->delete();
-
-        // Delete highscore record.
-        Highscore::where('player_id', $this->getId())->delete();
-
-        // Delete tech record.
-        UserTech::where('user_id', $this->getId())->delete();
-
-        // Clear planet_current reference before deleting planets (FK constraint).
-        $this->user->planet_current = null;
-        $this->user->save();
-
-        // Delete all planets.
         Planet::where('user_id', $this->getId())->delete();
+    }
 
-        // Delete the actual user.
-        $this->user->delete();
+    /**
+     * Remove the player's missions and their child return missions before account deletion.
+     */
+    private function deleteOwnFleetMissions(): void
+    {
+        $missions = FleetMission::where('user_id', $this->getId())->get();
+
+        foreach ($missions as $mission) {
+            FleetMission::where('parent_id', $mission->id)->delete();
+            $mission->delete();
+        }
     }
 
     /**

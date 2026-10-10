@@ -12,6 +12,7 @@ use OGame\Models\FleetMission;
 use OGame\Models\Planet;
 use OGame\Models\Planet\Coordinate;
 use OGame\Models\PlanetMove;
+use Random\Randomizer;
 use RuntimeException;
 
 class PlanetMoveService
@@ -167,7 +168,7 @@ class PlanetMoveService
         $planetModel->planet = $move->target_position;
 
         $planetData = $planetServiceFactory->planetData($move->target_position, false);
-        $planetModel->temp_max = rand($planetData['temperature'][0], $planetData['temperature'][1]);
+        $planetModel->temp_max = app(Randomizer::class)->getInt($planetData['temperature'][0], $planetData['temperature'][1]);
         $planetModel->temp_min = $planetModel->temp_max - 40;
         $planetModel->save();
 
@@ -265,7 +266,8 @@ class PlanetMoveService
         $fleetSpeed = $settingsService->fleetSpeedPeaceful();
         $duration = (int) max(round((35000 / 10 * sqrt($distance * 10 / $slowestSpeed) + 10) / $fleetSpeed), 1);
 
-        $now = (int) Date::now()->timestamp;
+        $dispatchMoment = Date::now();
+        $now = (int) $dispatchMoment->timestamp;
 
         // Create the fleet mission record directly (bypasses GameMission::start()).
         $mission = new FleetMission();
@@ -283,6 +285,7 @@ class PlanetMoveService
         $mission->mission_type = 4; // Deployment
         $mission->time_departure = $now;
         $mission->time_arrival = $now + $duration;
+        $mission->time_arrival_ms = (int) $dispatchMoment->valueOf() + ($duration * 1000);
         $mission->metal = 0;
         $mission->crystal = 0;
         $mission->deuterium = 0;
@@ -386,19 +389,24 @@ class PlanetMoveService
 
     /**
      * Calculate a simple distance between two coordinates for ship transfer duration.
+     * Uses donut wrapping against configured universe size via CoordinateDistanceCalculator.
      */
     private function calculateCoordinateDistance(Coordinate $from, Coordinate $to): int
     {
+        /** @var CoordinateDistanceCalculator $calculator */
+        $calculator = resolve(CoordinateDistanceCalculator::class);
+
         $diffGalaxy = abs($from->galaxy - $to->galaxy);
         $diffSystem = abs($from->system - $to->system);
         $diffPlanet = abs($from->position - $to->position);
 
         if ($diffGalaxy != 0) {
-            return $diffGalaxy * 20000;
+            return $calculator->getGalaxyDistance($from->galaxy, $to->galaxy) * 20000;
         }
 
         if ($diffSystem != 0) {
-            return $diffSystem * 5 * 19 + 2700;
+            $deltaSystem = max($calculator->getSystemDistance($from->system, $to->system), 1);
+            return $deltaSystem * 5 * 19 + 2700;
         }
 
         if ($diffPlanet != 0) {

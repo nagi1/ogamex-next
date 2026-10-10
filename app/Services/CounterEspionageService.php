@@ -3,6 +3,7 @@
 namespace OGame\Services;
 
 use OGame\GameObjects\Models\Units\UnitCollection;
+use Random\Randomizer;
 
 /**
  * Service for handling counter-espionage calculations and logic.
@@ -68,7 +69,7 @@ class CounterEspionageService
             return true;
         }
 
-        $roll = random_int(1, 100);
+        $roll = app(Randomizer::class)->getInt(1, 100);
         return $roll <= $chance;
     }
 

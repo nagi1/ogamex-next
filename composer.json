@@ -7,8 +7,10 @@
     "require": {
         "php": "^8.5",
         "lab404/laravel-impersonate": "^1.7",
+        "laravel/ai": "^1.0",
         "laravel/fortify": "^1.21",
         "laravel/framework": "^13.0",
+        "laravel/horizon": "^5.49",
         "laravel/reverb": "^1.7",
         "laravel/tinker": "^3.0",
         "laravel/ui": "^4.5",
@@ -68,7 +70,7 @@
             "./vendor/bin/phpstan analyse --memory-limit=1G"
         ],
         "tests": [
-            "./vendor/bin/pest --parallel"
+            "./vendor/bin/pest --parallel --bail"
         ],
         "rector": [
             "./vendor/bin/rector --memory-limit=1G"

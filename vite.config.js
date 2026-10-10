@@ -1,8 +1,36 @@
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import { createHash } from 'node:crypto'
+
+function legacyChunkFiles(manifestFile) {
+    const manifestPath = resolve(manifestFile)
+    const chunksDirectory = dirname(manifestPath)
+    const chunksRoot = chunksDirectory + '/'
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'))
+
+    if (!Array.isArray(manifest.chunks) || manifest.chunks.length === 0) {
+        throw new Error('Legacy chunk manifest has no chunks: ' + manifestFile)
+    }
+
+    return manifest.chunks.map(({ path }) => {
+        if (typeof path !== 'string' || path.length === 0) {
+            throw new Error('Legacy chunk manifest has an invalid path: ' + manifestFile)
+        }
+
+        const chunkPath = resolve(chunksDirectory, path)
+        if (!chunkPath.startsWith(chunksRoot)) {
+            throw new Error('Legacy chunk manifest path escapes its directory: ' + path)
+        }
+
+        readFileSync(chunkPath, 'utf-8')
+
+        return chunkPath
+    })
+}
+
+const ingameChunkFiles = legacyChunkFiles('resources/js/ingame/chunks/manifest.json')
 
 const ingameScripts = [
     'resources/js/ingame/jquery-1.12.4.min.js',
@@ -17,7 +45,7 @@ const ingameScripts = [
     'resources/js/ingame/tooltips.js',
     'resources/js/ingame/trader.js',
     'resources/js/ingame/timerhandler.js',
-    'resources/js/ingame/e7c74974620fa35b197315ebdbb8c2.js',
+    ...ingameChunkFiles,
     'resources/js/ingame/messages-pagination.js',
     'node_modules/pusher-js/dist/web/pusher.min.js',
     'node_modules/laravel-echo/dist/echo.iife.js',
@@ -25,8 +53,12 @@ const ingameScripts = [
     'resources/js/ingame/chat.js',
 ]
 
+// Out-game bundle in load order. Vendor libraries keep the filenames they shipped
+// with; our own out-game scripts live in chunks/ under readable names. Keep this
+// list in dependency order: jQuery, then its plugins, then the code that binds to
+// the page, then the login and registration helpers.
 const outgameScripts = [
-    'resources/js/outgame/6b1759b4d8ae0aeb3b4f566299ad46.js',
+    'resources/js/outgame/chunks/bootstrap.js',
     'resources/js/outgame/22838c9f0f7e8e3535367164b832ce.js',
     'resources/js/outgame/22ef0d59ed3309209b51ac1d7d8674.js',
     'resources/js/outgame/f02d853270851b55790fb41a4113e9.js',
@@ -34,10 +66,10 @@ const outgameScripts = [
     'resources/js/outgame/d0437255213d95b42db39070285d8c.js',
     'resources/js/outgame/0b5c68ed173515e7cb0965c287aa0c.js',
     'resources/js/outgame/4c590fd581de4bc24b47347d879e94.js',
-    'resources/js/outgame/6871e1cb7f618a30edcba23801e23c.js',
-    'resources/js/outgame/0136dd84cb21c44f18865ec6f6b10a.js',
-    'resources/js/outgame/60cd95d4ce5cb91a86861f433773d1.js',
-    'resources/js/outgame/b55eb79922e157d28e811c7452ab10.js',
+    'resources/js/outgame/chunks/login.js',
+    'resources/js/outgame/chunks/universe-filter.js',
+    'resources/js/outgame/chunks/javascript-available.js',
+    'resources/js/outgame/chunks/interface.js',
 ]
 
 /**

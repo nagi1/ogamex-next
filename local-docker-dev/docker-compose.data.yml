@@ -1,0 +1,54 @@
+name: ogamex-shared-data
+
+# Shared state for every local OGameX cohort.  Application containers reach these
+# services directly over Docker DNS; only the two host ports exist for WSL-native
+# CLI tools and are not used by the applications.
+services:
+  mysql:
+    image: mysql:8.4.11
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_HOST: "%"
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ogamex-mysql-data:/var/lib/mysql
+    networks:
+      shared-services:
+        aliases: [mysql]
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 24
+      start_period: 20s
+
+  redis:
+    image: redis:8.10.1-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--save", "3600 1 300 100 60 10000", "--appendonly", "no"]
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ogamex-redis-data:/data
+    networks:
+      shared-services:
+        aliases: [redis]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 24
+      start_period: 5s
+
+volumes:
+  ogamex-mysql-data:
+    name: ogamex-mysql-data
+  ogamex-redis-data:
+    name: ogamex-redis-data
+
+networks:
+  shared-services:
+    name: ogamex-shared-services
