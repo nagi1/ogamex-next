@@ -516,6 +516,9 @@ class HalvingServiceTest extends IsolatedAccountTestCase
      */
     public function testOperationIsolation(): void
     {
+        // Queueing a second building is the Commander benefit, so activate her.
+        $this->playerActivateCommander();
+
         // Set up user with sufficient Dark Matter
         $user = $this->findCurrentUser();
         $user->dark_matter = 100000;

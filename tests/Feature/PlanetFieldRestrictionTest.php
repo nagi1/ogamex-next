@@ -305,6 +305,9 @@ class PlanetFieldRestrictionTest extends IsolatedAccountTestCase
      */
     public function testBuildingsShowAsUnavailableWhenQueueWouldExceedFieldLimit(): void
     {
+        // Queueing several buildings is the Commander benefit, so activate her.
+        $this->playerActivateCommander();
+
         // Set the planet to have 5 fields total
         $planetModel = Planet::where('id', $this->planetService->getPlanetId())->first();
         if ($planetModel === null) {

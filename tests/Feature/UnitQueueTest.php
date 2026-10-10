@@ -330,6 +330,9 @@ class UnitQueueTest extends IsolatedAccountTestCase
      */
     public function testUnitQueueShipyardRequirement(): void
     {
+        // Queueing several buildings is the Commander benefit, so activate her.
+        $this->playerActivateCommander();
+
         // Add required resources to planet
         $this->planetAddResources(new Resources(5000, 5000, 5000, 0));
 
@@ -366,6 +369,9 @@ class UnitQueueTest extends IsolatedAccountTestCase
      */
     public function testUnitQueueResearchRequirement(): void
     {
+        // Queueing several buildings is the Commander benefit, so activate her.
+        $this->playerActivateCommander();
+
         // Add required resources to planet
         $this->planetAddResources(new Resources(5000, 5000, 5000, 0));
 

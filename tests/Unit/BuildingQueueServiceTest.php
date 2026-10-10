@@ -4,11 +4,14 @@ namespace Tests\Unit;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
+use OGame\Factories\PlanetServiceFactory;
+use OGame\Factories\PlayerServiceFactory;
 use OGame\Models\Planet;
 use OGame\Models\Planet\Coordinate;
 use OGame\Models\User;
 use OGame\Services\BuildingQueueService;
 use OGame\Services\ObjectService;
+use OGame\Services\OfficerService;
 use Tests\UnitTestCase;
 
 class BuildingQueueServiceTest extends UnitTestCase
@@ -165,6 +168,35 @@ class BuildingQueueServiceTest extends UnitTestCase
     }
 
     /**
+     * Grant the Commander so the building queue holds more than one item.
+     *
+     * Queueing more than one building at a time is the Commander benefit, so the
+     * queue-mechanics tests below need her active.
+     */
+    private function giveCommander(User $user): void
+    {
+        $officerService = resolve(OfficerService::class);
+        $officer = $officerService->getOfficer($user);
+        $officer->activate('commander', 7);
+        $officer->save();
+        $officerService->clearCache($user);
+    }
+
+    /**
+     * Rebind the test services to the planet's real owner and activate the Commander.
+     *
+     * These tests' PlanetService would otherwise use the dummy player (id 0) from
+     * UnitTestCase, whose officers cannot be read. The queue is the Commander benefit,
+     * so the owner must have her active to hold more than one building.
+     */
+    private function bindPlanetToOwnerWithCommander(Planet $planet, User $user): void
+    {
+        $this->playerService = resolve(PlayerServiceFactory::class)->make($user->id, true);
+        $this->planetService = resolve(PlanetServiceFactory::class)->makeForPlayer($this->playerService, $planet->id);
+        $this->giveCommander($user);
+    }
+
+    /**
      * Test that downgrade in queue is not lost when upgrade completes before it.
      */
     public function testDowngradeNotLostAfterUpgrade(): void
@@ -184,7 +216,7 @@ class BuildingQueueServiceTest extends UnitTestCase
             'robot_factory' => 10,
             'nano_factory' => 5,
         ]);
-        $this->planetService->setPlanet($planet);
+        $this->bindPlanetToOwnerWithCommander($planet, $user);
         $this->planetService->updateResourceProductionStats(false);
 
         $this->createAndSetUserTechModel([
@@ -268,7 +300,7 @@ class BuildingQueueServiceTest extends UnitTestCase
             'robot_factory' => 10,
             'nano_factory' => 5,
         ]);
-        $this->planetService->setPlanet($planet);
+        $this->bindPlanetToOwnerWithCommander($planet, $user);
         $this->planetService->updateResourceProductionStats(false);
 
         $this->createAndSetUserTechModel([
@@ -327,7 +359,7 @@ class BuildingQueueServiceTest extends UnitTestCase
             'robot_factory' => 10,
             'nano_factory' => 5,
         ]);
-        $this->planetService->setPlanet($planet);
+        $this->bindPlanetToOwnerWithCommander($planet, $user);
         $this->planetService->updateResourceProductionStats(false);
 
         $this->createAndSetUserTechModel([
