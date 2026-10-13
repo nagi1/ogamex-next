@@ -21,7 +21,7 @@
         "asset:beautify-js": "node scripts/beautify-js.js"
     },
     "devDependencies": {
-        "acorn": "^8.18.0",
+        "acorn": "^8.19.0",
         "axios": "^1.20.0",
         "laravel-echo": "^2.5.0",
         "laravel-vite-plugin": "^3.2",
