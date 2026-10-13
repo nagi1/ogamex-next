@@ -23,7 +23,7 @@
     "devDependencies": {
         "acorn": "^8.19.0",
         "axios": "^1.20.0",
-        "laravel-echo": "^2.5.0",
+        "laravel-echo": "^2.6.1",
         "laravel-vite-plugin": "^3.2",
         "postcss": "^8.5.28",
         "pusher-js": "^8.6.0",
