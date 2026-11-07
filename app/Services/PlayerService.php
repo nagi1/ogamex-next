@@ -241,6 +241,29 @@ class PlayerService
     }
 
     /**
+     * Newbie protection bands of the live servers (serverData.xml `newbieProtectionHigh` 50,000 and
+     * `newbieProtectionLimit` 500,000 on 257 of 267 universes): below the high mark a player is protected
+     * from anyone with more than 5 times its points, up to the limit from anyone with more than 10 times,
+     * and above the limit from nobody.
+     */
+    public const int NEWBIE_PROTECTION_HIGH = 50_000;
+    public const int NEWBIE_PROTECTION_LIMIT = 500_000;
+
+    /**
+     * Whether a player on $weakPoints is under newbie protection against a player on $strongPoints.
+     */
+    public static function protectsNewbie(float $weakPoints, float $strongPoints): bool
+    {
+        if ($weakPoints >= self::NEWBIE_PROTECTION_LIMIT) {
+            return false;
+        }
+
+        $ratio = $weakPoints < self::NEWBIE_PROTECTION_HIGH ? 5 : 10;
+
+        return $weakPoints * $ratio < $strongPoints;
+    }
+
+    /**
      * Checks if the player is a newbie.
      *
      * @param PlayerService $comparedTo
@@ -253,15 +276,7 @@ class PlayerService
             return false;
         }
 
-        $currentPlayerPoints = $this->getCachedGeneralScore();
-        $comparedToPoints = $comparedTo->getCachedGeneralScore();
-
-        // If the current player has less than 20% of points compared to the provided player, then they are considered weak / newbie.
-        if ($currentPlayerPoints < ($comparedToPoints * 0.2)) {
-            return true;
-        }
-
-        return false;
+        return self::protectsNewbie($this->getCachedGeneralScore(), $comparedTo->getCachedGeneralScore());
     }
 
     /**
@@ -277,15 +292,8 @@ class PlayerService
             return false;
         }
 
-        $currentPlayerPoints = $this->getCachedGeneralScore();
-        $comparedToPoints = $comparedTo->getCachedGeneralScore();
-
-        // If the current player has more than 500% of points compared to the provided player, then they are considered strong.
-        if ($currentPlayerPoints > ($comparedToPoints * 5)) {
-            return true;
-        }
-
-        return false;
+        // Strong is the other side of the same protection: the compared player is a newbie to this one.
+        return self::protectsNewbie($comparedTo->getCachedGeneralScore(), $this->getCachedGeneralScore());
     }
 
     /**
