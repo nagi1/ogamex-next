@@ -53,6 +53,27 @@ x-grand-env: &grand-env
   AI_CONVERSATION_ENABLED: "true"
   AI_CAMPAIGN_CONSULTATION_MODE: advice
   AI_CAMPAIGN_CONSULTATION_MODEL: deepseek-flash
+  # ---- Play universe (sprint 8-10 Nov 2026, owner): every model on, through this file only. ----
+  # Module defaults stay unchanged; everything below applies to the `grand` universe alone.
+  # Empire module (alliance diplomacy tab) is enabled for this universe through its own statuses file.
+  MODULES_STATUSES_FILE: /var/www/local-docker-dev/grand-modules.json
+  # Jev classifier through its live API (TYPESAFE_API_KEY comes from the root .env).
+  AI_CLASSIFICATION_ENABLED: "true"
+  # Engine-driven social teacher: alliance politics read FAtiMA, PsychSim, CBRKit and AgentOS through the gateway.
+  AI_SOCIAL_MINDS: "true"
+  AI_SOCIAL_CYCLES: "true"
+  AI_SOCIAL_HUMAN_PRESSURE: medium
+  AI_COGNITION_GATEWAY_URL: http://host.docker.internal:8099
+  AI_COGNITION_PSYCHSIM_URL: http://host.docker.internal:8094
+  AI_MEMORY_AGENTOS_URL: http://host.docker.internal:8093
+  AI_EXPERIENCE_CBRKIT_URL: http://host.docker.internal:8091
+  # Fleet model: the simulator's errand model g16 (feature version 3), run in PHP. config/rl.php has no per-account
+  # split yet, so it flies the errands of all 20 accounts; the scripted-raider switch (PHP lane) goes here once named.
+  AI_RL_ERRAND_MODEL: /var/www/storage/rl/ogsim/runs/es-late-c4/final-g16.policy.json
+  # Economy model: best-es3-s10 reads the simulator's 25/14 columns, while the PHP seam sends EconomyChoiceEncoder v4
+  # (59/68) and ogrl.serve loads only ONNX: there is no path to serve it yet (blocker), so builds stay on the teacher.
+  AI_RL_POLICY: teacher
+  # PLACEHOLDER (ADVISOR agent): per-area advisor modes (AI_ADVISOR_*_MODE) are set here when that lane delivers.
 
 services:
   ogamex-app:
