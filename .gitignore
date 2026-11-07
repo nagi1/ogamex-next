@@ -25,6 +25,9 @@ storage/rust-libs/*.so
 # Local output from in-game JavaScript tooling.
 tmp/
 
+# OGame social/diplomacy corpus (Modules/AI): large, public third-party text, kept locally.
+/storage/rl/external/
+
 # Separately-maintained modules live in their own repositories (their own clone,
 # their own remote). The host ignores the path instead of pinning a submodule.
 /Modules/AI/

@@ -73,9 +73,9 @@ class ModuleSlotServiceTest extends TestCase
         $this->assertSame('', ModuleSlotService::render('admin.modules'));
     }
 
-    public function test_only_the_admin_modules_slot_is_supported(): void
+    public function test_supported_slots(): void
     {
-        $this->assertSame(['admin.modules'], ModuleSlotService::SLOTS);
+        $this->assertSame(['admin.modules', 'alliance.tabs'], ModuleSlotService::SLOTS);
     }
 
     public function test_unknown_slot_is_rejected_with_the_supported_slots(): void

@@ -61,6 +61,7 @@
                                         </a>
                                     </li>
                                 @endif
+                                @moduleSlot('alliance.tabs', ['alliance' => $alliance, 'member' => $member])
                             @else
                                 {{-- User is not in an alliance - show create/search or apply options --}}
                                 @if($targetAllianceId)

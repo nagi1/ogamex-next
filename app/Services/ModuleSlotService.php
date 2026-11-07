@@ -18,6 +18,8 @@ use InvalidArgumentException;
  *
  * Available slot names:
  *   admin.modules — a module's admin controls, rendered on the Modules admin page
+ *   alliance.tabs — extra tabs on the player's own alliance page; data: alliance (Alliance), member (AllianceMember|null).
+ *                   A tab is an <li> whose link has the core `navi` class and a `rel` URL returning the tab's HTML.
  */
 class ModuleSlotService
 {
@@ -27,6 +29,7 @@ class ModuleSlotService
      */
     public const SLOTS = [
         'admin.modules',
+        'alliance.tabs',
     ];
 
     /** @var array<string, array<callable>> */

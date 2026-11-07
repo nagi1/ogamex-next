@@ -1,0 +1,10 @@
+{
+    "name": "ogamex/empire",
+    "description": "Alliance empires for OGameX: diplomacy between alliances, for players and AI alike.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Modules\\Empire\\": "app/"
+        }
+    }
+}

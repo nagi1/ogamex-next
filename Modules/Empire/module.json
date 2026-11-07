@@ -1,0 +1,16 @@
+{
+    "name": "Empire",
+    "alias": "empire",
+    "description": "Alliance empires: diplomacy (wars, pacts, peace, betrayal and public reputation) for players and AI alike. Not part of original OGame; disabled by default.",
+    "keywords": [
+        "alliance",
+        "diplomacy",
+        "social",
+        "ogamex"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\Empire\\Providers\\EmpireServiceProvider"
+    ],
+    "files": []
+}
