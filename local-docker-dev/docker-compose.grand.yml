@@ -73,7 +73,12 @@ x-grand-env: &grand-env
   # Economy model: best-es3-s10 reads the simulator's 25/14 columns, while the PHP seam sends EconomyChoiceEncoder v4
   # (59/68) and ogrl.serve loads only ONNX: there is no path to serve it yet (blocker), so builds stay on the teacher.
   AI_RL_POLICY: teacher
-  # PLACEHOLDER (ADVISOR agent): per-area advisor modes (AI_ADVISOR_*_MODE) are set here when that lane delivers.
+  # Advisor (DeepSeek) per-area modes (off|observe|advice); also switched in the admin AI settings panel.
+  # Offense and costly stay off until that lane lands them; the daily call caps keep their defaults.
+  AI_ADVISOR_DIPLOMACY_MODE: advice
+  AI_ADVISOR_CONVERSATION_MODE: advice
+  AI_ADVISOR_OFFENSE_MODE: "off"
+  AI_ADVISOR_COSTLY_MODE: "off"
 
 services:
   ogamex-app:
