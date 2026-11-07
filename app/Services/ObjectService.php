@@ -3,6 +3,8 @@
 namespace OGame\Services;
 
 use Exception;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Config\Repository;
 use OGame\GameObjects\BuildingObjects;
 use OGame\GameObjects\CivilShipObjects;
 use OGame\GameObjects\DefenseObjects;
@@ -46,13 +48,29 @@ class ObjectService
     private static ?string $objectCacheLocale = null;
 
     /**
+     * The same objects keyed by id and by machine name, built with the cache: the lookups below are asked
+     * tens of thousands of times per AI login and walked every object each time.
+     *
+     * @var array<int, GameObject>
+     */
+    private static array $objectsById = [];
+
+    /** @var array<string, GameObject> */
+    private static array $objectsByMachineName = [];
+
+    /** The application whose configuration $localeConfig is, so the locale is read without a container lookup per call. */
+    private static Container|null $localeApp = null;
+
+    private static Repository|null $localeConfig = null;
+
+    /**
      * Get the cache bucket for the current application locale.
      *
      * @return array<string, array<GameObject>>
      */
     private static function objectsForLocale(): array
     {
-        $locale = app()->getLocale();
+        $locale = self::locale();
 
         if (self::$objectCacheLocale !== $locale) {
             self::$objectCache = [
@@ -64,9 +82,31 @@ class ObjectService
                 'defense' => DefenseObjects::get(),
             ];
             self::$objectCacheLocale = $locale;
+            self::$objectsById = [];
+            self::$objectsByMachineName = [];
+            foreach (self::$objectCache as $objects) {
+                foreach ($objects as $object) {
+                    self::$objectsById[$object->id] ??= $object;
+                    self::$objectsByMachineName[$object->machine_name] ??= $object;
+                }
+            }
         }
 
         return self::$objectCache;
+    }
+
+    /**
+     * The application's locale, as app()->getLocale() reads it.
+     */
+    private static function locale(): string
+    {
+        $app = Container::getInstance();
+        if (self::$localeApp !== $app || self::$localeConfig === null) {
+            self::$localeApp = $app;
+            self::$localeConfig = $app->make('config');
+        }
+
+        return (string) self::$localeConfig->get('app.locale');
     }
 
     /**
@@ -241,16 +281,9 @@ class ObjectService
      */
     public static function getObjectById(int $object_id): GameObject
     {
-        $allObjects = self::getObjects();
+        self::objectsForLocale();
 
-        // Loop through all buildings and return the one with the matching UID
-        foreach ($allObjects as $object) {
-            if ($object->id == $object_id) {
-                return $object;
-            }
-        }
-
-        throw new RuntimeException('Game object not found with ID: ' . $object_id);
+        return self::$objectsById[$object_id] ?? throw new RuntimeException('Game object not found with ID: ' . $object_id);
     }
 
     /**
@@ -261,16 +294,9 @@ class ObjectService
      */
     public static function getObjectByMachineName(string $machine_name): GameObject
     {
-        $allObjects = self::getObjects();
+        self::objectsForLocale();
 
-        // Loop through all buildings and return the one with the matching UID
-        foreach ($allObjects as $object) {
-            if ($object->machine_name == $machine_name) {
-                return $object;
-            }
-        }
-
-        throw new RuntimeException('Game object not found with machine name: ' . $machine_name);
+        return self::$objectsByMachineName[$machine_name] ?? throw new RuntimeException('Game object not found with machine name: ' . $machine_name);
     }
 
     /**
@@ -391,10 +417,10 @@ class ObjectService
      */
     public static function getGameObjectsWithProductionByMachineName(string $machine_name): GameObject
     {
-        foreach (self::getObjects() as $object) {
-            if ($object->machine_name === $machine_name && !empty(($object->production))) {
-                return $object;
-            }
+        self::objectsForLocale();
+        $object = self::$objectsByMachineName[$machine_name] ?? null;
+        if ($object !== null && !empty($object->production)) {
+            return $object;
         }
 
         throw new RuntimeException('Game object not found with production value for machine name: ' . $machine_name);
@@ -558,7 +584,13 @@ class ObjectService
 
         // Objects only be able to be built once
         if ($machine_name === 'small_shield_dome' || $machine_name === 'large_shield_dome') {
-            return $planet->getObjectAmount($machine_name) ? 0 : 1;
+            // A dome still in the shipyard queue counts too, or every visit during its build could queue another.
+            $queued = UnitQueue::where('planet_id', $planet->getPlanetId())
+                ->where('object_id', self::getObjectByMachineName($machine_name)->id)
+                ->where('processed', 0)
+                ->sum('object_amount');
+
+            return ($planet->getObjectAmount($machine_name) + $queued) > 0 ? 0 : 1;
         }
 
         // Check missile silo capacity for IPM and ABM
