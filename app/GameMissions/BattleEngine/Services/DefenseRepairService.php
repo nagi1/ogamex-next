@@ -4,6 +4,8 @@ namespace OGame\GameMissions\BattleEngine\Services;
 
 use OGame\GameObjects\Models\Enums\GameObjectType;
 use OGame\GameObjects\Models\Units\UnitCollection;
+use Random\Engine\Mt19937;
+use Random\Randomizer;
 
 /**
  * Service responsible for calculating which destroyed defenses get repaired after battle.
@@ -17,6 +19,11 @@ class DefenseRepairService
      * @var int The repair rate percentage (0-100).
      */
     private int $repairRate;
+
+    /**
+     * @var Randomizer|null The generator the last seeded repair drew from, its own rather than PHP's global one.
+     */
+    private Randomizer|null $random = null;
 
     /**
      * DefenseRepairService constructor.
@@ -59,10 +66,8 @@ class DefenseRepairService
             return $repairedDefenses;
         }
 
-        // Seed the random number generator if a seed is provided
-        if ($this->seed !== null) {
-            mt_srand($this->seed);
-        }
+        // A seeded repair draws from its own generator, never from PHP's global one.
+        $this->random = $this->seed === null ? null : new Randomizer(new Mt19937($this->seed));
 
         foreach ($destroyedDefenses->units as $entry) {
             // Only process defense units, skip ships
@@ -83,7 +88,7 @@ class DefenseRepairService
             } else {
                 // For each destroyed unit, roll the dice to see if it gets repaired
                 for ($i = 0; $i < $entry->amount; $i++) {
-                    $roll = $this->seed !== null ? mt_rand(1, 100) : random_int(1, 100);
+                    $roll = $this->random !== null ? $this->random->getInt(1, 100) : random_int(1, 100);
                     if ($roll <= $this->repairRate) {
                         $repairedCount++;
                     }
@@ -101,6 +106,15 @@ class DefenseRepairService
         }
 
         return $repairedDefenses;
+    }
+
+    /**
+     * The seeded generator the last repair drew from, so the battle's later draws can continue it; null when the
+     * repair was not seeded or its rate is zero.
+     */
+    public function randomizer(): Randomizer|null
+    {
+        return $this->random;
     }
 
     /**

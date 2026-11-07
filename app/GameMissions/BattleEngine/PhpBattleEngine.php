@@ -9,6 +9,7 @@ use OGame\GameObjects\Models\Units\UnitCollection;
 use OGame\GameObjects\Models\Units\UnitEntry;
 use OGame\Services\CharacterClassService;
 use OGame\Services\SettingsService;
+use Random\Randomizer;
 
 /**
  * Class BattleEngine.
@@ -142,7 +143,7 @@ class PhpBattleEngine extends BattleEngine
                 // If the attacker has rapidfire against the defender and successfully rolled a dice,
                 // the attacker can attack a random unit again.
                 do {
-                    $targetUnitKey = array_rand($defenderUnits);
+                    $targetUnitKey = $this->combatRandom()->pickArrayKeys($defenderUnits, 1)[0];
                     $targetUnit = $defenderUnits[$targetUnitKey];
 
                     $rapidfire = $this->attackUnit(true, $round, $unit, $targetUnit);
@@ -154,7 +155,7 @@ class PhpBattleEngine extends BattleEngine
                 // If the attacker has rapidfire against the defender and successfully rolled a dice,
                 // the attacker can attack a random unit again.
                 do {
-                    $targetUnitKey = array_rand($attackerUnits);
+                    $targetUnitKey = $this->combatRandom()->pickArrayKeys($attackerUnits, 1)[0];
                     $targetUnit = $attackerUnits[$targetUnitKey];
 
                     $rapidfire = $this->attackUnit(false, $round, $unit, $targetUnit);
@@ -240,6 +241,14 @@ class PhpBattleEngine extends BattleEngine
     }
 
     /**
+     * The battle's seeded generator (set by simulateBattle); a secure one if the rounds run without it.
+     */
+    private function combatRandom(): Randomizer
+    {
+        return $this->rng ??= new Randomizer();
+    }
+
+    /**
      * Return the unit entries of a fleet ordered by ascending unit id.
      *
      * @param array<UnitEntry> $units
@@ -298,7 +307,7 @@ class PhpBattleEngine extends BattleEngine
         // If the defender's hull integrity is less than 70%, the unit can explode randomly.
         // Bounced shots never trigger the roll, otherwise massed weak shots could explode a
         // damaged unit straight through an intact shield.
-        if (!$bounced && $defender->currentHullPlating > 0 && $defender->damagedHullExplosion()) {
+        if (!$bounced && $defender->currentHullPlating > 0 && $defender->damagedHullExplosion($this->combatRandom())) {
             // Hull was damaged and dice roll was successful, destroy the unit.
             $defender->currentShieldPoints = 0;
             $defender->currentHullPlating = 0;
@@ -322,7 +331,7 @@ class PhpBattleEngine extends BattleEngine
 
         // Rapidfire: if the attacker has a rapidfire bonus against the defender, roll a dice to see if the
         // attacker can attack again.
-        if ($attacker->unitObject->didSuccessfulRapidfire($defender->unitObject)) {
+        if ($attacker->unitObject->didSuccessfulRapidfire($defender->unitObject, $this->combatRandom())) {
             // Rapidfire was successful, return true to indicate that the attacker can attack again.
             return true;
         }

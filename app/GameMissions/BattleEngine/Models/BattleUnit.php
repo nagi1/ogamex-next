@@ -3,6 +3,7 @@
 namespace OGame\GameMissions\BattleEngine\Models;
 
 use OGame\GameObjects\Models\UnitObject;
+use Random\Randomizer;
 
 /**
  * Model class that represents a unit in a battle keeping track of its health and other properties.
@@ -51,9 +52,10 @@ class BattleUnit
      *
      * This method rolls a dice and returns TRUE if the unit explodes, FALSE otherwise.
      *
+     * @param Randomizer $random The battle's seeded generator.
      * @return bool
      */
-    public function damagedHullExplosion(): bool
+    public function damagedHullExplosion(Randomizer $random): bool
     {
         $hullPercentage = $this->currentHullPlating / $this->originalHullPlating;
         if ($hullPercentage >= 0.7) {
@@ -61,6 +63,6 @@ class BattleUnit
         }
 
         $explosionChance = (1 - $hullPercentage) * 100;
-        return rand(0, 100) < (int)$explosionChance;
+        return $random->getInt(0, 100) < (int)$explosionChance;
     }
 }

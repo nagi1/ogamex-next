@@ -22,6 +22,7 @@ use OGame\Services\PlanetService;
 use OGame\Services\PlayerService;
 use OGame\Services\SettingsService;
 use OGame\Services\WreckFieldService;
+use Random\Engine\Mt19937;
 use Random\Randomizer;
 use RuntimeException;
 
@@ -60,6 +61,14 @@ abstract class BattleEngine
      * draw is drawn from a seeded generator; when null, behaviour is unchanged.
      */
     protected ?int $seed = null;
+
+    /**
+     * @var Randomizer|null The battle's own generator, seeded with $seed. Combat never draws from PHP's global
+     * Mersenne Twister: anything else in the process may reseed that one at any moment (Faker's generator calls
+     * mt_srand() in its destructor, which the cycle collector can run in the middle of a round), and the same seed
+     * would then fight a different battle. An Mt19937 engine draws exactly what mt_rand did under the same seed.
+     */
+    protected Randomizer|null $rng = null;
 
     /**
      * @var bool Whether this run is a pure, read-only question: no planet
@@ -142,9 +151,9 @@ abstract class BattleEngine
         $this->seed = $seed ?? app(Randomizer::class)->getInt(0, PHP_INT_MAX);
         $this->pure = $pure;
 
-        // Seeding the global Mersenne Twister makes every mt_rand/rand/array_rand
-        // draw in the round path reproducible under this seed.
-        mt_srand($this->seed);
+        // Every draw in the round path comes from this seeded generator, so the battle is reproducible
+        // under its seed whatever else in the process touches the global generator.
+        $this->rng = new Randomizer(new Mt19937($this->seed));
 
         $result = new BattleResult();
 
@@ -292,11 +301,12 @@ abstract class BattleEngine
         if ($defenderPlayer->hasEngineer()) {
             $defenseRepairRate = (int)round($defenseRepairRate + (100 - $defenseRepairRate) / 2);
         }
-        // The repair service re-seeds the global generator, so it receives a
-        // distinct sub-stream rather than replaying the round draws.
+        // The repair rolls use a distinct sub-stream rather than replaying the round draws, and the
+        // draws after them (the moon roll) continue that sub-stream.
         $repairSeed = $this->seed === null ? null : $this->seed ^ 0x9E3779B9;
         $defenseRepairService = new DefenseRepairService($defenseRepairRate, $repairSeed);
         $result->repairedDefenses = $defenseRepairService->calculateRepairedDefenses($result->defenderUnitsLost);
+        $this->rng = $defenseRepairService->randomizer() ?? $this->rng;
 
         // Determine winner of battle.
         // Attacker withdrawal after defender flee is not a combat win — never grant loot.
@@ -898,6 +908,6 @@ abstract class BattleEngine
      */
     protected function random(int $min, int $max): int
     {
-        return $this->seed !== null ? mt_rand($min, $max) : random_int($min, $max);
+        return $this->rng !== null ? $this->rng->getInt($min, $max) : random_int($min, $max);
     }
 }

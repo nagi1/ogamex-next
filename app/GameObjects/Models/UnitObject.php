@@ -5,7 +5,7 @@ namespace OGame\GameObjects\Models;
 use OGame\GameObjects\Models\Abstracts\GameObject;
 use OGame\GameObjects\Models\Fields\GameObjectProperties;
 use OGame\GameObjects\Models\Fields\GameObjectRapidfire;
-use Random\RandomException;
+use Random\Randomizer;
 
 abstract class UnitObject extends GameObject
 {
@@ -28,17 +28,17 @@ abstract class UnitObject extends GameObject
      * and the dice roll is successful, return true. Otherwise, return false.
      *
      * @param UnitObject $object
+     * @param Randomizer $random The battle's seeded generator.
      * @return bool
-     * @throws RandomException
      */
-    public function didSuccessfulRapidfire(UnitObject $object): bool
+    public function didSuccessfulRapidfire(UnitObject $object, Randomizer $random): bool
     {
         foreach ($this->rapidfire as $rapidfire) {
             if ($rapidfire->object_machine_name == $object->machine_name) {
                 // Rapidfire continues with probability (n - 1) / n, matching the original game.
                 // For example amount 4 means 3/4 = 75% chance.
-                // mt_rand so a seeded battle (mt_srand in BattleEngine) replays identically.
-                return mt_rand(1, $rapidfire->amount) > 1;
+                // The battle's own generator, so a seeded battle replays identically.
+                return $random->getInt(1, $rapidfire->amount) > 1;
             }
         }
 
