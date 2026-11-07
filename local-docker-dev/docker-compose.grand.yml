@@ -74,10 +74,10 @@ x-grand-env: &grand-env
   # (59/68) and ogrl.serve loads only ONNX: there is no path to serve it yet (blocker), so builds stay on the teacher.
   AI_RL_POLICY: teacher
   # Advisor (DeepSeek) per-area modes (off|observe|advice); also switched in the admin AI settings panel.
-  # Offense and costly stay off until that lane lands them; the daily call caps keep their defaults.
+  # Costly stays off until the PHP lane's hook lands; the daily call caps keep their defaults.
   AI_ADVISOR_DIPLOMACY_MODE: advice
   AI_ADVISOR_CONVERSATION_MODE: advice
-  AI_ADVISOR_OFFENSE_MODE: "off"
+  AI_ADVISOR_OFFENSE_MODE: advice
   AI_ADVISOR_COSTLY_MODE: "off"
 
 services:
