@@ -1236,8 +1236,11 @@ class PlanetService
     /**
      * Gets the Intergalactic Research Network combined research lab level for object.
      *
+     * Reads the account's other planets, so two calls can differ when a sibling changes.
+     *
      * @param string $machine_name
      * @return int
+     * @phpstan-impure
      */
     public function getResearchNetworkLabLevel(string $machine_name): int
     {

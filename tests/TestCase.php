@@ -2,14 +2,13 @@
 
 namespace Tests;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use OGame\Models\Planet\Coordinate;
 use OGame\Services\SettingsService;
@@ -39,8 +38,8 @@ abstract class TestCase extends BaseTestCase
         if ($frozenNow !== false && trim($frozenNow) !== '') {
             $at = CarbonImmutable::parse(trim($frozenNow));
             Date::setTestNow($at);
-            Carbon::setTestNow($at);
-            CarbonImmutable::setTestNow($at);
+            $this->travelTo($at);
+            $this->travelTo($at);
         }
 
         if ($this->app->environment('testing') && DB::getDriverName() === 'mysql') {

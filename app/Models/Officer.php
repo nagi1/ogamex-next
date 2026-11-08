@@ -44,15 +44,6 @@ class Officer extends Model
         'all_officers',
     ];
 
-    protected $casts = [
-        'commander_until'    => 'datetime',
-        'admiral_until'      => 'datetime',
-        'engineer_until'     => 'datetime',
-        'geologist_until'    => 'datetime',
-        'technocrat_until'   => 'datetime',
-        'all_officers_until' => 'datetime',
-    ];
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -139,5 +130,17 @@ class Officer extends Model
             }
         }
         return $count;
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'commander_until'    => 'datetime',
+            'admiral_until'      => 'datetime',
+            'engineer_until'     => 'datetime',
+            'geologist_until'    => 'datetime',
+            'technocrat_until'   => 'datetime',
+            'all_officers_until' => 'datetime',
+        ];
     }
 }

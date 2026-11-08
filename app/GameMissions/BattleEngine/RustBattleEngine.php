@@ -3,6 +3,7 @@
 namespace OGame\GameMissions\BattleEngine;
 
 use FFI;
+use FFI\Exception;
 use OGame\GameMissions\BattleEngine\Models\AttackerFleet;
 use OGame\GameMissions\BattleEngine\Models\BattleResult;
 use OGame\GameMissions\BattleEngine\Models\BattleResultRound;
@@ -71,7 +72,7 @@ class RustBattleEngine extends BattleEngine
         try {
             self::$sharedFfi = FFI::cdef($battle . "
             char* rank_case_similarities(const char* input_json);", $library);
-        } catch (FFI\Exception) {
+        } catch (Exception) {
             self::$sharedFfi = FFI::cdef($battle, $library);
         }
 

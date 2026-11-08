@@ -54,12 +54,17 @@ RUN if [ $OPCACHE_ENABLE = "1" ]; then \
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy necessary folders with correct permissions in a single layer
+# Copy necessary folders with correct permissions in a single layer. storage/ is
+# not in the build context (.dockerignore: runtime state is bind-mounted), so its
+# skeleton is created here instead.
 COPY --chown=www-data:www-data \
-    storage \
     bootstrap/cache \
     rust \
     /var/www/
+RUN mkdir -p /var/www/storage/app/public /var/www/storage/framework/cache/data \
+        /var/www/storage/framework/sessions /var/www/storage/framework/testing \
+        /var/www/storage/framework/views /var/www/storage/logs \
+    && chown -R www-data:www-data /var/www/storage
 
 # Then copy remaining files with default permissions
 COPY . /var/www/

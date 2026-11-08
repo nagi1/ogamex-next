@@ -294,7 +294,7 @@ class NPCFleetGeneratorService
 
             // Add 1-2 combat ships
             for ($i = 0; $i < $combatShipCount; $i++) {
-                $shipType = $possibleCombatShips[app(Randomizer::class)->pickArrayKeys($possibleCombatShips, 1)[0]];
+                $shipType = $possibleCombatShips[app(Randomizer::class)->pickArrayKeys($possibleCombatShips, 1)[0]] ?? $possibleCombatShips[0];
                 try {
                     $ship = $objectService->getShipObjectByMachineName($shipType);
                     $shipCost = $ship->price->resources->sum();

@@ -48,7 +48,7 @@ class ProcessPlanetQueues extends Command
         ResearchQueueService $researchQueue,
         PlanetMoveService $planetMoves,
     ): int {
-        $now = now()->timestamp;
+        $now = (int) now()->timestamp;
         $chunk = max(1, (int) $this->option('chunk'));
         $limit = (int) $this->option('limit');
 
@@ -161,7 +161,7 @@ class ProcessPlanetQueues extends Command
 
         $planets = [];
 
-        foreach (DB::table('planets')->where('time_last_update', '<', now()->timestamp - $idleSeconds)
+        foreach (DB::table('planets')->where('time_last_update', '<', (int) now()->timestamp - $idleSeconds)
             ->orderBy('time_last_update')->limit($chunk)->pluck('id') as $planetId) {
             $planets[(int) $planetId] = true;
         }

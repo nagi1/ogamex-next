@@ -19,6 +19,8 @@ env:
 jobs:
   deploy:
     name: Deploy to release.ogamex.dev
+    # Upstream's own servers: a fork has no such runner, so the job would wait a day and be cancelled.
+    if: github.repository == 'lanedirt/OGameX'
     runs-on: [self-hosted, ctogx]
 
     concurrency:
