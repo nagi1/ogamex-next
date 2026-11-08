@@ -1,0 +1,18 @@
+[Unit]
+Description=OGameX play universe (grand): shared MySQL/Redis and the grand app, scheduler and Horizon
+# Docker Desktop restarts `unless-stopped` containers before WSL has this distro's checkout mounted, so the
+# bind-mounted /var/www is empty and the entrypoint's first script is "not found" (exit 127). Recreating the
+# containers once the checkout is readable is the fix; this unit does it at every boot (linger is on).
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=600
+ExecStartPre=/bin/sh -c 'until docker info >/dev/null 2>&1 && [ -f /home/nagi/code/ogamex-next/artisan ]; do sleep 5; done'
+ExecStart=/usr/bin/docker compose -f /home/nagi/code/ogamex-next/local-docker-dev/docker-compose.data.yml up -d mysql redis
+ExecStart=/usr/bin/docker compose -f /home/nagi/code/ogamex-next/local-docker-dev/docker-compose.grand.yml --profile queue up -d --force-recreate
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target
