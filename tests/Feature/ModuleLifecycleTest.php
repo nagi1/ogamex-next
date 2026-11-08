@@ -118,7 +118,7 @@ test('uninstall drop-data lists the rollback only when requested and migrations 
 
     @unlink($noMigrations);
     @unlink($withMigrations);
-});
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')), 'the AI module is a separate repository, absent from the host checkout');
 
 test('drop-data without force aborts and keeps the module enabled', function (): void {
     $statuses = isolatedModuleStatuses(['HelloWorld' => true]);

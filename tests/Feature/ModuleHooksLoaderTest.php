@@ -161,4 +161,4 @@ test('the real AI module contributes its worker pool only while enabled', functi
         ->and($disabledOut)->not->toContain('program:ai-queue-worker');
 
     @unlink($target);
-});
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')), 'the AI module is a separate repository, absent from the host checkout');

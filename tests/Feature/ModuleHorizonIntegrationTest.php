@@ -50,7 +50,7 @@ test('the enabled AI module registers its redis horizon lanes in every environme
     }
 
     @unlink($statuses);
-});
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')), 'the AI module is a separate repository, absent from the host checkout');
 
 test('the disabled AI module leaves no horizon trace', function (): void {
     $statuses = isolatedHorizonStatuses(['AI' => false]);
