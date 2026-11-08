@@ -55,7 +55,7 @@ test('the doctor fails and explains the fix when redis queues have no Horizon', 
         ->and($output)->toContain('Horizon is not installed')
         ->and($output)->toContain('blocking problem')
         ->and($output)->toContain('Fix them');
-});
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')), 'the AI module is a separate repository, absent from the host checkout');
 
 test('the doctor refuses an unknown module and points at module:list', function (): void {
     [$exitCode, $output] = runModuleDoctor('NotARealModule');
