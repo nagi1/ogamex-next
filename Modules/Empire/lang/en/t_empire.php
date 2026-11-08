@@ -51,4 +51,5 @@ return [
         'no_pact' => 'You have no pact with that alliance.',
         'not_at_war' => 'You are not at war with that alliance.',
     ],
+    'tab_failed' => 'The diplomacy board could not be loaded.',
 ];
