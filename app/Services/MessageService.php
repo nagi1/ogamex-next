@@ -88,8 +88,8 @@ class MessageService
             $message->key = $gameMessage->getKey();
             $message->params = $params;
             $message->save();
-        } catch (Exception) {
-            throw new RuntimeException('Could not create GameMessage instance while trying to send message.');
+        } catch (Exception $exception) {
+            throw new RuntimeException('Could not create GameMessage instance while trying to send message: ' . $gameMessageClass, 0, $exception);
         }
     }
 
