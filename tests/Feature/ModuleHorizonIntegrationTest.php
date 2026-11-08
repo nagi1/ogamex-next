@@ -80,4 +80,4 @@ test('the AI module announces its queue names only while enabled', function (): 
 
     @unlink($enabled);
     @unlink($disabled);
-});
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')), 'the AI module is a separate repository, absent from the host checkout');

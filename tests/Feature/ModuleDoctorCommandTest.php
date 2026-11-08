@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Nwidart\Modules\Facades\Module;
 
 /**
  * Run the doctor command in-process and return its exit code and full output.
@@ -36,7 +37,7 @@ test('the doctor explains that a disabled module contributes nothing', function 
         ->and($output)->toContain('disabled')
         ->and($output)->toContain('its lanes, worker pool and entrypoint hooks are inactive')
         ->and($output)->toContain('php artisan ogamex:module:install AI');
-})->skip(fn (): bool => is_file(base_path('Modules/AI/module.json')), 'the tracked status file enables the AI module wherever it is checked out');
+})->skip(fn (): bool => !is_file(base_path('Modules/AI/module.json')) || Module::isEnabled('AI'), 'needs the AI module checked out and disabled');
 
 test('the doctor says when a module ships no container configuration at all', function (): void {
     [$exitCode, $output] = runModuleDoctor('HelloWorld');
