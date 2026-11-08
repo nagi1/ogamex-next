@@ -80,6 +80,8 @@ x-grand-env: &grand-env
   AI_ADVISOR_CONVERSATION_MODE: advice
   AI_ADVISOR_OFFENSE_MODE: advice
   AI_ADVISOR_COSTLY_MODE: "off"
+  # Model lab tab in the AI console (/admin/ai/models): the trained weight models on live state, dry run only.
+  AI_MODEL_LAB_ENABLED: "true"
 
 services:
   ogamex-app:
